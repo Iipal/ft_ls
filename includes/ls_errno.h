@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ls_errno.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/17 19:56:50 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/06/17 15:33:13 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/06/17 19:09:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_ERRNO_H
+# define LS_ERRNO_H
 
-int	main(int argc, char *argv[])
-{
-	--argc;
-	++argv;
-	ls(argc, argv);
-}
+# define ERR  " ERROR: "
+# define PERR " ERROR"
+
+# define E_ALLOC ERR "Where is your memory, pal?"
+
+#endif
