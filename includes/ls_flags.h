@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/17 20:05:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/17 22:03:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ FLAGS;
 # define F_TIME_CHAR      't'
 
 # define E_INVALID_FLAG ERR "Invalid flag detected."
+
+# define E_MISS_FLAG    ERR "'-' exist but flags missing."
 
 #endif

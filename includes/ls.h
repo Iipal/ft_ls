@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/17 20:29:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/17 21:50:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "ls_flags.h"
 
 # include <dirent.h>
+# include <stdio.h>
+# include <errno.h>
 
 struct	s_environment
 {
