@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/17 22:03:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/18 15:21:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ static bool	add_check_valid_flag(char flag, Environment *const env)
 
 bool		ls_parse_flags(string flags, Environment *const env)
 {
-	IFM_F(E_MISS_FLAG, !*(++flags));
-	while (*flags)
-		if (!add_check_valid_flag(*flags++, env))
+	while (*(++flags))
+		if (!add_check_valid_flag(*flags, env))
 		{
-			ft_putendl_fd(E_INVALID_FLAG, STDERR_FILENO);
+			E_ILLEGAL(*flags);
 			return (false);
 		}
 	return (true);

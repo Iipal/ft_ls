@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/17 22:03:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/18 15:21:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ FLAGS;
 # define F_REVERSE_CHAR   'r'
 # define F_TIME_CHAR      't'
 
-# define E_INVALID_FLAG ERR "Invalid flag detected."
+# define E_ILL_OPT ERR "illegal option -- "
+# define E_ILLEGAL(f) {MSG(E_ILL_OPT);ft_putchar_fd(f,2);ft_putchar_fd(10,2);}
 
 # define E_MISS_FLAG    ERR "'-' exist but flags missing."
 

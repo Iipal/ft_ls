@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_errno.h                                         :+:      :+:    :+:   */
+/*   ls_free_curr_dir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 15:33:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/18 15:13:06 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/06/18 17:20:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_ERRNO_H
-# define LS_ERRNO_H
+#include "ls.h"
 
-# define ERR  "ls: "
-# define PERR "ls"
+void	ls_free_curr_dir(CurrDir **cur_dir)
+{
+	size_t	i;
 
-# define E_ALLOC ERR "Where is your memory, pal?"
-
-#endif
+																																																																																																																		i = ~0ULL;
+	if (*cur_dir)
+	{
+		while ((*cur_dir)->in_dir_dirents > ++i)
+			FREE((*cur_dir)->dirents[i], free);
+		FREE((*cur_dir)->dirents, free);
+		FREE((*cur_dir), free);
+	}
+}
