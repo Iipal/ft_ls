@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/18 17:30:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/19 19:22:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	ls_free_curr_dir(CurrDir **cur_dir)
 {
 	size_t	i;
 
-																																							i = ~0ULL;
+	i = ~0ULL;
 	if (*cur_dir)
 	{
-		while ((*cur_dir)->in_dir_dirents > ++i)
-			FREE((*cur_dir)->dirents[i], free);
-		FREE((*cur_dir)->dirents, free);
+		while ((*cur_dir)->in_dir_objs > ++i)
+		{
+			FREE((*cur_dir)->objs[i].dirent, free);
+			FREE((*cur_dir)->objs[i].stat, free);
+		}
+		FREE((*cur_dir)->objs, free);
 		FREE((*cur_dir), free);
 	}
 }

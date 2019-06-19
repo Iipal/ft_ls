@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 14:46:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/19 21:05:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static bool	add_parse_dir(string path, Environment *const env)
 	i = ~0ULL;
 	NODO_F(curr_dir = ls_init_curr_dir(path, &env->flags),
 		ls_free_curr_dir(&curr_dir));
-	ls_sort_ascii_dirents(curr_dir->in_dir_dirents, curr_dir->dirents);
-	while (curr_dir->in_dir_dirents > ++i)
-		printf("%s ", curr_dir->dirents[i]->d_name);
+	// ls_sort_stats_time(curr_dir->in_dir_objs, curr_dir->objs);
+	ls_sort_dirents_ascii(curr_dir->in_dir_objs, curr_dir->objs);
+	while (curr_dir->in_dir_objs > ++i)
+		printf("%s ", curr_dir->objs[i].dirent->d_name);
 	printf("\n");
 	ls_free_curr_dir(&curr_dir);
 	return (true);
