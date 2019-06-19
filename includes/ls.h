@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/18 16:26:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/19 13:25:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@
 # include <errno.h>
 # include <sys/stat.h>
 
+# define DIRENT typedef struct dirent Dirent
+
+DIRENT;
+
 struct	s_curr_dir
 {
-	struct dirent	**dirents;
-	size_t			in_dir_dirents;
+	Dirent	**dirents;
+	size_t	in_dir_dirents;
 };
 
 # define CURR_DIR typedef struct s_curr_dir	CurrDir
@@ -42,6 +46,10 @@ struct	s_environment
 ENVIRONMENT;
 
 bool	ls(size_t ac, strtab av);
+
+strtab	ls_sort_ascii(size_t max_strings, strtab strings_tab);
+
+CurrDir	*ls_init_curr_dir(string path, const Flags *const flags);
 
 bool	ls_parse_flags(string flags, Environment *const env);
 
