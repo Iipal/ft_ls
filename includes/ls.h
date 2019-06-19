@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 13:25:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/19 14:44:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ CURR_DIR;
 
 struct	s_environment
 {
+	size_t	ac;
+	strtab	sorted_av;
 	Flags	flags;
 };
 
@@ -48,6 +50,7 @@ ENVIRONMENT;
 bool	ls(size_t ac, strtab av);
 
 strtab	ls_sort_ascii(size_t max_strings, strtab strings_tab);
+void	ls_sort_ascii_dirents(const size_t in_dir_dirents, Dirent **dirents);
 
 CurrDir	*ls_init_curr_dir(string path, const Flags *const flags);
 

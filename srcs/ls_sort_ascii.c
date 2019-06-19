@@ -6,55 +6,51 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:34:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 13:26:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/19 14:31:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static size_t	add_find_max_string_len(const size_t max,
-					const strtab strings)
+static size_t	add_find_max_string_len(const size_t n, const strtab tab)
 {
 	size_t	i;
 	size_t	out_max;
 
 	i = ~0ULL;
-	if (!max)
+	if (!n)
 		return (0);
-	out_max = ft_strlen(*strings);
-	while (max > ++i)
-		if (out_max < ft_strlen(strings[i]))
-			out_max = ft_strlen(strings[i]);
+	out_max = ft_strlen(*tab);
+	while (n > ++i)
+		if (out_max < ft_strlen(tab[i]))
+			out_max = ft_strlen(tab[i]);
 	return (out_max);
 }
 
-strtab			ls_sort_ascii(size_t max, strtab strings)
+strtab			ls_sort_ascii(size_t n, strtab tab)
 {
-	const size_t	max_string_len = add_find_max_string_len(max, strings) + 1;
-	char			temp[1024];
+	const size_t	max_string_len = add_find_max_string_len(n, tab) + 1;
 	strtab			out;
+	char			temp[1024];
 	size_t			i;
 	size_t			j;
 
-	if (!max)
+	if (!n)
 		return (NULL);
 	i = ~0ULL;
-	if ('-' == **strings && *(*strings + 1))
-		++i;
-	MEM(string, out, max, E_ALLOC);
-	while (max > ++i)
+	MEM(string, out, n, E_ALLOC);
+	while (n > ++i)
 	{
 		j = i;
 		MEM(char, out[i], max_string_len, E_ALLOC);
-		out[i] = ft_strcpy(out[i], strings[i]);
-		while (max > j)
+		out[i] = ft_strcpy(out[i], tab[i]);
+		while (n > j)
 		{
-			if (0 < ft_strcmp(out[i], strings[j]))
+			if (0 < ft_strcmp(out[i], tab[j]))
 			{
-				ft_bzero(temp, sizeof(char) * 1024);
 				ft_strcpy((string)temp, out[i]);
-				ft_strcpy(out[i], strings[j]);
-				ft_strcpy(strings[j], (const string)temp);
+				ft_strcpy(out[i], tab[j]);
+				ft_strcpy(tab[j], (const string)temp);
 			}
 			++j;
 		}

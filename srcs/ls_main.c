@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 13:28:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/19 14:46:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static bool	add_parse_dir(string path, Environment *const env)
 	i = ~0ULL;
 	NODO_F(curr_dir = ls_init_curr_dir(path, &env->flags),
 		ls_free_curr_dir(&curr_dir));
+	ls_sort_ascii_dirents(curr_dir->in_dir_dirents, curr_dir->dirents);
 	while (curr_dir->in_dir_dirents > ++i)
-		printf("[%zu]: %s\n", i + 1, curr_dir->dirents[i]->d_name);
+		printf("%s ", curr_dir->dirents[i]->d_name);
+	printf("\n");
 	ls_free_curr_dir(&curr_dir);
 	return (true);
 }
@@ -29,10 +31,8 @@ static bool	add_parse_dir(string path, Environment *const env)
 bool		ls(size_t ac, strtab av)
 {
 	Environment	*env;
-	strtab		sorted_av;
 	size_t		i;
 
-	sorted_av = NULL;
 	MEM(Environment, env, 1, E_ALLOC);
 	if (!ac)
 	{
@@ -40,7 +40,6 @@ bool		ls(size_t ac, strtab av)
 	}
 	else
 	{
-		sorted_av = ls_sort_ascii(ac, av);
 		if ('-' == **av && *(*av + 1))
 		{
 			NODO_F(ls_parse_flags(*av, env), ls_free(&env));
@@ -48,8 +47,23 @@ bool		ls(size_t ac, strtab av)
 			++av;
 		}
 		i = ~0ULL;
-		while (ac > ++i)
-			NODO_F(add_parse_dir(sorted_av[i], env), ls_free(&env));
+		env->ac = ac;
+		env->sorted_av = ls_sort_ascii(ac, av);
+		if (1 == ac)
+		{
+			NODO_F(add_parse_dir(*(env->sorted_av), env), ls_free(&env));
+		}
+		else
+		{
+			while (ac > ++i)
+			{
+				MSG(env->sorted_av[i]);
+				MSGN(":");
+				NODO_F(add_parse_dir(env->sorted_av[i], env), ls_free(&env));
+				if (ac != i + 1)
+					MSGN("\n");
+			}
+		}
 	}
 	ls_free(&env);
 	return (true);
