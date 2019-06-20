@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 13:08:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 15:02:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline struct dirent	__attribute__((always_inline)) *add_dup_dirent(
+static inline __attribute__((always_inline)) struct dirent	*add_dup_dirent(
 	struct dirent *src)
 {
 	struct dirent	*out;
@@ -22,7 +22,7 @@ static inline struct dirent	__attribute__((always_inline)) *add_dup_dirent(
 	return (out);
 }
 
-static inline struct stat 	__attribute__((always_inline)) *add_dup_stat(
+static inline __attribute__((always_inline)) struct stat	*add_dup_stat(
 	struct stat *src)
 {
 	struct stat	*out;
@@ -32,7 +32,7 @@ static inline struct stat 	__attribute__((always_inline)) *add_dup_stat(
 	return (out);
 }
 
-static inline bool	__attribute__((always_inline)) add_check_exist_flags(
+static inline __attribute__((always_inline)) bool	add_check_exist_flags(
 	const struct dirent *const dirent,
 	const Flags *const flags)
 {
