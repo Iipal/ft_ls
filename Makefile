@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/06/19 11:48:37 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/21 00:27:58 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ OBJ := $(SRCS:.c=.o)
 
 LIBFT := $(CURDIR)/libft/libft.a
 LMAKE := make -C libft
+LIBFTPRINTF := $(CURDIR)/libftprintf/libftprintf.a
+LFTPRINTMAKE := make -C libftprintf
 
 DEL := rm -rf
 
@@ -46,9 +48,12 @@ $(OBJ): %.o: %.c
 $(LIBFT):
 	@$(LMAKE)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(LIBFTPRINTF):
+	@$(LFTPRINTMAKE)
+
+$(NAME): $(LIBFT) $(LIBFTPRINTF) $(OBJ)
 	@echo -n ' <q.p> | $(NPWD): '
-	@$(CC) $(OBJ) $(LIBS) $(LIBFT) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBFT) $(LIBFTPRINTF) -o $(NAME)
 	@echo "$(SUCCESS2)"
 
 del:
