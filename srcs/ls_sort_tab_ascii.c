@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_sort_ascii.c                                    :+:      :+:    :+:   */
+/*   ls_sort_tab_ascii.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:34:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 14:31:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 09:20:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static size_t	add_find_max_string_len(const size_t n, const strtab tab)
 	return (out_max);
 }
 
-strtab			ls_sort_ascii(size_t n, strtab tab)
+strtab			ls_sort_tab_ascii(size_t n, strtab tab)
 {
 	const size_t	max_string_len = add_find_max_string_len(n, tab) + 1;
 	strtab			out;

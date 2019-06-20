@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 20:58:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 09:18:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static inline bool	__attribute__((always_inline)) add_check_exist_flags(
 CurrDir	*ls_init_curr_dir(string path, const Flags *const flags)
 {
 	struct dirent	*tmp_dirent;
-	struct stat		tmp_stat;
 	CurrDir			*out;
 	DIR				*tmp_dir;
-	size_t	i;
+	size_t			i;
+	struct stat		tmp_stat;
 
 	NODO_F(tmp_dir = opendir(path), perror(PERR));
 	MEM(CurrDir, out, 1, E_ALLOC);

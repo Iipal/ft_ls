@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 21:05:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 09:54:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool		ls(size_t ac, strtab av)
 		}
 		i = ~0ULL;
 		env->ac = ac;
-		env->sorted_av = ls_sort_ascii(ac, av);
+		env->sorted_av = ls_sort_tab_ascii(ac, av);
 		if (1 == ac)
 		{
 			NODO_F(add_parse_dir(*(env->sorted_av), env), ls_free(&env));
