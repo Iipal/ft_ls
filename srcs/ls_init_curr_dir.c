@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 15:02:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 18:54:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static inline __attribute__((always_inline)) struct dirent	*add_dup_dirent(
 	struct dirent	*out;
 
 	MEM(struct dirent, out, 1, E_ALLOC);
-	*out = *src;
+	ft_memcpy(out, src, sizeof(struct dirent));
+	// *out = *src;
 	return (out);
 }
 
@@ -28,7 +29,8 @@ static inline __attribute__((always_inline)) struct stat	*add_dup_stat(
 	struct stat	*out;
 
 	MEM(struct stat, out, 1, E_ALLOC);
-	*out = *src;
+	ft_memcpy(out, src, sizeof(struct stat));
+	// *out = *src;
 	return (out);
 }
 

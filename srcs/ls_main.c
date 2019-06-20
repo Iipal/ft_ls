@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 16:41:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 18:27:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 	size_t	i;
 
 	i = ~0ULL;
+	full_path = NULL;
 	while (curr_dir->in_dir_objs > ++i)
 	{
-		if ('/' != *previous_path)
+		if ('/' != previous_path[ft_strlen(previous_path) - 1])
 		{
 			full_path = ft_strnew(sizeof(char)
 				* (ft_strlen(curr_dir->objs[i].dirent->d_name)
@@ -38,9 +39,14 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 		}
 		else
 			full_path =
-				ft_strjoin(curr_dir->objs[i].dirent->d_name, previous_path);
-		if ((tmp_dir = opendir(full_path))
-		&& !ft_is_one_of_str(full_path, 0, 2, ".", ".."))
+				ft_strjoin(previous_path, curr_dir->objs[i].dirent->d_name);
+		if (!ft_strcmp(full_path + (ft_strlen(full_path) - 2), "..")
+		|| !ft_strcmp(full_path + (ft_strlen(full_path) - 1), "."))
+		{
+			ft_strdel(&full_path);
+			continue ;
+		}
+		if ((tmp_dir = opendir(full_path)))
 		{
 			printf("\n%s:\n", full_path);
 			add_parse_dir(full_path, flags);
