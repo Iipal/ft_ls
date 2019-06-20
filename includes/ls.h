@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 09:19:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 10:56:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ ENVIRONMENT;
 bool	ls(size_t ac, strtab av);
 
 strtab	ls_sort_tab_ascii(size_t max_strings, strtab strings_tab);
-void	ls_sort_dirents_ascii(const size_t in_dir_objs, InDirObject *objs);
-void	ls_sort_stats_time(const size_t in_dir_objs, InDirObject *objs);
+void	ls_sort_dirents_ascii(const size_t in_dir_objs,
+			InDirObject *const objs,
+			const bool is_reverse);
+void	ls_sort_stats_time(const size_t in_dir_objs,
+			InDirObject *const objs,
+			const bool is_reverse);
 
 CurrDir	*ls_init_curr_dir(string path, const Flags *const flags);
 

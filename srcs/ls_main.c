@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 09:54:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 12:28:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ static bool	add_parse_dir(string path, Environment *const env)
 	size_t	i;
 
 	i = ~0ULL;
-	NODO_F(curr_dir = ls_init_curr_dir(path, &env->flags),
-		ls_free_curr_dir(&curr_dir));
-	// ls_sort_stats_time(curr_dir->in_dir_objs, curr_dir->objs);
-	ls_sort_dirents_ascii(curr_dir->in_dir_objs, curr_dir->objs);
+	NO_F(curr_dir = ls_init_curr_dir(path, &env->flags));
+	if (env->flags.f_t_time_sort)
+		ls_sort_stats_time(curr_dir->in_dir_objs, curr_dir->objs,
+			env->flags.f_r_reverse_sort);
+	else
+		ls_sort_dirents_ascii(curr_dir->in_dir_objs, curr_dir->objs,
+			env->flags.f_r_reverse_sort);
 	while (curr_dir->in_dir_objs > ++i)
 		printf("%s ", curr_dir->objs[i].dirent->d_name);
 	printf("\n");
@@ -50,7 +53,11 @@ bool		ls(size_t ac, strtab av)
 		i = ~0ULL;
 		env->ac = ac;
 		env->sorted_av = ls_sort_tab_ascii(ac, av);
-		if (1 == ac)
+		if (!ac)
+		{
+			NODO_F(add_parse_dir(".", env), ls_free(&env));
+		}
+		else if (1 == ac)
 		{
 			NODO_F(add_parse_dir(*(env->sorted_av), env), ls_free(&env));
 		}
@@ -60,7 +67,7 @@ bool		ls(size_t ac, strtab av)
 			{
 				MSG(env->sorted_av[i]);
 				MSGN(":");
-				NODO_F(add_parse_dir(env->sorted_av[i], env), ls_free(&env));
+				NODO_F(add_parse_dir(env->sorted_av[i], env), continue);
 				if (ac != i + 1)
 					MSGN("\n");
 			}
