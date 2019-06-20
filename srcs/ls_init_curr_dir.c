@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 12:21:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 13:08:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ CurrDir	*ls_init_curr_dir(string path, const Flags *const flags)
 	i = ~0ULL;
 	while ((tmp_dirent = readdir(tmp_dir)))
 	{
-		if (stat(tmp_dirent->d_name, &tmp_stat))
-			perror(tmp_dirent->d_name);
+		stat(tmp_dirent->d_name, &tmp_stat);
 		if (add_check_exist_flags(tmp_dirent, flags))
 		{
 			NODOM_F(E_ALLOC, out->objs[++i].dirent = add_dup_dirent(tmp_dirent),

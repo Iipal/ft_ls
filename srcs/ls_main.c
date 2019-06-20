@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 12:28:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/20 13:25:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ static bool	add_parse_dir(string path, Environment *const env)
 		ls_sort_dirents_ascii(curr_dir->in_dir_objs, curr_dir->objs,
 			env->flags.f_r_reverse_sort);
 	while (curr_dir->in_dir_objs > ++i)
-		printf("%s ", curr_dir->objs[i].dirent->d_name);
-	printf("\n");
+	{
+		ft_putstr(curr_dir->objs[i].dirent->d_name);
+		ft_putchar(' ');
+	}
+	ft_putchar('\n');
 	ls_free_curr_dir(&curr_dir);
 	return (true);
 }
@@ -50,21 +53,21 @@ bool		ls(size_t ac, strtab av)
 			--ac;
 			++av;
 		}
-		i = ~0ULL;
 		env->ac = ac;
-		env->sorted_av = ls_sort_tab_ascii(ac, av);
 		if (!ac)
 		{
 			NODO_F(add_parse_dir(".", env), ls_free(&env));
 		}
 		else if (1 == ac)
 		{
-			NODO_F(add_parse_dir(*(env->sorted_av), env), ls_free(&env));
+			NODO_F(add_parse_dir(*av, env), ls_free(&env));
 		}
 		else
 		{
+			i = ~0ULL;
 			while (ac > ++i)
 			{
+				env->sorted_av = ls_sort_tab_ascii(ac, av);
 				MSG(env->sorted_av[i]);
 				MSGN(":");
 				NODO_F(add_parse_dir(env->sorted_av[i], env), continue);
