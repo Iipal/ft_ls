@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/06/21 00:27:58 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/21 00:35:32 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ := $(SRCS:.c=.o)
 LIBFT := $(CURDIR)/libft/libft.a
 LMAKE := make -C libft
 LIBFTPRINTF := $(CURDIR)/libftprintf/libftprintf.a
-LFTPRINTMAKE := make -C libftprintf
+LFPMAKE := make -C libftprintf
 
 DEL := rm -rf
 
@@ -49,7 +49,7 @@ $(LIBFT):
 	@$(LMAKE)
 
 $(LIBFTPRINTF):
-	@$(LFTPRINTMAKE)
+	@$(LFPMAKE)
 
 $(NAME): $(LIBFT) $(LIBFTPRINTF) $(OBJ)
 	@echo -n ' <q.p> | $(NPWD): '
@@ -73,9 +73,11 @@ debug: set_cc_debug all
 clean:
 	@$(DEL) $(OBJ)
 	@$(LMAKE) clean
+	@$(LFPMAKE) clean
 
 fclean: clean
 	@$(LMAKE) fclean
+	@$(LFPMAKE) fclean
 	@$(DEL) $(NAME)
 	@echo "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
 
@@ -83,6 +85,7 @@ re: fclean all
 
 norme:
 	@$(LMAKE) norme
+	@$(LFPMAKE) norme
 	@echo "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
 	@norminette includes/
 	@norminette $(SRCS)
