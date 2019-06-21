@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:49:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 20:33:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ static bool	add_parse_dir(string path, const Flags *const flags)
 			flags->f_r_reverse_sort);
 	while (curr_dir->in_dir_objs > ++i)
 	{
-		ft_printf("%s ", curr_dir->objs[i].dirent->d_name);
-		ft_putchar(' ');
+		ft_printf("%s", curr_dir->objs[i].dirent->d_name);
+		if (curr_dir->in_dir_objs - 1 != i)
+			ft_putchar(' ');
 	}
 	ft_putchar('\n');
 	if (flags->f_r_recursive_output)
