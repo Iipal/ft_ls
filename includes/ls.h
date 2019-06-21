@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 10:56:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 08:48:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LS_H
 
 # include "libft.h"
+# include "ft_printf.h"
 # include "ls_errno.h"
 # include "ls_flags.h"
 

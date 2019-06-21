@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 18:27:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 08:49:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 		}
 		if ((tmp_dir = opendir(full_path)))
 		{
-			printf("\n%s:\n", full_path);
+			ft_printf("\n%s:\n", full_path);
 			add_parse_dir(full_path, flags);
 		}
 		ft_strdel(&full_path);
@@ -72,7 +72,7 @@ static bool	add_parse_dir(string path, const Flags *const flags)
 			flags->f_r_reverse_sort);
 	while (curr_dir->in_dir_objs > ++i)
 	{
-		ft_putstr(curr_dir->objs[i].dirent->d_name);
+		ft_printf("%s ", curr_dir->objs[i].dirent->d_name);
 		ft_putchar(' ');
 	}
 	ft_putchar('\n');
