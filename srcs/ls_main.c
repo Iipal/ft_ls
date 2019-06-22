@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/22 02:59:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/22 03:39:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ bool		ls(size_t ac, strtab av)
 		NODO_F(add_parse_dir(".", &env->flags), ls_free(&env));
 	}
 	else
-		add_parse_with_ac(ac, av, env);
+		NODO_F(add_parse_with_ac(ac, av, env), ls_free(&env));
 	ls_free(&env);
 	return (true);
 }
