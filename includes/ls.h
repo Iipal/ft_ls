@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 08:48:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 23:32:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <errno.h>
 # include <sys/stat.h>
 
-struct	s_in_dir_object
+struct			s_in_dir_object
 {
 	struct dirent	*dirent;
 	struct stat		*stat;
@@ -33,17 +33,19 @@ struct	s_in_dir_object
 
 IN_DIR_OBJ;
 
-struct	s_curr_dir
+struct			s_curr_dir
 {
 	InDirObject	*objs;
+	size_t		*obj_name_lens;
 	size_t		in_dir_objs;
+	size_t		max_obj_len;
 };
 
 # define CURR_DIR typedef struct s_curr_dir	CurrDir
 
 CURR_DIR;
 
-struct	s_environment
+struct			s_environment
 {
 	size_t	ac;
 	strtab	sorted_av;
@@ -54,21 +56,24 @@ struct	s_environment
 
 ENVIRONMENT;
 
-bool	ls(size_t ac, strtab av);
+bool			ls(size_t ac, strtab av);
 
-strtab	ls_sort_tab_ascii(size_t max_strings, strtab strings_tab);
-void	ls_sort_dirents_ascii(const size_t in_dir_objs,
-			InDirObject *const objs,
-			const bool is_reverse);
-void	ls_sort_stats_time(const size_t in_dir_objs,
-			InDirObject *const objs,
-			const bool is_reverse);
+strtab			ls_sort_tab_ascii(size_t max_strings, strtab strings_tab);
+void			ls_sort_dirents_ascii(const size_t in_dir_objs,
+					InDirObject *const objs,
+					const bool is_reverse);
+void			ls_sort_stats_time(const size_t in_dir_objs,
+					InDirObject *const objs,
+					const bool is_reverse);
 
-CurrDir	*ls_init_curr_dir(string path, const Flags *const flags);
+CurrDir			*ls_init_curr_dir(string path, const Flags *const flags);
 
-bool	ls_parse_flags(string flags, Environment *const env);
+struct dirent	*ls_dup_dirent(struct dirent *src);
+struct stat		*ls_dup_stat(struct stat *src);
 
-void	ls_free(Environment **env);
-void	ls_free_curr_dir(CurrDir **curr_dir);
+bool			ls_parse_flags(string flags, Environment *const env);
+
+void			ls_free(Environment **env);
+void			ls_free_curr_dir(CurrDir **curr_dir);
 
 #endif

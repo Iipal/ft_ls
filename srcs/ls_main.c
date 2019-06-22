@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/21 20:33:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/22 02:59:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 	return (true);
 }
 
-
 static bool	add_parse_dir(string path, const Flags *const flags)
 {
 	CurrDir *curr_dir;
@@ -73,6 +72,10 @@ static bool	add_parse_dir(string path, const Flags *const flags)
 	while (curr_dir->in_dir_objs > ++i)
 	{
 		ft_printf("%s", curr_dir->objs[i].dirent->d_name);
+		if (curr_dir->in_dir_objs - 1 != i
+		&& ft_strlen(curr_dir->objs[i].dirent->d_name) < curr_dir->max_obj_len)
+			ft_putnchar(' ', curr_dir->max_obj_len
+					- ft_strlen(curr_dir->objs[i].dirent->d_name));
 		if (curr_dir->in_dir_objs - 1 != i)
 			ft_putchar(' ');
 	}
@@ -83,10 +86,44 @@ static bool	add_parse_dir(string path, const Flags *const flags)
 	return (true);
 }
 
+static bool	add_parse_with_ac(size_t ac, strtab av, Environment *env)
+{
+	size_t	i;
+
+	if ('-' == **av && *(*av + 1))
+	{
+		NODO_F(ls_parse_flags(*av, env), ls_free(&env));
+		--ac;
+		++av;
+	}
+	env->ac = ac;
+	if (!ac)
+	{
+		NODO_F(add_parse_dir(".", &env->flags), ls_free(&env));
+	}
+	else if (1 == ac)
+	{
+		NODO_F(add_parse_dir(*av, &env->flags), ls_free(&env));
+	}
+	else
+	{
+		i = ~0ULL;
+		while (ac > ++i)
+		{
+			env->sorted_av = ls_sort_tab_ascii(ac, av);
+			MSG(env->sorted_av[i]);
+			MSGN(":");
+			NODO_F(add_parse_dir(env->sorted_av[i], &env->flags), continue);
+			if (ac != i + 1)
+				MSGN("\n");
+		}
+	}
+	return (true);
+}
+
 bool		ls(size_t ac, strtab av)
 {
 	Environment	*env;
-	size_t		i;
 
 	MEM(Environment, env, 1, E_ALLOC);
 	if (!ac)
@@ -94,36 +131,7 @@ bool		ls(size_t ac, strtab av)
 		NODO_F(add_parse_dir(".", &env->flags), ls_free(&env));
 	}
 	else
-	{
-		if ('-' == **av && *(*av + 1))
-		{
-			NODO_F(ls_parse_flags(*av, env), ls_free(&env));
-			--ac;
-			++av;
-		}
-		env->ac = ac;
-		if (!ac)
-		{
-			NODO_F(add_parse_dir(".", &env->flags), ls_free(&env));
-		}
-		else if (1 == ac)
-		{
-			NODO_F(add_parse_dir(*av, &env->flags), ls_free(&env));
-		}
-		else
-		{
-			i = ~0ULL;
-			while (ac > ++i)
-			{
-				env->sorted_av = ls_sort_tab_ascii(ac, av);
-				MSG(env->sorted_av[i]);
-				MSGN(":");
-				NODO_F(add_parse_dir(env->sorted_av[i], &env->flags), continue);
-				if (ac != i + 1)
-					MSGN("\n");
-			}
-		}
-	}
+		add_parse_with_ac(ac, av, env);
 	ls_free(&env);
 	return (true);
 }

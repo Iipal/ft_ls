@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:34:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/20 09:20:16 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/21 23:16:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ strtab			ls_sort_tab_ascii(size_t n, strtab tab)
 {
 	const size_t	max_string_len = add_find_max_string_len(n, tab) + 1;
 	strtab			out;
-	char			temp[1024];
 	size_t			i;
 	size_t			j;
 
@@ -47,11 +46,7 @@ strtab			ls_sort_tab_ascii(size_t n, strtab tab)
 		while (n > j)
 		{
 			if (0 < ft_strcmp(out[i], tab[j]))
-			{
-				ft_strcpy((string)temp, out[i]);
-				ft_strcpy(out[i], tab[j]);
-				ft_strcpy(tab[j], (const string)temp);
-			}
+				SWAP(out[i], tab[j]);
 			++j;
 		}
 	}
