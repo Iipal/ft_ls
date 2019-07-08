@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/08 12:23:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/08 12:29:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 	return (true);
 }
 
-# define STR_SIZE sizeof("rwxrwxrwx")
+# define STR_SIZE sizeof("drwxrwxrwx")
 # define FP_SPECIAL 1
 
 static void	add_print_long_format(InDirObject *restrict const obj)
@@ -65,7 +65,8 @@ static void	add_print_long_format(InDirObject *restrict const obj)
 	const mode_t	perm = obj->stat->st_mode;
 	const int		flags = 0;
 
-	snprintf(str, STR_SIZE, "%c%c%c%c%c%c%c%c%c",
+	snprintf(str, STR_SIZE, "%c%c%c%c%c%c%c%c%c%c",
+		(S_ISDIR(perm)) ? 'd' : '-',
 		(perm & S_IRUSR) ? 'r' : '-', (perm & S_IWUSR) ? 'w' : '-',
 		(perm & S_IXUSR) ? (((perm & S_ISUID) && (flags & FP_SPECIAL))
 			? 's' : 'x') : (((perm & S_ISUID) && (flags & FP_SPECIAL))
