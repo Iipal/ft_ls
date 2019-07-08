@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/08 11:31:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/08 12:23:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,30 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 	return (true);
 }
 
+# define STR_SIZE sizeof("rwxrwxrwx")
+# define FP_SPECIAL 1
+
 static void	add_print_long_format(InDirObject *restrict const obj)
 {
-	if (S_ISREG(obj->stat->st_mode))
-		ft_putchar('-');
-	else if (S_ISDIR(obj->stat->st_mode))
-		ft_putchar('d');
-	ft_putchar('\n');
+	static char		str[STR_SIZE];
+	const mode_t	perm = obj->stat->st_mode;
+	const int		flags = 0;
+
+	snprintf(str, STR_SIZE, "%c%c%c%c%c%c%c%c%c",
+		(perm & S_IRUSR) ? 'r' : '-', (perm & S_IWUSR) ? 'w' : '-',
+		(perm & S_IXUSR) ? (((perm & S_ISUID) && (flags & FP_SPECIAL))
+			? 's' : 'x') : (((perm & S_ISUID) && (flags & FP_SPECIAL))
+			? 'S' : '-'),
+		(perm & S_IRGRP) ? 'r' : '-', (perm & S_IWGRP) ? 'w' : '-',
+		(perm & S_IXGRP) ? (((perm & S_ISGID) && (flags & FP_SPECIAL))
+			? 's' : 'x') : (((perm & S_ISGID) && (flags & FP_SPECIAL))
+			? 'S' : '-'),
+		(perm & S_IROTH) ? 'r' : '-', (perm & S_IWOTH) ? 'w' : '-',
+		(perm & S_IXOTH) ? (((perm & S_ISVTX) && (flags & FP_SPECIAL))
+			? 't' : 'x') : (((perm & S_ISVTX) && (flags & FP_SPECIAL))
+			? 'T' : '-'));
+
+	ft_putendl(str);
 }
 
 static bool	add_parse_dir(string path, const Flags *const flags)
