@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/22 03:41:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/08 10:08:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static inline __attribute__((always_inline)) bool	add_check_exist_flags(
 	return (true);
 }
 
-size_t	add_find_max_len(size_t in_dir_objs, size_t *objs_name_lens)
+size_t				add_find_max_len(size_t in_dir_objs, size_t *objs_name_lens)
 {
 	size_t	out;
 
@@ -33,7 +33,7 @@ size_t	add_find_max_len(size_t in_dir_objs, size_t *objs_name_lens)
 	return (out);
 }
 
-static CurrDir	*pre_calc_curr_dir(string path, const Flags *const flags)
+static CurrDir		*pre_calc_curr_dir(string path, const Flags *const flags)
 {
 	CurrDir			*out;
 	struct dirent	*tmp_dirent;
@@ -49,7 +49,7 @@ static CurrDir	*pre_calc_curr_dir(string path, const Flags *const flags)
 	return (out);
 }
 
-CurrDir	*ls_init_curr_dir(string path, const Flags *const flags)
+CurrDir				*ls_init_curr_dir(string path, const Flags *const flags)
 {
 	CurrDir			*out;
 	struct dirent	*tmp_dirent;

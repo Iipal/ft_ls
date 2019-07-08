@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/22 03:39:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/08 11:31:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ static bool	add_check_dirs(CurrDir *curr_dir,
 	return (true);
 }
 
+static void	add_print_long_format(InDirObject *restrict const obj)
+{
+	if (S_ISREG(obj->stat->st_mode))
+		ft_putchar('-');
+	else if (S_ISDIR(obj->stat->st_mode))
+		ft_putchar('d');
+	ft_putchar('\n');
+}
+
 static bool	add_parse_dir(string path, const Flags *const flags)
 {
 	CurrDir *curr_dir;
@@ -71,13 +80,19 @@ static bool	add_parse_dir(string path, const Flags *const flags)
 			flags->f_r_reverse_sort);
 	while (curr_dir->in_dir_objs > ++i)
 	{
-		ft_printf("%s", curr_dir->objs[i].dirent->d_name);
-		if (curr_dir->in_dir_objs - 1 != i
-		&& ft_strlen(curr_dir->objs[i].dirent->d_name) < curr_dir->max_obj_len)
-			ft_putnchar(' ', curr_dir->max_obj_len
-					- ft_strlen(curr_dir->objs[i].dirent->d_name));
-		if (curr_dir->in_dir_objs - 1 != i)
-			ft_putchar(' ');
+		if (flags->f_l_list_output)
+			add_print_long_format(&curr_dir->objs[i]);
+		else
+		{
+			ft_printf("%s", curr_dir->objs[i].dirent->d_name);
+			if (curr_dir->in_dir_objs - 1 != i
+			&& ft_strlen(curr_dir->objs[i].dirent->d_name)
+				< curr_dir->max_obj_len)
+					ft_putnchar(' ', curr_dir->max_obj_len
+							- ft_strlen(curr_dir->objs[i].dirent->d_name));
+			if (curr_dir->in_dir_objs - 1 != i)
+				ft_putchar(' ');
+		}
 	}
 	ft_putchar('\n');
 	if (flags->f_r_recursive_output)
@@ -92,30 +107,25 @@ static bool	add_parse_with_ac(size_t ac, strtab av, Environment *env)
 
 	if ('-' == **av && *(*av + 1))
 	{
-		NODO_F(ls_parse_flags(*av, env), ls_free(&env));
+		NO_F(ls_parse_flags(*av, env));
 		--ac;
 		++av;
 	}
 	env->ac = ac;
-	if (!ac)
-	{
-		NODO_F(add_parse_dir(".", &env->flags), ls_free(&env));
-	}
-	else if (1 == ac)
-	{
-		NODO_F(add_parse_dir(*av, &env->flags), ls_free(&env));
-	}
+	if (!env->ac)
+		return (add_parse_dir(".", &env->flags));
 	else
 	{
 		i = ~0ULL;
-		while (ac > ++i)
+		while (env->ac > ++i)
 		{
-			env->sorted_av = ls_sort_tab_ascii(ac, av);
-			MSG(env->sorted_av[i]);
-			MSGN(":");
-			NODO_F(add_parse_dir(env->sorted_av[i], &env->flags), continue);
-			if (ac != i + 1)
-				MSGN("\n");
+			env->sorted_av = ls_sort_tab_ascii(env->ac, av);
+			if (i)
+				ft_printf("%s:\n", env->sorted_av[i]);
+			if (!add_parse_dir(env->sorted_av[i], &env->flags))
+				continue ;
+			if (env->ac != i + 1)
+				ft_putchar('\n');
 		}
 	}
 	return (true);
