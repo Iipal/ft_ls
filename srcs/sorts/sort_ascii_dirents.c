@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_sort_indir_objs.c                               :+:      :+:    :+:   */
+/*   sort_indir_objs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,19 @@
 
 #include "ls.h"
 
-void	ls_sort_stats_time(const size_t in_dir_objs,
-			InDirObject *const objs,
-			const bool is_reverse)
+void	sort_ascii_dirents(size_t const in_dir_objs,
+							InDirObject *const objs,
+							bool const is_reverse)
 {
 	size_t	i;
 	size_t	j;
 
-	if (!in_dir_objs)
+	if (!in_dir_objs || !objs)
 		return ;
 	i = ~0ULL;
-	while ((in_dir_objs - 1) > ++i && (!i ? !(j = i)
-										: (j = i)))
-		while (in_dir_objs > ++j)
-			if (is_reverse)
-			{
-				if (objs[i].stat->st_mtime >= objs[j].stat->st_mtime)
-					SWAP(objs[i], objs[j]);
-			}
-			else
-			{
-				if (objs[i].stat->st_mtime < objs[j].stat->st_mtime)
-					SWAP(objs[i], objs[j]);
-			}
-}
-
-void	ls_sort_dirents_ascii(const size_t in_dir_objs,
-			InDirObject *const objs,
-			const bool is_reverse)
-{
-	size_t	i;
-	size_t	j;
-
-	if (!in_dir_objs)
-		return ;
-	i = ~0ULL;
-	while ((in_dir_objs - 1) > ++i && (!i ? !(j = i)
-										: (j = i)))
+	while (in_dir_objs - 1 > ++i)
+	{
+		j = i;
 		while (in_dir_objs > ++j)
 			if (is_reverse)
 			{
@@ -62,4 +38,5 @@ void	ls_sort_dirents_ascii(const size_t in_dir_objs,
 						objs[j].dirent->d_name))
 					SWAP(objs[i], objs[j]);
 			}
+	}
 }

@@ -1,38 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_init_curr_dir.c                                 :+:      :+:    :+:   */
+/*   init_curr_dir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 09:25:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 16:15:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static bool		add_check_exist_flags(const struct dirent *const dirent,
-												uint8_t const fmask)
+static bool		s_is_folder_hidden(struct dirent const *const dirent,
+												uint8_t const flags)
 {
-	if (!IS_SET_BIT(fmask, F_A_HDN)
-	&& !ft_strncmp((string)dirent->d_name, ".", ft_strlen(".")))
-		return (false);
+	if (!IS_SET_BIT(flags, F_A_HDN))
+		if (dirent->d_name[0] == '.')
+			return (false);
 	return (true);
 }
 
-static size_t	add_find_max_len(size_t in_dir_objs, size_t *objs_name_lens)
+static size_t	s_find_max_name_len(size_t const in_dir_objs,
+								InDirObject const *const objs)
 {
+	size_t	curr_len;
 	size_t	max_len;
+	size_t	i;
 
-	max_len = objs_name_lens[in_dir_objs - 1];
-	while (in_dir_objs--)
-		if (max_len < objs_name_lens[in_dir_objs])
-			max_len = objs_name_lens[in_dir_objs];
+	i = ~0ULL;
+	max_len = ft_strlen((*objs).dirent->d_name);
+	while (in_dir_objs > ++i)
+	{
+		curr_len = ft_strlen(objs[i].dirent->d_name);
+		if (max_len < curr_len)
+			max_len = curr_len;
+	}
 	return (max_len);
 }
 
-static CurrDir	*pre_calc_curr_dir(string path, uint8_t const fmask)
+static CurrDir	*s_calc_in_dir_objs(char const *const path,
+					uint8_t const flags)
 {
 	CurrDir			*out;
 	struct dirent	*tmp_dirent;
@@ -41,14 +49,14 @@ static CurrDir	*pre_calc_curr_dir(string path, uint8_t const fmask)
 	NODO_F(tmp_dir = opendir(path), perror(PERR));
 	MEM(CurrDir, out, 1, E_ALLOC);
 	while ((tmp_dirent = readdir(tmp_dir)))
-		out->in_dir_objs += add_check_exist_flags(tmp_dirent, fmask);
+		out->in_dir_objs += s_is_folder_hidden(tmp_dirent, flags);
 	closedir(tmp_dir);
 	MEM(InDirObject, out->objs, out->in_dir_objs, E_ALLOC);
-	MEM(size_t, out->obj_name_lens, out->in_dir_objs, E_ALLOC);
 	return (out);
 }
 
-CurrDir			*ls_init_curr_dir(string path, uint8_t const fmask)
+CurrDir			*init_curr_dir(char const *const path,
+					uint8_t const flags)
 {
 	CurrDir			*out;
 	struct dirent	*tmp_dirent;
@@ -57,21 +65,21 @@ CurrDir			*ls_init_curr_dir(string path, uint8_t const fmask)
 	size_t			i;
 
 	i = ~0ULL;
-	NO_F(out = pre_calc_curr_dir(path, fmask));
+	NO_F(out = s_calc_in_dir_objs(path, flags));
 	NODO_F(tmp_dir = opendir(path), perror(PERR));
 	while ((tmp_dirent = readdir(tmp_dir)))
 	{
 		stat(tmp_dirent->d_name, &tmp_stat);
-		if (add_check_exist_flags(tmp_dirent, fmask))
+		if (s_is_folder_hidden(tmp_dirent, flags))
 		{
-			NODOM_F(E_ALLOC, out->objs[++i].dirent = ls_dup_dirent(tmp_dirent),
-				ls_free_curr_dir(&out));
-			NODOM_F(E_ALLOC, out->objs[i].stat = ls_dup_stat(&tmp_stat),
-				ls_free_curr_dir(&out));
-			out->obj_name_lens[i] = ft_strlen(out->objs[i].dirent->d_name);
+			NODOM_F(E_ALLOC_OBJ(OBJ_DIRENT),
+			out->objs[++i].dirent = dup_dirent(tmp_dirent), free_curr_dir(&out));
+			NODOM_F(E_ALLOC_OBJ(OBJ_STAT),
+			out->objs[i].stat = dup_stat(&tmp_stat), free_curr_dir(&out));
 		}
 	}
 	closedir(tmp_dir);
-	out->max_obj_len = add_find_max_len(out->in_dir_objs, out->obj_name_lens);
+	out->max_obj_name_len
+		= s_find_max_name_len(out->in_dir_objs, out->objs);
 	return (out);
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_init_dups.c                                     :+:      :+:    :+:   */
+/*   new_sorted_ascii_strtab.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/21 22:59:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 09:03:44 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/06/19 11:34:48 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/07/31 17:21:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-struct dirent	*ls_dup_dirent(struct dirent const *const src)
+char	**new_sorted_ascii_tab(size_t const n, char **tab)
 {
-	struct dirent	*out;
+	size_t			i;
+	size_t			j;
 
-	MEM(struct dirent, out, 1, E_ALLOC);
-	ft_memcpy(out, (void*)src, sizeof(struct dirent));
-	return (out);
-}
-
-struct stat		*ls_dup_stat(struct stat const *const src)
-{
-	struct stat	*out;
-
-	MEM(struct stat, out, 1, E_ALLOC);
-	ft_memcpy(out, (void*)src, sizeof(struct stat));
-	return (out);
+	i = ~0ULL;
+	while (n > ++i)
+	{
+		j = i - 1ULL;
+		while (n > ++j)
+			if (0 < ft_strcmp(tab[i], tab[j]))
+				SWAP(tab[i], tab[j]);
+	}
+	return (tab);
 }

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_free.c                                          :+:      :+:    :+:   */
+/*   ls_free_curr_dir.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 20:14:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/22 11:37:06 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/07/31 16:15:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	ls_free(Environment **env)
+void	free_curr_dir(CurrDir **cur_dir)
 {
 	size_t	i;
 
 	i = ~0ULL;
-	if (*env)
+	if (*cur_dir)
 	{
-		if ((*env)->sorted_av)
+		while ((*cur_dir)->in_dir_objs > ++i)
 		{
-			while ((*env)->ac > ++i)
-				FREE((*env)->sorted_av[i], free);
-			FREE((*env)->sorted_av, free);
+			FREE((*cur_dir)->objs[i].dirent, free);
+			FREE((*cur_dir)->objs[i].stat, free);
 		}
-		FREE(*env, free);
+		FREE((*cur_dir)->objs, free);
+		FREE((*cur_dir), free);
 	}
 }

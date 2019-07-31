@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:33:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/18 15:13:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 16:14:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,9 @@
 # define PERR "ls"
 
 # define E_ALLOC ERR "Where is your memory, pal?"
+
+# define E_ALLOC_OBJ(obj) ERR "Can't allocate memory for \'" obj "\'."
+# define OBJ_DIRENT "struct dirent duplicate"
+# define OBJ_STAT   "struct stat duplicate"
 
 #endif

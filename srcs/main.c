@@ -6,34 +6,34 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 09:24:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 17:21:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static bool	add_parse_with_ac(size_t ac, strtab av, Environment *env)
+static bool	s_parse_with_ac(size_t ac, char **av)
 {
-	size_t	i;
+	static uint8_t	flags_bits_mask;
+	size_t			i;
 
 	if ('-' == **av && *(*av + 1))
 	{
-		NO_F(ls_parse_flags(*av++, &env->flags_mask));
+		NO_F(parse_flags(*av++, &flags_bits_mask));
 		--ac;
 	}
-	env->ac = ac;
-	if (!env->ac)
-		return (ls_parse_dir(".", env->flags_mask));
+	if (!ac)
+		return (parse_dir(".", flags_bits_mask));
 	else
 	{
 		i = ~0ULL;
-		while (env->ac > ++i)
+		av = new_sorted_ascii_tab(ac, av);
+		while (ac > ++i)
 		{
-			env->sorted_av = ls_sort_tab_ascii(env->ac, av);
-			(0 < i) ? ft_printf("%s:\n", env->sorted_av[i]) : 0;
-			if (!ls_parse_dir(env->sorted_av[i], env->flags_mask))
+			(0 < i) ? ft_printf("%s:\n", av[i]) : 0;
+			if (!parse_dir(av[i], flags_bits_mask))
 				continue ;
-			(env->ac != i + 1) ? ft_putchar('\n') : 0;
+			(ac != i + 1) ? ft_putchar('\n') : 0;
 		}
 	}
 	return (true);
@@ -41,18 +41,10 @@ static bool	add_parse_with_ac(size_t ac, strtab av, Environment *env)
 
 int			main(int argc, char *argv[])
 {
-	Environment *env;
-
 	--argc;
 	++argv;
-	MEM(Environment, env, 1, E_ALLOC);
 	if (!argc)
-	{
-		NODO_F(ls_parse_dir(".", 0), ls_free(&env));
-	}
+		parse_dir(".", 0);
 	else
-	{
-		NODO_F(add_parse_with_ac(argc, argv, env), ls_free(&env));
-	}
-	ls_free(&env);
+		s_parse_with_ac(argc, argv);
 }

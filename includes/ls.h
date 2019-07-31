@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 09:26:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 17:08:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <errno.h>
 # include <sys/stat.h>
 
+# define STR_SIZE sizeof("drwxrwxrwx")
+# define FP_SPECIAL 1
+
 struct			s_in_dir_object
 {
 	struct dirent	*dirent;
@@ -36,45 +39,44 @@ IN_DIR_OBJ;
 struct			s_curr_dir
 {
 	InDirObject	*objs;
-	size_t		*obj_name_lens;
+	size_t		max_obj_name_len;
 	size_t		in_dir_objs;
-	size_t		max_obj_len;
 };
 
 # define CURR_DIR typedef struct s_curr_dir	CurrDir
 
 CURR_DIR;
 
-struct			s_environment
+struct			s_long_format_helper
 {
-	size_t	ac;
-	strtab	sorted_av;
-	uint8_t	flags_mask;
+	char	*permission;
 };
 
-# define ENVIRONMENT typedef struct s_environment Environment
+# define FORMAT_HELPER typedef struct s_long_format_helper LongFormatCurrData
 
-ENVIRONMENT;
+FORMAT_HELPER;
 
-bool			ls(size_t ac, strtab av);
+bool			parse_dir(char *path,
+					uint8_t const flags);
 
-bool			ls_parse_dir(string path, const uint8_t flags);
-CurrDir			*ls_init_curr_dir(string path, const uint8_t flags);
+CurrDir			*init_curr_dir(char const *const path,
+					uint8_t const flags);
 
-strtab			ls_sort_tab_ascii(size_t max_strings, strtab strings_tab);
-void			ls_sort_dirents_ascii(const size_t in_dir_objs,
+char			**new_sorted_ascii_tab(size_t const n,
+					char **tab);
+
+void			sort_ascii_dirents(size_t const in_dir_objs,
 					InDirObject *const objs,
-					const bool is_reverse);
-void			ls_sort_stats_time(const size_t in_dir_objs,
+					bool const is_reverse);
+void			sort_time_stats(size_t const in_dir_objs,
 					InDirObject *const objs,
-					const bool is_reverse);
+					bool const is_reverse);
 
-struct dirent	*ls_dup_dirent(struct dirent const *const src);
-struct stat		*ls_dup_stat(struct stat const *const src);
+struct dirent	*dup_dirent(struct dirent const *const src);
+struct stat		*dup_stat(struct stat const *const src);
 
-bool			ls_parse_flags(string flags, uint8_t *const fmask);
+bool			parse_flags(char const *flags_str, uint8_t *const flags);
 
-void			ls_free(Environment **env);
-void			ls_free_curr_dir(CurrDir **curr_dir);
+void			free_curr_dir(CurrDir **curr_dir);
 
 #endif

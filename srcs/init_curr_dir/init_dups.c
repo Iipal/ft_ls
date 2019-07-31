@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_free_curr_dir.c                                 :+:      :+:    :+:   */
+/*   init_dups.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/19 19:22:52 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/06/21 22:59:58 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/07/31 16:47:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	ls_free_curr_dir(CurrDir **cur_dir)
+struct dirent	*dup_dirent(struct dirent const *const src)
 {
-	size_t	i;
+	struct dirent	*out;
 
-	i = ~0ULL;
-	if (*cur_dir)
-	{
-		while ((*cur_dir)->in_dir_objs > ++i)
-		{
-			FREE((*cur_dir)->objs[i].dirent, free);
-			FREE((*cur_dir)->objs[i].stat, free);
-		}
-		FREE((*cur_dir)->objs, free);
-		FREE((*cur_dir), free);
-	}
+	MEM(struct dirent, out, 1, E_ALLOC);
+	ft_memcpy(out, (void*)src, sizeof(struct dirent));
+	return (out);
+}
+
+struct stat		*dup_stat(struct stat const *const src)
+{
+	struct stat	*out;
+
+	MEM(struct stat, out, 1, E_ALLOC);
+	ft_memcpy(out, (void*)src, sizeof(struct stat));
+	return (out);
 }
