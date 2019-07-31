@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/18 15:21:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 09:28:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,28 @@
 # include "libft.h"
 # include "ls_errno.h"
 
-struct	s_flags
-{
-	bool	f_l_list_output;
-	bool	f_r_recursive_output;
-	bool	f_a_show_hidden;
-	bool	f_r_reverse_sort;
-	bool	f_t_time_sort;
-};
+# define F_N_BIT(n) (1 << n)
 
-# define FLAGS typedef struct s_flags Flags
+# define F_L_LIST (1 << 0)
+# define F_R_REC  (1 << 1)
+# define F_A_HDN  (1 << 2)
+# define F_R_REV  (1 << 3)
+# define F_T_TIME (1 << 4)
 
-FLAGS;
+# define SET_BIT(mask, bit) ((mask) |= (bit))
+# define IS_SET_BIT(mask, bit) ((mask) & (bit))
 
 # define MAX_FLAGS 5
 
-# define F_LIST_CHAR      'l'
-# define F_RECURSIVE_CHAR 'R'
-# define F_HIDDEN_CHAR    'a'
-# define F_REVERSE_CHAR   'r'
-# define F_TIME_CHAR      't'
+# define F_LIST_CH      'l'
+# define F_RECURSIVE_CH 'R'
+# define F_HIDDEN_CH    'a'
+# define F_REVERSE_CH   'r'
+# define F_TIME_CH      't'
 
 # define E_ILL_OPT ERR "illegal option -- "
 # define E_ILLEGAL(f) {MSG(E_ILL_OPT);ft_putchar_fd(f,2);ft_putchar_fd(10,2);}
 
-# define E_MISS_FLAG    ERR "'-' exist but flags missing."
+# define E_MISS_FLAG ERR "'-' exist but flags missing."
 
 #endif

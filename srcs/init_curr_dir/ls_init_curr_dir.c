@@ -6,34 +6,33 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/08 10:08:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 09:25:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline __attribute__((always_inline)) bool	add_check_exist_flags(
-	const struct dirent *const dirent,
-	const Flags *const flags)
+static bool		add_check_exist_flags(const struct dirent *const dirent,
+												uint8_t const fmask)
 {
-	if (!flags->f_a_show_hidden
+	if (!IS_SET_BIT(fmask, F_A_HDN)
 	&& !ft_strncmp((string)dirent->d_name, ".", ft_strlen(".")))
 		return (false);
 	return (true);
 }
 
-size_t				add_find_max_len(size_t in_dir_objs, size_t *objs_name_lens)
+static size_t	add_find_max_len(size_t in_dir_objs, size_t *objs_name_lens)
 {
-	size_t	out;
+	size_t	max_len;
 
-	out = objs_name_lens[in_dir_objs - 1];
+	max_len = objs_name_lens[in_dir_objs - 1];
 	while (in_dir_objs--)
-		if (out < objs_name_lens[in_dir_objs])
-			out = objs_name_lens[in_dir_objs];
-	return (out);
+		if (max_len < objs_name_lens[in_dir_objs])
+			max_len = objs_name_lens[in_dir_objs];
+	return (max_len);
 }
 
-static CurrDir		*pre_calc_curr_dir(string path, const Flags *const flags)
+static CurrDir	*pre_calc_curr_dir(string path, uint8_t const fmask)
 {
 	CurrDir			*out;
 	struct dirent	*tmp_dirent;
@@ -42,14 +41,14 @@ static CurrDir		*pre_calc_curr_dir(string path, const Flags *const flags)
 	NODO_F(tmp_dir = opendir(path), perror(PERR));
 	MEM(CurrDir, out, 1, E_ALLOC);
 	while ((tmp_dirent = readdir(tmp_dir)))
-		out->in_dir_objs += add_check_exist_flags(tmp_dirent, flags);
+		out->in_dir_objs += add_check_exist_flags(tmp_dirent, fmask);
 	closedir(tmp_dir);
 	MEM(InDirObject, out->objs, out->in_dir_objs, E_ALLOC);
 	MEM(size_t, out->obj_name_lens, out->in_dir_objs, E_ALLOC);
 	return (out);
 }
 
-CurrDir				*ls_init_curr_dir(string path, const Flags *const flags)
+CurrDir			*ls_init_curr_dir(string path, uint8_t const fmask)
 {
 	CurrDir			*out;
 	struct dirent	*tmp_dirent;
@@ -58,12 +57,12 @@ CurrDir				*ls_init_curr_dir(string path, const Flags *const flags)
 	size_t			i;
 
 	i = ~0ULL;
-	NO_F(out = pre_calc_curr_dir(path, flags));
+	NO_F(out = pre_calc_curr_dir(path, fmask));
 	NODO_F(tmp_dir = opendir(path), perror(PERR));
 	while ((tmp_dirent = readdir(tmp_dir)))
 	{
 		stat(tmp_dirent->d_name, &tmp_stat);
-		if (add_check_exist_flags(tmp_dirent, flags))
+		if (add_check_exist_flags(tmp_dirent, fmask))
 		{
 			NODOM_F(E_ALLOC, out->objs[++i].dirent = ls_dup_dirent(tmp_dirent),
 				ls_free_curr_dir(&out));

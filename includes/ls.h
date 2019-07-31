@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/22 11:32:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/31 09:26:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ struct			s_environment
 {
 	size_t	ac;
 	strtab	sorted_av;
-	Flags	flags;
+	uint8_t	flags_mask;
 };
 
 # define ENVIRONMENT typedef struct s_environment Environment
@@ -57,6 +57,9 @@ struct			s_environment
 ENVIRONMENT;
 
 bool			ls(size_t ac, strtab av);
+
+bool			ls_parse_dir(string path, const uint8_t flags);
+CurrDir			*ls_init_curr_dir(string path, const uint8_t flags);
 
 strtab			ls_sort_tab_ascii(size_t max_strings, strtab strings_tab);
 void			ls_sort_dirents_ascii(const size_t in_dir_objs,
@@ -66,12 +69,10 @@ void			ls_sort_stats_time(const size_t in_dir_objs,
 					InDirObject *const objs,
 					const bool is_reverse);
 
-CurrDir			*ls_init_curr_dir(string path, const Flags *const flags);
+struct dirent	*ls_dup_dirent(struct dirent const *const src);
+struct stat		*ls_dup_stat(struct stat const *const src);
 
-struct dirent	*ls_dup_dirent(struct dirent *src);
-struct stat		*ls_dup_stat(struct stat *src);
-
-bool			ls_parse_flags(string flags, Environment *const env);
+bool			ls_parse_flags(string flags, uint8_t *const fmask);
 
 void			ls_free(Environment **env);
 void			ls_free_curr_dir(CurrDir **curr_dir);
