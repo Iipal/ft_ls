@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:59:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/08 12:29:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:58:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,17 @@ static void	add_print_long_format(InDirObject *restrict const obj)
 {
 	static char		str[STR_SIZE];
 	const mode_t	perm = obj->stat->st_mode;
-	const int		flags = 0;
 
-	snprintf(str, STR_SIZE, "%c%c%c%c%c%c%c%c%c%c",
-		(S_ISDIR(perm)) ? 'd' : '-',
-		(perm & S_IRUSR) ? 'r' : '-', (perm & S_IWUSR) ? 'w' : '-',
-		(perm & S_IXUSR) ? (((perm & S_ISUID) && (flags & FP_SPECIAL))
-			? 's' : 'x') : (((perm & S_ISUID) && (flags & FP_SPECIAL))
-			? 'S' : '-'),
-		(perm & S_IRGRP) ? 'r' : '-', (perm & S_IWGRP) ? 'w' : '-',
-		(perm & S_IXGRP) ? (((perm & S_ISGID) && (flags & FP_SPECIAL))
-			? 's' : 'x') : (((perm & S_ISGID) && (flags & FP_SPECIAL))
-			? 'S' : '-'),
-		(perm & S_IROTH) ? 'r' : '-', (perm & S_IWOTH) ? 'w' : '-',
-		(perm & S_IXOTH) ? (((perm & S_ISVTX) && (flags & FP_SPECIAL))
-			? 't' : 'x') : (((perm & S_ISVTX) && (flags & FP_SPECIAL))
-			? 'T' : '-'));
+	str[0] = (S_ISDIR(perm)) ? 'd' : '-';
+	str[1] = (perm & S_IRUSR) ? 'r' : '-';
+	str[2] = (perm & S_IWUSR) ? 'w' : '-';
+	str[3] = (perm & S_IXUSR) ? 'x' : '-';
+	str[4] = (perm & S_IRGRP) ? 'r' : '-';
+	str[5] =  (perm & S_IWGRP) ? 'w' : '-';
+	str[6] = (perm & S_IXGRP) ? 'x' : '-';
+	str[7] = (perm & S_IROTH) ? 'r' : '-';
+	str[8] =  (perm & S_IWOTH) ? 'w' : '-';
+	str[9] = (perm & S_IXOTH) ? 'x' : '-';
 
 	ft_putendl(str);
 }
