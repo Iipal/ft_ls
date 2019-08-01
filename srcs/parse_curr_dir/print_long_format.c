@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 22:16:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 22:23:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,12 @@ void					print_long_format(size_t const n_objs,
 			objs[i].stat->st_nlink, data.pw->pw_name, data.gp->gr_name,
 			objs[i].stat->st_size, objs[i].stat->st_ctime,
 			objs[i].dirent->d_name);
-		ft_printf(" %d | %d", objs[i].stat->st_blksize, objs[i].stat->st_blocks);
-			total += objs[i].stat->st_blocks;
-		putchar('\n');
+		if ('-' == data.permission[0])
+			total += objs[i].stat->st_blocks / 2;
+		else
+			total += 4;
+		ft_putchar('\n');
 	}
-	ft_printf("total %ld\n", total / 2);
-	free(fmt_str);
+	ft_printf("total %ld\n", total);
+	// free(fmt_str);
 }
