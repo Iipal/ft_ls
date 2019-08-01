@@ -58,15 +58,15 @@ bool		parse_dir(char *path, uint8_t const flags)
 	CurrDir	*cd;
 
 	NO_F(cd = init_curr_dir(path, flags));
-	if (IS_SET_BIT(flags, F_T_TIME))
-		sort_time_stats(cd->n_objs, cd->objs, IS_SET_BIT(flags, F_R_REV));
+	if (IS_BIT(flags, F_T_TIME))
+		sort_time_stats(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
 	else
-		sort_ascii_dirents(cd->n_objs, cd->objs, IS_SET_BIT(flags, F_R_REV));
-	if (IS_SET_BIT(flags, F_L_LIST))
+		sort_ascii_dirents(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
+	if (IS_BIT(flags, F_L_LIST))
 		print_long_format(cd->n_objs, cd->objs);
 	else
 		print_default_format(cd->n_objs, cd->objs);
-	if (IS_SET_BIT(flags, F_R_REC))
+	if (IS_BIT(flags, F_R_REC))
 		s_check_dirs_recursive(flags, path, cd->n_objs, cd->objs);
 	free_curr_dir(&cd);
 	return (true);

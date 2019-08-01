@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 10:03:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 20:19:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define F_T_TIME (1 << 4)
 
 # define SET_BIT(mask, bit) ((mask) |= (bit))
-# define IS_SET_BIT(mask, bit) (((mask) & (bit)) == (bit))
+# define IS_BIT(mask, bit) (((mask) & (bit)) == (bit))
 
 # define F_LIST_CH      'l'
 # define F_RECURSIVE_CH 'R'

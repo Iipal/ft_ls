@@ -15,7 +15,7 @@
 static bool		s_is_folder_hidden(struct dirent const *const dirent,
 												uint8_t const flags)
 {
-	if (!IS_SET_BIT(flags, F_A_HDN))
+	if (!IS_BIT(flags, F_A_HDN))
 		if (dirent->d_name[0] == '.')
 			return (false);
 	return (true);
