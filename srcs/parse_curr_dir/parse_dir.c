@@ -13,8 +13,8 @@
 #include "ls.h"
 
 static bool	s_check_dirs_recursive(CurrDir *const curr_dir,
-			uint8_t const flags,
-			char *previous_path)
+				uint8_t const flags,
+				char *previous_path)
 {
 	DIR		*tmp_dir;
 	string	full_path;
@@ -38,8 +38,8 @@ static bool	s_check_dirs_recursive(CurrDir *const curr_dir,
 		else
 			full_path =
 				ft_strjoin(previous_path, curr_dir->objs[i].dirent->d_name);
-		if (!ft_strcmp(full_path + (ft_strlen(full_path) - 2), "..")
-		|| !ft_strcmp(full_path + (ft_strlen(full_path) - 1), "."))
+		if (*(full_path + (ft_strlen(full_path) - 1)) == '.'
+		|| !ft_strcmp(full_path + (ft_strlen(full_path) - 2), ".."))
 		{
 			ft_strdel(&full_path);
 			continue ;
@@ -52,25 +52,6 @@ static bool	s_check_dirs_recursive(CurrDir *const curr_dir,
 		ft_strdel(&full_path);
 	}
 	return (true);
-}
-
-static void	s_print_long_format(InDirObject *const obj)
-{
-	static char		str_perm[STR_SIZE];
-	mode_t const	perm = obj->stat->st_mode;
-
-	str_perm[0] = (S_ISDIR(perm)) ? 'd' : '-';
-	str_perm[1] = (perm & S_IRUSR) ? 'r' : '-';
-	str_perm[2] = (perm & S_IWUSR) ? 'w' : '-';
-	str_perm[3] = (perm & S_IXUSR) ? 'x' : '-';
-	str_perm[4] = (perm & S_IRGRP) ? 'r' : '-';
-	str_perm[5] =  (perm & S_IWGRP) ? 'w' : '-';
-	str_perm[6] = (perm & S_IXGRP) ? 'x' : '-';
-	str_perm[7] = (perm & S_IROTH) ? 'r' : '-';
-	str_perm[8] =  (perm & S_IWOTH) ? 'w' : '-';
-	str_perm[9] = (perm & S_IXOTH) ? 'x' : '-';
-
-	ft_putendl(str_perm);
 }
 
 bool		parse_dir(char *path, uint8_t const flags)
@@ -86,7 +67,7 @@ bool		parse_dir(char *path, uint8_t const flags)
 			IS_SET_BIT(flags, F_R_REV));
 	while (curr_dir->in_dir_objs > ++i)
 		if (IS_SET_BIT(flags, F_L_LIST))
-			s_print_long_format(&curr_dir->objs[i]);
+			print_long_format(&curr_dir->objs[i]);
 		else
 		{
 			ft_printf("%s", curr_dir->objs[i].dirent->d_name);

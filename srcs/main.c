@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 17:21:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 07:18:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	s_parse_with_ac(size_t ac, char **av)
 	static uint8_t	flags_bits_mask;
 	size_t			i;
 
-	if ('-' == **av && *(*av + 1))
+	if ('-' == **av)
 	{
 		NO_F(parse_flags(*av++, &flags_bits_mask));
 		--ac;
@@ -27,7 +27,7 @@ static bool	s_parse_with_ac(size_t ac, char **av)
 	else
 	{
 		i = ~0ULL;
-		av = new_sorted_ascii_tab(ac, av);
+		av = sort_ascii_tab_str(ac, av);
 		while (ac > ++i)
 		{
 			(0 < i) ? ft_printf("%s:\n", av[i]) : 0;

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 14:16:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 07:42:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define MAX_FLAGS 5
 
-# define F_N_BIT(n) (1 << n)
+# define F_N_BIT(n) (1 << (n))
 
 # define F_L_LIST (1 << 0)
 # define F_R_REC  (1 << 1)
@@ -27,7 +27,7 @@
 # define F_T_TIME (1 << 4)
 
 # define SET_BIT(mask, bit) ((mask) |= (bit))
-# define IS_SET_BIT(mask, bit) ((mask) & (bit))
+# define IS_SET_BIT(mask, bit) (((mask) & (bit)) == (bit))
 
 # define F_LIST_CH      'l'
 # define F_RECURSIVE_CH 'R'
