@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 22:08:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 11:40:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@
 # include <dirent.h>
 # include <sys/stat.h>
 
-bool			parse_dir(char *path,
-					uint8_t const flags);
+bool			parse_dir(char *path, uint8_t const flags);
 
-void			print_long_format(InDirObject *const curr_obj);
+void			print_long_format(size_t const n_objs,
+					InDirObject const *const objs);
+void			print_default_format(size_t const n_objs,
+					InDirObject const *const objs);
 
 CurrDir			*init_curr_dir(char const *const path,
 					uint8_t const flags);
 
 char			**sort_ascii_tab_str(size_t const n, char **tab);
-void			sort_ascii_dirents(size_t const in_dir_objs,
+void			sort_ascii_dirents(size_t const objs_counter,
 					InDirObject *const objs,
 					bool const is_reverse);
-void			sort_time_stats(size_t const in_dir_objs,
+void			sort_time_stats(size_t const objs_counter,
 					InDirObject *const objs,
 					bool const is_reverse);
 

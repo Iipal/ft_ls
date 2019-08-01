@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 08:05:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 12:02:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,67 @@ static void	s_get_permission(char *const perm_str, mode_t const st_mode_perm)
 	perm_str[9] = (st_mode_perm & S_IXOTH) ? 'x' : '-';
 }
 
-void	print_long_format(InDirObject *const curr_obj)
+void	s_precalc_output_width(size_t const n_objs,
+			InDirObject const *const objs,
+			LongFormatCurrData *const fmt_data)
 {
-	static LongFormatCurrData data;
+	size_t i;
+	size_t max_nlink_width;
+	size_t max_size_width;
 
-	data = (LongFormatCurrData) { (char[PERMISSION_STRING_LENGTH]){ 0 },
-		getpwuid(curr_obj->stat->st_uid), getgrgid(curr_obj->stat->st_gid)};
-	s_get_permission(data.permission, curr_obj->stat->st_mode);
-	ft_printf("%s %d %s %s %d %d %s\n", data.permission,
-		curr_obj->stat->st_nlink, data.pw->pw_name, data.gp->gr_name,
-		curr_obj->stat->st_size, curr_obj->stat->st_ctime,
-		curr_obj->dirent->d_name);
+	i = ~0ULL;
+	max_nlink_width = 0;
+	max_size_width = 0;
+	while (n_objs > ++i)
+	{
+		if (ft_digits(objs[i].stat->st_nlink) > max_nlink_width)
+			max_nlink_width = ft_digits(objs[i].stat->st_nlink);
+		if (ft_digits(objs[i].stat->st_size) > max_size_width)
+			max_size_width = ft_digits(objs[i].stat->st_size);
+	}
+	fmt_data->st_nlink_width = max_nlink_width;
+	fmt_data->st_size_width = max_size_width;
+}
+
+char	*s_prepare_output_fmtstr(char *fmt_str,
+			LongFormatCurrData const *const data)
+{
+	char	*tmp;
+
+	fmt_str = (char[]){ "%s %." };
+	tmp = ft_itoa(data->st_nlink_width);
+	fmt_str = ft_strncat(fmt_str, tmp, ft_strlen(tmp));
+	free(tmp);
+	fmt_str = ft_strncat(fmt_str, "d %s %s %.", sizeof("d %s %s %."));
+	tmp = ft_itoa(data->st_size_width);
+	fmt_str = ft_strncat(fmt_str, tmp, ft_strlen(tmp));
+	free(tmp);
+	fmt_str = ft_strncat(fmt_str, "d %d %s\n", sizeof("d %d %s\n"));
+	return (fmt_str);
+}
+
+void	print_long_format(size_t const n_objs, InDirObject const *const objs)
+{
+	char				*fmt_str;
+	LongFormatCurrData	data;
+	size_t				i;
+
+	i = ~0ULL;
+	fmt_str = NULL;
+	s_precalc_output_width(n_objs, objs, &data);
+	fmt_str = s_prepare_output_fmtstr(fmt_str, &data);
+	ft_printf("%s\n", fmt_str);
+	while (n_objs > ++i)
+	{
+		data = (LongFormatCurrData) { (char[STR_LEN_DATE]){ 0 },
+									(char[STR_LEN_PERMISSION]){ 0 },
+									getpwuid(objs[i].stat->st_uid),
+									getgrgid(objs[i].stat->st_gid),
+									data.st_nlink_width, data.st_size_width};
+		s_get_permission(data.permission, objs[i].stat->st_mode);
+		printf(fmt_str, data.permission,
+			objs[i].stat->st_nlink, data.pw->pw_name, data.gp->gr_name,
+			objs[i].stat->st_size, objs[i].stat->st_ctime,
+			objs[i].dirent->d_name);
+	}
 }

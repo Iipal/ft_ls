@@ -21,24 +21,6 @@ static bool		s_is_folder_hidden(struct dirent const *const dirent,
 	return (true);
 }
 
-static size_t	s_find_max_name_len(size_t const in_dir_objs,
-								InDirObject const *const objs)
-{
-	size_t	curr_len;
-	size_t	max_len;
-	size_t	i;
-
-	i = ~0ULL;
-	max_len = ft_strlen((*objs).dirent->d_name);
-	while (in_dir_objs > ++i)
-	{
-		curr_len = ft_strlen(objs[i].dirent->d_name);
-		if (max_len < curr_len)
-			max_len = curr_len;
-	}
-	return (max_len);
-}
-
 static CurrDir	*s_calc_in_dir_objs(char const *const path,
 					uint8_t const flags)
 {
@@ -49,9 +31,9 @@ static CurrDir	*s_calc_in_dir_objs(char const *const path,
 	NODO_F(tmp_dir = opendir(path), perror(PERR));
 	MEM(CurrDir, out, 1, E_ALLOC);
 	while ((tmp_dirent = readdir(tmp_dir)))
-		out->in_dir_objs += s_is_folder_hidden(tmp_dirent, flags);
+		out->n_objs += s_is_folder_hidden(tmp_dirent, flags);
 	closedir(tmp_dir);
-	MEM(InDirObject, out->objs, out->in_dir_objs, E_ALLOC);
+	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
 	return (out);
 }
 
@@ -79,7 +61,5 @@ CurrDir			*init_curr_dir(char const *const path,
 		}
 	}
 	closedir(tmp_dir);
-	out->max_obj_name_len
-		= s_find_max_name_len(out->in_dir_objs, out->objs);
 	return (out);
 }

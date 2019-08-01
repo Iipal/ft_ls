@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_free_curr_dir.c                                 :+:      :+:    :+:   */
+/*   free_curr_dir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 16:15:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 11:40:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_curr_dir(CurrDir **cur_dir)
 	i = ~0ULL;
 	if (*cur_dir)
 	{
-		while ((*cur_dir)->in_dir_objs > ++i)
+		while ((*cur_dir)->n_objs > ++i)
 		{
 			FREE((*cur_dir)->objs[i].dirent, free);
 			FREE((*cur_dir)->objs[i].stat, free);

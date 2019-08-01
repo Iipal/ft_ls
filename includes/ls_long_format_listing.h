@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 08:05:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/01 11:43:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@
 #include <pwd.h>
 #include <grp.h>
 
-# define PERMISSION_STRING_LENGTH sizeof("drwxrwxrwx")
+# define STR_LEN_DATE sizeof("Aug  1 05:47")
+# define STR_LEN_PERMISSION sizeof("drwxrwxrwx")
 
 struct			s_long_format_helper
 {
+	char			*date;
 	char			*permission;
 	struct passwd	*pw;
 	struct group	*gp;
+	size_t			st_nlink_width;
+	size_t			st_size_width;
 };
 
 # define FORMAT_HELPER typedef struct s_long_format_helper LongFormatCurrData
