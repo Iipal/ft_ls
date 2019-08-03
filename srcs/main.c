@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 16:14:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 16:32:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,27 @@ static void	s_parse_multifile(size_t const ac, char **av, uint8_t const flags)
 		if (ac != i + 1)
 			ft_putchar('\n');
 	}
-
-}
-
-static bool	s_parse_ac(size_t ac, char **av)
-{
-	uint8_t	flags;
-
-	if ('-' == **av)
-	{
-		NO_F(parse_flags(*av++, &flags));
-		--ac;
-	}
-	if (!ac)
-		return (parse_dir(".", flags));
-	else
-		s_parse_multifile(ac, av, flags);
-	return (true);
 }
 
 int			main(int argc, char *argv[])
 {
+	static uint8_t	flags;
+
 	--argc;
 	++argv;
 	if (!argc)
-		parse_dir(".", 0);
+		parse_dir(".", flags);
 	else
-		s_parse_ac(argc, argv);
+	{
+		if ('-' == **argv)
+		{
+			NO_F(parse_flags(*argv, &flags));
+			++argv;
+			--argc;
+		}
+		if (!argc)
+			return (parse_dir(".", flags));
+		else
+			s_parse_multifile(argc, argv, flags);
+	}
 }
