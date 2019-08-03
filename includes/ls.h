@@ -6,14 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 12:07:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 12:12:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_H
 # define LS_H
-
-# define _XOPEN_SOURCE 500
 
 # include "libft.h"
 # include "ft_printf.h"
@@ -26,7 +24,6 @@
 # include <dirent.h>
 
 # include <sys/stat.h>
-# include <sys/types.h>
 
 bool			parse_dir(char *path, uint8_t const flags);
 
