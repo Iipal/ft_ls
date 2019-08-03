@@ -12,7 +12,7 @@
 
 #include "ls.h"
 
-static CurrDir	*s_calc_in_dir_objs(char const *const path,
+static CurrDir	*s_precalc_in_dir_objs(char const *const path,
 					uint8_t const flags)
 {
 	CurrDir			*out;
@@ -28,50 +28,43 @@ static CurrDir	*s_calc_in_dir_objs(char const *const path,
 	return (out);
 }
 
-char	*s_full_path(char *const path, char *const dirent_name)
+static char		*s_full_path(char *const dst,
+							char *const path,
+							char *const dirent_name)
 {
-	char	*out;
-	size_t	out_len;
-
-	out = NULL;
-	out_len = ft_strlen(path);
-	if (path[out_len - 1] != '/')
-		++out_len;
-	out_len += ft_strlen(dirent_name);
-	MEM(char, out, out_len + 1, E_ALLOC);
-	ft_strcpy(out, path);
-	if (out[ft_strlen(out)] != '/')
-		out[ft_strlen(out)] = '/';
-	ft_strcpy(out + ft_strlen(out), dirent_name);
-	return (out);
+	ft_bzero(dst, sizeof(char) * 1024);
+	ft_strcpy(dst, path);
+	if (dst[ft_strlen(dst)] != '/')
+		dst[ft_strlen(dst)] = '/';
+	ft_strcpy(dst + ft_strlen(dst), dirent_name);
+	return (dst);
 }
 
 CurrDir			*init_curr_dir(char *const path,
 					uint8_t const flags)
 {
-	CurrDir			*out;
-	struct dirent	*dirent;
-	DIR				*dir;
-	struct stat		*tmp_stat;
-	size_t			i;
+	CurrDir		*out;
+	CurrDirInit	tmp;
+	size_t		i;
 
 	i = ~0ULL;
-	tmp_stat = &(struct stat){ 0 };
-	NO_F(out = s_calc_in_dir_objs(path, flags));
-	NODO_F(dir = opendir(path), perror(PERR));
-	while ((dirent = readdir(dir)))
+	tmp.m_stat = &(struct stat){ 0 };
+	NO_F(out = s_precalc_in_dir_objs(path, flags));
+	NODO_F(tmp.m_dir = opendir(path), perror(PERR));
+	while ((tmp.m_dirent = readdir(tmp.m_dir)))
 	{
-		char	*full = s_full_path(path, dirent->d_name);
-		stat(full, tmp_stat);
-		free(full);
-		if (!(!IS_BIT(flags, F_A_HDN) && '.' == dirent->d_name[0]))
+		stat(s_full_path(tmp.m_path, path, tmp.m_dirent->d_name), tmp.m_stat);
+		if (!(!IS_BIT(flags, F_A_HDN) && '.' == tmp.m_dirent->d_name[0]))
 		{
 			NODOM_F(E_ALLOC_OBJ(OBJ_DIRENT),
-			out->objs[++i].dirent = dup_dirent(dirent), free_curr_dir(&out));
+				out->objs[++i].dirent
+					= dup_dirent(tmp.m_dirent), free_curr_dir(&out));
 			NODOM_F(E_ALLOC_OBJ(OBJ_STAT),
-			out->objs[i].stat = dup_stat(tmp_stat), free_curr_dir(&out));
+				out->objs[i].stat = dup_stat(tmp.m_stat), free_curr_dir(&out));
 		}
 	}
-	closedir(dir);
+	closedir(tmp.m_dir);
+	if (!out->n_objs)
+		free_curr_dir(&out);
 	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 12:12:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 16:09:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 
 # include <stdio.h>
 # include <errno.h>
-# include <dirent.h>
-
 # include <sys/stat.h>
 
 bool			parse_dir(char *path, uint8_t const flags);

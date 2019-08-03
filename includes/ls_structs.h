@@ -6,14 +6,15 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 10:12:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 16:01:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_STRUCTS
 # define LS_STRUCTS
 
-#include <stddef.h>
+# include <dirent.h>
+# include <stddef.h>
 
 struct			s_in_dir_object
 {
@@ -31,8 +32,18 @@ struct			s_curr_dir
 	size_t		n_objs;
 };
 
-# define CURR_DIR typedef struct s_curr_dir	CurrDir
+struct			s_curr_dir_init
+{
+	DIR				*m_dir;
+	struct dirent	*m_dirent;
+	struct stat		*m_stat;
+	char			m_path[1024];
+};
+
+# define CURR_DIR      typedef struct s_curr_dir CurrDir
+# define CURR_DIR_INIT typedef struct s_curr_dir_init CurrDirInit
 
 CURR_DIR;
+CURR_DIR_INIT;
 
 #endif
