@@ -16,7 +16,7 @@ static bool	s_check_dirs_recursive(uint8_t const flags, char *previous_path,
 						size_t const n_objs, InDirObject const *const objs)
 {
 	DIR		*tmp_dir;
-	string	full_path;
+	char	*full_path;
 	size_t	i;
 
 	i = ~0ULL;

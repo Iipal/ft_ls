@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 16:55:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/03 23:13:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	s_check_valid_flag(char const curr_flag, uint8_t *const flags)
 	while (MAX_FLAGS > ++i)
 		if (curr_flag == valid_flags[i])
 		{
-			SET_BIT(*flags, F_N_BIT(i));
+			SET_BIT(*flags, TO_N_BIT(i));
 			return (true);
 		}
 	return (false);
