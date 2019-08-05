@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 16:15:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 11:24:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static char	*s_get_permission(char *perm_str, mode_t const st_mode_perm)
 	return (perm_str);
 }
 
-static char	*s_get_date(char *date_str, __time_t const date_time)
+static char	*s_get_date(char *date_str, t_time_t const date_time)
 {
-	struct tm	*tm_file;
+	static struct tm	*tm_file;
 
 	tm_file = localtime(&date_time);
 	strftime(date_str, STR_LEN_DATE, "%b %e %H:%M", tm_file);
@@ -39,11 +39,12 @@ static char	*s_get_date(char *date_str, __time_t const date_time)
 }
 
 void		print_long_format(size_t const n_objs,
-				InDirObject const *const objs)
+				InDirObject const *const objs,
+				uint8_t const flags)
 {
 	char				*fmt_str;
 	LongFormatCurrData	data;
-	__blkcnt_t			total;
+	t_blkcnt_t			total;
 	size_t				i;
 
 	i = ~0ULL;
@@ -59,6 +60,8 @@ void		print_long_format(size_t const n_objs,
 			s_get_permission(data.permission, objs[i].stat->st_mode),
 			getpwuid(objs[i].stat->st_uid)->pw_name,
 			getgrgid(objs[i].stat->st_gid)->gr_name };
+		IS_BIT(flags, F_S_BLCK)
+			? ft_printf("%2d ", objs[i].stat->st_blocks) : 0;
 		ft_printf(fmt_str, data.permission,
 			objs[i].stat->st_nlink, data.pw_name, data.gr_name,
 			objs[i].stat->st_size, data.date,

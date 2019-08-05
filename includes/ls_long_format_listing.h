@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/02 19:54:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 10:06:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,15 @@
 
 # define STR_LEN_DATE sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION sizeof("drwxrwxrwx")
-# define STR_LEN_DEFAULT_FMT sizeof("%s %jd %s %s %jd %s %s")
+# define STR_LEN_DEFAULT_FMT sizeof("%s  %jd %s  %s  %jd %s %s")
+
+# if defined(__APPLE__)
+typedef blkcnt_t t_blkcnt_t;
+typedef time_t t_time_t;
+# else
+typedef __blkcnt_t t_blkcnt_t;
+typedef __time_t t_time_t;
+#endif
 
 struct	s_long_format_helper
 {
@@ -45,7 +53,7 @@ SPEC_FMT_HELPER;
 
 WidthSpecific	precalc_output(size_t const n_objs,
 					InDirObject const *const objs,
-					__blkcnt_t *const total);
+					t_blkcnt_t *const total);
 char			*prepare_output_fmtstr(WidthSpecific const ws);
 
 #endif

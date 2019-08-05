@@ -12,18 +12,14 @@
 
 #include "ls.h"
 
-static CurrDir	*s_precalc_in_dir_objs(char const *const path,
-					uint8_t const flags)
+static CurrDir	*s_precalc_in_dir_objs(uint8_t const flags, DIR *dir)
 {
 	CurrDir			*out;
 	struct dirent	*dirent;
-	DIR				*dir;
 
-	NODO_F(dir = opendir(path), perror(PERR));
 	MEM(CurrDir, out, 1, E_ALLOC);
 	while ((dirent = readdir(dir)))
 		out->n_objs += !(!IS_BIT(flags, F_A_HDN) && '.' == dirent->d_name[0]);
-	closedir(dir);
 	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
 	return (out);
 }
@@ -49,8 +45,9 @@ CurrDir			*init_curr_dir(char *const path,
 
 	i = ~0ULL;
 	tmp.m_stat = &(struct stat){ 0 };
-	NO_F(out = s_precalc_in_dir_objs(path, flags));
 	NODO_F(tmp.m_dir = opendir(path), perror(PERR));
+	NO_F(out = s_precalc_in_dir_objs(flags, tmp.m_dir));
+	rewinddir(tmp.m_dir);
 	while ((tmp.m_dirent = readdir(tmp.m_dir)))
 	{
 		stat(s_full_path(tmp.m_path, path, tmp.m_dirent->d_name), tmp.m_stat);

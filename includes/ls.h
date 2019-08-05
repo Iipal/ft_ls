@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 16:09:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 10:07:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 bool			parse_dir(char *path, uint8_t const flags);
 
 void			print_long_format(size_t const n_objs,
-					InDirObject const *const objs);
+					InDirObject const *const objs,
+					uint8_t const flags);
 void			print_default_format(size_t const n_objs,
 					InDirObject const *const objs);
 

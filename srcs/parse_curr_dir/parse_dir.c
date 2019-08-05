@@ -63,7 +63,7 @@ bool		parse_dir(char *path, uint8_t const flags)
 	else
 		sort_ascii_dirents(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
 	if (IS_BIT(flags, F_L_LIST))
-		print_long_format(cd->n_objs, cd->objs);
+		print_long_format(cd->n_objs, cd->objs, flags);
 	else
 		print_default_format(cd->n_objs, cd->objs);
 	if (IS_BIT(flags, F_R_REC))
