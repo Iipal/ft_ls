@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_curr_dir.c                                 :+:      :+:    :+:   */
+/*   init_curr_dir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 16:15:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 16:14:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ CurrDir			*init_curr_dir(char *const path,
 		if (!(!IS_BIT(flags, F_A_HDN) && '.' == tmp.m_dirent->d_name[0]))
 		{
 			NODOM_F(E_ALLOC_OBJ(OBJ_DIRENT),
-				out->objs[++i].dirent
-					= dup_dirent(tmp.m_dirent), free_curr_dir(&out));
+				out->objs[++i].dirent =
+					dup_dirent(tmp.m_dirent), free_curr_dir(&out));
 			NODOM_F(E_ALLOC_OBJ(OBJ_STAT),
 				out->objs[i].stat = dup_stat(tmp.m_stat), free_curr_dir(&out));
 		}

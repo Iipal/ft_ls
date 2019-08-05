@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/03 15:47:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 15:55:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	sort_time_stats(size_t const in_dir_objs,
 		while (in_dir_objs > ++j)
 			if (is_reverse)
 			{
-				if (objs[i].stat->st_mtime >= objs[j].stat->st_mtime)
+				if (objs[i].stat->st_mtime > objs[j].stat->st_mtime)
 					SWAP(objs[i], objs[j]);
 			}
 			else
 			{
-				if (objs[i].stat->st_mtime < objs[j].stat->st_mtime)
+				if (objs[i].stat->st_mtime <= objs[j].stat->st_mtime)
 					SWAP(objs[i], objs[j]);
 			}
 	}

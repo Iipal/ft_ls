@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 10:10:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 15:48:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	s_check_valid_flag(char const curr_flag, uint8_t *const flags)
 {
 	const char	valid_flags[MAX_LS_FLAGS] = {F_LIST_CH, F_RECURSIVE_CH,
-					F_HIDDEN_CH, F_REVERSE_CH, F_TIME_CH, F_BLOCK_CH};
+								F_HIDDEN_CH, F_REVERSE_CH, F_TIME_CH};
 	uint32_t	i;
 
 	i = ~0U;

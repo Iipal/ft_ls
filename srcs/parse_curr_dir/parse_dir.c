@@ -1,54 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_dir.c                                     :+:      :+:    :+:   */
+/*   parse_dir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 16:16:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 16:14:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static bool	s_check_dirs_recursive(uint8_t const flags, char *previous_path,
+static char	*s_get_new_path(char const *const prev_path,
+							char const *const d_name)
+{
+	size_t const	prev_path_len = ft_strlen(prev_path);
+	bool const		is_no_slash = '/' != prev_path[prev_path_len - 1];
+	char			*out;
+
+	out = ft_strnew(ft_strlen(d_name) + prev_path_len + is_no_slash);
+	out = ft_strncpy(out, prev_path, prev_path_len);
+	if (is_no_slash)
+		out[prev_path_len] = '/';
+	ft_strncpy(out + prev_path_len + 1, d_name, ft_strlen(d_name));
+	return (out);
+}
+
+static bool	s_check_dirs_recursive(uint8_t const flags, char *prev_path,
 						size_t const n_objs, InDirObject const *const objs)
 {
-	DIR		*tmp_dir;
-	char	*full_path;
+	char	*new_path;
 	size_t	i;
 
 	i = ~0ULL;
-	full_path = NULL;
+	new_path = NULL;
 	while (n_objs > ++i)
 	{
-		if ('/' != previous_path[ft_strlen(previous_path) - 1])
-		{
-			full_path = ft_strnew(sizeof(char)
-				* (ft_strlen(objs[i].dirent->d_name)
-				+ ft_strlen(previous_path) + 1));
-			full_path = ft_strncpy(full_path, previous_path,
-									ft_strlen(previous_path));
-			full_path[ft_strlen(previous_path)] = '/';
-			full_path = ft_strncat(full_path, objs[i].dirent->d_name,
-								ft_strlen(objs[i].dirent->d_name));
-		}
-		else
-			full_path =
-				ft_strjoin(previous_path, objs[i].dirent->d_name);
-		if (*(full_path + (ft_strlen(full_path) - 1)) == '.'
-		|| !ft_strcmp(full_path + (ft_strlen(full_path) - 2), ".."))
-		{
-			ft_strdel(&full_path);
+		if ('.' == objs[i].dirent->d_name[ft_strlen(objs[i].dirent->d_name) - 1]
+		|| !ft_strcmp(objs[i].dirent->d_name
+			+ (ft_strlen(objs[i].dirent->d_name) - 2), ".."))
 			continue ;
-		}
-		if ((tmp_dir = opendir(full_path)))
+		if (S_ISDIR(objs[i].stat->st_mode))
 		{
-			ft_printf("\n%s:\n", full_path);
-			parse_dir(full_path, flags);
+			new_path = s_get_new_path(prev_path, objs[i].dirent->d_name);
+			ft_printf("\n%s:\n", new_path);
+			parse_dir(new_path, flags);
+			ft_strdel(&new_path);
 		}
-		ft_strdel(&full_path);
 	}
 	return (true);
 }
@@ -63,7 +62,7 @@ bool		parse_dir(char *path, uint8_t const flags)
 	else
 		sort_ascii_dirents(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
 	if (IS_BIT(flags, F_L_LIST))
-		print_long_format(cd->n_objs, cd->objs, flags);
+		print_long_format(cd->n_objs, cd->objs);
 	else
 		print_default_format(cd->n_objs, cd->objs);
 	if (IS_BIT(flags, F_R_REC))

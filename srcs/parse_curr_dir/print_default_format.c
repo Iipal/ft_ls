@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/01 11:35:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 16:13:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 static size_t	s_find_max_name_len(size_t const n_objs,
-								InDirObject const *const objs)
+					InDirObject const *const objs)
 {
 	size_t	curr_len;
 	size_t	max_len;
@@ -30,8 +30,8 @@ static size_t	s_find_max_name_len(size_t const n_objs,
 	return (max_len);
 }
 
-void	print_default_format(size_t const n_objs,
-			InDirObject const *const objs)
+void			print_default_format(size_t const n_objs,
+					InDirObject const *const objs)
 {
 	size_t	max_obj_name_len;
 	size_t	i;

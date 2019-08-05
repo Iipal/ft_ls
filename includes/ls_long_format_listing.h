@@ -6,12 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 10:06:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/05 16:15:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_LONG_FORMAT_LISTING
-# define LS_LONG_FORMAT_LISTING
+#ifndef LS_LONG_FORMAT_LISTING_H
+# define LS_LONG_FORMAT_LISTING_H
 
 # include <pwd.h>
 # include <grp.h>
@@ -21,13 +21,13 @@
 # define STR_LEN_PERMISSION sizeof("drwxrwxrwx")
 # define STR_LEN_DEFAULT_FMT sizeof("%s  %jd %s  %s  %jd %s %s")
 
-# if defined(__APPLE__)
+# ifdef __APPLE__
 typedef blkcnt_t t_blkcnt_t;
 typedef time_t t_time_t;
 # else
 typedef __blkcnt_t t_blkcnt_t;
 typedef __time_t t_time_t;
-#endif
+# endif
 
 struct	s_long_format_helper
 {
