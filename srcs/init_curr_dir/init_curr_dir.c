@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 16:14:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:38:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ static char		*s_full_path(char *const dst,
 	return (dst);
 }
 
+static CurrDir	*s_only_file(char *const path)
+{
+	CurrDir 	*out;
+	struct stat	st;
+	int const	ret = stat(path, &st);
+
+	IFDO_F(ret, perror(PERR));
+	MEM(CurrDir, out, 1UL, E_ALLOC);
+	out->n_objs = 1UL;
+	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
+	MEM(struct stat, out->objs->stat, out->n_objs, E_ALLOC);
+	out->is_file = true;
+	*out->objs->stat = st;
+	return (out);
+}
+
 CurrDir			*init_curr_dir(char *const path,
 					uint8_t const flags)
 {
@@ -44,20 +60,21 @@ CurrDir			*init_curr_dir(char *const path,
 	size_t		i;
 
 	i = ~0ULL;
-	tmp.m_stat = &(struct stat){ 0 };
-	NODO_F(tmp.m_dir = opendir(path), perror(PERR));
+	tmp.m_dir = opendir(path);
+	if (!tmp.m_dir)
+		return (s_only_file(path));
 	NO_F(out = s_precalc_in_dir_objs(flags, tmp.m_dir));
 	rewinddir(tmp.m_dir);
 	while ((tmp.m_dirent = readdir(tmp.m_dir)))
 	{
-		stat(s_full_path(tmp.m_path, path, tmp.m_dirent->d_name), tmp.m_stat);
+		stat(s_full_path(tmp.m_path, path, tmp.m_dirent->d_name), &tmp.m_stat);
 		if (!(!IS_BIT(flags, F_A_HDN) && '.' == tmp.m_dirent->d_name[0]))
 		{
 			NODOM_F(E_ALLOC_OBJ(OBJ_DIRENT),
 				out->objs[++i].dirent =
 					dup_dirent(tmp.m_dirent), free_curr_dir(&out));
 			NODOM_F(E_ALLOC_OBJ(OBJ_STAT),
-				out->objs[i].stat = dup_stat(tmp.m_stat), free_curr_dir(&out));
+				out->objs[i].stat = dup_stat(&tmp.m_stat), free_curr_dir(&out));
 		}
 	}
 	closedir(tmp.m_dir);

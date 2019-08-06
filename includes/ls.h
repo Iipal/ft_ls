@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 15:49:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:33:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <sys/stat.h>
 
 bool			parse_dir(char *path, uint8_t const flags);
+bool			parse_file(char const *const path,
+					uint8_t const flags,
+					struct stat const *const st);
 
 void			print_long_format(size_t const n_objs,
 					InDirObject const *const objs);

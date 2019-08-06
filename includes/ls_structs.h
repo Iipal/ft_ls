@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 16:12:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:27:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <dirent.h>
 # include <stddef.h>
+# include <sys/stat.h>
 
 struct			s_in_dir_object
 {
@@ -30,13 +31,14 @@ struct			s_curr_dir
 {
 	InDirObject	*objs;
 	size_t		n_objs;
+	bool		is_file;
 };
 
 struct			s_curr_dir_init
 {
 	DIR				*m_dir;
 	struct dirent	*m_dirent;
-	struct stat		*m_stat;
+	struct stat		m_stat;
 	char			m_path[1024];
 };
 

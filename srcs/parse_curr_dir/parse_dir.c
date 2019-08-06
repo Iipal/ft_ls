@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 16:14:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 17:37:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static char	*s_get_new_path(char const *const prev_path,
 	return (out);
 }
 
-static bool	s_check_dirs_recursive(uint8_t const flags, char *prev_path,
-						size_t const n_objs, InDirObject const *const objs)
+static bool	s_check_dirs_recursive(uint8_t const flags,
+								char *prev_path,
+								size_t const n_objs,
+								InDirObject const *const objs)
 {
 	char	*new_path;
 	size_t	i;
@@ -57,16 +59,23 @@ bool		parse_dir(char *path, uint8_t const flags)
 	CurrDir	*cd;
 
 	NO_F(cd = init_curr_dir(path, flags));
-	if (IS_BIT(flags, F_T_TIME))
-		sort_time_stats(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
+	if (cd->is_file)
+	{
+		parse_file(path, flags, cd->objs->stat);
+	}
 	else
-		sort_ascii_dirents(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
-	if (IS_BIT(flags, F_L_LIST))
-		print_long_format(cd->n_objs, cd->objs);
-	else
-		print_default_format(cd->n_objs, cd->objs);
-	if (IS_BIT(flags, F_R_REC))
-		s_check_dirs_recursive(flags, path, cd->n_objs, cd->objs);
+	{
+		if (IS_BIT(flags, F_T_TIME))
+			sort_time_stats(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
+		else
+			sort_ascii_dirents(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
+		if (IS_BIT(flags, F_L_LIST))
+			print_long_format(cd->n_objs, cd->objs);
+		else
+			print_default_format(cd->n_objs, cd->objs);
+		if (IS_BIT(flags, F_R_REC))
+			s_check_dirs_recursive(flags, path, cd->n_objs, cd->objs);
+	}
 	free_curr_dir(&cd);
 	return (true);
 }

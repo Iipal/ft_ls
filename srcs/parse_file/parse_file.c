@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_tab_str.c                               :+:      :+:    :+:   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/19 11:34:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 17:24:03 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/08/06 17:39:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-char	**sort_ascii_tab_str(size_t const n, char **tab)
+bool	parse_file(char const *const file,
+			uint8_t const flags,
+			struct stat const *const st)
 {
-	size_t			i;
-	size_t			j;
-
-	i = ~0ULL;
-	if (!n || 1UL == n)
-		return (tab);
-	while (n > ++i)
-	{
-		j = i - 1UL;
-		while (n > ++j)
-			if (0 < ft_strcmp(tab[i], tab[j]))
-				SWAP(tab[i], tab[j]);
-	}
-	return (tab);
+	(void)st;
+	if (!IS_BIT(flags, F_L_LIST))
+		ft_putendl(file);
+	return (true);
 }
