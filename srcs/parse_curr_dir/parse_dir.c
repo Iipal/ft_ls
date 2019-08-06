@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 17:37:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 18:47:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static char	*s_get_new_path(char const *const prev_path,
 	return (out);
 }
 
-static bool	s_check_dirs_recursive(uint8_t const flags,
-								char *prev_path,
+static bool	s_check_dirs_recursive(char *prev_path,
 								size_t const n_objs,
 								InDirObject const *const objs)
 {
@@ -47,34 +46,37 @@ static bool	s_check_dirs_recursive(uint8_t const flags,
 		{
 			new_path = s_get_new_path(prev_path, objs[i].dirent->d_name);
 			ft_printf("\n%s:\n", new_path);
-			parse_dir(new_path, flags);
+			parse_dir(new_path);
 			ft_strdel(&new_path);
 		}
 	}
 	return (true);
 }
 
-bool		parse_dir(char *path, uint8_t const flags)
+bool		parse_dir(char *path)
 {
 	CurrDir	*cd;
 
-	NO_F(cd = init_curr_dir(path, flags));
+	NO_F(cd = init_curr_dir(path));
 	if (cd->is_file)
 	{
-		parse_file(path, flags, cd->objs->stat);
+		parse_file(path, cd->objs->stat);
 	}
 	else
 	{
-		if (IS_BIT(flags, F_T_TIME))
-			sort_time_stats(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
-		else
-			sort_ascii_dirents(cd->n_objs, cd->objs, IS_BIT(flags, F_R_REV));
-		if (IS_BIT(flags, F_L_LIST))
+		if (!IS_BIT(g_flags, F_F_NOT_SORTED))
+		{
+			if (IS_BIT(g_flags, F_T_TIME))
+				sort_time_stats(cd->n_objs, cd->objs);
+			else
+				sort_ascii_dirents(cd->n_objs, cd->objs);
+		}
+		if (IS_BIT(g_flags, F_L_LIST))
 			print_long_format(cd->n_objs, cd->objs);
 		else
 			print_default_format(cd->n_objs, cd->objs);
-		if (IS_BIT(flags, F_R_REC))
-			s_check_dirs_recursive(flags, path, cd->n_objs, cd->objs);
+		if (IS_BIT(g_flags, F_R_RECURSIVE))
+			s_check_dirs_recursive(path, cd->n_objs, cd->objs);
 	}
 	free_curr_dir(&cd);
 	return (true);

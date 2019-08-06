@@ -6,15 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 15:55:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 18:46:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 void	sort_time_stats(size_t const in_dir_objs,
-						InDirObject *const objs,
-						bool const is_reverse)
+						InDirObject *const objs)
 {
 	size_t	i;
 	size_t	j;
@@ -26,7 +25,7 @@ void	sort_time_stats(size_t const in_dir_objs,
 	{
 		j = i;
 		while (in_dir_objs > ++j)
-			if (is_reverse)
+			if (IS_BIT(g_flags, F_R_REVERSE))
 			{
 				if (objs[i].stat->st_mtime > objs[j].stat->st_mtime)
 					SWAP(objs[i], objs[j]);
