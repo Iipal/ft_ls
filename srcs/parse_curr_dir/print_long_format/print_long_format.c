@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 16:14:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:03:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		print_long_format(size_t const n_objs,
 	data.date = (char[STR_LEN_DATE]) { 0 };
 	data.permission = (char[STR_LEN_PERMISSION]) { 0 };
 	fmt_str = prepare_output_fmtstr(precalc_output(n_objs, objs, &total));
-	ft_printf("total %ld\n", total);
+	ft_printf("total %d\n", total);
 	while (n_objs > ++i)
 	{
 		data = (LongFormatCurrData) {

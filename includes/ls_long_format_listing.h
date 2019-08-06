@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 16:15:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:02:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define STR_LEN_DATE sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION sizeof("drwxrwxrwx")
-# define STR_LEN_DEFAULT_FMT sizeof("%s  %jd %s  %s  %jd %s %s")
+# define STR_LEN_DEFAULT_FMT sizeof("%s  %d %s  %s  %d %s %s")
 
 # ifdef __APPLE__
 typedef blkcnt_t t_blkcnt_t;

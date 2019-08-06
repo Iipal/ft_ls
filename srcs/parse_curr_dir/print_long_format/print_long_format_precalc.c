@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/05 10:05:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/08/06 11:02:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ char			*prepare_output_fmtstr(WidthSpecific const ws)
 	digits_str_tmp = ft_itoa(ws.st_nlink_width);
 	ft_strcpy(fmt_str + ft_strlen(fmt_str), digits_str_tmp);
 	free(digits_str_tmp);
-	ft_strcpy(fmt_str + ft_strlen(fmt_str), "jd %s  %s  %");
+	ft_strcpy(fmt_str + ft_strlen(fmt_str), "d %s  %s  %");
 	digits_str_tmp = ft_itoa(ws.st_size_width);
 	ft_strcpy(fmt_str + ft_strlen(fmt_str), digits_str_tmp);
 	free(digits_str_tmp);
-	ft_strcpy(fmt_str + ft_strlen(fmt_str), "jd %s %s");
+	ft_strcpy(fmt_str + ft_strlen(fmt_str), "d %s %s");
 	return (fmt_str);
 }
