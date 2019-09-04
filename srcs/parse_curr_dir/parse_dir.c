@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 18:47:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/09/03 13:01:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*s_get_new_path(char const *const prev_path,
 	out = ft_strncpy(out, prev_path, prev_path_len);
 	if (is_no_slash)
 		out[prev_path_len] = '/';
-	ft_strncpy(out + prev_path_len + 1, d_name, ft_strlen(d_name));
+	ft_strncpy(out + prev_path_len + is_no_slash, d_name, ft_strlen(d_name));
 	return (out);
 }
 
