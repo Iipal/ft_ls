@@ -6,17 +6,17 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 18:37:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/05 19:12:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-bool	parse_file(char const *const file,
-			struct stat const *const st)
+void	parse_file(char const *const file,
+			InDirObject const *const obj)
 {
-	(void)st;
 	if (!IS_BIT(g_flags, F_L_LIST))
 		ft_putendl(file);
-	return (true);
+	else
+		print_obj_long_format(file, obj);
 }

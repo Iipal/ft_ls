@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/09/03 13:01:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/05 19:00:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool		parse_dir(char *path)
 	NO_F(cd = init_curr_dir(path));
 	if (cd->is_file)
 	{
-		parse_file(path, cd->objs->stat);
+		parse_file(path, cd->objs);
 	}
 	else
 	{
@@ -72,7 +72,7 @@ bool		parse_dir(char *path)
 				sort_ascii_dirents(cd->n_objs, cd->objs);
 		}
 		if (IS_BIT(g_flags, F_L_LIST))
-			print_long_format(cd->n_objs, cd->objs);
+			print_objs_long_format(cd->n_objs, cd->objs);
 		else
 			print_default_format(cd->n_objs, cd->objs);
 		if (IS_BIT(g_flags, F_R_RECURSIVE))

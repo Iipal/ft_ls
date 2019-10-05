@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/09/05 11:56:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/05 19:12:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,25 @@ static char	*s_get_date(char *date_str, t_time_t const date_time)
 	return (date_str);
 }
 
-void		print_long_format(size_t const n_objs,
+void		print_obj_long_format(char const *const path,
+							InDirObject const *const obj)
+{
+	char		*fmt_str;
+	t_blkcnt_t	dummy_total;
+
+	dummy_total = 0;
+	fmt_str = prepare_output_fmtstr(precalc_output(1, obj, &dummy_total));
+	ft_printf(fmt_str,
+		s_get_permission((char[STR_LEN_PERMISSION]) { 0 }, obj->stat->st_mode),
+		obj->stat->st_nlink, getpwuid(obj->stat->st_uid)->pw_name,
+		getgrgid(obj->stat->st_gid)->gr_name, obj->stat->st_size,
+		s_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat->st_ctime),
+		path);
+	ft_putchar('\n');
+	free(fmt_str);
+}
+
+void		print_objs_long_format(size_t const n_objs,
 				InDirObject const *const objs)
 {
 	char				*fmt_str;
