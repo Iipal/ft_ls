@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/09/04 09:47:37 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/10/05 17:50:05 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ SUCCESS2 := [$(INVERT)$(GREEN)✓$(WHITE)]
 all: $(NAME)
 
 $(OBJ): %.o: %.c
-	@echo -e -n ' $@: '
+	@echo -n ' $@: '
 	@$(CC) -c $(CFLAGS) $(LIBSINC) $(IFLAGS) $< -o $@
-	@echo -e "$(SUCCESS)"
+	@echo "$(SUCCESS)"
 
 $(LIBFT):
 	@$(LMAKE)
@@ -53,23 +53,23 @@ $(LIBFTPRINTF):
 	@$(LFPMAKE)
 
 $(NAME): $(LIBFT) $(LIBFTPRINTF) $(OBJ)
-	@echo -e -n ' <q.p> | $(NPWD): '
+	@echo -n ' <q.p> | $(NPWD): '
 	@$(CC) $(OBJ) $(LIBFT) $(LIBFTPRINTF) -o $(NAME)
-	@echo -e "$(SUCCESS2)"
+	@echo "$(SUCCESS2)"
 
 del:
 	@$(DEL) $(OBJ)
 	@$(DEL) $(NAME)
 
 pre: del all
-	@echo -e "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
+	@echo "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
 
 set_cc_debug:
 	@$(eval CC=$(CC_DEBUG))
 debug_all: set_cc_debug pre
-	@echo -e "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
 debug: set_cc_debug all
-	@echo -e "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
 
 clean:
 	@$(DEL) $(OBJ)
@@ -80,12 +80,12 @@ fclean: clean
 	@$(LMAKE) fclean
 	@$(LFPMAKE) fclean
 	@$(DEL) $(NAME)
-	@echo -e "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
+	@echo "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
 
 re: fclean all
 
 norme:
-	@echo -e "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
+	@echo "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
 	@norminette includes/
 	@norminette $(SRCS)
 
