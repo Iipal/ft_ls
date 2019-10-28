@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 10:10:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 11:38:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static CurrDir	*s_precalc_in_dir_objs(DIR *dir)
 	return (out);
 }
 
-static char		*s_full_path(char *const dst,
+static char		*s_under_path(char *const dst,
 							char *const path,
 							char *const dirent_name)
 {
@@ -57,38 +57,35 @@ static CurrDir	*s_only_file(char *const path)
 		return (NULL);
 	MEM(CurrDir, out, 1UL, E_ALLOC);
 	out->n_objs = 1UL;
-	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
-	NODOM_F(E_ALLOC_OBJ(OBJ_STAT), out->objs->stat = dup_stat(&st),
-		free_curr_dir(&out));
 	out->is_file = true;
+	out->objs = init_curr_in_dir_obj(NULL, &st, NULL);
+	if (!out->objs)
+		out = free_curr_dir(&out);
 	return (out);
 }
 
 CurrDir			*init_curr_dir(char *const path)
 {
 	CurrDir		*out;
-	CurrDirInit	tmp;
+	InDirObject	*c;
+	CurrDirInit	t;
 	size_t		i;
 
 	i = ~0ULL;
-	if (!(tmp.m_dir = opendir(path)))
+	if (!(t.dir = opendir(path)))
 		return (s_only_file(path));
-	NO_F(out = s_precalc_in_dir_objs(tmp.m_dir));
-	rewinddir(tmp.m_dir);
-	while ((tmp.m_dirent = readdir(tmp.m_dir)))
+	NO_F(out = s_precalc_in_dir_objs(t.dir));
+	rewinddir(t.dir);
+	while ((t.dirent = readdir(t.dir)))
 	{
-		IFDOR(!s_check_lstat(s_full_path(tmp.m_path, path,
-			tmp.m_dirent->d_name), &tmp.m_stat), free_curr_dir(&out), NULL);
-		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == tmp.m_dirent->d_name[0]))
-		{
-			NODOM_F(E_ALLOC_OBJ(OBJ_DIRENT), out->objs[++i].dirent =
-					dup_dirent(tmp.m_dirent), free_curr_dir(&out));
-			NODOM_F(E_ALLOC_OBJ(OBJ_STAT),
-				out->objs[i].stat = dup_stat(&tmp.m_stat), free_curr_dir(&out));
-		}
+		IFDOR(!s_check_lstat(s_under_path(t.path, path,
+			t.dirent->d_name), &t.stat), free_curr_dir(&out), NULL);
+		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == t.dirent->d_name[0]))
+			if (!(c = init_curr_in_dir_obj(&out->objs[++i], &t.stat, t.dirent)))
+				return (free_curr_dir(&out));
 	}
-	closedir(tmp.m_dir);
+	closedir(t.dir);
 	if (!out->n_objs)
-		free_curr_dir(&out);
+		out = free_curr_dir(&out);
 	return (out);
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_dups.c                                        :+:      :+:    :+:   */
+/*   init_curr_in_dir_obj.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/21 22:59:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 11:34:02 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/10/28 11:33:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-struct dirent	*dup_dirent(struct dirent const *const src)
+inline InDirObject	*init_curr_in_dir_obj(InDirObject *dst,
+										struct stat *stat,
+										struct dirent *dirent)
 {
-	struct dirent	*out;
+	InDirObject	*out;
 
-	MEM(struct dirent, out, 1, E_ALLOC);
-	*out = *src;
-	return (out);
-}
-
-struct stat		*dup_stat(struct stat const *const src)
-{
-	struct stat	*out;
-
-	MEM(struct stat, out, 1, E_ALLOC);
-	*out = *src;
+	out = dst;
+	if (!out)
+		MEM(InDirObject, out, 1, E_ALLOC);
+	if (stat && !(out->dirent = dup_dirent(dirent)))
+		return (free_curr_in_dir_obj(out));
+	if (dirent && !(out->stat = dup_stat(stat)))
+		return (free_curr_in_dir_obj(out));
 	return (out);
 }
