@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 11:38:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 12:57:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static CurrDir	*s_only_file(char *const path)
 CurrDir			*init_curr_dir(char *const path)
 {
 	CurrDir		*out;
-	InDirObject	*c;
 	CurrDirInit	t;
 	size_t		i;
 
@@ -81,7 +80,8 @@ CurrDir			*init_curr_dir(char *const path)
 		IFDOR(!s_check_lstat(s_under_path(t.path, path,
 			t.dirent->d_name), &t.stat), free_curr_dir(&out), NULL);
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == t.dirent->d_name[0]))
-			if (!(c = init_curr_in_dir_obj(&out->objs[++i], &t.stat, t.dirent)))
+			if (!(t.curr = init_curr_in_dir_obj(&out->objs[++i],
+								&t.stat, t.dirent)))
 				return (free_curr_dir(&out));
 	}
 	closedir(t.dir);

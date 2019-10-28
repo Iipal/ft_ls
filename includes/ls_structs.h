@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 11:37:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 12:57:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ struct			s_curr_dir
 struct			s_curr_dir_init
 {
 	DIR				*dir;
+	InDirObject		*curr;
 	struct dirent	*dirent;
 	struct stat		stat;
 	char			path[1024];
