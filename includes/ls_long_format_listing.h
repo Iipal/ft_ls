@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 13:33:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 22:15:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,11 @@
 # include <grp.h>
 # include <time.h>
 
+# include "ls.h"
+
 # define STR_LEN_DATE        sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION  sizeof("drwxrwxrwx")
 # define STR_LEN_DEFAULT_FMT sizeof("%s  %d %s  %s  %d %s %s")
-
-# ifdef __APPLE__
-#  define MY_BLCK_T typedef blkcnt_t t_blkcnt_t;
-#  define MY_TIME_T typedef time_t t_time_t;
-# else
-#  define MY_BLCK_T typedef __blkcnt_t t_blkcnt_t;
-#  define MY_TIME_T typedef __time_t t_time_t;
-# endif
-
-MY_BLCK_T;
-MY_TIME_T;
 
 struct			s_lf_helper
 {

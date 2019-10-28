@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 19:13:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 22:01:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	s_parse_multifile(int const ac, char **av)
 {
 	char	**valid_args;
 	int		valid_args_len;
-	int 	i;
+	int		i;
 
 	i = -1;
 	av = sort_ascii_tab_str(ac, av);

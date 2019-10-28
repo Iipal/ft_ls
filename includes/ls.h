@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 20:11:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 22:14:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@
 # include "ls_flags.h"
 # include "ls_structs.h"
 
+# ifdef __APPLE__
+#  define MY_BLCK_T typedef blkcnt_t t_blkcnt_t;
+#  define MY_TIME_T typedef time_t t_time_t;
+# else
+#  define MY_BLCK_T typedef __blkcnt_t t_blkcnt_t;
+#  define MY_TIME_T typedef __time_t t_time_t;
+# endif
+
+MY_BLCK_T;
+MY_TIME_T;
+
 # include <stdio.h>
 # include <errno.h>
 # include <sys/stat.h>
@@ -30,10 +41,14 @@ void			parse_file(char *path, InDirObject const *const obj);
 
 void			parse_flags_output(char *path, CurrDir *cd);
 
-void			print_objs_long_format(size_t const n_objs,
-					InDirObject const *const objs);
-void			print_obj_long_format(char const *const path,
-					InDirObject const *const objs);
+/*
+** PLF - Print Long Format
+*/
+void			plf_objs(size_t const n_objs, InDirObject const *const objs);
+void			plf_obj(char const *const path, InDirObject const *const objs);
+
+char			*plf_get_date(char *date_str, t_time_t const date_time);
+char			*plf_get_permission(char *perm_str, mode_t const st_mode_perm);
 
 void			print_default_format(size_t const n_objs,
 					InDirObject const *const objs);
@@ -44,7 +59,6 @@ InDirObject		*init_curr_in_dir_obj(InDirObject *dst,
 					struct stat *stat, struct dirent *dirent);
 bool			init_lstat_check(char *const path, struct stat *buff);
 bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
-
 
 char			**sort_ascii_tab_str(size_t const n, char **tab);
 void			sort_ascii_dirents(size_t const objs_counter,

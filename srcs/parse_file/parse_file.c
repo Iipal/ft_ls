@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 21:41:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 22:13:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		parse_file(char *file, InDirObject const *const obj)
 		if (S_ISLNK(obj->stat->st_mode) && ft_strchr(file, '/'))
 			is_link_parse_as_dir = true;
 		else
-			print_obj_long_format(file, obj);
+			plf_obj(file, obj);
 	}
 	if (is_link_parse_as_dir)
 	{

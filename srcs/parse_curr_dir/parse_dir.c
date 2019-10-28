@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 21:32:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 22:12:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		parse_flags_output(char *path, CurrDir *cd)
 			sort_ascii_dirents(cd->n_objs, cd->objs);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))
-		print_objs_long_format(cd->n_objs, cd->objs);
+		plf_objs(cd->n_objs, cd->objs);
 	else
 		print_default_format(cd->n_objs, cd->objs);
 	if (IS_BIT(g_flags, BIT_R_RECURSIVE))

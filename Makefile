@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/10/05 17:50:05 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/10/28 22:04:17 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,6 @@ norme:
 norme_all:
 	@$(LMAKE) norme
 	@$(LFPMAKE) norme
-	norme
+	@make norme
 
 .PHONY: re fclean clean all norme_all norme del pre debug debug_all
