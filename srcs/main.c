@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 08:18:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 15:04:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	s_parse_multifile(size_t const ac, char **av)
 	av = sort_ascii_tab_str(ac, av);
 	while (ac > ++i)
 	{
-		if (0 < i)
+		if (i)
 			ft_printf("%s:\n", av[i]);
 		if (!parse_dir(av[i]))
 			continue ;
@@ -39,8 +39,7 @@ int			main(int argc, char *argv[])
 		parse_dir(".");
 	else
 	{
-		if ('-' == **argv)
-		{
+		while (argc && '-' == **argv) {
 			NO_F(parse_flags(*argv));
 			++argv;
 			--argc;

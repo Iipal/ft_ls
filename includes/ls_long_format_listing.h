@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 08:30:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 13:33:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 MY_BLCK_T;
 MY_TIME_T;
 
-struct			s_long_format_helper
+struct			s_lf_helper
 {
 	char	*date;
 	char	*permission;
@@ -40,17 +40,17 @@ struct			s_long_format_helper
 	char	*gr_name;
 };
 
-# define FORMAT_HELPER typedef struct s_long_format_helper LongFormatCurrData
+# define FORMAT_HELPER typedef struct s_lf_helper LFCurrData
 
 FORMAT_HELPER;
 
-struct			s_long_format_spec_width
+struct			s_lf_spec_width
 {
 	size_t	st_nlink_width;
 	size_t	st_size_width;
 };
 
-# define SPEC_FMT_HELPER typedef struct s_long_format_spec_width WidthSpecific
+# define SPEC_FMT_HELPER typedef struct s_lf_spec_width WidthSpecific
 
 SPEC_FMT_HELPER;
 
