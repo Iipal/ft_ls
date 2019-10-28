@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:01:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 23:37:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int	g_flags = 0;
+int		g_flags = 0;
 
 static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 {
@@ -38,7 +38,7 @@ static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 	return (out);
 }
 
-static void	s_parse_multifile(int const ac, char **av)
+static bool	s_parse_multifile(int const ac, char **av)
 {
 	char	**valid_args;
 	int		valid_args_len;
@@ -47,6 +47,8 @@ static void	s_parse_multifile(int const ac, char **av)
 	i = -1;
 	av = sort_ascii_tab_str(ac, av);
 	valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len);
+	if (!valid_args)
+		return (false);
 	while (valid_args_len > ++i)
 	{
 		if (1 < ac)
@@ -57,6 +59,7 @@ static void	s_parse_multifile(int const ac, char **av)
 			ft_putchar('\n');
 	}
 	valid_args = free_valid_args(valid_args, valid_args_len);
+	return (true);
 }
 
 int			main(int argc, char *argv[])
@@ -64,18 +67,18 @@ int			main(int argc, char *argv[])
 	--argc;
 	++argv;
 	if (!argc)
-		parse_dir(".");
+		return (!parse_dir("."));
 	else
 	{
 		while (argc && '-' == **argv)
 		{
-			NO_F(parse_flags(*argv));
+			NO_R(parse_flags(*argv), EXIT_FAILURE);
 			++argv;
 			--argc;
 		}
 		if (!argc)
-			return (parse_dir("."));
+			return (!parse_dir("."));
 		else
-			s_parse_multifile(argc, argv);
+			return (!s_parse_multifile(argc, argv));
 	}
 }
