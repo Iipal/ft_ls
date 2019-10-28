@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:14:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 22:16:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 #  define MY_TIME_T typedef __time_t t_time_t;
 # endif
 
-MY_BLCK_T;
-MY_TIME_T;
-
 # include <stdio.h>
 # include <errno.h>
 # include <sys/stat.h>
+
+MY_BLCK_T;
+MY_TIME_T;
 
 void			pre_parse_errno(char *path);
 
