@@ -6,13 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 23:37:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 23:43:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int		g_flags = 0;
+int	g_flags = 0;
+int	g_main_ret = EXIT_SUCCESS;
 
 static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 {
@@ -27,6 +28,8 @@ static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 	while (ac > ++i)
 		if (init_lstat_check(av[i], &tmp))
 			++(*valid_args);
+		else
+			g_main_ret = EXIT_FAILURE;
 	if (!*valid_args)
 		return (av);
 	MEM(char*, out, *valid_args, E_ALLOC);
@@ -46,9 +49,8 @@ static bool	s_parse_multifile(int const ac, char **av)
 
 	i = -1;
 	av = sort_ascii_tab_str(ac, av);
-	valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len);
-	if (!valid_args)
-		return (false);
+	if (!(valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len)))
+		return (g_main_ret = EXIT_FAILURE);
 	while (valid_args_len > ++i)
 	{
 		if (1 < ac)
@@ -59,7 +61,7 @@ static bool	s_parse_multifile(int const ac, char **av)
 			ft_putchar('\n');
 	}
 	valid_args = free_valid_args(valid_args, valid_args_len);
-	return (true);
+	return (EXIT_SUCCESS);
 }
 
 int			main(int argc, char *argv[])
@@ -79,6 +81,7 @@ int			main(int argc, char *argv[])
 		if (!argc)
 			return (!parse_dir("."));
 		else
-			return (!s_parse_multifile(argc, argv));
+			s_parse_multifile(argc, argv);
 	}
+	return (g_main_ret);
 }
