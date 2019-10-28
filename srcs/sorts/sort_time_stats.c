@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/09/03 12:52:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 08:22:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sort_time_stats(size_t const in_dir_objs,
 	{
 		j = i;
 		while (in_dir_objs > ++j)
-			if (IS_BIT(g_flags, F_R_REVERSE))
+			if (IS_BIT(g_flags, BIT_R_REVERSE))
 			{
 				if (objs[i].stat->st_mtime >= objs[j].stat->st_mtime)
 					SWAP(objs[i], objs[j]);

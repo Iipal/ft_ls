@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/05 19:00:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 08:20:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ bool		parse_dir(char *path)
 	}
 	else
 	{
-		if (!IS_BIT(g_flags, F_F_NOT_SORTED))
+		if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 		{
-			if (IS_BIT(g_flags, F_T_TIME))
+			if (IS_BIT(g_flags, BIT_T_TIME))
 				sort_time_stats(cd->n_objs, cd->objs);
 			else
 				sort_ascii_dirents(cd->n_objs, cd->objs);
 		}
-		if (IS_BIT(g_flags, F_L_LIST))
+		if (IS_BIT(g_flags, BIT_L_LIST))
 			print_objs_long_format(cd->n_objs, cd->objs);
 		else
 			print_default_format(cd->n_objs, cd->objs);
-		if (IS_BIT(g_flags, F_R_RECURSIVE))
+		if (IS_BIT(g_flags, BIT_R_RECURSIVE))
 			s_check_dirs_recursive(path, cd->n_objs, cd->objs);
 	}
 	free_curr_dir(&cd);

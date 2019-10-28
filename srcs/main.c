@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 18:47:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 08:18:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-uint8_t	g_flags = 0;
+int	g_flags = 0;
 
 static void	s_parse_multifile(size_t const ac, char **av)
 {

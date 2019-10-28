@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 17:26:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 08:34:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,16 @@ void			print_default_format(size_t const n_objs,
 	while (n_objs > ++i)
 	{
 		ft_printf("%s", objs[i].dirent->d_name);
-		ft_putnchar(' ', max_obj_name_len
-			- ft_strlen(objs[i].dirent->d_name));
+		if (!IS_BIT(g_flags, BIT_1_ONE))
+			ft_putnchar(' ', max_obj_name_len
+				- ft_strlen(objs[i].dirent->d_name));
 		if (n_objs - 1 != i)
-			ft_putchar(' ');
+		{
+			if (IS_BIT(g_flags, BIT_1_ONE))
+				ft_putchar('\n');
+			else
+				ft_putchar(' ');
+		}
 	}
 	ft_putchar('\n');
 }

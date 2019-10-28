@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/05 18:33:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 08:30:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@
 # define STR_LEN_DEFAULT_FMT sizeof("%s  %d %s  %s  %d %s %s")
 
 # ifdef __APPLE__
-typedef blkcnt_t t_blkcnt_t;
-typedef time_t t_time_t;
+#  define MY_BLCK_T typedef blkcnt_t t_blkcnt_t;
+#  define MY_TIME_T typedef time_t t_time_t;
 # else
-typedef __blkcnt_t t_blkcnt_t;
-typedef __time_t t_time_t;
+#  define MY_BLCK_T typedef __blkcnt_t t_blkcnt_t;
+#  define MY_TIME_T typedef __time_t t_time_t;
 # endif
 
-struct	s_long_format_helper
+MY_BLCK_T;
+MY_TIME_T;
+
+struct			s_long_format_helper
 {
 	char	*date;
 	char	*permission;
@@ -41,7 +44,7 @@ struct	s_long_format_helper
 
 FORMAT_HELPER;
 
-struct	s_long_format_spec_width
+struct			s_long_format_spec_width
 {
 	size_t	st_nlink_width;
 	size_t	st_size_width;
