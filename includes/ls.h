@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 19:00:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 20:11:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 void			pre_parse_errno(char *path);
 
 bool			parse_dir(char *path);
-void			parse_file(char const *const path,
-					InDirObject const *const obj);
+void			parse_file(char *path, InDirObject const *const obj);
+
+void			parse_flags_output(char *path, CurrDir *cd);
 
 void			print_objs_long_format(size_t const n_objs,
 					InDirObject const *const objs);
@@ -38,7 +39,7 @@ void			print_default_format(size_t const n_objs,
 					InDirObject const *const objs);
 
 CurrDir			*init_only_file(char *const path);
-CurrDir			*init_curr_dir(char *const path);
+CurrDir			*init_curr_dir(char *const path, bool const force_open_dir);
 InDirObject		*init_curr_in_dir_obj(InDirObject *dst,
 					struct stat *stat, struct dirent *dirent);
 bool			init_lstat_check(char *const path, struct stat *buff);

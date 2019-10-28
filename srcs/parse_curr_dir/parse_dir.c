@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 17:46:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 21:32:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,32 @@ static bool	s_check_dirs_recursive(char *prev_path,
 	return (true);
 }
 
+void		parse_flags_output(char *path, CurrDir *cd)
+{
+	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
+	{
+		if (IS_BIT(g_flags, BIT_T_TIME))
+			sort_time_stats(cd->n_objs, cd->objs);
+		else
+			sort_ascii_dirents(cd->n_objs, cd->objs);
+	}
+	if (IS_BIT(g_flags, BIT_L_LIST))
+		print_objs_long_format(cd->n_objs, cd->objs);
+	else
+		print_default_format(cd->n_objs, cd->objs);
+	if (IS_BIT(g_flags, BIT_R_RECURSIVE))
+		s_check_dirs_recursive(path, cd->n_objs, cd->objs);
+}
+
 bool		parse_dir(char *path)
 {
 	CurrDir	*cd;
 
-	NO_F(cd = init_curr_dir(path));
+	NO_F(cd = init_curr_dir(path, false));
 	if (cd->is_file)
 		parse_file(path, cd->objs);
 	else
-	{
-		if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
-		{
-			if (IS_BIT(g_flags, BIT_T_TIME))
-				sort_time_stats(cd->n_objs, cd->objs);
-			else
-				sort_ascii_dirents(cd->n_objs, cd->objs);
-		}
-		if (IS_BIT(g_flags, BIT_L_LIST))
-			print_objs_long_format(cd->n_objs, cd->objs);
-		else
-			print_default_format(cd->n_objs, cd->objs);
-		if (IS_BIT(g_flags, BIT_R_RECURSIVE))
-			s_check_dirs_recursive(path, cd->n_objs, cd->objs);
-	}
+		parse_flags_output(path, cd);
 	free_curr_dir(&cd);
 	return (true);
 }
