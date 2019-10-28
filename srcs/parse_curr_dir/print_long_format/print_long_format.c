@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/05 19:12:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 09:02:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 static char	*s_get_permission(char *perm_str, mode_t const st_mode_perm)
 {
 	perm_str[0] = '-';
-	if (S_ISLNK(st_mode_perm))
-		perm_str[0] = 'l';
-	else if (S_ISDIR(st_mode_perm))
+	if (S_ISDIR(st_mode_perm))
 		perm_str[0] = 'd';
+	else if (S_ISLNK(st_mode_perm))
+		perm_str[0] = 'l';
 	perm_str[1] = (st_mode_perm & S_IRUSR) ? 'r' : '-';
 	perm_str[1] = (st_mode_perm & S_IRUSR) ? 'r' : '-';
 	perm_str[2] = (st_mode_perm & S_IWUSR) ? 'w' : '-';

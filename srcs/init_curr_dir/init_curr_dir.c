@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 08:32:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 09:38:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,31 @@ static char		*s_full_path(char *const dst,
 	return (dst);
 }
 
+static bool	s_check_lstat(char *const path, struct stat *buff)
+{
+	struct stat	tmp_lstat;
+
+	IFDO_F(0 > stat(path, buff), perror("stat"));
+	IFDO_F(0 > lstat(path, buff), perror("lstat"));
+	if (S_ISLNK(tmp_lstat.st_mode))
+		*buff = tmp_lstat;
+	return true;
+}
+
+
 static CurrDir	*s_only_file(char *const path)
 {
 	CurrDir		*out;
 	struct stat	st;
-	int const	ret = stat(path, &st);
 
-	IFDO_F(ret, perror(PERR));
+	if (!s_check_lstat(path, &st))
+		return NULL;
 	MEM(CurrDir, out, 1UL, E_ALLOC);
 	out->n_objs = 1UL;
 	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
-	MEM(struct stat, out->objs->stat, out->n_objs, E_ALLOC);
+	NODOM_F(E_ALLOC_OBJ(OBJ_STAT), out->objs->stat = dup_stat(&st),
+		free_curr_dir(&out));
 	out->is_file = true;
-	*out->objs->stat = st;
 	return (out);
 }
 
@@ -66,9 +78,9 @@ CurrDir			*init_curr_dir(char *const path)
 	rewinddir(tmp.m_dir);
 	while ((tmp.m_dirent = readdir(tmp.m_dir)))
 	{
-		stat(s_full_path(tmp.m_path, path, tmp.m_dirent->d_name), &tmp.m_stat);
-		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN)
-		&& '.' == tmp.m_dirent->d_name[0]))
+		IFDOR(!s_check_lstat(s_full_path(tmp.m_path, path,
+			tmp.m_dirent->d_name), &tmp.m_stat), free_curr_dir(&out), NULL);
+		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == tmp.m_dirent->d_name[0]))
 		{
 			NODOM_F(E_ALLOC_OBJ(OBJ_DIRENT), out->objs[++i].dirent =
 					dup_dirent(tmp.m_dirent), free_curr_dir(&out));
