@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_curr_in_dir_obj.c                             :+:      :+:    :+:   */
+/*   init_only_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 15:31:51 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/10/28 17:11:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-inline InDirObject	*init_curr_in_dir_obj(InDirObject *dst,
-										struct stat *stat,
-										struct dirent *dirent)
+CurrDir	*init_only_file(char *const path)
 {
-	InDirObject	*out;
+	CurrDir		*out;
+	struct stat	st;
 
-	out = dst;
-	if (!out)
-		MEM(InDirObject, out, 1, E_ALLOC);
-	if (dirent && !(out->dirent = dup_dirent(dirent)))
-		return (free_curr_in_dir_obj(out));
-	if (stat && !(out->stat = dup_stat(stat)))
-		return (free_curr_in_dir_obj(out));
+	if (!init_lstat_check(path, &st))
+		return (NULL);
+	MEM(CurrDir, out, 1UL, E_ALLOC);
+	out->n_objs = 1UL;
+	out->is_file = true;
+	out->objs = init_curr_in_dir_obj(NULL, &st, NULL);
+	if (!out->objs)
+		out = free_curr_dir(&out);
 	return (out);
 }

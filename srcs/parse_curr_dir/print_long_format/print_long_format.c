@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 15:04:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 16:04:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ static char	*s_get_permission(char *perm_str, mode_t const st_mode_perm)
 	return (perm_str);
 }
 
-char const *const	g_date_months[] = { "Jan ", "Feb ", "Mar ", "Apr ", "May ",
-					"Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec " };
-
 static char	*s_append_int_to_str(char *dst, int src)
 {
 	char	*tmp;
@@ -48,10 +45,12 @@ static char	*s_append_int_to_str(char *dst, int src)
 static char	*s_get_date(char *date_str, t_time_t const date_time)
 {
 	static struct tm	*tm_file;
+	char const *const	date_months[] = { "Jan ", "Feb ", "Mar ", "Apr ",
+		"May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec " };
 
 	tm_file = localtime(&date_time);
 	bzero(date_str, sizeof(char) * STR_LEN_DATE);
-	date_str = ft_strcpy(date_str, g_date_months[tm_file->tm_mon]);
+	date_str = ft_strcpy(date_str, date_months[tm_file->tm_mon]);
 	date_str[4] = (10 > tm_file->tm_mday) ? ' ' : '\0';
 	date_str = s_append_int_to_str(date_str, tm_file->tm_mday);
 	date_str[ft_strlen(date_str)] = ' ';

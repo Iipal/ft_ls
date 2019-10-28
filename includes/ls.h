@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 11:39:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 19:00:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <errno.h>
 # include <sys/stat.h>
 
+void			pre_parse_errno(char *path);
+
 bool			parse_dir(char *path);
 void			parse_file(char const *const path,
 					InDirObject const *const obj);
@@ -35,9 +37,13 @@ void			print_obj_long_format(char const *const path,
 void			print_default_format(size_t const n_objs,
 					InDirObject const *const objs);
 
+CurrDir			*init_only_file(char *const path);
 CurrDir			*init_curr_dir(char *const path);
 InDirObject		*init_curr_in_dir_obj(InDirObject *dst,
 					struct stat *stat, struct dirent *dirent);
+bool			init_lstat_check(char *const path, struct stat *buff);
+bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
+
 
 char			**sort_ascii_tab_str(size_t const n, char **tab);
 void			sort_ascii_dirents(size_t const objs_counter,
@@ -52,5 +58,6 @@ bool			parse_flags(char const *flags_str);
 
 void			*free_curr_dir(CurrDir **curr_dir);
 void			*free_curr_in_dir_obj(InDirObject *obj);
+void			*free_valid_args(char **args, int max);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 15:04:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 19:13:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,49 @@
 
 int	g_flags = 0;
 
-static void	s_parse_multifile(size_t const ac, char **av)
+static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 {
-	size_t i;
+	char		**out;
+	struct stat	tmp;
+	int			i;
+	int			j;
 
-	i = ~0ULL;
-	av = sort_ascii_tab_str(ac, av);
+	i = -1;
+	j = -1;
+	*valid_args = 0;
 	while (ac > ++i)
+		if (init_lstat_check(av[i], &tmp))
+			++(*valid_args);
+	if (!*valid_args)
+		return (av);
+	MEM(char*, out, *valid_args, E_ALLOC);
+	i = -1;
+	valid_args = 0;
+	while (ac > ++i)
+		if (init_lstat_check_no_errno(av[i], &tmp))
+			out[++j] = ft_strdup(av[i]);
+	return (out);
+}
+
+static void	s_parse_multifile(int const ac, char **av)
+{
+	char	**valid_args;
+	int		valid_args_len;
+	int 	i;
+
+	i = -1;
+	av = sort_ascii_tab_str(ac, av);
+	valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len);
+	while (valid_args_len > ++i)
 	{
-		if (i)
-			ft_printf("%s:\n", av[i]);
-		if (!parse_dir(av[i]))
+		if (1 < ac)
+			ft_printf("%s:\n", valid_args[i]);
+		if (!parse_dir(valid_args[i]))
 			continue ;
-		if (ac != i + 1)
+		if (valid_args_len != i + 1)
 			ft_putchar('\n');
 	}
+	valid_args = free_valid_args(valid_args, valid_args_len);
 }
 
 int			main(int argc, char *argv[])
@@ -39,7 +67,8 @@ int			main(int argc, char *argv[])
 		parse_dir(".");
 	else
 	{
-		while (argc && '-' == **argv) {
+		while (argc && '-' == **argv)
+		{
 			NO_F(parse_flags(*argv));
 			++argv;
 			--argc;
