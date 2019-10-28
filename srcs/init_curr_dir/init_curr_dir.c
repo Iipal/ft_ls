@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 09:38:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/28 10:10:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char		*s_full_path(char *const dst,
 	return (dst);
 }
 
-static bool	s_check_lstat(char *const path, struct stat *buff)
+static bool		s_check_lstat(char *const path, struct stat *buff)
 {
 	struct stat	tmp_lstat;
 
@@ -45,9 +45,8 @@ static bool	s_check_lstat(char *const path, struct stat *buff)
 	IFDO_F(0 > lstat(path, buff), perror("lstat"));
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
-	return true;
+	return (true);
 }
-
 
 static CurrDir	*s_only_file(char *const path)
 {
@@ -55,7 +54,7 @@ static CurrDir	*s_only_file(char *const path)
 	struct stat	st;
 
 	if (!s_check_lstat(path, &st))
-		return NULL;
+		return (NULL);
 	MEM(CurrDir, out, 1UL, E_ALLOC);
 	out->n_objs = 1UL;
 	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
