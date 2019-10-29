@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 18:56:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:32:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 18:37:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*free_valid_args(char **args, int32_t const max)
 {
-	register int32_t	i;
+	int32_t	i;
 
 	i = -1;
 	if (max && args)

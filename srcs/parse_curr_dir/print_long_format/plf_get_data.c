@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 09:49:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 19:09:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,16 @@ char	*plf_get_date(char *date_dst, t_time_t const date_time)
 }
 
 char	*plf_full_path(char *const dst,
+			size_t const dst_max,
 			char *const dir_path,
-			char *const file_name,
-			size_t const dst_max)
+			char *const file_name)
 {
+	register size_t	dir_path_len = ft_strlen(dir_path);
+
 	ft_memset(dst, 0, sizeof(char) * dst_max);
-	ft_strcpy(dst, dir_path);
-	if (dst[ft_strlen(dst) - 1] != '/')
-		dst[ft_strlen(dst)] = '/';
-	ft_strcpy(dst + ft_strlen(dst), file_name);
+	ft_strncpy(dst, dir_path, dir_path_len);
+	if (dst[dir_path_len - 1] != '/')
+		dst[dir_path_len++] = '/';
+	ft_strcpy(dst + dir_path_len, file_name);
 	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:21:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 18:42:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	sort_time_stats(uint32_t const in_dir_objs,
 						InDirObject *const objs)
 {
-	register uint32_t	i;
-	register uint32_t	j;
+	uint32_t			i;
+	uint32_t			j;
 	register int64_t	cmp;
 
 	if (!in_dir_objs || !objs)

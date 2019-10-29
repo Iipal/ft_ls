@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:32:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 19:25:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ CurrDir			*init_curr_dir(char *const path, bool const force_open_dir)
 	t.dir = opendir(path);
 	while ((t.dirent = readdir(t.dir)))
 	{
-		IFDOR(!init_lstat_check(plf_full_path(t.path, path,
-			t.dirent->d_name, 1024UL), &t.stat), free_curr_dir(&out), NULL);
+		IFDOR(!init_lstat_check(u_full_path(t.path, path, t.dirent->d_name),
+			&t.stat), free_curr_dir(&out), NULL);
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == t.dirent->d_name[0]))
 			if (!(t.curr = init_curr_in_dir_obj(&out->objs[++i],
 								&t.stat, t.dirent)))

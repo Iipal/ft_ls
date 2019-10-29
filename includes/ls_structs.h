@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:29:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 20:55:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,19 @@ struct			s_curr_dir_init
 
 CURR_DIR;
 CURR_DIR_INIT;
+
+enum			e_print_format
+{
+	e_print_default,
+	e_print_long_format,
+	e_print_line_by_line
+};
+
+enum			e_sort_type
+{
+	e_sort_ascii,
+	e_sort_time,
+	e_sort_none
+};
 
 #endif

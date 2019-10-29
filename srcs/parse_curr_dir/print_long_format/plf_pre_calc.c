@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:38:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 18:49:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,21 @@ WidthSpecific	plf_width_spec(uint32_t const n_objs,
 					InDirObject const *const objs,
 					t_blkcnt_t *const total)
 {
-	WidthSpecific		ws;
-	register uint32_t	i;
+	WidthSpecific	ws;
+	WidthSpecific	ws_temp;
+	uint32_t		i;
 
 	i = ~0U;
 	ws.st_nlink_width = 0;
 	ws.st_size_width = 0;
 	while (n_objs > ++i)
 	{
-		if (ft_digits(objs[i].stat->st_nlink) > (size_t)ws.st_nlink_width)
-			ws.st_nlink_width = ft_digits(objs[i].stat->st_nlink);
-		if (ft_digits(objs[i].stat->st_size) > (size_t)ws.st_size_width)
-			ws.st_size_width = ft_digits(objs[i].stat->st_size);
+		ws_temp.st_nlink_width = ft_digits(objs[i].stat->st_nlink);
+		if (ws_temp.st_nlink_width > ws.st_nlink_width)
+			ws.st_nlink_width = ws_temp.st_nlink_width;
+		ws_temp.st_size_width = ft_digits(objs[i].stat->st_size);
+		if (ws_temp.st_size_width > ws.st_size_width)
+			ws.st_size_width = ws_temp.st_size_width;
 		if (!(S_ISDIR(objs[i].stat->st_mode)))
 			*total += objs[i].stat->st_blocks;
 	}

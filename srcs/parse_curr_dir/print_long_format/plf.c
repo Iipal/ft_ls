@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:33:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 19:25:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 static void	s_print_link(char *const file)
 {
-	size_t const	buff_size = 256;
-	char			*buff;
-	char			*buff_path;
+	char	*buff;
+	char	*buff_path;
 
-	buff = (char*)ft_memalloc(sizeof(char) * buff_size);
-	buff_path = (char*)ft_memalloc(sizeof(char) * buff_size);
-	readlink(plf_full_path(buff_path, g_src_path, file, buff_size),
-		buff, buff_size);
+	buff = (char*)ft_memalloc(sizeof(char) * 256);
+	buff_path = (char*)ft_memalloc(sizeof(char) * 256);
+	readlink(u_full_path(buff_path, g_src_path, file), buff, 256);
+	FREE(buff_path, free);
 	ft_printf(" -> %s", buff);
 	FREE(buff, free);
-	FREE(buff_path, free);
 }
 
 void		plf_obj(char *fmt_str, char *const path,

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:34:48 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:30:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 18:39:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**sort_ascii_tab_str(int const n, char **tab)
 {
-	register int32_t	i;
-	register int32_t	j;
+	int32_t	i;
+	int32_t	j;
 
 	i = -1;
 	if (!n || 1 == n)
