@@ -6,28 +6,28 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 10:04:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:38:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 #include "ls_long_format_listing.h"
 
-WidthSpecific	plf_width_spec(size_t const n_objs,
+WidthSpecific	plf_width_spec(uint32_t const n_objs,
 					InDirObject const *const objs,
 					t_blkcnt_t *const total)
 {
-	WidthSpecific	ws;
-	size_t			i;
+	WidthSpecific		ws;
+	register uint32_t	i;
 
-	i = ~0ULL;
-	ws.st_nlink_width = 0ULL;
-	ws.st_size_width = 0ULL;
+	i = ~0U;
+	ws.st_nlink_width = 0;
+	ws.st_size_width = 0;
 	while (n_objs > ++i)
 	{
-		if (ft_digits(objs[i].stat->st_nlink) > ws.st_nlink_width)
+		if (ft_digits(objs[i].stat->st_nlink) > (size_t)ws.st_nlink_width)
 			ws.st_nlink_width = ft_digits(objs[i].stat->st_nlink);
-		if (ft_digits(objs[i].stat->st_size) > ws.st_size_width)
+		if (ft_digits(objs[i].stat->st_size) > (size_t)ws.st_size_width)
 			ws.st_size_width = ft_digits(objs[i].stat->st_size);
 		if (!(S_ISDIR(objs[i].stat->st_mode)))
 			*total += objs[i].stat->st_blocks;

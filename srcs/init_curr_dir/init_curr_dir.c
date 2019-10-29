@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 09:54:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:32:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static CurrDir	*s_precalc_in_dir_objs(DIR *dir)
 
 CurrDir			*init_curr_dir(char *const path, bool const force_open_dir)
 {
-	CurrDir		*out;
-	CurrDirInit	t;
-	size_t		i;
+	CurrDir				*out;
+	CurrDirInit			t;
+	register uint32_t	i;
 
-	i = ~0ULL;
+	i = ~0U;
 	IFR(!init_lstat_check_no_errno(path, &t.stat), NULL);
 	if (!force_open_dir && !S_ISDIR(t.stat.st_mode))
 		return (init_only_file(path));

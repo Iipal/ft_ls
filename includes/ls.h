@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 09:56:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:35:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			parse_flags_output(char *path, CurrDir *cd);
 /*
 ** PLF - Print Long Format
 */
-void			plf_objs(size_t const n_objs, InDirObject const *const objs);
+void			plf_objs(uint32_t const n_objs, InDirObject const *const objs);
 void			plf_obj(char *fmt_str, char *const path,
 					InDirObject const *const obj, bool const is_free_fmt);
 
@@ -57,7 +57,7 @@ char			*plf_full_path(char *const dst,
 					char *const file_name,
 					size_t const dst_max);
 
-void			print_default_format(size_t const n_objs,
+void			print_default_format(uint32_t const n_objs,
 					InDirObject const *const objs);
 
 CurrDir			*init_only_file(char *const path);
@@ -67,11 +67,10 @@ InDirObject		*init_curr_in_dir_obj(InDirObject *dst,
 bool			init_lstat_check(char *const path, struct stat *buff);
 bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
 
-char			**sort_ascii_tab_str(size_t const n, char **tab);
-void			sort_ascii_dirents(size_t const objs_counter,
-					InDirObject *const objs);
-void			sort_time_stats(size_t const objs_counter,
-					InDirObject *const objs);
+char			**sort_ascii_tab_str(int const n, char **tab);
+void			sort_ascii_dirents(uint32_t const in_dir_objs,
+					InDirObject *objs);
+void			sort_time_stats(uint32_t const in_dir_objs, InDirObject *objs);
 
 struct dirent	*dup_dirent(struct dirent const *const src);
 struct stat		*dup_stat(struct stat const *const src);
@@ -80,6 +79,6 @@ bool			parse_flags(char const *flags_str);
 
 void			*free_curr_dir(CurrDir **curr_dir);
 void			*free_curr_in_dir_obj(InDirObject *obj);
-void			*free_valid_args(char **args, int max);
+void			*free_valid_args(char **args, int32_t const max);
 
 #endif

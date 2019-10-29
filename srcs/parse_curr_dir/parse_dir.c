@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:12:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:34:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static char	*s_get_new_path(char const *const prev_path,
 }
 
 static bool	s_check_dirs_recursive(char *prev_path,
-								size_t const n_objs,
+								uint32_t const n_objs,
 								InDirObject const *const objs)
 {
-	char	*new_path;
-	size_t	i;
+	char				*new_path;
+	register uint32_t	i;
 
-	i = ~0ULL;
+	i = ~0U;
 	new_path = NULL;
 	while (n_objs > ++i)
 	{

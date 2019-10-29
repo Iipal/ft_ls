@@ -6,20 +6,20 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:15:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:35:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static size_t	s_find_max_name_len(size_t const n_objs,
+static size_t	s_find_max_name_len(uint32_t const n_objs,
 					InDirObject const *const objs)
 {
-	size_t	curr_len;
-	size_t	max_len;
-	size_t	i;
+	size_t				curr_len;
+	size_t				max_len;
+	register uint32_t	i;
 
-	i = ~0ULL;
+	i = ~0U;
 	max_len = ft_strlen((*objs).dirent->d_name);
 	while (n_objs > ++i)
 	{
@@ -30,13 +30,13 @@ static size_t	s_find_max_name_len(size_t const n_objs,
 	return (max_len);
 }
 
-void			print_default_format(size_t const n_objs,
+void			print_default_format(uint32_t const n_objs,
 					InDirObject const *const objs)
 {
-	size_t	max_obj_name_len;
-	size_t	i;
+	size_t				max_obj_name_len;
+	register uint32_t	i;
 
-	i = ~0ULL;
+	i = ~0U;
 	max_obj_name_len = s_find_max_name_len(n_objs, objs);
 	while (n_objs > ++i)
 	{

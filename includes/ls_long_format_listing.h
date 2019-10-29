@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 10:04:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:37:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 
 struct			s_lf_spec_width
 {
-	size_t	st_nlink_width;
-	size_t	st_size_width;
+	int32_t	st_nlink_width;
+	int32_t	st_size_width;
 };
 
 # define SPEC_FMT_HELPER typedef struct s_lf_spec_width WidthSpecific
 
 SPEC_FMT_HELPER;
 
-WidthSpecific	plf_width_spec(size_t const n_objs,
+WidthSpecific	plf_width_spec(uint32_t const n_objs,
 					InDirObject const *const objs,
 					t_blkcnt_t *const total);
 char			*plf_fmt_str(WidthSpecific const ws);

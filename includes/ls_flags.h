@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 15:19:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:16:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "ls_errno.h"
 
-extern int	g_flags;
+extern int32_t	g_flags;
 
 # define BIT_L_LIST       (1 << 0)
 # define BIT_R_RECURSIVE  (1 << 1)

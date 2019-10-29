@@ -6,18 +6,18 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 10:05:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 16:37:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int		g_flags = 0;
+int32_t	g_flags = 0;
 char	*g_src_path = NULL;
 
-int		g_main_ret = EXIT_SUCCESS;
+int32_t	g_main_ret = EXIT_SUCCESS;
 
-static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
+static char	**s_pre_parse_errno_args(int32_t const ac, char **av, int32_t *va)
 {
 	char		**out;
 	struct stat	tmp;
@@ -26,28 +26,28 @@ static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 
 	i = -1;
 	j = -1;
-	*valid_args = 0;
+	*va = 0;
 	while (ac > ++i)
 		if (init_lstat_check(av[i], &tmp))
-			++(*valid_args);
+			++(*va);
 		else
 			g_main_ret = EXIT_FAILURE;
-	if (!*valid_args)
+	if (!*va)
 		return (av);
-	MEM(char*, out, *valid_args, E_ALLOC);
+	MEM(char*, out, *va, E_ALLOC);
 	i = -1;
-	valid_args = 0;
+	va = 0;
 	while (ac > ++i)
 		if (init_lstat_check_no_errno(av[i], &tmp))
 			out[++j] = ft_strdup(av[i]);
 	return (out);
 }
 
-static bool	s_parse_multifile(int const ac, char **av)
+static bool	s_parse_args(int const ac, char **av)
 {
-	char	**valid_args;
-	int		valid_args_len;
-	int		i;
+	char				**valid_args;
+	int32_t				valid_args_len;
+	register int32_t	i;
 
 	i = -1;
 	av = sort_ascii_tab_str(ac, av);
@@ -63,8 +63,7 @@ static bool	s_parse_multifile(int const ac, char **av)
 		if (valid_args_len != i + 1)
 			ft_putchar('\n');
 	}
-	valid_args = free_valid_args(valid_args, valid_args_len);
-	return (EXIT_SUCCESS);
+	return ((bool)free_valid_args(valid_args, valid_args_len));
 }
 
 int			main(int argc, char *argv[])
@@ -84,7 +83,7 @@ int			main(int argc, char *argv[])
 		if (!argc)
 			g_main_ret = !parse_dir(".");
 		else
-			s_parse_multifile(argc, argv);
+			s_parse_args(argc, argv);
 	}
 	return (g_main_ret);
 }
