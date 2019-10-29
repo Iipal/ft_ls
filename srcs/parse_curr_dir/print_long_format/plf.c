@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 09:59:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 10:12:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		plf_objs(size_t const n_objs, InDirObject const *const objs)
 
 	i = ~0ULL;
 	total = 0L;
-	fmt_str = prepare_output_fmtstr(precalc_output(n_objs, objs, &total));
+	fmt_str = plf_fmt_str(plf_width_spec(n_objs, objs, &total));
 	ft_printf("total %d\n", total);
 	while (n_objs > ++i)
 		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i], false);

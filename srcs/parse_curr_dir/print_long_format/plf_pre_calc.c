@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_long_format_precalc.c                        :+:      :+:    :+:   */
+/*   plf_pre_calc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/08/06 11:02:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 10:04:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 #include "ls_long_format_listing.h"
 
-WidthSpecific	precalc_output(size_t const n_objs,
+WidthSpecific	plf_width_spec(size_t const n_objs,
 					InDirObject const *const objs,
 					t_blkcnt_t *const total)
 {
@@ -35,7 +35,7 @@ WidthSpecific	precalc_output(size_t const n_objs,
 	return (ws);
 }
 
-char			*prepare_output_fmtstr(WidthSpecific const ws)
+char			*plf_fmt_str(WidthSpecific const ws)
 {
 	char	*fmt_str;
 	char	*digits_str_tmp;
