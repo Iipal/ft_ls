@@ -49,18 +49,4 @@ struct			s_curr_dir_init
 CURR_DIR;
 CURR_DIR_INIT;
 
-enum			e_print_format
-{
-	e_print_default,
-	e_print_long_format,
-	e_print_line_by_line
-};
-
-enum			e_sort_type
-{
-	e_sort_ascii,
-	e_sort_time,
-	e_sort_none
-};
-
 #endif

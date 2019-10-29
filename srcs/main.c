@@ -6,20 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 21:44:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 23:35:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int32_t				g_flags = 0;
-enum e_print_format	g_print_format = e_print_default;
-enum e_sort_type	g_sort_type = e_sort_ascii;
-char				*g_src_path = NULL;
-
-t_sorts				*g_sorts_fn = (t_sorts[]) { &sort_ascii_dirents,
-												&sort_time_stats };
-t_prints			*g_prints_fn = (t_prints[]) { &pdf_objs, &plf_objs };
+int32_t	g_flags = 0;
+char	*g_src_path = NULL;
 
 int32_t	g_main_ret = EXIT_SUCCESS;
 

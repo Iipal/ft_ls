@@ -16,9 +16,13 @@
 # include "libft.h"
 # include "ls_errno.h"
 
-# define BIT_R_REVERSE    (1 << 0)
-# define BIT_A_HIDDEN     (1 << 1)
-# define BIT_R_RECURSIVE  (1 << 2)
+# define BIT_L_LIST       (1 << 0)
+# define BIT_1_ONE        (1 << 1)
+# define BIT_T_TIME       (1 << 2)
+# define BIT_F_NOT_SORTED (1 << 3)
+# define BIT_R_REVERSE    (1 << 4)
+# define BIT_R_RECURSIVE  (1 << 5)
+# define BIT_A_HIDDEN     (1 << 6)
 
 # define F_LIST_CH       'l'
 # define F_ONE           '1'

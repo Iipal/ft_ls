@@ -46,7 +46,7 @@ void				parse_file(char *file, InDirObject const *const obj)
 
 	cd = NULL;
 	is_link_parse_as_dir = false;
-	if (g_print_format == e_print_long_format)
+	if (IS_BIT(g_flags, BIT_L_LIST))
 		is_link_parse_as_dir = s_check_def_or_under_link_print(file, obj);
 	else
 		is_link_parse_as_dir = s_check_plf_or_under_link_print(file, obj);

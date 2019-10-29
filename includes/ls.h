@@ -36,8 +36,6 @@ MY_BLCK_T;
 MY_TIME_T;
 
 extern int32_t				g_flags;
-extern enum e_print_format	g_print_format;
-extern enum e_sort_type		g_sort_type;
 extern char					*g_src_path;
 
 void			pre_parse_errno(char *path);
@@ -50,9 +48,6 @@ void			parse_flags_output(char *path, CurrDir *cd);
 /*
 ** PLF - Print Long Format
 */
-typedef void	(*t_prints)(uint32_t const, InDirObject const *const);
-extern t_prints	*g_prints_fn;
-
 void			plf_objs(uint32_t const n_objs, InDirObject const *const objs);
 void			plf_obj(char *fmt_str, char *const path,
 					InDirObject const *const obj, bool const is_free_fmt);
@@ -74,8 +69,6 @@ bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
 
 char			**sort_ascii_tab_str(int const n, char **tab);
 
-typedef void	(*t_sorts)(uint32_t const, InDirObject*);
-extern t_sorts	*g_sorts_fn;
 void			sort_ascii_dirents(uint32_t const in_dir_objs,
 						InDirObject *objs);
 void			sort_time_stats(uint32_t const in_dir_objs, InDirObject *objs);
