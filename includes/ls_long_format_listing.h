@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:15:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 09:28:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@
 # define STR_LEN_DATE        sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION  sizeof("drwxrwxrwx")
 # define STR_LEN_DEFAULT_FMT sizeof("%s  %d %s  %s  %d %s %s")
-
-struct			s_lf_helper
-{
-	char	*date;
-	char	*permission;
-	char	*pw_name;
-	char	*gr_name;
-};
-
-# define FORMAT_HELPER typedef struct s_lf_helper LFCurrData
-
-FORMAT_HELPER;
 
 struct			s_lf_spec_width
 {

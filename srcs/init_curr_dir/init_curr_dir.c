@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 21:35:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 09:54:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ static CurrDir	*s_precalc_in_dir_objs(DIR *dir)
 	return (out);
 }
 
-static char		*s_under_path(char *const dst,
-							char *const path,
-							char *const dirent_name)
-{
-	ft_bzero(dst, sizeof(char) * 1024);
-	ft_strcpy(dst, path);
-	if (dst[ft_strlen(dst)] != '/')
-		dst[ft_strlen(dst)] = '/';
-	ft_strcpy(dst + ft_strlen(dst), dirent_name);
-	return (dst);
-}
-
 CurrDir			*init_curr_dir(char *const path, bool const force_open_dir)
 {
 	CurrDir		*out;
@@ -53,8 +41,8 @@ CurrDir			*init_curr_dir(char *const path, bool const force_open_dir)
 	t.dir = opendir(path);
 	while ((t.dirent = readdir(t.dir)))
 	{
-		IFDOR(!init_lstat_check(s_under_path(t.path, path,
-			t.dirent->d_name), &t.stat), free_curr_dir(&out), NULL);
+		IFDOR(!init_lstat_check(plf_full_path(t.path, path,
+			t.dirent->d_name, 1024UL), &t.stat), free_curr_dir(&out), NULL);
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == t.dirent->d_name[0]))
 			if (!(t.curr = init_curr_in_dir_obj(&out->objs[++i],
 								&t.stat, t.dirent)))

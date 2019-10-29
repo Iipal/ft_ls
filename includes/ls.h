@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:16:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 09:56:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 MY_BLCK_T;
 MY_TIME_T;
 
+extern char	*g_src_path;
+
 void			pre_parse_errno(char *path);
 
 bool			parse_dir(char *path);
@@ -45,10 +47,15 @@ void			parse_flags_output(char *path, CurrDir *cd);
 ** PLF - Print Long Format
 */
 void			plf_objs(size_t const n_objs, InDirObject const *const objs);
-void			plf_obj(char const *const path, InDirObject const *const objs);
+void			plf_obj(char *fmt_str, char *const path,
+					InDirObject const *const obj, bool const is_free_fmt);
 
 char			*plf_get_date(char *date_str, t_time_t const date_time);
 char			*plf_get_permission(char *perm_str, mode_t const st_mode_perm);
+char			*plf_full_path(char *const dst,
+					char *const dir_path,
+					char *const file_name,
+					size_t const dst_max);
 
 void			print_default_format(size_t const n_objs,
 					InDirObject const *const objs);

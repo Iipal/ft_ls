@@ -6,16 +6,17 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:13:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 09:12:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#include "ls_long_format_listing.h"
 
 void		parse_file(char *file, InDirObject const *const obj)
 {
-	CurrDir	*cd;
-	bool	is_link_parse_as_dir;
+	CurrDir		*cd;
+	bool		is_link_parse_as_dir;
+	t_blkcnt_t	total;
 
 	cd = NULL;
 	is_link_parse_as_dir = false;
@@ -31,7 +32,8 @@ void		parse_file(char *file, InDirObject const *const obj)
 		if (S_ISLNK(obj->stat->st_mode) && ft_strchr(file, '/'))
 			is_link_parse_as_dir = true;
 		else
-			plf_obj(file, obj);
+			plf_obj(prepare_output_fmtstr(precalc_output(1UL, obj, &total)),
+				file, obj, true);
 	}
 	if (is_link_parse_as_dir)
 	{

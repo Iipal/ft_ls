@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_long_format_get_data.c                       :+:      :+:    :+:   */
+/*   plf_get_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 22:17:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 09:49:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_long_format_listing.h"
 
-char		*plf_get_permission(char *perm_str, mode_t const st_mode_perm)
+char	*plf_get_permission(char *perm_str, mode_t const st_mode_perm)
 {
 	perm_str[0] = '-';
 	if (S_ISDIR(st_mode_perm))
@@ -31,32 +31,25 @@ char		*plf_get_permission(char *perm_str, mode_t const st_mode_perm)
 	return (perm_str);
 }
 
-static char	*s_plf_append_int_to_str(char *dst, int src)
+char	*plf_get_date(char *date_dst, t_time_t const date_time)
 {
-	char	*tmp;
+	char const *const	date = ctime(&date_time);
 
-	tmp = ft_itoa(src);
-	ft_strcpy(dst + ft_strlen(dst), tmp);
-	ft_strdel(&tmp);
-	return (dst);
+	IFDOR(!date, DEF_STRERR("ls", "plf_get_date"), NULL);
+	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
+	date_dst[12] = '\0';
+	return (date_dst);
 }
 
-char		*plf_get_date(char *date_str, t_time_t const date_time)
+char	*plf_full_path(char *const dst,
+			char *const dir_path,
+			char *const file_name,
+			size_t const dst_max)
 {
-	static struct tm			*tm;
-	static char const *const	date_months[] = { "Jan ", "Feb ", "Mar ",
-	"Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec " };
-
-	tm = localtime(&date_time);
-	ft_memset(date_str, 0, sizeof(char) * STR_LEN_DATE);
-	date_str = ft_strcpy(date_str, date_months[tm->tm_mon]);
-	date_str[4] = (10 > tm->tm_mday) ? ' ' : '\0';
-	date_str = s_plf_append_int_to_str(date_str, tm->tm_mday);
-	date_str[ft_strlen(date_str)] = ' ';
-	date_str[ft_strlen(date_str)] = (10 > tm->tm_hour) ? '0' : '\0';
-	date_str = s_plf_append_int_to_str(date_str, tm->tm_hour);
-	date_str[ft_strlen(date_str)] = ':';
-	date_str[ft_strlen(date_str)] = (10 > tm->tm_min) ? '0' : '\0';
-	date_str = s_plf_append_int_to_str(date_str, tm->tm_min);
-	return (date_str);
+	ft_memset(dst, 0, sizeof(char) * dst_max);
+	ft_strcpy(dst, dir_path);
+	if (dst[ft_strlen(dst) - 1] != '/')
+		dst[ft_strlen(dst)] = '/';
+	ft_strcpy(dst + ft_strlen(dst), file_name);
+	return (dst);
 }

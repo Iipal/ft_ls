@@ -6,14 +6,16 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 23:43:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/29 10:00:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int	g_flags = 0;
-int	g_main_ret = EXIT_SUCCESS;
+int		g_flags = 0;
+char	*g_src_path = NULL;
+
+int		g_main_ret = EXIT_SUCCESS;
 
 static char	**s_pre_parse_errno_args(int const ac, char **av, int *valid_args)
 {
@@ -46,6 +48,7 @@ static bool	s_parse_multifile(int const ac, char **av)
 	char	**valid_args;
 	int		valid_args_len;
 	int		i;
+	bool	ret;
 
 	i = -1;
 	av = sort_ascii_tab_str(ac, av);
@@ -55,6 +58,7 @@ static bool	s_parse_multifile(int const ac, char **av)
 	{
 		if (1 < ac)
 			ft_printf("%s:\n", valid_args[i]);
+		g_src_path = valid_args[i];
 		if (!parse_dir(valid_args[i]))
 			continue ;
 		if (valid_args_len != i + 1)
@@ -69,7 +73,7 @@ int			main(int argc, char *argv[])
 	--argc;
 	++argv;
 	if (!argc)
-		return (!parse_dir("."));
+		g_main_ret = !parse_dir(".");
 	else
 	{
 		while (argc && '-' == **argv)
@@ -79,7 +83,7 @@ int			main(int argc, char *argv[])
 			--argc;
 		}
 		if (!argc)
-			return (!parse_dir("."));
+			g_main_ret = !parse_dir(".");
 		else
 			s_parse_multifile(argc, argv);
 	}
