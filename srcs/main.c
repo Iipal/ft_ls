@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 23:35:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/30 10:28:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			main(int argc, char *argv[])
 		g_main_ret = !parse_dir(".");
 	else
 	{
-		while (argc && '-' == **argv)
+		while (argc && '-' == **argv && *(*argv + 1))
 		{
 			NO_R(parse_flags(*argv), EXIT_FAILURE);
 			++argv;

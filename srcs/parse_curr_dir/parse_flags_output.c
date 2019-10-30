@@ -36,6 +36,8 @@ void	parse_flags_output(char *path, CurrDir *cd)
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf_objs(cd->n_objs, cd->objs);
+	else
+		pdf_objs(cd->n_objs, cd->objs);
 	if (IS_BIT(g_flags, BIT_R_RECURSIVE))
 		s_check_subdirs(path, cd->n_objs, cd->objs);
 }

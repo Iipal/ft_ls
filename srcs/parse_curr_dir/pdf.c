@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 21:48:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/30 11:22:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,20 @@ static size_t	s_find_max_name_len(uint32_t const n_objs,
 
 void			pdf_objs(uint32_t const n_objs, InDirObject const *const objs)
 {
-	register uint32_t	i;
-	size_t				max_obj_name_len;
+	uint32_t	i;
+	size_t		max_obj_name_len;
+	char const	files_separator_ch = IS_BIT(g_flags, BIT_1_ONE) ? '\n': ' ';
 
 	i = ~0U;
 	max_obj_name_len = s_find_max_name_len(n_objs, objs);
 	while (n_objs > ++i)
 	{
 		ft_printf("%s", objs[i].dirent->d_name);
-		ft_putnchar(' ', max_obj_name_len
-			- ft_strlen(objs[i].dirent->d_name));
+		if (!IS_BIT(g_flags, BIT_1_ONE))
+			ft_putnchar(' ', max_obj_name_len
+				- ft_strlen(objs[i].dirent->d_name));
 		if (n_objs - 1 != i)
-				ft_putchar(' ');
+			ft_putchar(files_separator_ch);
 	}
 	ft_putchar('\n');
 }
