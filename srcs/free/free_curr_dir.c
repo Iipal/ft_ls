@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 18:37:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/30 15:05:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*free_curr_dir(CurrDir **curr_dir)
 {
-	uint32_t	i;
+	int32_t	i;
 
-	i = ~0U;
+	i = -1;
 	if (*curr_dir)
 	{
 		while ((*curr_dir)->n_objs > ++i)

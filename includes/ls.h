@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 21:42:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/30 15:38:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,14 @@ bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
 
 char			**sort_ascii_tab_str(int const n, char **tab);
 
-void			sort_ascii_dirents(uint32_t const in_dir_objs,
-						InDirObject *objs);
-void			sort_time_stats(uint32_t const in_dir_objs, InDirObject *objs);
+typedef int32_t	(*t_fn_comparator)(InDirObject const*,InDirObject const*);
+int32_t			sort_ascii_dirents_cmp(InDirObject const *a,
+					InDirObject const *b);
+int32_t			sort_time_stats_cmp(InDirObject const *a,
+					InDirObject const *b);
+
+void			merge_sort(InDirObject *objs, int32_t in_dir_objs,
+					t_fn_comparator cmp);
 
 struct dirent	*dup_dirent(struct dirent const *const src);
 struct stat		*dup_stat(struct stat const *const src);

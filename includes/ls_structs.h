@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 20:55:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/30 15:05:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ IN_DIR_OBJ;
 struct			s_curr_dir
 {
 	InDirObject	*objs;
-	uint32_t	n_objs;
+	int32_t		n_objs;
 	bool		is_file;
 };
 
