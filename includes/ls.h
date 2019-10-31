@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/31 13:01:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/31 14:28:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ InDirObject		*init_curr_in_dir_obj(InDirObject *dst,
 bool			init_lstat_check(char *const path, struct stat *buff);
 bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
 
-char			**sort_ascii_tab_str(int const n, char **tab);
 
+int32_t			sort_ascii_cmp(void const *a, void const *b);
 int32_t			sort_ascii_dirents_cmp(void const *a, void const *b);
 int32_t			sort_time_stats_cmp(void const *a, void const *b);
 
