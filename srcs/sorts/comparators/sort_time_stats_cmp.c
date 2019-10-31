@@ -6,13 +6,20 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/30 15:39:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/10/31 12:52:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int32_t	sort_time_stats_cmp(InDirObject const *a, InDirObject const *b)
+int32_t	sort_time_stats_cmp(void const *a, void const *b)
 {
-	return (a->stat->st_mtime - b->stat->st_mtime);
+	int32_t const	cmp = ((InDirObject*)a)->stat->st_mtime
+						- ((InDirObject*)b)->stat->st_mtime;
+
+	if (0 > cmp)
+		return (-1);
+	else if (0 <= cmp)
+		return (1);
+	return (0);
 }

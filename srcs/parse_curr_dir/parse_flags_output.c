@@ -25,32 +25,16 @@ static bool	s_check_subdirs(char *prev_dir, uint32_t const n_objs,
 	return (true);
 }
 
-int	cmp(InDirObject const *a, InDirObject const *b)
-{
-	// InDirObject const	*ido_a = (InDirObject const*)a;
-	// InDirObject const	*ido_b = (InDirObject const*)b;
-	int const			cmp = b->stat->st_mtime - a->stat->st_mtime;
-	int					ret;
-
-	ret = 0;
-	if (0 > cmp)
-		ret = -1;
-	else if (0 <= cmp)
-		ret = 1;
-	return ret;
-}
-
 void	parse_flags_output(char *path, CurrDir *cd)
 {
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 	{
 		if (IS_BIT(g_flags, BIT_T_TIME))
-		{
-			// mergesort(cd->objs, cd->n_objs, sizeof(InDirObject), cmp);
-			merge_sort(cd->objs, cd->n_objs, cmp);
-		}
+			shell_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+				sort_time_stats_cmp);
 		else
-			merge_sort(cd->objs, cd->n_objs, sort_ascii_dirents_cmp);
+			shell_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+				sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf_objs(cd->n_objs, cd->objs);
