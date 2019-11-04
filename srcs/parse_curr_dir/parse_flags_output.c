@@ -30,10 +30,10 @@ void	parse_flags_output(char *path, CurrDir *cd)
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 	{
 		if (IS_BIT(g_flags, BIT_T_TIME))
-			shell_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+			quick_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
 				sort_time_stats_cmp);
 		else
-			shell_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+			quick_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
 				sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))

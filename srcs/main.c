@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/31 14:29:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/04 18:11:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static bool	s_parse_args(int const ac, char **av)
 	int32_t	i;
 
 	i = -1;
-	shell_sort(av, ac, sizeof(char*), sort_ascii_cmp);
+	quick_sort(av, ac, sizeof(char*), sort_ascii_cmp);
 	if (!(valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len)))
 		return (g_main_ret = EXIT_FAILURE);
 	while (valid_args_len > ++i)

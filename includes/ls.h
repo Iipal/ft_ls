@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/31 14:28:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/04 17:45:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void			parse_flags_output(char *path, CurrDir *cd);
 ** PLF - Print Long Format
 */
 void			plf_objs(uint32_t const n_objs, InDirObject const *const objs);
-void			plf_obj(char *fmt_str, char *const path,
-					InDirObject const *const obj, bool const is_free_fmt);
+void			plf_obj(char *fmt_str,
+					char *const path,
+					InDirObject const *const obj,
+					bool const is_free_fmt);
 
 char			*plf_get_date(char *date_str, t_time_t const date_time);
 char			*plf_get_permission(char *perm_str, mode_t const st_mode_perm);
@@ -63,7 +65,8 @@ void			pdf_objs(uint32_t const n_objs, InDirObject const *const objs);
 CurrDir			*init_only_file(char *const path);
 CurrDir			*init_curr_dir(char *const path, bool const force_open_dir);
 InDirObject		*init_curr_in_dir_obj(InDirObject *dst,
-					struct stat *stat, struct dirent *dirent);
+					struct stat *stat,
+					struct dirent *dirent);
 bool			init_lstat_check(char *const path, struct stat *buff);
 bool			init_lstat_check_no_errno(char *const path, struct stat *buff);
 
@@ -72,7 +75,8 @@ int32_t			sort_ascii_cmp(void const *a, void const *b);
 int32_t			sort_ascii_dirents_cmp(void const *a, void const *b);
 int32_t			sort_time_stats_cmp(void const *a, void const *b);
 
-void			shell_sort(void *_base, ssize_t const _n_el,
+void			quick_sort(void *_base,
+					size_t const _n_el,
 					size_t const _width,
 					int32_t (*_cmp)(void const*, void const*));
 
