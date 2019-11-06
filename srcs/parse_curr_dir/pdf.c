@@ -6,21 +6,21 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/30 11:38:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:52:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static size_t	s_find_max_name_len(uint32_t const n_objs,
-					InDirObject const *const objs)
+static size_t	s_find_max_name_len(const uint32_t n_objs,
+					const InDirObject *restrict objs)
 {
 	size_t		curr_len;
 	size_t		max_len;
 	uint32_t	i;
 
 	i = ~0U;
-	max_len = ft_strlen((*objs).dirent->d_name);
+	max_len = ft_strlen(objs->dirent->d_name);
 	while (n_objs > ++i)
 	{
 		curr_len = ft_strlen(objs[i].dirent->d_name);
@@ -30,11 +30,12 @@ static size_t	s_find_max_name_len(uint32_t const n_objs,
 	return (max_len);
 }
 
-void			pdf_objs(uint32_t const n_objs, InDirObject const *const objs)
+void			pdf_objs(const uint32_t n_objs,
+					const InDirObject *restrict objs)
 {
 	uint32_t	i;
 	size_t		max_obj_name_len;
-	char const	files_separator_ch = IS_BIT(g_flags, BIT_1_ONE) ? '\n': ' ';
+	const char	files_separator_ch = (IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
 
 	i = ~0U;
 	max_obj_name_len = s_find_max_name_len(n_objs, objs);

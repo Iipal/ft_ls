@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 19:25:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:42:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static CurrDir	*s_precalc_in_dir_objs(DIR *dir)
+static CurrDir	*s_precalc_in_dir_objs(DIR *restrict dir)
 {
 	CurrDir			*out;
 	struct dirent	*dirent;
@@ -25,7 +25,8 @@ static CurrDir	*s_precalc_in_dir_objs(DIR *dir)
 	return (out);
 }
 
-CurrDir			*init_curr_dir(char *const path, bool const force_open_dir)
+CurrDir			*init_curr_dir(const char *restrict path,
+					const bool force_open_dir)
 {
 	CurrDir				*out;
 	CurrDirInit			t;

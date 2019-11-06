@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/04 18:11:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:54:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*g_src_path = NULL;
 
 int32_t	g_main_ret = EXIT_SUCCESS;
 
-static char	**s_pre_parse_errno_args(int32_t const ac, char **av, int32_t *va)
+static char	**s_pre_parse_errno_args(int32_t ac, char **av,
+				int32_t *restrict va)
 {
 	char		**out;
 	struct stat	tmp;
@@ -43,7 +44,7 @@ static char	**s_pre_parse_errno_args(int32_t const ac, char **av, int32_t *va)
 	return (out);
 }
 
-static bool	s_parse_args(int const ac, char **av)
+static bool	s_parse_args(int ac, char **av)
 {
 	char	**valid_args;
 	int32_t	valid_args_len;

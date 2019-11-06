@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 08:53:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:42:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-CurrDir	*init_only_file(char *const path)
+CurrDir	*init_only_file(const char *restrict path)
 {
 	CurrDir		*out;
 	struct stat	st;

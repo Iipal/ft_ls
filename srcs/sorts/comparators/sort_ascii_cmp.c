@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 14:27:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/04 17:25:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:15:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int32_t	sort_ascii_cmp(void const *a, void const *b)
+int32_t	sort_ascii_cmp(const void *a, const void *b)
 {
-	return (ft_strcmp((char const*)b, (char const*)a));
+	return (ft_strcmp((const char*)b, (const char*)a));
 }

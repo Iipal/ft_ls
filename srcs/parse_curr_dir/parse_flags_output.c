@@ -1,7 +1,8 @@
 #include "ls.h"
 
-static bool	s_check_subdirs(char *prev_dir, uint32_t const n_objs,
-								InDirObject const *const objs)
+static bool	s_check_subdirs(const char *restrict prev_dir,
+				const uint32_t n_objs,
+				const InDirObject *restrict objs)
 {
 	char		*d_name;
 	char		*subdir;
@@ -25,15 +26,16 @@ static bool	s_check_subdirs(char *prev_dir, uint32_t const n_objs,
 	return (true);
 }
 
-void	parse_flags_output(char *path, CurrDir *cd)
+void	parse_flags_output(const char *restrict path,
+			const CurrDir *restrict cd)
 {
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 	{
 		if (IS_BIT(g_flags, BIT_T_TIME))
-			quick_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+			qsort(cd->objs, cd->n_objs, sizeof(InDirObject),
 				sort_time_stats_cmp);
 		else
-			quick_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+			qsort(cd->objs, cd->n_objs, sizeof(InDirObject),
 				sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))

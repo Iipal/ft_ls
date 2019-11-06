@@ -3,8 +3,8 @@
 
 # include <stddef.h>
 
-char	*u_full_path(char *const dst,
-			char const *const dir_path,
-			char const *const file);
+char	*u_full_path(char *restrict dst,
+			const char *restrict dir_path,
+			const char *restrict file);
 
 #endif

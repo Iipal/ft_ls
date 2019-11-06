@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 21:50:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:53:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_long_format_listing.h"
 
-static inline bool	s_check_def_or_under_link_print(char *file,
-						InDirObject const *const obj)
+static inline bool	s_check_def_or_under_link_print(const char *restrict file,
+						const InDirObject *restrict obj)
 {
 	bool	print_as_dir;
 
@@ -25,8 +25,8 @@ static inline bool	s_check_def_or_under_link_print(char *file,
 	return (print_as_dir);
 }
 
-static inline bool	s_check_plf_or_under_link_print(char *file,
-						InDirObject const *const obj)
+static inline bool	s_check_plf_or_under_link_print(const char *restrict file,
+						const InDirObject *restrict obj)
 {
 	bool		print_as_dir;
 	t_blkcnt_t	t;
@@ -39,10 +39,11 @@ static inline bool	s_check_plf_or_under_link_print(char *file,
 	return (print_as_dir);
 }
 
-void				parse_file(char *file, InDirObject const *const obj)
+void				parse_file(const char *restrict file,
+						const InDirObject *restrict obj)
 {
-	CurrDir		*cd;
-	bool		is_link_parse_as_dir;
+	CurrDir	*cd;
+	bool	is_link_parse_as_dir;
 
 	cd = NULL;
 	is_link_parse_as_dir = false;

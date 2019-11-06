@@ -6,13 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 17:45:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:14:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-bool	init_lstat_check(char *const path, struct stat *buff)
+bool	init_lstat_check(const char *restrict path,
+			struct stat *restrict buff)
 {
 	struct stat	tmp_lstat;
 
@@ -23,7 +24,8 @@ bool	init_lstat_check(char *const path, struct stat *buff)
 	return (true);
 }
 
-bool	init_lstat_check_no_errno(char *const path, struct stat *buff)
+bool	init_lstat_check_no_errno(const char *restrict path,
+			struct stat *restrict buff)
 {
 	struct stat	tmp_lstat;
 

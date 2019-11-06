@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 19:25:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:41:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_long_format_listing.h"
 
-static void	s_print_link(char *const file)
+static void	s_print_link(const char *restrict file)
 {
 	char	*buff;
 	char	*buff_path;
@@ -25,8 +25,10 @@ static void	s_print_link(char *const file)
 	FREE(buff, free);
 }
 
-void		plf_obj(char *fmt_str, char *const path,
-				InDirObject const *const obj, bool const is_free_fmt)
+void		plf_obj(char *restrict fmt_str,
+				const char *restrict path,
+				const InDirObject *restrict obj,
+				const bool is_free_fmt)
 {
 	ft_printf(fmt_str,
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->stat->st_mode),
@@ -40,7 +42,7 @@ void		plf_obj(char *fmt_str, char *const path,
 		FREE(fmt_str, free);
 }
 
-void		plf_objs(uint32_t const n_objs, InDirObject const *const objs)
+void		plf_objs(const uint32_t n_objs, const InDirObject *restrict objs)
 {
 	char				*fmt_str;
 	t_blkcnt_t			total;

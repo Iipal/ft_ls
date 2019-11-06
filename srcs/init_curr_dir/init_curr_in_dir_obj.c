@@ -6,15 +6,15 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/28 15:31:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:21:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-inline InDirObject	*init_curr_in_dir_obj(InDirObject *dst,
-										struct stat *stat,
-										struct dirent *dirent)
+inline InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
+						const struct stat *restrict stat,
+						const struct dirent *restrict dirent)
 {
 	InDirObject	*out;
 

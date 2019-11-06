@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 19:09:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:51:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_long_format_listing.h"
 
-char	*plf_get_permission(char *perm_str, mode_t const st_mode_perm)
+char	*plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm)
 {
 	perm_str[0] = '-';
 	if (S_ISDIR(st_mode_perm))
@@ -31,20 +31,21 @@ char	*plf_get_permission(char *perm_str, mode_t const st_mode_perm)
 	return (perm_str);
 }
 
-char	*plf_get_date(char *date_dst, t_time_t const date_time)
+char	*plf_get_date(char *restrict date_dst,
+			const t_time_t date_time)
 {
-	char const *const	date = ctime(&date_time);
+	const char	*date = ctime(&date_time);
 
 	IFDOR(!date, DEF_STRERR("ls", "plf_get_date"), NULL);
 	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
 	date_dst[12] = '\0';
 	return (date_dst);
 }
-
-char	*plf_full_path(char *const dst,
-			size_t const dst_max,
-			char *const dir_path,
-			char *const file_name)
+/*
+char	*plf_full_path(char *restrict dst,
+			const size_t dst_max,
+			const char *restrict dir_path,
+			const char *restrict file_name)
 {
 	register size_t	dir_path_len = ft_strlen(dir_path);
 
@@ -55,3 +56,4 @@ char	*plf_full_path(char *const dst,
 	ft_strcpy(dst + dir_path_len, file_name);
 	return (dst);
 }
+ */

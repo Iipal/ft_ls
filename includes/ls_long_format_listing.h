@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/29 16:37:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/06 18:51:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ struct			s_lf_spec_width
 
 SPEC_FMT_HELPER;
 
-WidthSpecific	plf_width_spec(uint32_t const n_objs,
-					InDirObject const *const objs,
-					t_blkcnt_t *const total);
-char			*plf_fmt_str(WidthSpecific const ws);
+WidthSpecific	plf_width_spec(const uint32_t n_objs,
+					const InDirObject *restrict objs,
+					t_blkcnt_t *restrict total);
+char			*plf_fmt_str(const WidthSpecific ws);
 
 #endif
