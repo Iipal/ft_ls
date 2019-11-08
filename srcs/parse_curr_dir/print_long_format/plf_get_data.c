@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:51:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/07 22:44:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,8 @@ char	*plf_get_date(char *restrict date_dst,
 {
 	const char	*date = ctime(&date_time);
 
-	IFDOR(!date, DEF_STRERR("ls", "plf_get_date"), NULL);
+	IFDOR(!date, DEF_STRERR(ERR, "plf_get_date"), NULL);
 	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
 	date_dst[12] = '\0';
 	return (date_dst);
 }
-/*
-char	*plf_full_path(char *restrict dst,
-			const size_t dst_max,
-			const char *restrict dir_path,
-			const char *restrict file_name)
-{
-	register size_t	dir_path_len = ft_strlen(dir_path);
-
-	ft_memset(dst, 0, sizeof(char) * dst_max);
-	ft_strncpy(dst, dir_path, dir_path_len);
-	if (dst[dir_path_len - 1] != '/')
-		dst[dir_path_len++] = '/';
-	ft_strcpy(dst + dir_path_len, file_name);
-	return (dst);
-}
- */

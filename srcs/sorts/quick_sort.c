@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:42:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/07 23:04:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static ssize_t	s_partition(void *_base,
 	i = start - 1L;
 	pivot = ft_memdup(_base + (end * g_width), g_width);
 	while (end - 1L >= ++j)
-		if (0 >= g_comparator(_base + (j * g_width), pivot))
+		if (0 < g_comparator(_base + (j * g_width), pivot))
 			ft_memswap(_base + (++i * g_width),
 						_base + (j  * g_width), g_width);
 	ft_memswap(_base + (++i * g_width), _base + (end * g_width), g_width);

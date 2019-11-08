@@ -6,15 +6,15 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:33:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/07/31 16:14:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/07 22:44:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_ERRNO_H
 # define LS_ERRNO_H
 
-# define ERR  "ls: "
-# define PERR "ls"
+# define ERR  "ft_ls: "
+# define PERR "ft_ls"
 
 # define E_ALLOC ERR "Where is your memory, pal?"
 
