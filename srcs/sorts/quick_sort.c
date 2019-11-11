@@ -6,57 +6,55 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 14:41:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 15:13:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 #include <immintrin.h>
 
-static size_t	g_width = 0UL;
-static uint8_t	*g_base = NULL;
-static int		(*g_comparator)(const void*, const void*) = NULL;
+static size_t	g_qs_width = 0UL;
+static uint8_t	*g_qs_base = NULL;
+static int32_t	(*g_qs_comparator)(const void*, const void*) = NULL;
 
-static ssize_t	s_partition(register const ssize_t start,
-					register const ssize_t end)
+static ssize_t	s_sort_partition(register const __v2di ip)
 {
-	ssize_t	j;
-	ssize_t	i;
-	uint8_t	*pivot;
+	register __v2di	i;
+	const uint8_t	*pivot = NULL;
 
-	j = start - 1L;
-	i = start - 1L;
-	pivot = (uint8_t*)ft_memdup(g_base + (end * g_width), g_width);
-	while (end > ++j)
-		if (0 < g_comparator(g_base + (j * g_width), pivot))
-			ft_memswap(g_base + (++i * g_width),
-				g_base + (j * g_width), g_width);
-	ft_memswap(g_base + (++i * g_width), g_base + (end * g_width), g_width);
+	i = (__v2di) { ip[0] - 1L, ip[0] - 1L };
+	pivot = (uint8_t*)ft_memdup(g_qs_base + (ip[1] * g_qs_width), g_qs_width);
+	while (ip[1] > ++i[1])
+		if (0 < g_qs_comparator(g_qs_base + (i[1] * g_qs_width), pivot))
+			ft_memswap(g_qs_base + (++i[0] * g_qs_width),
+				g_qs_base + (i[1] * g_qs_width), g_qs_width);
+	ft_memswap(g_qs_base + (++i[0] * g_qs_width),
+		g_qs_base + (ip[1] * g_qs_width), g_qs_width);
 	ft_memdel((void**)&pivot);
-	return (i);
+	return (i[0]);
 }
 
-static void		qsort_recursion(register const ssize_t start,
+static void		s_qs_recursion(register const ssize_t start,
 					register const ssize_t end)
 {
 	ssize_t	pivot;
 
 	if (start >= end)
 		return ;
-	pivot = s_partition(start, end);
-	qsort_recursion(start, pivot - 1L);
-	qsort_recursion(pivot + 1L, end);
+	pivot = s_sort_partition((__v2di) { start, end });
+	s_qs_recursion(start, pivot - 1L);
+	s_qs_recursion(pivot + 1L, end);
 }
 
-void			quick_sort(void *_base,
-					const size_t _n_el,
-					const size_t _width,
-					int32_t (*_cmp)(const void*, const void*))
+void			quick_sort(void *base,
+					const size_t n_el,
+					const size_t width,
+					int32_t (*comparator)(const void*, const void*))
 {
-	if (2 > _n_el)
+	if (2 > n_el)
 		return ;
-	g_base = _base;
-	g_width = _width;
-	g_comparator = _cmp;
-	qsort_recursion(0L, _n_el - 1L);
+	g_qs_base = base;
+	g_qs_width = width;
+	g_qs_comparator = comparator;
+	s_qs_recursion(0L, n_el - 1L);
 }

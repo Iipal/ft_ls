@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/08 02:38:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 14:45:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,14 @@ bool				init_lstat_check(const char *restrict path,
 bool				init_lstat_check_no_errno(const char *restrict path,
 						struct stat *restrict buff);
 
-
 int32_t				sort_ascii_cmp(const void *a, const void *b);
 int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
 int32_t				sort_time_stats_cmp(const void *a, const void *b);
 
-void				quick_sort(void *_base,
-						const size_t _n_el,
-						const size_t _width,
-						int32_t (*_cmp)(const void*, const void*));
+void				quick_sort(void *base,
+						const size_t n_el,
+						const size_t width,
+						int32_t (*comparator)(const void*, const void*));
 
 struct dirent		*dup_dirent(const struct dirent *restrict src);
 struct stat			*dup_stat(const struct stat *restrict src);
