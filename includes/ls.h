@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 14:45:24 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 18:25:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ bool				init_lstat_check(const char *restrict path,
 bool				init_lstat_check_no_errno(const char *restrict path,
 						struct stat *restrict buff);
 
-int32_t				sort_ascii_cmp(const void *a, const void *b);
+void				sort_ascii_tab(const size_t n, char **tab);
+
 int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
 int32_t				sort_time_stats_cmp(const void *a, const void *b);
 
