@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 18:14:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 21:11:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void		parse_flags_output(const char *restrict path,
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 	{
 		if (IS_BIT(g_flags, BIT_T_TIME))
-			quick_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+			isort(cd->objs, cd->n_objs, sizeof(InDirObject),
 				sort_time_stats_cmp);
 		else
-			quick_sort(cd->objs, cd->n_objs, sizeof(InDirObject),
+			isort(cd->objs, cd->n_objs, sizeof(InDirObject),
 				sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))

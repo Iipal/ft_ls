@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 18:25:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 21:11:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ void				sort_ascii_tab(const size_t n, char **tab);
 int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
 int32_t				sort_time_stats_cmp(const void *a, const void *b);
 
-void				quick_sort(void *base,
+/*
+** Insertion Sort
+*/
+void				isort(void *base,
 						const size_t n_el,
 						const size_t width,
 						int32_t (*comparator)(const void*, const void*));

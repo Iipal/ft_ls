@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bubble_sort_ascii_tab.c                            :+:      :+:    :+:   */
+/*   sort_ascii_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 14:27:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 18:25:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 21:10:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 
 void	sort_ascii_tab(const size_t n, char **tab)
 {
-	__v2du	i;
+	volatile __v2du	i;
+	char			*key;
 
-	i[0] = ~0UL;
+	i[0] = -1L;
 	while (n > ++i[0])
 	{
-		i[1] = i[0];
-		while (n > ++i[1])
-			if (ft_strcmp(tab[i[0]], tab[i[1]]))
-				SWAP(tab[i[0]], tab[i[1]]);
+		key = tab[i[0]];
+		i[1] = i[0] - 1L;
+		while (0 <= i[1])
+		{
+			if (0 >= ft_strcmp(tab[i[1]], key))
+				break ;
+			tab[i[1] + 1L] = tab[i[1]];
+			i[1] -= 1L;
+		}
+		tab[i[1] + 1L] = key;
 	}
 }
