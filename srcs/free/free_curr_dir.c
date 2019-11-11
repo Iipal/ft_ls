@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/08 02:37:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 00:09:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	*free_curr_dir(CurrDir **curr_dir)
 	i = -1;
 	if (*curr_dir)
 	{
-		while ((*curr_dir)->n_objs > ++i)
-			free_curr_in_dir_obj(&(*curr_dir)->objs[i]);
+		if ((*curr_dir)->objs)
+			while ((*curr_dir)->n_objs > ++i)
+				free_curr_in_dir_obj(&(*curr_dir)->objs[i]);
 		FREE((*curr_dir)->objs, free);
 		FREE((*curr_dir), free);
 	}

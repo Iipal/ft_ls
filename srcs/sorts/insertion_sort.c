@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 21:26:24 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 00:17:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	isort(void *base,
 	if (2 > n_el)
 		return ;
 	i[0] = 0L;
+	key = ft_memalloc(width);
 	while ((ssize_t)n_el > ++i[0])
 	{
-		key = ft_memdup(base + (i[0] * width), width);
+		key = ft_memcpy(key, base + (i[0] * width), width);
 		i[1] = i[0] - 1L;
 		while (0 <= i[1])
 		{
@@ -37,6 +38,6 @@ void	isort(void *base,
 			i[1] -= 1L;
 		}
 		ft_memmove(base + ((i[1] + 1L) * width), key, width);
-		ft_memdel(&key);
 	}
+	ft_memdel(&key);
 }

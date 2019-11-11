@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 14:27:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 21:10:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 23:38:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 void	sort_ascii_tab(const size_t n, char **tab)
 {
-	volatile __v2du	i;
+	volatile __v2di	i;
 	char			*key;
 
-	i[0] = -1L;
-	while (n > ++i[0])
+	i[0] = 0L;
+	while ((ssize_t)n > ++i[0])
 	{
 		key = tab[i[0]];
 		i[1] = i[0] - 1L;
