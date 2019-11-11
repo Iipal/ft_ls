@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 15:13:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 17:18:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int32_t	(*g_qs_comparator)(const void*, const void*) = NULL;
 
 static ssize_t	s_sort_partition(register const __v2di ip)
 {
-	register __v2di	i;
-	const uint8_t	*pivot = NULL;
+	register __v2di			i;
+	static const uint8_t	*pivot = NULL;
 
 	i = (__v2di) { ip[0] - 1L, ip[0] - 1L };
 	pivot = (uint8_t*)ft_memdup(g_qs_base + (ip[1] * g_qs_width), g_qs_width);
