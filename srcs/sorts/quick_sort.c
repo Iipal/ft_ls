@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/07 23:04:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/11 14:41:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,38 @@
 #include <immintrin.h>
 
 static size_t	g_width = 0UL;
+static uint8_t	*g_base = NULL;
 static int		(*g_comparator)(const void*, const void*) = NULL;
 
-static ssize_t	s_partition(void *_base,
-					register const ssize_t start,
+static ssize_t	s_partition(register const ssize_t start,
 					register const ssize_t end)
 {
 	ssize_t	j;
 	ssize_t	i;
-	void	*pivot;
+	uint8_t	*pivot;
 
 	j = start - 1L;
 	i = start - 1L;
-	pivot = ft_memdup(_base + (end * g_width), g_width);
-	while (end - 1L >= ++j)
-		if (0 < g_comparator(_base + (j * g_width), pivot))
-			ft_memswap(_base + (++i * g_width),
-						_base + (j  * g_width), g_width);
-	ft_memswap(_base + (++i * g_width), _base + (end * g_width), g_width);
-	ft_memdel(&pivot);
+	pivot = (uint8_t*)ft_memdup(g_base + (end * g_width), g_width);
+	while (end > ++j)
+		if (0 < g_comparator(g_base + (j * g_width), pivot))
+			ft_memswap(g_base + (++i * g_width),
+				g_base + (j * g_width), g_width);
+	ft_memswap(g_base + (++i * g_width), g_base + (end * g_width), g_width);
+	ft_memdel((void**)&pivot);
 	return (i);
 }
 
-static void		qsort_recursion(void *_base,
-					register const ssize_t start,
+static void		qsort_recursion(register const ssize_t start,
 					register const ssize_t end)
 {
 	ssize_t	pivot;
 
 	if (start >= end)
 		return ;
-	pivot = s_partition(_base, start, end);
-	qsort_recursion(_base, start, pivot - 1L);
-	qsort_recursion(_base, pivot + 1L, end);
+	pivot = s_partition(start, end);
+	qsort_recursion(start, pivot - 1L);
+	qsort_recursion(pivot + 1L, end);
 }
 
 void			quick_sort(void *_base,
@@ -56,7 +55,8 @@ void			quick_sort(void *_base,
 {
 	if (2 > _n_el)
 		return ;
+	g_base = _base;
 	g_width = _width;
 	g_comparator = _cmp;
-	qsort_recursion(_base, 0L, _n_el - 1L);
+	qsort_recursion(0L, _n_el - 1L);
 }
