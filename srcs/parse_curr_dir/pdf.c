@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 15:50:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 17:12:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static size_t	s_find_max_len(const uint32_t n_objs,
 	return (max);
 }
 
-void	pdf_objs(const uint32_t n_objs,
-			const InDirObject *restrict objs)
+void			pdf_objs(const uint32_t n_objs,
+					const InDirObject *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? 0xA : 0x20);
 	const size_t	max_len = s_find_max_len(n_objs, objs);
