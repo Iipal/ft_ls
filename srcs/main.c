@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 15:18:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 15:52:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int			main(int argc, char *argv[])
 {
 	--argc;
 	++argv;
+	if (0 >= isatty(fileno(stdout)))
+		SET_BIT(g_flags, BIT_1_ONE);
 	if (!argc)
 		g_main_ret = !parse_dir(".");
 	else

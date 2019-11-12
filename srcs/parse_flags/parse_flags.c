@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:54:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 15:50:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ static bool			s_check_valid_flag(const char curr_flag)
 	i = ~0UL;
 	while (valid_flags_size > ++i)
 		if (curr_flag == valid_flags[i])
-		{
-			SET_BIT(g_flags, TO_N_BIT(i));
-			if (IS_BIT(g_flags, BIT_1_ONE))
-				UNSET_BIT(g_flags, BIT_L_LIST);
-			return (true);
-		}
+			return (SET_BIT(g_flags, TO_N_BIT(i)));
 	return (false);
+}
+
+static inline void	s_validate_flags(void)
+{
+	if (IS_BIT(g_flags, BIT_1_ONE))
+		UNSET_BIT(g_flags, BIT_L_LIST);
+	if (IS_BIT(g_flags, BIT_F_NOT_SORTED))
+		SET_BIT(g_flags, BIT_A_HIDDEN);
 }
 
 bool				parse_flags(const char *flags_str)
@@ -39,7 +42,6 @@ bool				parse_flags(const char *flags_str)
 			E_ILLEGAL(*flags_str);
 			return (false);
 		}
-	if (IS_BIT(g_flags, BIT_F_NOT_SORTED))
-		SET_BIT(g_flags, BIT_A_HIDDEN);
+	s_validate_flags();
 	return (true);
 }
