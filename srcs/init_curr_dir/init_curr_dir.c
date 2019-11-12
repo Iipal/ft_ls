@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 00:00:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 12:57:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ CurrDir			*init_curr_dir(const char *restrict path,
 		return (init_only_file(path));
 	IFR(!(t.dir = opendir(path)), NULL);
 	NO_F(out = s_precalc_in_dir_objs(t.dir));
-	seekdir(t.dir, SEEK_SET);
+	closedir(t.dir);
+	t.dir = opendir(path);
 	while ((t.dirent = readdir(t.dir)))
 	{
 		IFDOR(!init_lstat_check(u_full_path(t.path, path, t.dirent->d_name),

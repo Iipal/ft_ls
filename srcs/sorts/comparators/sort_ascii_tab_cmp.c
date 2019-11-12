@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_tab.c                                   :+:      :+:    :+:   */
+/*   sort_ascii_tab_cmp.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/31 14:27:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 23:38:56 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/12 13:23:01 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/12 13:24:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
-#include <immintrin.h>
 
-void	sort_ascii_tab(const size_t n, char **tab)
+int32_t	sort_ascii_tab_cmp(const void *a, const void *b)
 {
-	volatile __v2di	i;
-	char			*key;
-
-	i[0] = 0L;
-	while ((ssize_t)n > ++i[0])
-	{
-		key = tab[i[0]];
-		i[1] = i[0] - 1L;
-		while (0 <= i[1])
-		{
-			if (0 >= ft_strcmp(tab[i[1]], key))
-				break ;
-			tab[i[1] + 1L] = tab[i[1]];
-			i[1] -= 1L;
-		}
-		tab[i[1] + 1L] = key;
-	}
+	return (ft_strcmp(*(const char**)a, *(const char**)b));
 }

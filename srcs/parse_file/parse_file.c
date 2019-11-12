@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:53:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 13:25:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void				parse_file(const char *restrict file,
 
 	cd = NULL;
 	is_link_parse_as_dir = false;
-	if (IS_BIT(g_flags, BIT_L_LIST))
+	if (!IS_BIT(g_flags, BIT_L_LIST))
 		is_link_parse_as_dir = s_check_def_or_under_link_print(file, obj);
 	else
 		is_link_parse_as_dir = s_check_plf_or_under_link_print(file, obj);

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/08 02:42:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 13:09:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ struct			s_in_dir_object
 {
 	struct dirent	*dirent;
 	struct stat		*stat;
+	int32_t			d_name_len;
 };
 
 # define IN_DIR_OBJ typedef struct s_in_dir_object InDirObject

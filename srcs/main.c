@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 18:25:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 13:23:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ static char	**s_pre_parse_errno_args(int32_t ac, char **av,
 	return (out);
 }
 
+int32_t	cmps(const void *a, const void *b)
+{
+	return (ft_strcmp(*(const char**)a, *(const char**)b));
+}
+
 static bool	s_parse_args(int ac, char **av)
 {
 	char	**valid_args;
@@ -51,7 +56,7 @@ static bool	s_parse_args(int ac, char **av)
 	int32_t	i;
 
 	i = -1;
-	sort_ascii_tab(ac, av);
+	isort(av, ac, sizeof(char*), cmps);
 	if (!(valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len)))
 		return (g_main_ret = EXIT_FAILURE);
 	while (valid_args_len > ++i)
