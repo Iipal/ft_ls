@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 12:57:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 14:34:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@ static CurrDir	*s_precalc_in_dir_objs(DIR *restrict dir)
 {
 	CurrDir			*out;
 	struct dirent	*dirent;
+	int32_t			total_n_objs;
 
+	total_n_objs = 0;
 	MEM(CurrDir, out, 1, E_ALLOC);
 	while ((dirent = readdir(dir)))
+	{
 		out->n_objs += !(!IS_BIT(g_flags, BIT_A_HIDDEN)
 					&& '.' == dirent->d_name[0]);
-	MEM(InDirObject, out->objs, out->n_objs, E_ALLOC);
+		++total_n_objs;
+	}
+	if (total_n_objs && !out->n_objs)
+		total_n_objs = 1;
+	MEM(InDirObject, out->objs, total_n_objs, E_ALLOC);
 	return (out);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 13:24:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 15:18:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <immintrin.h>
 
 MY_BLCK_T;
 MY_TIME_T;

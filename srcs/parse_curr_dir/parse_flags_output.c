@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 23:40:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 14:00:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 
 	i = ~0U;
 	d_name = NULL;
-	subdir = (char*)ft_memalloc(sizeof(char) * 256);
+	subdir = (char*)ft_memalloc(sizeof(char) * 1024);
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].dirent->d_name;
