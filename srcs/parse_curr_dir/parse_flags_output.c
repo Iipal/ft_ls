@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 23:40:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 20:19:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 
 	i = ~0U;
 	d_name = NULL;
-	subdir = (char*)ft_memalloc(sizeof(char) * 256);
+	subdir = (char*)ft_memalloc(sizeof(char) * 1024);
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].dirent->d_name;
@@ -44,11 +44,11 @@ void		parse_flags_output(const char *restrict path,
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 	{
 		if (IS_BIT(g_flags, BIT_T_TIME))
-			isort(cd->objs, cd->n_objs, sizeof(InDirObject),
-				sort_time_stats_cmp);
+			qsort(cd->objs, cd->n_objs,
+				sizeof(InDirObject), sort_time_stats_cmp);
 		else
-			isort(cd->objs, cd->n_objs, sizeof(InDirObject),
-				sort_ascii_dirents_cmp);
+			qsort(cd->objs, cd->n_objs,
+				sizeof(InDirObject), sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf_objs(cd->n_objs, cd->objs);

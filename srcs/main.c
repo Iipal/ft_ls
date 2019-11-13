@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 18:25:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 20:19:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,22 @@ static char	**s_pre_parse_errno_args(int32_t ac, char **av,
 {
 	char		**out;
 	struct stat	tmp;
-	int			i;
-	int			j;
+	__v2si		i;
 
-	i = -1;
-	j = -1;
 	*va = 0;
-	while (ac > ++i)
-		if (init_lstat_check(av[i], &tmp))
+	i = (__v2si){ -1, -1 };
+	while (ac > ++i[0])
+		if (init_lstat_check(av[i[0]], &tmp))
 			++(*va);
 		else
 			g_main_ret = EXIT_FAILURE;
 	if (!*va)
 		return (av);
 	MEM(char*, out, *va, E_ALLOC);
-	i = -1;
-	va = 0;
-	while (ac > ++i)
-		if (init_lstat_check_no_errno(av[i], &tmp))
-			out[++j] = ft_strdup(av[i]);
+	i[0] = -1;
+	while (ac > ++i[0])
+		if (init_lstat_check_no_errno(av[i[0]], &tmp))
+			out[++i[1]] = ft_strdup(av[i[0]]);
 	return (out);
 }
 
@@ -51,7 +48,7 @@ static bool	s_parse_args(int ac, char **av)
 	int32_t	i;
 
 	i = -1;
-	sort_ascii_tab(ac, av);
+	q_sort(av, ac, sizeof(char*), sort_ascii_tab_cmp);
 	if (!(valid_args = s_pre_parse_errno_args(ac, av, &valid_args_len)))
 		return (g_main_ret = EXIT_FAILURE);
 	while (valid_args_len > ++i)
@@ -81,6 +78,8 @@ int			main(int argc, char *argv[])
 			++argv;
 			--argc;
 		}
+		if (0 >= isatty(fileno(stdout)))
+			SET_BIT(g_flags, BIT_1_ONE);
 		if (!argc)
 			g_main_ret = !parse_dir(".");
 		else

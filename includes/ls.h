@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 23:57:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 19:47:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <immintrin.h>
 
 MY_BLCK_T;
 MY_TIME_T;
@@ -82,15 +83,17 @@ bool				init_lstat_check(const char *restrict path,
 bool				init_lstat_check_no_errno(const char *restrict path,
 						struct stat *restrict buff);
 
-void				sort_ascii_tab(const size_t n, char **tab);
-
+/*
+** Sort callback-comparators.
+*/
+int32_t				sort_ascii_tab_cmp(const void *a, const void *b);
 int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
 int32_t				sort_time_stats_cmp(const void *a, const void *b);
 
 /*
-** Insertion Sort
+** quick sort
 */
-void				isort(void *base,
+extern void			q_sort(void *base,
 						const size_t n_el,
 						const size_t width,
 						int32_t (*comparator)(const void*, const void*));

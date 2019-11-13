@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:21:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/12 15:16:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ inline InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
 		return (free_curr_in_dir_obj(out));
 	if (stat && !(out->stat = dup_stat(stat)))
 		return (free_curr_in_dir_obj(out));
+	out->d_name_len = 0UL;
+	if (out->dirent)
+		out->d_name_len = ft_strlen(out->dirent->d_name);
 	return (out);
 }
