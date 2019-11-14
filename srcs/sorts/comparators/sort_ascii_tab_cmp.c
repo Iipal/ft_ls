@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 13:23:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 13:24:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 14:07:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int32_t	sort_ascii_tab_cmp(const void *a, const void *b)
 {
-	return (ft_strcmp(*(const char**)a, *(const char**)b));
+	return (ft_strcmp(*(const char**)b, *(const char**)a));
 }

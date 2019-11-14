@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 19:47:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 14:05:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ MY_TIME_T;
 extern int32_t	g_flags;
 extern char		*g_src_path;
 
+/*
+** parsing data and output
+*/
 bool				parse_flags(const char *flags_str);
 
 bool				parse_dir(const char *restrict path);
@@ -49,6 +52,45 @@ void				parse_file(const char *restrict path,
 
 void				parse_flags_output(const char *restrict path,
 						const CurrDir *restrict cd);
+
+/*
+** initialize:
+*/
+CurrDir				*init_only_file(const char *restrict path);
+CurrDir				*init_curr_dir(const char *restrict path,
+						const bool force_open_dir);
+extern InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
+						const struct stat *restrict stat,
+						const struct dirent *restrict dirent);
+
+/*
+** initialize checks:
+*/
+bool				init_lstat_check(const char *restrict path,
+						struct stat *restrict buff);
+bool				init_lstat_check_no_errno(const char *restrict path,
+						struct stat *restrict buff);
+
+/*
+** initialize utils:
+*/
+struct dirent		*dup_dirent(const struct dirent *restrict src);
+struct stat			*dup_stat(const struct stat *restrict src);
+
+/*
+** sort callback-comparators
+*/
+int32_t				sort_ascii_tab_cmp(const void *a, const void *b);
+int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
+int32_t				sort_time_stats_cmp(const void *a, const void *b);
+
+/*
+** quick sort
+*/
+extern void			q_sort(void *base,
+						const size_t n_el,
+						const size_t width,
+						int32_t (*comparator)(const void*, const void*));
 
 /*
 ** PLF - Print Long Format
@@ -71,38 +113,10 @@ char				*plf_get_permission(char *restrict perm_str,
 void				pdf_objs(const uint32_t n_objs,
 						const InDirObject *const objs);
 
-CurrDir				*init_only_file(const char *restrict path);
-CurrDir				*init_curr_dir(const char *restrict path,
-						const bool force_open_dir);
-extern InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
-						const struct stat *restrict stat,
-						const struct dirent *restrict dirent);
-
-bool				init_lstat_check(const char *restrict path,
-						struct stat *restrict buff);
-bool				init_lstat_check_no_errno(const char *restrict path,
-						struct stat *restrict buff);
-
 /*
-** Sort callback-comparators.
+** free
 */
-int32_t				sort_ascii_tab_cmp(const void *a, const void *b);
-int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
-int32_t				sort_time_stats_cmp(const void *a, const void *b);
-
-/*
-** quick sort
-*/
-extern void			q_sort(void *base,
-						const size_t n_el,
-						const size_t width,
-						int32_t (*comparator)(const void*, const void*));
-
-struct dirent		*dup_dirent(const struct dirent *restrict src);
-struct stat			*dup_stat(const struct stat *restrict src);
-
 void				*free_curr_dir(CurrDir **curr_dir);
 void				*free_curr_in_dir_obj(InDirObject *obj);
-void				*free_valid_args(char **args, const int32_t max);
 
 #endif
