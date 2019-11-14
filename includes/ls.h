@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/14 14:05:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 16:07:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				parse_flags_output(const char *restrict path,
 ** initialize:
 */
 CurrDir				*init_only_file(const char *restrict path);
-CurrDir				*init_curr_dir(const char *restrict path,
+CurrDir				*init_curr_dir(const char *path,
 						const bool force_open_dir);
 extern InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
 						const struct stat *restrict stat,

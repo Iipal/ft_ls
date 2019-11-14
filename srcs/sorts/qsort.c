@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 20:20:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 16:22:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static ssize_t	s_qs_partition(register const __v2di pi)
 	return (i[0]);
 }
 
-static void	s_qs_recursive(register const __v2di pi)
+static void		s_qs_recursive(register const __v2di pi)
 {
 	ssize_t	pivot;
 
@@ -44,10 +44,10 @@ static void	s_qs_recursive(register const __v2di pi)
 	s_qs_recursive((__v2di) { pivot + 1L, pi[1] });
 }
 
-inline void	q_sort(void *base,
-				const size_t n_el,
-				const size_t width,
-				int32_t (*comparator)(const void*, const void*))
+inline void		q_sort(void *base,
+					const size_t n_el,
+					const size_t width,
+					int32_t (*comparator)(const void*, const void*))
 {
 	if (2 > n_el)
 		return ;

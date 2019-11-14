@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 02:38:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/08 02:38:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 16:14:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stddef.h>
 
-char	*u_full_path(char *restrict dst,
-			const char *restrict dir_path,
-			const char *restrict file);
+char	*u_full_path(char *dst,
+			const char *dir_path,
+			const char *file);
 
 #endif

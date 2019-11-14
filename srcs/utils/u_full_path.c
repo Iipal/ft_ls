@@ -6,15 +6,15 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 18:35:36 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/11 17:36:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 16:14:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-char	*u_full_path(char *restrict dst,
-			const char *restrict dir_path,
-			const char *restrict file)
+char	*u_full_path(char *dst,
+			const char *dir_path,
+			const char *file)
 {
 	register size_t	dir_path_len;
 

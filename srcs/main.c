@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/14 14:06:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 16:28:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,27 @@ static t_list	*s_pre_parse_errno_args(int32_t ac, char **av)
 	return (out);
 }
 
-static void	s_del_list(void *data, size_t size)
+static void		s_del_list(void *data, size_t size)
 {
 	(void)size;
 	free(data);
 }
 
-static int	s_parse_args(int ac, char **av)
+static int		s_parse_args(int ac, char **av)
 {
 	t_list	*args;
 	t_list	*save;
 	int32_t	i;
 
+	i = -1;
 	qsort(av, ac, sizeof(char*), sort_ascii_tab_cmp);
 	if (!(args = s_pre_parse_errno_args(ac, av)))
 		return (g_main_ret = EXIT_FAILURE);
-	i = -1;
 	save = args;
 	while (args && g_valid_args_counter > ++i)
 	{
-		g_src_path = (char*)args->data;
+		FREE(g_src_path, free);
+		g_src_path = ft_strndup(args->data, args->data_size);
 		if (1 < ac)
 			ft_printf("%s:\n", g_src_path);
 		if (!parse_dir(g_src_path))
@@ -71,10 +72,11 @@ static int	s_parse_args(int ac, char **av)
 		args = args->next;
 	}
 	ft_lstdel(&save, s_del_list);
+	FREE(g_src_path, free);
 	return (EXIT_SUCCESS);
 }
 
-int			main(int argc, char *argv[])
+int				main(int argc, char *argv[])
 {
 	--argc;
 	++argv;

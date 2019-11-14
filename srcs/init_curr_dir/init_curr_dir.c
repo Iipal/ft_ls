@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 14:34:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/14 16:24:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ static CurrDir	*s_precalc_in_dir_objs(DIR *restrict dir)
 	if (total_n_objs && !out->n_objs)
 		total_n_objs = 1;
 	MEM(InDirObject, out->objs, total_n_objs, E_ALLOC);
+	rewinddir(dir);
 	return (out);
 }
 
-CurrDir			*init_curr_dir(const char *restrict path,
+CurrDir			*init_curr_dir(const char *path,
 					const bool force_open_dir)
 {
 	CurrDir				*out;
@@ -45,18 +46,18 @@ CurrDir			*init_curr_dir(const char *restrict path,
 		return (init_only_file(path));
 	IFR(!(t.dir = opendir(path)), NULL);
 	NO_F(out = s_precalc_in_dir_objs(t.dir));
-	closedir(t.dir);
-	t.dir = opendir(path);
+	MEM(char, t.tmp, 256, E_ALLOC);
 	while ((t.dirent = readdir(t.dir)))
-	{
-		IFDOR(!init_lstat_check(u_full_path(t.path, path, t.dirent->d_name),
-			&t.stat), free_curr_dir(&out), NULL);
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == t.dirent->d_name[0]))
+		{
+			IFDOR(!init_lstat_check(u_full_path(t.tmp, path, t.dirent->d_name),
+				&t.stat), free_curr_dir(&out), NULL);
 			if (!(t.curr = init_curr_in_dir_obj(&out->objs[++i],
-								&t.stat, t.dirent)))
+					&t.stat, t.dirent)))
 				return (free_curr_dir(&out));
-	}
+		}
 	closedir(t.dir);
+	FREE(t.tmp, free);
 	if (!out->n_objs)
 		out = free_curr_dir(&out);
 	return (out);
