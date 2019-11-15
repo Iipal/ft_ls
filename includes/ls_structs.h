@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/14 16:22:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/15 16:17:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,31 @@ struct			s_curr_dir_init
 
 CURR_DIR;
 CURR_DIR_INIT;
+
+struct	s_2si
+{
+	int	x;
+	int	y;
+};
+
+struct	s_2sl
+{
+	long	x;
+	long	y;
+};
+
+struct	s_2ul
+{
+	unsigned long	x;
+	unsigned long	y;
+};
+
+# define S2SI typedef struct s_2si s2si
+# define S2SL typedef struct s_2sl s2sl
+# define S2UL typedef struct s_2ul s2ul
+
+S2SI;
+S2SL;
+S2UL;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/15 15:17:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/15 16:16:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,32 @@ static size_t	g_qs_width;
 static void		*g_qs_base;
 int32_t			(*g_qs_comparator)(const void*, const void*);
 
-typedef long long t_v2di __attribute__ ((__vector_size__(16),__aligned__));
-
-static ssize_t	s_qs_partition(register const t_v2di pi)
+static ssize_t	s_qs_partition(register const s2sl pi)
 {
-	register t_v2di	i;
+	register s2sl	i;
 	void			*pivot;
 
-	i = (t_v2di) { pi[0] - 1L, pi[0] - 1L};
-	pivot = ft_memdup(g_qs_base + (pi[1] * g_qs_width), g_qs_width);
-	while (pi[1] - 1L >= ++i[1])
-		if (0 > g_qs_comparator(g_qs_base + (i[1] * g_qs_width), pivot))
-			ft_memswap(g_qs_base + (++i[0] * g_qs_width),
-				g_qs_base + (i[1] * g_qs_width), g_qs_width);
-	ft_memswap(g_qs_base + (++i[0] * g_qs_width),
-		g_qs_base + (pi[1] * g_qs_width), g_qs_width);
+	i = (s2sl) { pi.x - 1L, pi.x - 1L};
+	pivot = ft_memdup(g_qs_base + (pi.y * g_qs_width), g_qs_width);
+	while (pi.y - 1L >= ++i.y)
+		if (0 > g_qs_comparator(g_qs_base + (i.y * g_qs_width), pivot))
+			ft_memswap(g_qs_base + (++i.x * g_qs_width),
+				g_qs_base + (i.y * g_qs_width), g_qs_width);
+	ft_memswap(g_qs_base + (++i.x * g_qs_width),
+		g_qs_base + (pi.y * g_qs_width), g_qs_width);
 	free(pivot);
-	return (i[0]);
+	return (i.x);
 }
 
-static void		s_qs_recursive(register const t_v2di pi)
+static void		s_qs_recursive(register const s2sl pi)
 {
 	ssize_t	pivot;
 
-	if (pi[0] > pi[1])
+	if (pi.x > pi.y)
 		return ;
 	pivot = s_qs_partition(pi);
-	s_qs_recursive((t_v2di) { pi[0], pivot - 1L });
-	s_qs_recursive((t_v2di) { pivot + 1L, pi[1] });
+	s_qs_recursive((s2sl) { pi.x, pivot - 1L });
+	s_qs_recursive((s2sl) { pivot + 1L, pi.y });
 }
 
 inline void		q_sort(void *base,
@@ -56,5 +54,5 @@ inline void		q_sort(void *base,
 	g_qs_base = base;
 	g_qs_width = width;
 	g_qs_comparator = comparator;
-	s_qs_recursive((__v2di) { 0, n_el - 1L });
+	s_qs_recursive((s2sl) { 0, n_el - 1L });
 }
