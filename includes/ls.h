@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/14 16:07:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/15 19:09:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # define _GNU_SOURCE
 
+# include "libstructs.h"
 # include "libft.h"
 # include "ft_printf.h"
+
 # include "ls_errno.h"
 # include "ls_flags.h"
 # include "ls_structs.h"

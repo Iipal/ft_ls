@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/15 15:12:17 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/15 19:09:43 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
 CFLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes \
 	-I $(CURDIR)/libft/includes \
+	-I $(CURDIR)/libstructs \
 	-I $(CURDIR)/libftprintf/includes
 
 SRCS := $(abspath $(wildcard $(shell find srcs -name "*.c")))

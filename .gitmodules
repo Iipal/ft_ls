@@ -4,3 +4,6 @@
 [submodule "libftprintf"]
 	path = libftprintf
 	url = git@github.com:Iipal/ft_printf-42.git
+[submodule "libstructs"]
+	path = libstructs
+	url = git@github.com:Iipal/libstructs.git
