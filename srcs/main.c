@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/15 16:01:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/16 19:52:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int		s_parse_args(int ac, char **av)
 	int32_t	i;
 
 	i = -1;
-	qsort(av, ac, sizeof(char*), sort_ascii_tab_cmp);
+	q_sort(av, ac, sizeof(char*), sort_ascii_tab_cmp);
 	if (!(args = s_pre_parse_errno_args(ac, av)))
 		return (g_main_ret = EXIT_FAILURE);
 	save = args;
