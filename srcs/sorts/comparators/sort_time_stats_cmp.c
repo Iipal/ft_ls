@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/15 15:17:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/16 19:43:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int32_t	sort_time_stats_cmp(const void *a, const void *b)
 
 	cmp = a_mtime - b_mtime;
 	if (!cmp)
-		return (is_rev ? 1 : -1);
+		return (sort_ascii_dirents_cmp(a, b));
 	return (is_rev ? (cmp) : -(cmp));
 }
