@@ -1,0 +1,99 @@
+make[2]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+make[2]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+In file included from /home/ipal/Code/ft_ls/srcs/parse_flags/parse_flags.c:13:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+In file included from /home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_flags_output.c:13:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+In file included from /home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:13:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+In file included from /home/ipal/Code/ft_ls/srcs/parse_curr_dir/pdf.c:13:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+In file included from /home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.c:13:
+In file included from /home/ipal/Code/ft_ls/includes/ls_long_format_listing.h:20:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+In file included from /home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_dir.c:13:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+In file included from /home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_get_data.c:13:
+In file included from /home/ipal/Code/ft_ls/includes/ls_long_format_listing.h:20:
+/home/ipal/Code/ft_ls/includes/ls.h:16:10: error: macro name is a reserved identifier [-Werror,-Wreserved-id-macro]
+# define _GNU_SOURCE
+         ^
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.c:23:23: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+        FREE(buff_path, free);
+                             ^
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.c:25:18: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+        FREE(buff, free);
+                        ^
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.c:42:22: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+                FREE(fmt_str, free);
+                                   ^
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.c:53:39: error: implicit conversion changes signedness: 'const int32_t' (aka 'const int') to 'uint32_t' (aka 'unsigned int') [-Werror,-Wsign-conversion]
+        fmt_str = plf_fmt_str(plf_width_spec(n_objs, objs, &total));
+                              ~~~~~~~~~~~~~~ ^~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.c:57:21: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+        FREE(fmt_str, free);
+                           ^
+6 errors generated.
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf.o] Error 1
+make[1]: *** Waiting for unfinished jobs....
+/home/ipal/Code/ft_ls/srcs/parse_flags/parse_flags.c:42:25: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+                        E_ILLEGAL(*flags_str);
+                                             ^
+2 errors generated.
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_flags/parse_flags.o] Error 1
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:29:52: error: implicit conversion changes signedness: '__nlink_t' (aka 'unsigned long') to 'int64_t' (aka 'long') [-Werror,-Wsign-conversion]
+                ws_temp.st_nlink_width = ft_digits(objs[i].stat->st_nlink);
+                                         ~~~~~~~~~ ~~~~~~~~~~~~~~^~~~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:29:28: error: implicit conversion loses integer precision: 'size_t' (aka 'unsigned long') to 'int32_t' (aka 'int') [-Werror,-Wshorten-64-to-32]
+                ws_temp.st_nlink_width = ft_digits(objs[i].stat->st_nlink);
+                                       ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:32:27: error: implicit conversion loses integer precision: 'size_t' (aka 'unsigned long') to 'int32_t' (aka 'int') [-Werror,-Wshorten-64-to-32]
+                ws_temp.st_size_width = ft_digits(objs[i].stat->st_size);
+                                      ~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:54:36: error: implicit conversion changes signedness: 'size_t' (aka 'unsigned long') to 'int64_t' (aka 'long') [-Werror,-Wsign-conversion]
+        const size_t    d_name_w = ft_digits(g_max_name_len);
+                                   ~~~~~~~~~ ^~~~~~~~~~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:59:46: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+                + d_nlink_w + d_size_w + d_name_w, E_ALLOC);
+                                                           ^
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.c:66:38: error: implicit conversion loses integer precision: 'size_t' (aka 'unsigned long') to 'int32_t' (aka 'int') [-Werror,-Wshorten-64-to-32]
+        s_fmtcat_int(fmt_str + curr_offset, g_max_name_len);
+        ~~~~~~~~~~~~                        ^~~~~~~~~~~~~~
+7 errors generated.
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_fmt_str.o] Error 1
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_dir.c:19:39: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+        NO_F(cd = init_curr_dir(path, false));
+                                             ^
+2 errors generated.
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_flags_output.c:47:25: error: implicit conversion changes signedness: 'const int32_t' (aka 'const int') to 'size_t' (aka 'unsigned long') [-Werror,-Wsign-conversion]
+                        q_sort(cd->objs, cd->n_objs,
+                        ~~~~~~           ~~~~^~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_flags_output.c:50:25: error: implicit conversion changes signedness: 'const int32_t' (aka 'const int') to 'size_t' (aka 'unsigned long') [-Werror,-Wsign-conversion]
+                        q_sort(cd->objs, cd->n_objs,
+                        ~~~~~~           ~~~~^~~~~~
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_flags_output.c:58:29: error: implicit conversion changes signedness: 'const int32_t' (aka 'const int') to 'uint32_t' (aka 'unsigned int') [-Werror,-Wsign-conversion]
+                s_check_subdirs(path, cd->n_objs, cd->objs);
+                ~~~~~~~~~~~~~~~       ~~~~^~~~~~
+4 errors generated.
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_dir.o] Error 1
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_curr_dir/parse_flags_output.o] Error 1
+1 error generated.
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_curr_dir/pdf.o] Error 1
+/home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_get_data.c:39:53: error: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Werror,-Wextra-semi-stmt]
+        IFDOR(!date, DEF_STRERR(ERR, "plf_get_date"), NULL);
+                                                           ^
+2 errors generated.
+make[1]: *** [Makefile:60: /home/ipal/Code/ft_ls/srcs/parse_curr_dir/print_long_format/plf_get_data.o] Error 1
+make: *** [Makefile:54: multi] Error 2

@@ -6,18 +6,18 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/16 21:01:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/18 01:22:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	pdf_objs(const uint32_t n_objs, const InDirObject *restrict objs)
+void	pdf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? 0xA : 0x20);
-	uint32_t		i;
+	int32_t			i;
 
-	i = ~0U;
+	i = -1;
 	while (n_objs > ++i)
 	{
 		ft_printf("%s", objs[i].dirent->d_name);

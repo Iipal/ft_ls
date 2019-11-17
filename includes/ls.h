@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/16 20:16:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/18 01:21:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include "ls_utils.h"
 
 # ifdef __APPLE__
-#  define MY_BLCK_T typedef blkcnt_t t_blkcnt_t;
-#  define MY_TIME_T typedef time_t t_time_t;
+#  define MY_BLCK_T typedef blkcnt_t t_blkcnt_t
+#  define MY_TIME_T typedef time_t t_time_t
 # else
-#  define MY_BLCK_T typedef __blkcnt_t t_blkcnt_t;
-#  define MY_TIME_T typedef __time_t t_time_t;
+#  define MY_BLCK_T typedef __blkcnt_t t_blkcnt_t
+#  define MY_TIME_T typedef __time_t t_time_t
 # endif
 
 # include <stdio.h>
@@ -98,7 +98,7 @@ extern void			q_sort(void *base,
 /*
 ** PLF - Print Long Format
 */
-void				plf_objs(const uint32_t n_objs,
+void				plf_objs(const int32_t n_objs,
 						const InDirObject *restrict objs);
 void				plf_obj(char *restrict fmt_str,
 						const char *restrict path,
@@ -113,7 +113,7 @@ char				*plf_get_permission(char *restrict perm_str,
 /*
 ** PDF - Print Default Format
 */
-void				pdf_objs(const uint32_t n_objs,
+void				pdf_objs(const int32_t n_objs,
 						const InDirObject *const objs);
 
 /*

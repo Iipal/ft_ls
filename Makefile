@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/17 22:46:46 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/18 01:16:22 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ endif
 NAME := ft_ls
 NPWD := $(CURDIR)/$(NAME)
 
-CC_BASE := clang
+CC_BASE := clang -march=native -mtune=native
 
 CC := $(CC_BASE) -Ofast -pipe -flto -fpic
 CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
 
-CFLAGS := -Wall -Wextra -Werror -Wunused
+CFLAGS := -Wall -Wextra -Werror -Wunused -Weverything
 IFLAGS := -I $(CURDIR)/includes \
 	-I $(CURDIR)/libft/includes \
 	-I $(CURDIR)/libstructs \
@@ -49,12 +49,15 @@ INVERT := \033[7m
 SUCCESS := [$(GREEN)✓$(WHITE)]
 SUCCESS2 := [$(INVERT)$(GREEN)✓$(WHITE)]
 
+.PHONY: all multi
+multi:
+	@$(MAKE) -j8 all
+
 all: $(NAME)
 
 $(OBJ): %.o: %.c
-	@$(ECHO) -n ' $@: '
+	@$(ECHO) ' $| $@ '
 	@$(CC) -c $(CFLAGS) $(LIBSINC) $(IFLAGS) $< -o $@
-	@$(ECHO) "$(SUCCESS)"
 
 $(LIBFT):
 	@$(LMAKE)
@@ -104,4 +107,4 @@ norme_all:
 	@$(LFPMAKE) norme
 	@make norme
 
-.PHONY: re fclean clean all norme_all norme del pre debug debug_all
+.PHONY: re fclean clean norme_all norme del pre debug debug_all
