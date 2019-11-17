@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/15 19:09:43 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/17 22:46:46 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NPWD := $(CURDIR)/$(NAME)
 
 CC_BASE := clang
 
-CC := $(CC_BASE) -Ofast -pipe -flto
+CC := $(CC_BASE) -Ofast -pipe -flto -fpic
 CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
 
 CFLAGS := -Wall -Wextra -Werror -Wunused

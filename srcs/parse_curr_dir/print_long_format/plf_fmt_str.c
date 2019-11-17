@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:51:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/16 21:15:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,22 @@ char				*plf_fmt_str(const WidthSpecific ws)
 {
 	const size_t	d_nlink_w = ft_digits(ws.st_nlink_width);
 	const size_t	d_size_w = ft_digits(ws.st_size_width);
+	const size_t	d_name_w = ft_digits(g_max_name_len);
 	size_t			curr_offset;
 	char			*fmt_str;
 
-	MEM(char, fmt_str, STR_LEN_DEFAULT_FMT + d_nlink_w + d_size_w, E_ALLOC);
+	MEM(char, fmt_str, STR_LEN_DEFAULT_FMT
+		+ d_nlink_w + d_size_w + d_name_w, E_ALLOC);
 	ft_strcpy(fmt_str, "%s  %");
 	curr_offset = sizeof("%s  %") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.st_nlink_width);
 	curr_offset += d_nlink_w;
-	ft_strcpy(fmt_str + curr_offset, "d %s  %s  %");
-	curr_offset += sizeof("d %s  %s  %") - 1UL;
+	ft_strcpy(fmt_str + curr_offset, "d %.");
+	curr_offset += sizeof("d %-") - 1UL;
+	s_fmtcat_int(fmt_str + curr_offset, g_max_name_len);
+	curr_offset += d_name_w;
+	ft_strcpy(fmt_str + curr_offset, "s %s %");
+	curr_offset += sizeof("s %s %") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_width);
 	curr_offset += d_size_w;
 	ft_strcpy(fmt_str + curr_offset, "d %s %s");

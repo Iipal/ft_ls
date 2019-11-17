@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/06 18:41:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/16 22:08:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		plf_obj(char *restrict fmt_str,
 		plf_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat->st_ctime), path);
 	if (S_ISLNK(obj->stat->st_mode))
 		s_print_link(path);
-	ft_putchar('\n');
+	ft_printf("\n");
 	if (is_free_fmt)
 		FREE(fmt_str, free);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/15 19:09:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/16 20:16:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ MY_TIME_T;
 
 extern int32_t	g_flags;
 extern char		*g_src_path;
+extern size_t	g_max_name_len;
 
 /*
 ** parsing data and output
