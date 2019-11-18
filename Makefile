@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/18 15:41:27 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/18 16:01:39 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,11 @@ OBJS := $(SRCS:.c=.o)
 
 LIBFT := $(CURDIR)/libft/libft.a
 LMAKE := make -C libft --no-print-directory
+LMAKE_DEP := make -C libft --no-print-directory $(MAKECMDGOALS)
+
 LIBFTPRINTF := $(CURDIR)/libftprintf/libftprintf.a
 LFPMAKE := make -C libftprintf --no-print-directory
+LFPMAKE_DEP := make -C libftprintf --no-print-directory $(MAKECMDGOALS)
 
 DEL := rm -rf
 
@@ -68,16 +71,16 @@ $(OBJS): %.o: %.c
 	@$(ECHO) " | $@: $(SUCCESS)"
 
 $(LIBFT):
-	@$(LMAKE)
+	@$(LMAKE_DEP)
 
 $(LIBFTPRINTF):
-	@$(LFPMAKE)
+	@$(LFPMAKE_DEP)
 
 STATUS:
 	@$(info / compiled: $(NPWD): $(SUCCESS_NO_CLR))
 	@$(info | flags: $(CFLAGS))
 
-debug_all: pre
+debug_all: fclean multi
 debug: multi
 
 clean:
@@ -85,6 +88,7 @@ clean:
 	@$(LMAKE) clean
 	@$(LFPMAKE) clean
 fclean: clean
+	@$(info fclean ft_ls)
 	@$(LMAKE) fclean
 	@$(LFPMAKE) fclean
 	@$(DEL) $(NAME)
@@ -94,8 +98,12 @@ del:
 	@$(DEL) $(OBJS)
 	@$(DEL) $(NAME)
 
+del_libs:
+	@$(DEL) $(LIBFT)
+	@$(DEL) $(LIBFTPRINTF)
+
 pre: del multi
-re: fclean multi
+re: del del_libs multi
 
 norme:
 	@$(ECHO) "$(INVERT)norminette$(WHITE) for $(NPWD):"
