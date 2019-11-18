@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/18 01:16:22 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/18 15:41:27 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,27 +16,27 @@ ifeq ($(UNAME_S),Linux)
 	ECHO += -e
 endif
 
-NAME := ft_ls
+NAME := $(notdir $(CURDIR))
 NPWD := $(CURDIR)/$(NAME)
 
-CC_BASE := clang -march=native -mtune=native
+CC = clang
 
-CC := $(CC_BASE) -Ofast -pipe -flto -fpic
-CC_DEBUG := $(CC_BASE) -glldb -D DEBUG
+CFLAGS := -march=native -mtune=native -Ofast -pipe -flto -fpic
+CFLAGS_DEBUG := -glldb -D DEBUG
 
-CFLAGS := -Wall -Wextra -Werror -Wunused -Weverything
+CC_WARNINGS_FLAGS := -Wall -Wextra -Werror -Wunused
 IFLAGS := -I $(CURDIR)/includes \
 	-I $(CURDIR)/libft/includes \
 	-I $(CURDIR)/libstructs \
 	-I $(CURDIR)/libftprintf/includes
 
-SRCS := $(abspath $(wildcard $(shell find srcs -name "*.c")))
-OBJ := $(SRCS:.c=.o)
+SRCS := $(shell find srcs -name "*.c")
+OBJS := $(SRCS:.c=.o)
 
 LIBFT := $(CURDIR)/libft/libft.a
-LMAKE := make -C libft
+LMAKE := make -C libft --no-print-directory
 LIBFTPRINTF := $(CURDIR)/libftprintf/libftprintf.a
-LFPMAKE := make -C libftprintf
+LFPMAKE := make -C libftprintf --no-print-directory
 
 DEL := rm -rf
 
@@ -50,14 +50,22 @@ SUCCESS := [$(GREEN)✓$(WHITE)]
 SUCCESS2 := [$(INVERT)$(GREEN)✓$(WHITE)]
 
 .PHONY: all multi
-multi:
-	@$(MAKE) -j8 all
+multi: $(LIBFT) $(LIBFTPRINTF)
+ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
+	@$(MAKE) -j 3 -Otarget --no-print-directory CFLAGS="$(CFLAGS_DEBUG)" all
+else
+	@$(MAKE) -j 3 -Otarget --no-print-directory all
+endif
 
 all: $(NAME)
 
-$(OBJ): %.o: %.c
-	@$(ECHO) ' $| $@ '
-	@$(CC) -c $(CFLAGS) $(LIBSINC) $(IFLAGS) $< -o $@
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFTPRINTF) $(LIBFT) $(IFLAGS) -o $(NAME)
+	@$(MAKE) -q STATUS --no-print-directory
+
+$(OBJS): %.o: %.c
+	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
+	@$(ECHO) " | $@: $(SUCCESS)"
 
 $(LIBFT):
 	@$(LMAKE)
@@ -65,40 +73,32 @@ $(LIBFT):
 $(LIBFTPRINTF):
 	@$(LFPMAKE)
 
-$(NAME): $(LIBFT) $(LIBFTPRINTF) $(OBJ)
-	@$(ECHO) -n ' <q.p> | $(NPWD): '
-	@$(CC) $(OBJ) $(LIBFT) $(LIBFTPRINTF) -o $(NAME)
-	@$(ECHO) "$(SUCCESS2)"
+STATUS:
+	@$(info / compiled: $(NPWD): $(SUCCESS_NO_CLR))
+	@$(info | flags: $(CFLAGS))
 
-del:
-	@$(DEL) $(OBJ)
-	@$(DEL) $(NAME)
-
-pre: del all
-	@$(ECHO) "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
-
-set_cc_debug:
-	@$(eval CC=$(CC_DEBUG))
-debug_all: set_cc_debug pre
-	@$(ECHO) "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
-debug: set_cc_debug all
-	@$(ECHO) "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+debug_all: pre
+debug: multi
 
 clean:
-	@$(DEL) $(OBJ)
+	@$(DEL) $(OBJS)
 	@$(LMAKE) clean
 	@$(LFPMAKE) clean
-
 fclean: clean
 	@$(LMAKE) fclean
 	@$(LFPMAKE) fclean
 	@$(DEL) $(NAME)
-	@$(ECHO) "$(INVERT)$(RED)deleted$(WHITE)$(INVERT): $(NPWD)$(WHITE)"
+	@$(ECHO) "$(INVERT)deleted$(WHITE): $(NPWD)"
 
-re: fclean all
+del:
+	@$(DEL) $(OBJS)
+	@$(DEL) $(NAME)
+
+pre: del multi
+re: fclean multi
 
 norme:
-	@$(ECHO) "$(INVERT)norminette for $(GREEN)$(NAME)$(WHITE)$(INVERT):$(WHITE)"
+	@$(ECHO) "$(INVERT)norminette$(WHITE) for $(NPWD):"
 	@norminette includes/
 	@norminette $(SRCS)
 
@@ -107,4 +107,4 @@ norme_all:
 	@$(LFPMAKE) norme
 	@make norme
 
-.PHONY: re fclean clean norme_all norme del pre debug debug_all
+.PHONY: re fclean clean norme_all norme del pre debug debug_all STATUS
