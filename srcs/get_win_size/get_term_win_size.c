@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 17:58:24 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 18:14:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 01:09:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ inline bool	get_term_win_size(void)
 
 	if (0 > ioctl(STDOUT_FILENO, TIOCGWINSZ, &w_size))
 	{
+		if (!isatty(fileno(stdout)))
+			return (true);
 		DEF_STRERR(ERR, "get_term_win_size");
 		return (false);
 	}
