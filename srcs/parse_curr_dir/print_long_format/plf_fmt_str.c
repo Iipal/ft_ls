@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 14:55:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 15:06:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,32 +54,28 @@ static inline void	s_fmtcat_int(char *restrict dst, int32_t num)
 
 char				*plf_fmt_str(const WidthSpecific ws)
 {
-	const WidthSpecific	dgts = (WidthSpecific) { ft_digits(ws.st_nlnk_w),
-												ft_digits(ws.st_size_w),
-												ft_digits(ws.pw_name_w),
-												ft_digits(ws.gr_name_w) };
-	size_t			curr_offset;
 	char			*fmt_str;
+	size_t			curr_offset;
 
-	MEM(char, fmt_str, STR_LEN_DEFAULT_FMT
-		+ dgts.st_nlnk_w + dgts.st_size_w + dgts.pw_name_w + dgts.gr_name_w,
-		E_ALLOC);
+	fmt_str = ft_strnew(STR_LEN_DEFAULT_FMT + ft_digits(ws.st_nlnk_w)
+				+ ft_digits(ws.st_size_w) + ft_digits(ws.pw_name_w)
+				+ ft_digits(ws.gr_name_w));
 	ft_strcpy(fmt_str, "%s  %");
 	curr_offset = sizeof("%s  %") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.st_nlnk_w);
-	curr_offset += dgts.st_nlnk_w;
+	curr_offset += ft_digits(ws.st_nlnk_w);
 	ft_strcpy(fmt_str + curr_offset, "d %-");
 	curr_offset += sizeof("d %-") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.pw_name_w);
-	curr_offset += dgts.pw_name_w;
+	curr_offset += ft_digits(ws.pw_name_w);
 	ft_strcpy(fmt_str + curr_offset, "s  %-");
 	curr_offset += sizeof("s  %-") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.gr_name_w);
-	curr_offset += dgts.gr_name_w;
+	curr_offset +=  ft_digits(ws.gr_name_w);
 	ft_strcpy(fmt_str + curr_offset, "s  %");
 	curr_offset += sizeof("s  %") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_w);
-	curr_offset += dgts.st_size_w;
+	curr_offset += ft_digits(ws.st_size_w);
 	ft_strcpy(fmt_str + curr_offset, "d %s %s");
 	return (fmt_str);
 }
