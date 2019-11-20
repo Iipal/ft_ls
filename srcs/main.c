@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 22:02:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 01:09:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int32_t	g_flags = 0;
 char	*g_src_path = NULL;
 size_t	g_max_name_len = 0UL;
-s2si	g_win_size;
+s2si	g_win_size = { 100, 100 };
 
 int32_t	g_main_ret = EXIT_SUCCESS;
 
@@ -95,7 +95,7 @@ int				main(int argc, char *argv[])
 			++argv;
 			--argc;
 		}
-		if (0 >= isatty(fileno(stdout)))
+		if (!isatty(fileno(stdout)))
 			SET_BIT(g_flags, BIT_1_ONE);
 		if (!argc)
 			g_main_ret = !parse_dir(g_src_path);

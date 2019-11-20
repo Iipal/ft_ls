@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 22:08:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 01:12:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 static inline __attribute__((__const__))
 s2si	s_get_current_items_output_format_size(const int32_t n_objs)
 {
-	const float	x = lroundf((float)g_win_size.x / (float)g_max_name_len);
-	const float	y = lroundf((float)n_objs / x + 1.0f);
-
-	return ((s2si) { x, y });
+	return ((s2si) { (float)g_win_size.x / (float)g_max_name_len,
+		(float)n_objs / ((float)g_win_size.x / (float)g_max_name_len) + 1.0f });
 }
 
 void	pdf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
-	s2si			items_fmt = s_get_current_items_output_format_size(n_objs);
+	const s2si		items_fmt = s_get_current_items_output_format_size(n_objs);
 	int32_t			curr_i;
 	s2si			i;
 
