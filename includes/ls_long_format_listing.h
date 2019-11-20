@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/16 21:15:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 14:35:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 
 # define STR_LEN_DATE        sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION  sizeof("drwxrwxrwx")
-# define STR_LEN_DEFAULT_FMT sizeof("%s  %d %-s  %s  %d %s %s")
+# define STR_LEN_DEFAULT_FMT sizeof("%s  %d %-s  %-s %d %s %s")
 
 struct			s_lf_spec_width
 {
-	int32_t	st_nlink_width;
-	int32_t	st_size_width;
+	size_t	st_nlnk_w;
+	size_t	st_size_w;
+	size_t	pw_name_w;
+	size_t	gr_name_w;
 };
 
 # define SPEC_FMT_HELPER typedef struct s_lf_spec_width WidthSpecific

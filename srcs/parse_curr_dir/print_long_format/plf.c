@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 01:02:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 14:04:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void		plf_obj(char *restrict fmt_str,
 
 void		plf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 {
-	char				*fmt_str;
-	t_blkcnt_t			total;
-	register int32_t	i;
+	char		*fmt_str;
+	t_blkcnt_t	total;
+	int32_t		i;
 
 	i = -1;
 	total = 0L;
 	fmt_str = plf_fmt_str(plf_width_spec(n_objs, objs, &total));
-	ft_printf("total %ld\n", total);
+	ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
 		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i], false);
 	FREE(fmt_str, free);

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 01:44:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 14:47:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,21 @@ WidthSpecific		plf_width_spec(const uint32_t n_objs,
 	uint32_t		i;
 
 	i = ~0U;
-	ws.st_nlink_width = 0;
-	ws.st_size_width = 0;
+	ws = (WidthSpecific) { 0 };
 	while (n_objs > ++i)
 	{
-		ws_temp.st_nlink_width = ft_digits(objs[i].stat->st_nlink);
-		if (ws_temp.st_nlink_width > ws.st_nlink_width)
-			ws.st_nlink_width = ws_temp.st_nlink_width;
-		ws_temp.st_size_width = ft_digits(objs[i].stat->st_size);
-		if (ws_temp.st_size_width > ws.st_size_width)
-			ws.st_size_width = ws_temp.st_size_width;
+		ws_temp.st_nlnk_w = ft_digits(objs[i].stat->st_nlink);
+		ws_temp.st_size_w = ft_digits(objs[i].stat->st_size);
+		ws_temp.pw_name_w = ft_strlen(getpwuid(objs[i].stat->st_uid)->pw_name);
+		ws_temp.gr_name_w = ft_strlen(getgrgid(objs[i].stat->st_gid)->gr_name);
+		if (ws_temp.st_nlnk_w > ws.st_nlnk_w)
+			ws.st_nlnk_w = ws_temp.st_nlnk_w;
+		if (ws_temp.st_size_w > ws.st_size_w)
+			ws.st_size_w = ws_temp.st_size_w;
+		if (ws_temp.pw_name_w > ws.pw_name_w)
+			ws.pw_name_w = ws_temp.pw_name_w;
+		if (ws_temp.gr_name_w > ws.gr_name_w)
+			ws.gr_name_w = ws_temp.gr_name_w;
 		if (!(S_ISDIR(objs[i].stat->st_mode)))
 			*total += objs[i].stat->st_blocks;
 	}
@@ -49,26 +54,32 @@ static inline void	s_fmtcat_int(char *restrict dst, int32_t num)
 
 char				*plf_fmt_str(const WidthSpecific ws)
 {
-	const size_t	d_nlink_w = ft_digits(ws.st_nlink_width);
-	const size_t	d_size_w = ft_digits(ws.st_size_width);
-	const size_t	d_name_w = ft_digits(g_max_name_len);
+	const WidthSpecific	dgts = (WidthSpecific) { ft_digits(ws.st_nlnk_w),
+												ft_digits(ws.st_size_w),
+												ft_digits(ws.pw_name_w),
+												ft_digits(ws.gr_name_w) };
 	size_t			curr_offset;
 	char			*fmt_str;
 
 	MEM(char, fmt_str, STR_LEN_DEFAULT_FMT
-		+ d_nlink_w + d_size_w + d_name_w, E_ALLOC);
+		+ dgts.st_nlnk_w + dgts.st_size_w + dgts.pw_name_w + dgts.gr_name_w,
+		E_ALLOC);
 	ft_strcpy(fmt_str, "%s  %");
 	curr_offset = sizeof("%s  %") - 1UL;
-	s_fmtcat_int(fmt_str + curr_offset, ws.st_nlink_width);
-	curr_offset += d_nlink_w;
+	s_fmtcat_int(fmt_str + curr_offset, ws.st_nlnk_w);
+	curr_offset += dgts.st_nlnk_w;
 	ft_strcpy(fmt_str + curr_offset, "d %-");
 	curr_offset += sizeof("d %-") - 1UL;
-	s_fmtcat_int(fmt_str + curr_offset, g_max_name_len);
-	curr_offset += d_name_w;
-	ft_strcpy(fmt_str + curr_offset, "s %s %");
-	curr_offset += sizeof("s %s %") - 1UL;
-	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_width);
-	curr_offset += d_size_w;
+	s_fmtcat_int(fmt_str + curr_offset, ws.pw_name_w);
+	curr_offset += dgts.pw_name_w;
+	ft_strcpy(fmt_str + curr_offset, "s %-");
+	curr_offset += sizeof("s %-") - 1UL;
+	s_fmtcat_int(fmt_str + curr_offset, ws.gr_name_w);
+	curr_offset += dgts.gr_name_w;
+	ft_strcpy(fmt_str + curr_offset, "s %");
+	curr_offset += sizeof("s %") - 1UL;
+	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_w);
+	curr_offset += dgts.st_size_w;
 	ft_strcpy(fmt_str + curr_offset, "d %s %s");
 	return (fmt_str);
 }
