@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 14:04:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 16:38:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		plf_obj(char *restrict fmt_str,
 {
 	ft_printf(fmt_str,
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->stat->st_mode),
-		obj->stat->st_nlink, getpwuid(obj->stat->st_uid)->pw_name,
+		obj->acl_ch, obj->stat->st_nlink, getpwuid(obj->stat->st_uid)->pw_name,
 		getgrgid(obj->stat->st_gid)->gr_name, obj->stat->st_size,
 		plf_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat->st_ctime), path);
 	if (S_ISLNK(obj->stat->st_mode))

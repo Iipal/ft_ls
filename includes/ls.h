@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/18 01:21:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 18:43:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # define _GNU_SOURCE
 
-# include "libstructs.h"
 # include "libft.h"
 # include "ft_printf.h"
 
@@ -34,8 +33,11 @@
 
 # include <stdio.h>
 # include <errno.h>
+# include <sys/xattr.h>
+# include <sys/acl.h>
 # include <sys/stat.h>
-# include <immintrin.h>
+# include <sys/ioctl.h>
+# include <math.h>
 
 MY_BLCK_T;
 MY_TIME_T;
@@ -43,6 +45,12 @@ MY_TIME_T;
 extern int32_t	g_flags;
 extern char		*g_src_path;
 extern size_t	g_max_name_len;
+extern s2si		g_win_size;
+
+/*
+**	Get terminal window size;
+*/
+extern bool			get_term_win_size(void);
 
 /*
 ** parsing data and output
