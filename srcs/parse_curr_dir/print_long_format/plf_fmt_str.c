@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 14:47:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 14:55:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ char				*plf_fmt_str(const WidthSpecific ws)
 	curr_offset += sizeof("d %-") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.pw_name_w);
 	curr_offset += dgts.pw_name_w;
-	ft_strcpy(fmt_str + curr_offset, "s %-");
-	curr_offset += sizeof("s %-") - 1UL;
+	ft_strcpy(fmt_str + curr_offset, "s  %-");
+	curr_offset += sizeof("s  %-") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.gr_name_w);
 	curr_offset += dgts.gr_name_w;
-	ft_strcpy(fmt_str + curr_offset, "s %");
-	curr_offset += sizeof("s %") - 1UL;
+	ft_strcpy(fmt_str + curr_offset, "s  %");
+	curr_offset += sizeof("s  %") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_w);
 	curr_offset += dgts.st_size_w;
 	ft_strcpy(fmt_str + curr_offset, "d %s %s");
