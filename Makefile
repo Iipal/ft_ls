@@ -6,15 +6,22 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/13 10:24:13 by tmaluh            #+#    #+#              #
-#    Updated: 2019/11/18 16:16:57 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/11/20 14:47:29 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ECHO := echo
+MAKE := make
+
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	ECHO += -e
+ECHO += -e
 endif
+ifeq ($(UNAME_S),Darwin)
+MAKE := ~/.brew/bin/gmake
+endif
+
+MAKE += -Otarget --no-print-directory
 
 NAME := $(notdir $(CURDIR))
 NPWD := $(CURDIR)/$(NAME)
@@ -34,12 +41,12 @@ SRCS := $(shell find srcs -name "*.c")
 OBJS := $(SRCS:.c=.o)
 
 LIBFT := $(CURDIR)/libft/libft.a
-LMAKE := make -C libft --no-print-directory
-LMAKE_DEP := make -C libft --no-print-directory $(MAKECMDGOALS)
+LMAKE := $(MAKE) -C libft
+LMAKE_DEP := $(MAKE) -C libft $(MAKECMDGOALS)
 
 LIBFTPRINTF := $(CURDIR)/libftprintf/libftprintf.a
-LFPMAKE := make -C libftprintf --no-print-directory
-LFPMAKE_DEP := make -C libftprintf --no-print-directory $(MAKECMDGOALS)
+LFPMAKE := $(MAKE) -C libftprintf
+LFPMAKE_DEP := $(MAKE) -C libftprintf $(MAKECMDGOALS)
 
 DEL := rm -rf
 
@@ -55,16 +62,16 @@ SUCCESS2 := [$(INVERT)$(GREEN)✓$(WHITE)]
 .PHONY: all multi
 multi: $(LIBFT) $(LIBFTPRINTF)
 ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
-	@$(MAKE) -j -Otarget --no-print-directory CFLAGS="$(CFLAGS_DEBUG)" all
+	@$(MAKE) -j CFLAGS="$(CFLAGS_DEBUG)" all
 else
-	@$(MAKE) -j -Otarget --no-print-directory all
+	@$(MAKE) -j all
 endif
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFTPRINTF) $(LIBFT) $(IFLAGS) -o $(NAME)
-	@$(MAKE) -q STATUS --no-print-directory
+	@$(MAKE) -q STATUS
 
 $(OBJS): %.o: %.c
 	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
