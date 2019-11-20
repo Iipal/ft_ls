@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 20:12:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 22:08:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 static inline __attribute__((__const__))
 s2si	s_get_current_items_output_format_size(const int32_t n_objs)
 {
-	return ((s2si) { g_win_size.x / g_max_name_len,
-			n_objs / (g_win_size.x / g_max_name_len) + 1 });
+	const float	x = lroundf((float)g_win_size.x / (float)g_max_name_len);
+	const float	y = lroundf((float)n_objs / x + 1.0f);
+
+	return ((s2si) { x, y });
 }
 
 void	pdf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
-	const s2si		items_fmt = s_get_current_items_output_format_size(n_objs);
+	s2si			items_fmt = s_get_current_items_output_format_size(n_objs);
 	int32_t			curr_i;
 	s2si			i;
 
@@ -35,7 +37,7 @@ void	pdf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 			if (n_objs <= curr_i)
 				break ;
 			ft_printf("%s", objs[curr_i].dirent->d_name);
-			if (items_fmt.x -1 != i.x)
+			if (items_fmt.x - 1 != i.x)
 			{
 				ft_putchar(ch_separator);
 				if (!IS_BIT(g_flags, BIT_1_ONE))

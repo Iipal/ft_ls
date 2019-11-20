@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 18:09:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/20 22:02:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int		s_parse_args(int ac, char **av)
 	save = args;
 	while (args && g_valid_args_counter > ++i)
 	{
-		FREE(g_src_path, free);
+		ft_strdel(&g_src_path);
 		g_src_path = ft_strndup((const char*)args->data, args->data_size);
 		if (1 < ac)
 			ft_printf("%s:\n", g_src_path);
@@ -90,7 +90,8 @@ int				main(int argc, char *argv[])
 	{
 		while (argc && '-' == **argv && *(*argv + 1))
 		{
-			NO_R(parse_flags(*argv), EXIT_FAILURE);
+			if (!parse_flags(*argv))
+				return (EXIT_FAILURE);
 			++argv;
 			--argc;
 		}
@@ -101,6 +102,6 @@ int				main(int argc, char *argv[])
 		else
 			s_parse_args(argc, argv);
 	}
-	FREE(g_src_path, free);
+	ft_strdel(&g_src_path);
 	return (g_main_ret);
 }
