@@ -1,4 +1,4 @@
-NAME := $(notdir $(CURDIR))
+NAME := $(notdir $(CURDIR)).a
 NPWD := $(CURDIR)/$(NAME)
 
 CC := clang
@@ -7,14 +7,10 @@ CFLAGS := -march=native -mtune=native -Ofast -pipe -flto -fpic
 CFLAGS_DEBUG := -glldb -D DEBUG
 
 CFLAGS_WARN := -Wall -Wextra -Werror -Wunused
-IFLAGS := $(addprefix -I,$(shell find . -name includes))
+IFLAGS := $(addprefix -I,$(shell find ../.. -name includes))
 
 SRCS := $(shell find srcs -name "*.c")
 OBJS := $(SRCS:.c=.o)
-
-LIBS_DIRS := $(shell find ./libs -maxdepth 1 -type d)
-LIBS_DIRS := $(filter-out $(firstword $(LIBS_DIRS)), $(LIBS_DIRS))
-LIBS_NAMES = $(join $(LIBS_DIRS),$(addsuffix .a,$(addprefix /,$(notdir $(LIBS_DIRS)))))
 
 ECHO := echo
 MAKE := make
@@ -30,6 +26,7 @@ ifeq ($(UNAME_S),Linux)
 ECHO += -e
 
 NPROCS := $(shell grep -c ^processor /proc/cpuinfo)
+AR := llvm-ar -rcs
 endif
 
 # MacOS Specifications:
@@ -39,7 +36,8 @@ ifeq ($(UNAME_S),Darwin)
 # Remove this line if in your MacOS system already installed GNUMake 4.0.0 or later.
 MAKE := ~/.brew/bin/gmake
 
-NPROCS:=$(shell sysctl -n hw.ncpu)
+NPROCS := $(shell sysctl -n hw.ncpu)
+AR := ar -rcs
 endif
 
 MAKE += --no-print-directory

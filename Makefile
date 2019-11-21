@@ -1,12 +1,11 @@
 include configs/default_config.mk
 
 .PHONY: all multi
-multi:
+multi: $(LIBS_NAMES)
 ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
-	$(info $(MAKE))
-	@$(MAKE) -j $(NPROCS) -l $(NPROCS) CFLAGS="$(CFLAGS_DEBUG)" all
+	@$(MAKE) $(MAKE_PARALLEL_FLAGS) CFLAGS="$(CFLAGS_DEBUG)" all
 else
-	@$(MAKE) -j $(NPROCS) -l $(NPROCS) all
+	@$(MAKE) $(MAKE_PARALLEL_FLAGS) all
 endif
 
 all: $(NAME)
@@ -19,23 +18,24 @@ $(OBJS): %.o: %.c
 	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
 	@$(ECHO) " | $@: $(SUCCESS)"
 
+$(LIBS_NAMES):
+	@$(MAKE) -C $(dir $@) $(MAKECMDGOALS)
+
 STATUS:
-	@$(info / compiled: $(NPWD): $(SUCCESS_NO_CLR))
+	@$(info / compiled: $(NPWD): $(MSG_SUCCESS_NO_CLR))
 	@$(info | flags: $(CFLAGS))
 
 debug_all: fclean multi
 debug: multi
 
 clean:
+	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) clean;)
 	@$(DEL) $(OBJS)
-	# @$(LMAKE) clean
-	# @$(LFPMAKE) clean
+	@$(ECHO) "$(CLR_INVERT)deleted$(CLR_WHITE): $(NAME) source objects."
 fclean: clean
-	@$(info fclean ft_ls)
-	# @$(LMAKE) fclean
-	# @$(LFPMAKE) fclean
+	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) fclean;)
 	@$(DEL) $(NAME)
-	@$(ECHO) "$(INVERT)deleted$(WHITE): $(NPWD)"
+	@$(ECHO) "$(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD)"
 
 del:
 	@$(DEL) $(OBJS)
@@ -47,13 +47,12 @@ pre: del multi
 re: del del_libs multi
 
 norme:
-	@$(ECHO) "$(INVERT)norminette$(WHITE) for $(NPWD):"
+	@$(ECHO) "$(CLR_INVERT)norminette$(CLR_WHITE) for $(NPWD):"
 	@norminette includes/
 	@norminette $(SRCS)
 
 norme_all:
-	@$(LMAKE) norme
-	@$(LFPMAKE) norme
+	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) norme;)
 	@$(MAKE) norme
 
-.PHONY: re fclean clean norme_all norme del pre debug debug_all STATUS
+.PHONY: re fclean clean norme del pre debug debug_all STATUS

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 00:13:20 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 00:45:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:34:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_ultoa(unsigned long num, char *restrict dst, int base)
 	j = 0L;
 	i = 0L;
 	dowhile_reduce = true;
-	while (dowhile_reduce || num > 0)
+	while (num > 0 || dowhile_reduce)
 	{
 		dowhile_reduce = false;
 		digit = num % base;
@@ -37,5 +37,5 @@ char	*ft_ultoa(unsigned long num, char *restrict dst, int base)
 	while (i >= 0L)
 		dst[j++] = temp[i--];
 	dst[j] = 0;
-	return dst;
+	return (dst);
 }

@@ -6,13 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 16:46:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/18 00:41:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:38:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static bool	add_is_valid(char const c, int8_t base, char const valid[])
+static bool
+	add_is_valid(char const c, int8_t base, char const valid[])
 {
 	while (base--)
 		if (valid[base] == F_TOLOWER(c))
@@ -20,7 +21,8 @@ static bool	add_is_valid(char const c, int8_t base, char const valid[])
 	return (false);
 }
 
-static int32_t	add_value_of(const char c)
+static inline int32_t __attribute__((__always_inline__))
+	add_value_of(const char c)
 {
 	int32_t	out;
 
@@ -34,7 +36,8 @@ static int32_t	add_value_of(const char c)
 	return (out);
 }
 
-int32_t		ft_atoi_base(const char *str, int8_t base)
+int32_t
+	ft_atoi_base(const char *str, int8_t base)
 {
 	int32_t		num;
 	int8_t		sign;

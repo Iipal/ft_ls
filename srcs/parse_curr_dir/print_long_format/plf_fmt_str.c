@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 16:30:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:32:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char				*plf_fmt_str(const WidthSpecific ws)
 	ft_strcpy(fmt_str + curr_offset, "s  %-");
 	curr_offset += sizeof("s  %-") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.gr_name_w);
-	curr_offset +=  ft_digits(ws.gr_name_w);
+	curr_offset += ft_digits(ws.gr_name_w);
 	ft_strcpy(fmt_str + curr_offset, "s  %");
 	curr_offset += sizeof("s  %") - 1UL;
 	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_w);

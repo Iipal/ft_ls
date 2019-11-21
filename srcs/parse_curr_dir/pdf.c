@@ -6,21 +6,22 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 12:08:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:33:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline __attribute__((__const__))
-s2si	s_get_current_items_output_format_size(const int32_t n_objs)
+static inline __attribute__((__const__)) s2si
+	s_get_current_items_output_format_size(const int32_t n_objs)
 {
 	const float	x = (float)g_win_size.x / (float)((g_max_name_len + 1UL));
 
 	return ((s2si) { x, (float)n_objs / x + 1.0f });
 }
 
-void	pdf_objs(const int32_t n_objs, const InDirObject *restrict objs)
+void
+	pdf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
 	const s2si		items_fmt = s_get_current_items_output_format_size(n_objs);

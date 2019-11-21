@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 01:09:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:32:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int				main(int argc, char *argv[])
 {
 	--argc;
 	++argv;
-
 	NO_R(get_term_win_size(), EXIT_FAILURE);
 	g_src_path = ft_strdup(".");
 	if (!argc)

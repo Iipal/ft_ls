@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 01:07:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/18 01:08:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:39:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_utils.h"
 
 inline void __attribute__((__overloadable__))
-ft_swap(unsigned char *restrict a, unsigned char *restrict b)
+	ft_swap(unsigned char *restrict a, unsigned char *restrict b)
 {
 	unsigned char	c;
 
@@ -23,7 +23,7 @@ ft_swap(unsigned char *restrict a, unsigned char *restrict b)
 }
 
 inline void __attribute__((__overloadable__))
-ft_swap(unsigned short *restrict a, unsigned short *restrict b)
+	ft_swap(unsigned short *restrict a, unsigned short *restrict b)
 {
 	unsigned short	c;
 
@@ -33,7 +33,7 @@ ft_swap(unsigned short *restrict a, unsigned short *restrict b)
 }
 
 inline void __attribute__((__overloadable__))
-ft_swap(unsigned int *restrict a, unsigned int *restrict b)
+	ft_swap(unsigned int *restrict a, unsigned int *restrict b)
 {
 	unsigned int	c;
 
@@ -43,7 +43,7 @@ ft_swap(unsigned int *restrict a, unsigned int *restrict b)
 }
 
 inline void __attribute__((__overloadable__))
-ft_swap(unsigned long *restrict a, unsigned long *restrict b)
+	ft_swap(unsigned long *restrict a, unsigned long *restrict b)
 {
 	unsigned long	c;
 

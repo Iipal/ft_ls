@@ -6,13 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 00:20:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:31:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 #if defined (__APPLE__)
+
 static inline char	s_check_acl(const char *restrict filename,
 						const struct stat *restrict st)
 {
@@ -41,7 +42,9 @@ static inline char	s_check_acl(const char *restrict filename,
 	}
 	return (' ');
 }
+
 #elif defined (__linux__)
+
 static inline char	s_check_acl(const char *restrict filename,
 						const struct stat *restrict st)
 {
@@ -49,6 +52,7 @@ static inline char	s_check_acl(const char *restrict filename,
 	(void)st;
 	return (' ');
 }
+
 #endif
 
 inline InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
