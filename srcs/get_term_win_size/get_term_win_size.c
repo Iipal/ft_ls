@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 17:58:24 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:50:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:37:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ inline bool	get_term_win_size(void)
 	{
 		if (!isatty(fileno(stdout)))
 			return (true);
-		DEF_STRERR(ERR, "get_term_win_size");
-		return (false);
+		return ((bool)ls_errno_msg(__FILE__, __func__));
 	}
-	g_win_size = (s2si) { w_size.ws_col, w_size.ws_row };
+	g_win_size = (struct s_2si) { w_size.ws_col, w_size.ws_row };
 	return (true);
 }

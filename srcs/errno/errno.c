@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_utils.h                                         :+:      :+:    :+:   */
+/*   errno.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 02:38:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:45:48 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/21 23:06:46 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 00:21:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_UTILS_H
-# define LS_UTILS_H
+#include "ls.h"
 
-# include <stddef.h>
-
-char	*u_full_path(char *dst,
-			const char *restrict dir_path,
-			const char *restrict file);
-
-#endif
+inline void
+	*ls_errno_msg(const char *restrict const file_name,
+				const char *restrict const fn_name)
+{
+	ft_printf("ft_ls: %s[%s]: %s\n", file_name, fn_name, strerror(errno));
+	return (NULL);
+}

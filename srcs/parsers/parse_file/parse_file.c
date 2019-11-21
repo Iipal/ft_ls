@@ -6,14 +6,15 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:47:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:43:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_long_format_listing.h"
 
-static inline bool	s_check_def_or_under_link_print(const char *restrict file,
-						const InDirObject *restrict obj)
+static inline bool __attribute__((__always_inline__))
+	s_check_def_or_under_link_print(const char *restrict file,
+		const struct s_object *restrict obj)
 {
 	bool	print_as_dir;
 
@@ -25,8 +26,9 @@ static inline bool	s_check_def_or_under_link_print(const char *restrict file,
 	return (print_as_dir);
 }
 
-static inline bool	s_check_plf_or_under_link_print(const char *restrict file,
-						const InDirObject *restrict obj)
+static inline bool __attribute__((__always_inline__))
+	s_check_plf_or_under_link_print(const char *restrict file,
+		const struct s_object *restrict obj)
 {
 	bool		print_as_dir;
 	t_blkcnt_t	t;
@@ -39,11 +41,12 @@ static inline bool	s_check_plf_or_under_link_print(const char *restrict file,
 	return (print_as_dir);
 }
 
-void				parse_file(const char *restrict file,
-						const InDirObject *restrict obj)
+inline void
+	parse_file(const char *restrict file,
+		const struct s_object *restrict obj)
 {
-	CurrDir	*cd;
-	bool	is_link_parse_as_dir;
+	struct s_dir	*cd;
+	bool				is_link_parse_as_dir;
 
 	cd = NULL;
 	is_link_parse_as_dir = false;

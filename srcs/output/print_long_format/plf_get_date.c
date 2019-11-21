@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_utils.h                                         :+:      :+:    :+:   */
+/*   plf_get_date.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 02:38:28 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:45:48 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 00:23:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_UTILS_H
-# define LS_UTILS_H
+#include "ls_long_format_listing.h"
 
-# include <stddef.h>
+inline char
+	*plf_get_date(char *restrict date_dst, const t_time_t date_time)
+{
+	const char	*date = ctime(&date_time);
 
-char	*u_full_path(char *dst,
-			const char *restrict dir_path,
-			const char *restrict file);
-
-#endif
+	if (!date)
+		return (ls_errno_msg(__FILE__, __func__));
+	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
+	date_dst[12] = '\0';
+	return (date_dst);
+}

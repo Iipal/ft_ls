@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 22:00:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 #if defined (__APPLE__)
 
-static inline char	s_check_acl(const char *restrict filename,
-						const struct stat *restrict st)
+static inline char
+	s_check_acl(const char *restrict filename,
+		const struct stat *restrict st)
 {
 	acl_t		acl;
 	acl_entry_t	dummy;
@@ -45,8 +46,9 @@ static inline char	s_check_acl(const char *restrict filename,
 
 #elif defined (__linux__)
 
-static inline char	s_check_acl(const char *restrict filename,
-						const struct stat *restrict st)
+static inline char
+	s_check_acl(const char *restrict filename,
+		const struct stat *restrict st)
 {
 	(void)filename;
 	(void)st;
@@ -55,16 +57,17 @@ static inline char	s_check_acl(const char *restrict filename,
 
 #endif
 
-inline InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
-						const struct stat *restrict stat,
-						const struct dirent *restrict dirent,
-						const char *restrict filename)
+inline struct s_object
+	*init_curr_in_dir_obj(struct s_object *restrict dst,
+		const struct stat *restrict stat,
+		const struct dirent *restrict dirent,
+		const char *restrict filename)
 {
-	InDirObject	*out;
+	struct s_object	*out;
 
 	out = dst;
-	if (!out)
-		out = (InDirObject*)ft_memalloc(sizeof(InDirObject));
+	if (!out && !(out = ft_memalloc(sizeof(struct s_object))))
+		return (ls_errno_msg(__FILE__, __func__));
 	if (dirent && !(out->dirent = dup_dirent(dirent)))
 		return (free_curr_in_dir_obj(out));
 	if (stat && !(out->stat = dup_stat(stat)))

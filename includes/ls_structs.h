@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 19:04:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:37:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct			s_2sl
 	long	y;
 };
 
-struct			s_in_dir_object
+struct			s_object
 {
 	struct dirent	*dirent;
 	struct stat		*stat;
@@ -37,35 +37,21 @@ struct			s_in_dir_object
 	char			acl_ch;
 };
 
-# define S2SI typedef struct s_2si s2si
-# define S2SL typedef struct s_2sl s2sl
-# define IN_DIR_OBJ typedef struct s_in_dir_object InDirObject
-
-S2SI;
-S2SL;
-IN_DIR_OBJ;
-
-struct			s_curr_dir
+struct			s_dir
 {
-	InDirObject	*objs;
-	int32_t		n_objs;
-	bool		is_file;
+	struct s_object	*objs;
+	int32_t			n_objs;
+	bool			is_file;
 };
 
-struct			s_curr_dir_init
+struct			s_dir_init
 {
 	DIR				*dir;
-	InDirObject		*curr;
-	struct dirent	*dirent;
-	struct stat		stat;
+	struct s_object	*obj;
+	struct dirent	*d;
+	struct stat		st;
 	char			*tmp;
 };
-
-# define CURR_DIR      typedef struct s_curr_dir CurrDir
-# define CURR_DIR_INIT typedef struct s_curr_dir_init CurrDirInit
-
-CURR_DIR;
-CURR_DIR_INIT;
 
 struct			s_arg
 {

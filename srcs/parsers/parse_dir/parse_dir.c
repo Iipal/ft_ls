@@ -6,15 +6,15 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:47:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:43:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-bool	parse_dir(const char *restrict path)
+inline bool	parse_dir(const char *restrict path)
 {
-	CurrDir	*cd;
+	struct s_dir	*cd;
 
 	if (!(cd = init_curr_dir(path, false)))
 		return (false);

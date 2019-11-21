@@ -6,22 +6,23 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 20:24:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_long_format_listing.h"
 
-WidthSpecific		plf_width_spec(const uint32_t n_objs,
-						const InDirObject *restrict objs,
-						t_blkcnt_t *restrict total)
+struct s_lf_spec_width
+	plf_width_spec(const uint32_t n_objs,
+		const struct s_object *restrict objs,
+		t_blkcnt_t *restrict total)
 {
-	WidthSpecific	ws;
-	WidthSpecific	ws_temp;
-	uint32_t		i;
+	struct s_lf_spec_width	ws;
+	struct s_lf_spec_width	ws_temp;
+	uint32_t				i;
 
 	i = ~0U;
-	ws = (WidthSpecific) { 0 };
+	ws = (struct s_lf_spec_width) { 0 };
 	while (n_objs > ++i)
 	{
 		ws_temp.st_nlnk_w = ft_digits(objs[i].stat->st_nlink);
@@ -42,7 +43,8 @@ WidthSpecific		plf_width_spec(const uint32_t n_objs,
 	return (ws);
 }
 
-static inline void	s_fmtcat_int(char *restrict dst, int32_t num)
+static inline void
+	s_fmtcat_int(char *restrict dst, int32_t num)
 {
 	char	*temp;
 
@@ -51,7 +53,8 @@ static inline void	s_fmtcat_int(char *restrict dst, int32_t num)
 	free(temp);
 }
 
-char				*plf_fmt_str(const WidthSpecific ws)
+char
+	*plf_fmt_str(const struct s_lf_spec_width ws)
 {
 	char	*fmt_str;
 	size_t	curr_offset;

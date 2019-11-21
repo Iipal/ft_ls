@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:42:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:41:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	s_check_subdirs(const char *restrict prev_dir,
 				const uint32_t n_objs,
-				const InDirObject *restrict objs)
+				const struct s_object *restrict objs)
 {
 	char		*d_name;
 	char		*subdir;
@@ -22,7 +22,8 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 
 	i = ~0U;
 	d_name = NULL;
-	subdir = (char*)ft_memalloc(sizeof(char) * 1024);
+	if (!(subdir = (char*)ft_memalloc(sizeof(char) * 1024)))
+		return ((bool)ls_errno_msg(__FILE__, __func__));
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].dirent->d_name;
@@ -39,21 +40,21 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 }
 
 void		output(const char *restrict path,
-				const CurrDir *restrict cd)
+				const struct s_dir *restrict cd)
 {
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 	{
 		if (IS_BIT(g_flags, BIT_T_TIME))
 			q_sort(cd->objs, cd->n_objs,
-				sizeof(InDirObject), sort_time_stats_cmp);
+				sizeof(struct s_object), sort_time_stats_cmp);
 		else
 			q_sort(cd->objs, cd->n_objs,
-				sizeof(InDirObject), sort_ascii_dirents_cmp);
+				sizeof(struct s_object), sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))
-		plf_objs(cd->n_objs, cd->objs);
+		plf(cd->n_objs, cd->objs);
 	else
-		pdf_objs(cd->n_objs, cd->objs);
+		pdf(cd->n_objs, cd->objs);
 	if (IS_BIT(g_flags, BIT_R_RECURSIVE))
 		s_check_subdirs(path, cd->n_objs, cd->objs);
 }
