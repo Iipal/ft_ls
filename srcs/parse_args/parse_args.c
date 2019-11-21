@@ -6,17 +6,17 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:22:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:29:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ls.h"
+#include "ls.h"
 
 static int32_t	g_va_counter = 0;
 static int32_t	g_va_notdir_counter = 0;
 
-static inline struct s_arg		*s_dup_arg(struct s_arg *restrict dst,
-							const struct s_arg arg)
+static inline struct s_arg __attribute__((__always_inline__))
+	*s_dup_arg(struct s_arg *restrict dst, const struct s_arg arg)
 {
 	if (arg.is_dir)
 		++g_va_notdir_counter;
@@ -30,7 +30,8 @@ static inline struct s_arg		*s_dup_arg(struct s_arg *restrict dst,
 	return (dst);
 }
 
-static struct s_arg	*s_pre_parse_errno_args(int32_t ac, char **av)
+static struct s_arg
+	*s_pre_parse_errno_args(int32_t ac, char **av)
 {
 	struct s_arg	*out;
 	struct stat		st;
@@ -50,7 +51,8 @@ static struct s_arg	*s_pre_parse_errno_args(int32_t ac, char **av)
 	return (out);
 }
 
-int				parse_args(int ac, char **av)
+int
+	parse_args(int ac, char **av)
 {
 	struct s_arg	*args;
 	int32_t			i;

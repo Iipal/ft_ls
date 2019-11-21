@@ -6,11 +6,10 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 16:32:25 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 20:24:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
 #include "ls_long_format_listing.h"
 
 WidthSpecific		plf_width_spec(const uint32_t n_objs,
@@ -54,8 +53,8 @@ static inline void	s_fmtcat_int(char *restrict dst, int32_t num)
 
 char				*plf_fmt_str(const WidthSpecific ws)
 {
-	char			*fmt_str;
-	size_t			curr_offset;
+	char	*fmt_str;
+	size_t	curr_offset;
 
 	fmt_str = ft_strnew(STR_LEN_DEFAULT_FMT + ft_digits(ws.st_nlnk_w)
 				+ ft_digits(ws.st_size_w) + ft_digits(ws.pw_name_w)
