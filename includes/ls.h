@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:44:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:55:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef __time_t	t_time_t;
 # include <sys/ioctl.h>
 # include <math.h>
 
-extern int32_t		g_flags;
-extern char			*g_src_path;
-extern size_t		g_max_name_len;
-extern struct s_2si	g_win_size;
-extern int			g_main_ret;
+extern int32_t	g_flags;
+extern char		*g_src_path;
+extern size_t	g_max_name_len;
+extern t_s2si	g_win_size;
+extern int		g_main_ret;
 
 /*
 **	Get terminal window size;

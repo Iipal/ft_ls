@@ -6,18 +6,17 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:45:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:56:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-char			*g_src_path = NULL;
-size_t			g_max_name_len = 0UL;
-struct s_2si	g_win_size = { 100, 100 };
-int32_t			g_flags = 0;
-
-int32_t			g_main_ret = EXIT_SUCCESS;
+char	*g_src_path = NULL;
+size_t	g_max_name_len = 0UL;
+t_s2si	g_win_size = { 100, 100 };
+int32_t	g_main_ret = EXIT_SUCCESS;
+int32_t	g_flags = 0;
 
 int	main(int argc, char *argv[])
 {

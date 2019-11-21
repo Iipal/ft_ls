@@ -6,26 +6,26 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:41:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 00:53:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline __attribute__((__const__)) struct s_2si
+static inline __attribute__((__const__)) t_s2si
 	s_items_output_fmt(const int32_t n_objs)
 {
 	const float	x = (float)g_win_size.x / (float)((g_max_name_len + 1UL));
 
-	return ((struct s_2si) { x, (float)n_objs / x + 1.0f });
+	return ((t_s2si) { x, (float)n_objs / x + 1.0f });
 }
 
 void
 	pdf(const int32_t n_objs, const struct s_object *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
-	struct s_2si	items_fmt;
-	struct s_2si	i;
+	t_s2si	items_fmt;
+	t_s2si	i;
 	int32_t			curr_i;
 
 	i.y = -1;
