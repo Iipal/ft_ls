@@ -1,9 +1,6 @@
 NAME := $(notdir $(CURDIR))
 NPWD := $(CURDIR)/$(NAME)
 
-LIB_NPWD := $(CURDIR)/$(LIB_NAME)
-LIB_NAME := $(notdir $(CURDIR)).a
-
 CC := clang
 
 CFLAGS := -march=native -mtune=native -Ofast -pupe -flto -fpic
@@ -41,6 +38,7 @@ ifeq ($(UNAME_S),Darwin)
 #  or user don't have enought permissions to install latest version of GNUMake on system globally.
 # Remove this line if in your MacOS system already installed GNUMake 4.0.0 or later.
 MAKE := ~/.brew/bin/gmake
+
 NPROCS:=$(shell system_profiler | awk '/Number Of CPUs/{print $4}{next;}')
 endif
 
