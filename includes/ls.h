@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 18:43:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:23:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,17 @@ extern int32_t	g_flags;
 extern char		*g_src_path;
 extern size_t	g_max_name_len;
 extern s2si		g_win_size;
+extern int		g_main_ret;
 
 /*
 **	Get terminal window size;
 */
 extern bool			get_term_win_size(void);
+
+/*
+** Start parsing arguments:
+*/
+int					parse_args(int ac, char **av);
 
 /*
 ** parsing data and output
@@ -72,7 +78,8 @@ CurrDir				*init_curr_dir(const char *path,
 						const bool force_open_dir);
 extern InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
 						const struct stat *restrict stat,
-						const struct dirent *restrict dirent);
+						const struct dirent *restrict dirent,
+						const char *restrict filename);
 
 /*
 ** initialize checks:
@@ -91,9 +98,12 @@ struct stat			*dup_stat(const struct stat *restrict src);
 /*
 ** sort callback-comparators
 */
-int32_t				sort_ascii_tab_cmp(const void *a, const void *b);
 int32_t				sort_ascii_dirents_cmp(const void *a, const void *b);
+int32_t				sort_ascii_tabs_cmp(const void *a, const void *b);
+int32_t				sort_ascii_args_cmp(const void *a, const void *b);
+int32_t				sort_isdir_args_cmp(const void *a, const void *b);
 int32_t				sort_time_stats_cmp(const void *a, const void *b);
+
 
 /*
 ** quick sort

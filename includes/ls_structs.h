@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 17:57:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 19:04:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,13 @@ struct			s_curr_dir_init
 
 CURR_DIR;
 CURR_DIR_INIT;
+
+struct			s_arg
+{
+	char	*path;
+	size_t	path_len;
+	bool	is_dir;
+	char	dummy[7];
+};
 
 #endif
