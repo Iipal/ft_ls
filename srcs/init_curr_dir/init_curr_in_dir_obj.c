@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 18:46:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 22:00:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ inline InDirObject	*init_curr_in_dir_obj(InDirObject *restrict dst,
 
 	out = dst;
 	if (!out)
-		MEM(InDirObject, out, 1, E_ALLOC);
+		out = (InDirObject*)ft_memalloc(sizeof(InDirObject));
 	if (dirent && !(out->dirent = dup_dirent(dirent)))
 		return (free_curr_in_dir_obj(out));
 	if (stat && !(out->stat = dup_stat(stat)))

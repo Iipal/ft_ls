@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/07 22:45:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 22:04:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ bool	init_lstat_check(const char *restrict path,
 {
 	struct stat	tmp_lstat;
 
-	IFDO_F(0 > stat(path, buff), DEF_STRERR(ERR, path));
-	IFDO_F(0 > lstat(path, &tmp_lstat), DEF_STRERR(ERR, path));
+	if (0 > stat(path, buff))
+	{
+		ft_printf(ERR "%s[%s]: %s\n", __FILE__, __func__, strerror(errno));
+		return (false);
+	}
+	if (0 > lstat(path, buff))
+	{
+		ft_printf(ERR "%s[%s]: %s\n", __FILE__, __func__, strerror(errno));
+		return (false);
+	}
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
 	return (true);

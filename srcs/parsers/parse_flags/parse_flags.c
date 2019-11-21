@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 15:50:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:49:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool				parse_flags(const char *flags_str)
 	while (*(++flags_str))
 		if (!s_check_valid_flag(*flags_str))
 		{
-			E_ILLEGAL(*flags_str);
+			ft_printf(E_ILL_OPT "%c\n", *flags_str );
 			return (false);
 		}
 	s_validate_flags();

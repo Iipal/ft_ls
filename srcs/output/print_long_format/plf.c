@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 15:11:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 22:02:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	s_print_link(const char *restrict file)
 	char	*buff;
 	char	*buff_path;
 
-	buff = (char*)ft_memalloc(sizeof(char) * 256);
-	buff_path = (char*)ft_memalloc(sizeof(char) * 256);
-	readlink(u_full_path(buff_path, g_src_path, file), buff, 256);
-	FREE(buff_path, free);
+	buff = (char*)ft_memalloc(sizeof(char) * 256UL);
+	buff_path = (char*)ft_memalloc(sizeof(char) * 256UL);
+	readlink(u_full_path(buff_path, g_src_path, file), buff, 256UL);
+	ft_strdel(&buff_path);
 	ft_printf(" -> %s", buff);
-	FREE(buff, free);
+	ft_strdel(&buff);
 }
 
 void		plf_obj(char *restrict fmt_str,
@@ -39,7 +39,7 @@ void		plf_obj(char *restrict fmt_str,
 		s_print_link(path);
 	ft_printf("\n");
 	if (is_free_fmt)
-		FREE(fmt_str, free);
+		ft_strdel((char**)&fmt_str);
 }
 
 void		plf_objs(const int32_t n_objs, const InDirObject *restrict objs)
@@ -54,5 +54,5 @@ void		plf_objs(const int32_t n_objs, const InDirObject *restrict objs)
 	ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
 		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i], false);
-	FREE(fmt_str, free);
+	ft_strdel(&fmt_str);
 }

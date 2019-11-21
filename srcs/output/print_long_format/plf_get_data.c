@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/07 22:44:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:58:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ char	*plf_get_date(char *restrict date_dst,
 	const char	*date = ctime(&date_time);
 
 	IFDOR(!date, DEF_STRERR(ERR, "plf_get_date"), NULL);
+	if (!date)
+	{
+		ft_printf(ERR "%s[%s]: %s\n", __FILE__, __func__, strerror(errno));
+		return (NULL);
+	}
 	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
 	date_dst[12] = '\0';
 	return (date_dst);

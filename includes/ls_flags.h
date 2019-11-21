@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/10/30 12:40:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:49:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@
 # define F_HIDDEN     'a'
 
 # define E_ILL_OPT ERR "illegal option -- "
-# define E_ILLEGAL(f) {MSG(E_ILL_OPT);ft_putchar_fd(f,2);ft_putchar_fd(10,2);}
 
 #endif

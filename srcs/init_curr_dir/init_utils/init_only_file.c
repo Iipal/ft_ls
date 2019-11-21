@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:46:16 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 22:03:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ CurrDir	*init_only_file(const char *restrict path)
 
 	if (!init_lstat_check(path, &st))
 		return (NULL);
-	MEM(CurrDir, out, 1UL, E_ALLOC);
+	out = ft_memalloc(sizeof(CurrDir));
 	out->n_objs = 1UL;
 	out->is_file = true;
 	out->objs = init_curr_in_dir_obj(NULL, &st, NULL, path);
