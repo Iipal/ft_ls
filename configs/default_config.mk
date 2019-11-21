@@ -26,7 +26,7 @@ UNAME_S := $(shell uname -s)
 # Linux Specifications:
 ifeq ($(UNAME_S),Linux)
 # Only for Red-Hat systems where -e param isn't enabled by default in echo built-in command.
-# Remove this line if you have enabled -e option.
+# Remove this line if you have enabled -e option in echo command.
 ECHO += -e
 
 NPROCS := $(shell grep -c ^processor /proc/cpuinfo)
