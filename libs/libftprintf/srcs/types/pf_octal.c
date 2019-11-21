@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 23:38:44 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 00:56:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:43:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 static inline void __attribute__((__always_inline__))
 	s_put_str_to_buf(void)
 {
-	const size_t	swidth = (g_flag_width > g_data_len)
-						? (g_flag_width - g_data_len) : 0UL;
-	const int		wch = IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_DOT) ? '0' : ' ';
+	const int	wch = IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_DOT) ? '0' : ' ';
+	size_t		swidth;
 
+	swidth = (g_flag_width > g_data_len)
+		? (g_flag_width - g_data_len) : 0UL;
 	if (IS_BIT(g_flag_spec_mask, PF_BIT_SPEC_MINUS) && wch != '0')
 		pf_put_str_buf();
 	pf_put_ch_buf(wch, swidth);

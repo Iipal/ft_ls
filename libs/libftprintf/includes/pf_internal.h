@@ -6,12 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 21:51:30 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 00:03:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:42:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_LOCAL_H
-# define FT_PRINTF_LOCAL_H
+#ifndef PF_INTERNAL_H
+# define PF_INTERNAL_H
 
 # include <stddef.h>
 # include <limits.h>

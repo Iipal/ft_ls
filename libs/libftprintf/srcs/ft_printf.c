@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/09 13:04:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 14:37:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:43:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*g_buf = NULL;
 size_t	g_buf_i = 0UL;
 
 size_t	g_fmt_i = ~0UL;
-
 
 char	g_flag = 0;
 int		g_flag_spec_mask = 0;

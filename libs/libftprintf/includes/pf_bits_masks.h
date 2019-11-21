@@ -6,12 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:20:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 23:12:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:42:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PF_FLAGS_H
-# define PF_FLAGS_H
+#ifndef PF_BITS_MASKS_H
+# define PF_BITS_MASKS_H
 
 # include "libft_bits_macroses.h"
 
@@ -32,4 +32,4 @@
 # define PF_BIT_TYPE_HH    (1 << 5)
 # define PF_BIT_TYPE_LL    (1 << 6)
 
-#endif /* PF_FLAGS_H */
+#endif

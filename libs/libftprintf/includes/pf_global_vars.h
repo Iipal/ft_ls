@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 13:19:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/19 23:12:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 16:42:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PF_GLOBAL_VARS_H
 
 /*
-**
 ** global buffer for all data what will be printed:
 */
 extern size_t	g_max_buf;
