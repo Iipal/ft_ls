@@ -5,8 +5,10 @@ CC := clang
 
 CFLAGS := -march=native -mtune=native -Ofast -pipe -flto -fpic
 CFLAGS_DEBUG := -glldb -D DEBUG
+CFLAGS_SANITIZE := -glldb -D DEBUG -fsanitize=address
 
 CFLAGS_WARN := -Wall -Wextra -Werror -Wunused
+
 IFLAGS := $(addprefix -I,$(shell find . -name includes))
 
 SRCS := $(shell find srcs -name "*.c")
@@ -51,5 +53,5 @@ CLR_WHITE := \033[0m
 CLR_BLUE := \033[34m
 
 MSG_SUCCESS := [$(CLR_GREEN)✓$(CLR_WHITE)]
-MSG_BSUCCESS := [$(CLR_BLUE)✓$(CLR_WHITE)])
+MSG_BSUCCESS := [$(CLR_BLUE)✓$(CLR_WHITE)]
 MSG_SUCCESS_NO_CLR := [✓]
