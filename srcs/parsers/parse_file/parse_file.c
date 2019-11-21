@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/12 13:25:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:42:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void				parse_file(const char *restrict file,
 	if (is_link_parse_as_dir)
 	{
 		cd = init_curr_dir(file, true);
-		parse_flags_output(file, cd);
+		output(file, cd);
 		free_curr_dir(&cd);
 	}
 }

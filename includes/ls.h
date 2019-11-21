@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:28:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:42:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool				parse_dir(const char *restrict path);
 void				parse_file(const char *restrict path,
 						const InDirObject *restrict obj);
 
-void				parse_flags_output(const char *restrict path,
+void				output(const char *restrict path,
 						const CurrDir *restrict cd);
 
 /*

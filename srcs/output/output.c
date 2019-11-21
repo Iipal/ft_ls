@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_flags_output.c                               :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/15 15:16:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 21:42:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 	return (true);
 }
 
-void		parse_flags_output(const char *restrict path,
+void		output(const char *restrict path,
 				const CurrDir *restrict cd)
 {
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
