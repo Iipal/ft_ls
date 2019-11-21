@@ -12,18 +12,18 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS_NAMES) $(IFLAGS) -o $(NAME)
-	@$(MAKE) -q STATUS
+	@$(MAKE) STATUS
 
 $(OBJS): %.o: %.c
 	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
-	@$(ECHO) " | $@: $(SUCCESS)"
+	@$(ECHO) " | $@: $(MSG_BSUCCESS)"
 
 $(LIBS_NAMES):
 	@$(MAKE) -C $(dir $@) $(MAKECMDGOALS)
 
 STATUS:
-	@$(info / compiled: $(NPWD): $(MSG_SUCCESS_NO_CLR))
-	@$(info | flags: $(CFLAGS))
+	@$(ECHO) "/ compiled [$(words $(OBJS))] objects to $(CLR_INVERT)$(NAME)$(CLR_WHITE): $(MSG_SUCCESS)"
+	@$(ECHO) "\ flags: $(CLR_BLUE)$(CFLAGS)$(CLR_WHITE)"
 
 debug_all: fclean multi
 debug: multi
