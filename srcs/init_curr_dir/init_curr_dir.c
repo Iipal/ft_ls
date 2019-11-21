@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/20 17:58:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/21 18:45:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ CurrDir			*init_curr_dir(const char *path,
 			IFDOR(!init_lstat_check(u_full_path(t.tmp, path, t.dirent->d_name),
 				&t.stat), free_curr_dir(&out), NULL);
 			if (!(t.curr = init_curr_in_dir_obj(&out->objs[++i],
-					&t.stat, t.dirent)))
+					&t.stat, t.dirent, t.dirent->d_name)))
 				return (free_curr_dir(&out));
 		}
 	closedir(t.dir);
