@@ -9,7 +9,9 @@ CFLAGS_SANITIZE := -glldb -D DEBUG -fsanitize=address
 
 CFLAGS_WARN := -Wall -Wextra -Werror -Wunused
 
-IFLAGS := $(addprefix -I,$(shell find . -name includes))
+IF_DIRS := $(shell find . -name "includes")
+IF_SUBDIRS := $(foreach I_PATH,$(IF_DIRS),$(shell find $(I_PATH) -type d))
+IFLAGS := $(addprefix -I,$(IF_DIRS)) $(addprefix -I,$(IF_SUBDIRS))
 
 SRCS := $(shell find srcs -name "*.c")
 OBJS := $(SRCS:.c=.o)
