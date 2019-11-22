@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:43:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 10:51:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ inline void
 		is_link_parse_as_dir = s_check_plf_or_under_link_print(file, obj);
 	if (is_link_parse_as_dir)
 	{
-		cd = init_curr_dir(file, true);
+		cd = init_dir(file, true);
 		output(file, cd);
-		free_curr_dir(&cd);
+		free_dir(&cd);
 	}
 }

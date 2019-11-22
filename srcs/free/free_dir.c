@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_curr_in_dir_obj.c                             :+:      :+:    :+:   */
+/*   free_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 12:54:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 10:40:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-inline void	*free_curr_in_dir_obj(struct s_object *obj)
+void	*free_dir(struct s_dir **curr_dir)
 {
-	if (obj)
+	int32_t	i;
+
+	i = -1;
+	if (*curr_dir)
 	{
-		if (obj->dirent)
-			ft_memdel((void**)&obj->dirent);
-		if (obj->stat)
-			ft_memdel((void**)&obj->stat);
+		if ((*curr_dir)->objs)
+			while ((*curr_dir)->n_objs > ++i)
+				free_dir_obj(&(*curr_dir)->objs[i]);
+		if ((*curr_dir)->objs)
+			ft_memdel((void**)&(*curr_dir)->objs);
+		ft_memdel((void**)curr_dir);
 	}
 	return (NULL);
 }

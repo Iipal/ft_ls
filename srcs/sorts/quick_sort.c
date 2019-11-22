@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   qsort.c                                            :+:      :+:    :+:   */
+/*   quick_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:54:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 10:56:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static size_t	g_qs_width;
-static void		*g_qs_base;
-int32_t			(*g_qs_comparator)(const void*, const void*);
+static size_t	g_qs_width = 0UL;
+static void		*g_qs_base = NULL;
+static int32_t	(*g_qs_comparator)(const void*, const void*) = NULL;
 
 static ssize_t	s_qs_partition(register const t_s2sl pi)
 {
@@ -49,7 +49,7 @@ inline void		q_sort(void *base,
 					const size_t width,
 					int32_t (*comparator)(const void*, const void*))
 {
-	if (2 > n_el)
+	if (2UL > n_el)
 		return ;
 	g_qs_base = base;
 	g_qs_width = width;

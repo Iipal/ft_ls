@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_curr_in_dir_obj.c                             :+:      :+:    :+:   */
+/*   init_dir_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 10:45:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static inline char
 #endif
 
 inline struct s_object
-	*init_curr_in_dir_obj(struct s_object *restrict dst,
+	*init_dir_obj(struct s_object *restrict dst,
 		const struct stat *restrict stat,
 		const struct dirent *restrict dirent,
 		const char *restrict filename)
@@ -69,9 +69,9 @@ inline struct s_object
 	if (!out && !(out = ft_memalloc(sizeof(struct s_object))))
 		return (ls_errno_msg(__FILE__, __func__));
 	if (dirent && !(out->dirent = dup_dirent(dirent)))
-		return (free_curr_in_dir_obj(out));
+		return (free_dir_obj(out));
 	if (stat && !(out->stat = dup_stat(stat)))
-		return (free_curr_in_dir_obj(out));
+		return (free_dir_obj(out));
 	out->d_name_len = 0UL;
 	if (out->dirent)
 	{

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_curr_dir.c                                    :+:      :+:    :+:   */
+/*   init_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:38:13 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 10:40:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	*free_curr_dir(struct s_dir **curr_dir)
+inline struct s_dir	*init_file(const char *restrict path)
 {
-	int32_t	i;
+	struct s_dir	*out;
+	struct stat			st;
 
-	i = -1;
-	if (*curr_dir)
-	{
-		if ((*curr_dir)->objs)
-			while ((*curr_dir)->n_objs > ++i)
-				free_curr_in_dir_obj(&(*curr_dir)->objs[i]);
-		if ((*curr_dir)->objs)
-			ft_memdel((void**)&(*curr_dir)->objs);
-		ft_memdel((void**)curr_dir);
-	}
-	return (NULL);
+	if (!init_lstat_check(path, &st))
+		return (NULL);
+	if (!(out = ft_memalloc(sizeof(struct s_dir))))
+		return (ls_errno_msg(__FILE__, __func__));
+	out->n_objs = 1UL;
+	out->is_file = true;
+	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
+		out = free_dir(&out);
+	return (out);
 }

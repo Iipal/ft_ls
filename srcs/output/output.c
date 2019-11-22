@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:41:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 11:12:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		output(const char *restrict path,
 			q_sort(cd->objs, cd->n_objs,
 				sizeof(struct s_object), sort_time_stats_cmp);
 		else
-			q_sort(cd->objs, cd->n_objs,
+			i_sort(cd->objs, cd->n_objs,
 				sizeof(struct s_object), sort_ascii_dirents_cmp);
 	}
 	if (IS_BIT(g_flags, BIT_L_LIST))

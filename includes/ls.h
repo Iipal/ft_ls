@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:55:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 11:03:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ output(const char *restrict path, const struct s_dir *restrict cd);
 ** initialize:
 */
 extern struct s_dir
-*init_only_file(const char *restrict path);
+*init_file(const char *restrict path);
 
 struct s_dir
-*init_curr_dir(const char *path, const bool force_open_dir);
+*init_dir(const char *path, const bool force_open_dir);
 
 extern struct s_object
-*init_curr_in_dir_obj(struct s_object *restrict dst,
+*init_dir_obj(struct s_object *restrict dst,
 	const struct stat *restrict stat,
 	const struct dirent *restrict dirent,
 	const char *restrict filename);
@@ -133,6 +133,15 @@ q_sort(void *base,
 	int32_t (*comparator)(const void*, const void*));
 
 /*
+** insertion sort
+*/
+extern void
+i_sort(void *base,
+	const size_t n_el,
+	const size_t width,
+	int32_t (*comparator)(const void*, const void*));
+
+/*
 ** PLF - Print Long Format
 */
 void
@@ -160,9 +169,9 @@ pdf(const int32_t n_objs, const struct s_object *const objs);
 ** free
 */
 void
-*free_curr_dir(struct s_dir **curr_dir);
+*free_dir(struct s_dir **curr_dir);
 
 extern void
-*free_curr_in_dir_obj(struct s_object *obj);
+*free_dir_obj(struct s_object *obj);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:55:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 11:00:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,8 @@
 # include <stddef.h>
 # include <sys/stat.h>
 
-typedef struct	s_2si
-{
-	int	x;
-	int	y;
-}				t_s2si;
-
-typedef struct	s_2sl
-{
-	long	x;
-	long	y;
-}				t_s2sl;
+typedef struct	s_2si { int	x; int	y; } t_s2si;
+typedef struct	s_2sl { long	x; long	y; } t_s2sl;
 
 struct			s_object
 {

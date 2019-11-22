@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:18:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 10:49:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool			s_check_valid_flag(const char curr_flag)
 	return (false);
 }
 
-static inline void	s_validate_flags(void)
+static inline void	s_flags_dependecy(void)
 {
 	if (IS_BIT(g_flags, BIT_1_ONE))
 		UNSET_BIT(g_flags, BIT_L_LIST);
@@ -42,6 +42,6 @@ bool				parse_flags(const char *flags_str)
 			ft_printf("illegal option -- %c\n", *flags_str);
 			return (false);
 		}
-	s_validate_flags();
+	s_flags_dependecy();
 	return (true);
 }

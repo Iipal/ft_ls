@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_curr_dir.c                                    :+:      :+:    :+:   */
+/*   init_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 10:46:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static struct s_dir
 	while ((dirent = readdir(dir)))
 		out->n_objs += !(!IS_BIT(g_flags, BIT_A_HIDDEN)
 					&& '.' == dirent->d_name[0]);
+	rewinddir(dir);
 	if (!IS_BIT(g_flags, BIT_A_HIDDEN) && !out->n_objs)
 	{
 		if (!(out->objs = ft_memalloc(sizeof(struct s_object) * 1UL)))
@@ -33,21 +34,20 @@ static struct s_dir
 	else if (!(out->objs = ft_memalloc(sizeof(struct s_object)
 										* out->n_objs)))
 			return (ls_errno_msg(__FILE__, __func__));
-	rewinddir(dir);
 	return (out);
 }
 
 struct s_dir
-	*init_curr_dir(const char *path, const bool force_open_dir)
+	*init_dir(const char *path, const bool force_open_dir)
 {
-	struct s_dir					*out;
+	struct s_dir		*out;
 	struct s_dir_init	h;
-	uint32_t				i;
+	uint32_t			i;
 
 	if (!(i = ~0U) || !init_lstat_check_no_errno(path, &h.st))
 		return (NULL);
 	if (!force_open_dir && !S_ISDIR(h.st.st_mode))
-		return (init_only_file(path));
+		return (init_file(path));
 	if (!(h.dir = opendir(path)) || !(h.tmp = ft_strnew(255UL)))
 		return (ls_errno_msg(__FILE__, __func__));
 	if (!(out = s_precalc_in_dir_objs(h.dir)))
@@ -56,13 +56,13 @@ struct s_dir
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == h.d->d_name[0]))
 		{
 			if (!init_lstat_check(u_full_path(h.tmp, path, h.d->d_name), &h.st))
-				return ((struct s_dir*)(*(ptrdiff_t*)free_curr_dir(&out)
+				return ((struct s_dir*)(*(ptrdiff_t*)free_dir(&out)
 						+ *(ptrdiff_t*)ls_errno_msg(__FILE__, __func__)));
-			if (!(h.obj = init_curr_in_dir_obj(&out->objs[++i],
-				&h.st, h.d, h.d->d_name)))
-				return (free_curr_dir(&out));
+			if (!(h.obj = init_dir_obj(&out->objs[++i],
+							&h.st, h.d, h.d->d_name)))
+				return (free_dir(&out));
 		}
 	closedir(h.dir);
 	ft_strdel(&h.tmp);
-	return (out->n_objs ? out : free_curr_dir(&out));
+	return (out->n_objs ? out : free_dir(&out));
 }
