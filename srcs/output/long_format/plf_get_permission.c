@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 00:23:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:23:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:16:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_long_format_listing.h"
+#include "ls.h"
 
 inline char
 	*plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm)

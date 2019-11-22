@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                   :+:      :+:    :+:   */
+/*   ls_sorts.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:40:45 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/22 12:54:49 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 12:56:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_SORTS_H
+# define LS_SORTS_H
 
-inline struct s_dir	*init_file(const char *restrict path)
-{
-	struct s_dir	*out;
-	struct stat			st;
+# include "ls_comparators.h"
 
-	if (!init_stat(path, &st))
-		return (NULL);
-	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __func__));
-	out->n_objs = 1UL;
-	out->is_file = true;
-	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
-		out = free_dir(&out);
-	return (out);
-}
+/*
+** quick sort
+*/
+extern void
+q_sort(void *base,
+	const size_t n_el,
+	const size_t width,
+	int32_t (*comparator)(const void*, const void*));
+
+/*
+** insertion sort
+*/
+extern void
+i_sort(void *base,
+	const size_t n_el,
+	const size_t width,
+	int32_t (*comparator)(const void*, const void*));
+
+#endif

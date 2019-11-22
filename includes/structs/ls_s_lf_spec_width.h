@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                   :+:      :+:    :+:   */
+/*   ls_s_lf_spec_width.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:40:45 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/22 12:51:24 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 12:51:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_S_LF_SPEC_WIDTH_H
+# define LS_S_LF_SPEC_WIDTH_H
 
-inline struct s_dir	*init_file(const char *restrict path)
+# include <sys/types.h>
+
+struct	s_lf_spec_width
 {
-	struct s_dir	*out;
-	struct stat			st;
+	size_t	st_nlnk_w;
+	size_t	st_size_w;
+	size_t	pw_name_w;
+	size_t	gr_name_w;
+};
 
-	if (!init_stat(path, &st))
-		return (NULL);
-	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __func__));
-	out->n_objs = 1UL;
-	out->is_file = true;
-	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
-		out = free_dir(&out);
-	return (out);
-}
+#endif

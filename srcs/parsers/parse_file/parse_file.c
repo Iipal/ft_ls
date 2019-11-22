@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:51:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:27:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_long_format_listing.h"
+#include "ls.h"
 
 static inline bool __attribute__((__always_inline__))
 	s_check_def_or_under_link_print(const char *restrict file,

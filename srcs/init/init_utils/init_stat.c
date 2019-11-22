@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_lstat_check.c                                 :+:      :+:    :+:   */
+/*   init_stat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 23:14:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:28:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 inline bool
-	init_lstat_check(const char *restrict path,
+	init_stat(const char *restrict path,
 		struct stat *restrict buff)
 {
 	struct stat	tmp_lstat;
@@ -28,7 +28,7 @@ inline bool
 }
 
 inline bool
-	init_lstat_check_no_errno(const char *restrict path,
+	init_stat_no_err(const char *restrict path,
 		struct stat *restrict buff)
 {
 	struct stat	tmp_lstat;

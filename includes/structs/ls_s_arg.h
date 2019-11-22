@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                   :+:      :+:    :+:   */
+/*   ls_s_arg.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:40:45 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/22 12:47:11 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 12:47:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_S_ARG_H
+# define LS_S_ARG_H
 
-inline struct s_dir	*init_file(const char *restrict path)
+# include <sys/types.h>
+# include <stdbool.h>
+
+struct	s_arg
 {
-	struct s_dir	*out;
-	struct stat			st;
+	char	*path;
+	size_t	path_len;
+	bool	is_dir;
+	char	dummy[7];
+};
 
-	if (!init_stat(path, &st))
-		return (NULL);
-	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __func__));
-	out->n_objs = 1UL;
-	out->is_file = true;
-	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
-		out = free_dir(&out);
-	return (out);
-}
+#endif

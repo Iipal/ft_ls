@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:16:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_long_format_listing.h"
+#include "ls.h"
 
 struct s_lf_spec_width
 	plf_width_spec(const uint32_t n_objs,

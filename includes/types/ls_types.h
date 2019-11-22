@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                   :+:      :+:    :+:   */
+/*   ls_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:40:45 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/22 12:37:39 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 12:48:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_TYPES_H
+# define LS_TYPES_H
 
-inline struct s_dir	*init_file(const char *restrict path)
+# ifdef __APPLE__
+typedef blkcnt_t	t_blkcnt_t;
+typedef time_t		t_time_t;
+# else
+typedef __blkcnt_t	t_blkcnt_t;
+typedef __time_t	t_time_t;
+# endif
+
+typedef struct	s_2si
 {
-	struct s_dir	*out;
-	struct stat			st;
+	int	x;
+	int	y;
+}				t_s2si;
 
-	if (!init_stat(path, &st))
-		return (NULL);
-	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __func__));
-	out->n_objs = 1UL;
-	out->is_file = true;
-	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
-		out = free_dir(&out);
-	return (out);
-}
+typedef struct	s_2sl
+{
+	long	x;
+	long	y;
+}				t_s2sl;
+
+#endif

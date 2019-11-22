@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:46:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:12:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ struct s_dir
 	struct s_dir_init	h;
 	uint32_t			i;
 
-	if (!(i = ~0U) || !init_lstat_check_no_errno(path, &h.st))
+	if (!(i = ~0U) || !init_stat_no_err(path, &h.st))
 		return (NULL);
 	if (!force_open_dir && !S_ISDIR(h.st.st_mode))
 		return (init_file(path));
@@ -55,7 +55,7 @@ struct s_dir
 	while ((h.d = readdir(h.dir)))
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == h.d->d_name[0]))
 		{
-			if (!init_lstat_check(u_full_path(h.tmp, path, h.d->d_name), &h.st))
+			if (!init_stat(u_full_path(h.tmp, path, h.d->d_name), &h.st))
 				return ((struct s_dir*)(*(ptrdiff_t*)free_dir(&out)
 						+ *(ptrdiff_t*)ls_errno_msg(__FILE__, __func__)));
 			if (!(h.obj = init_dir_obj(&out->objs[++i],

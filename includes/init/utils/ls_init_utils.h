@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plf_get_date.c                                     :+:      :+:    :+:   */
+/*   ls_init_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:23:39 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/22 12:56:38 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 12:57:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_long_format_listing.h"
+#ifndef LS_INIT_UTILS_H
+# define LS_INIT_UTILS_H
 
-inline char
-	*plf_get_date(char *restrict date_dst, const t_time_t date_time)
-{
-	const char	*date = ctime(&date_time);
+# include <dirent.h>
+# include <sys/stat.h>
 
-	if (!date)
-		return (ls_errno_msg(__FILE__, __func__));
-	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
-	date_dst[12] = '\0';
-	return (date_dst);
-}
+extern struct dirent
+*dup_dirent(const struct dirent *restrict src);
+
+extern struct stat
+*dup_stat(const struct stat *restrict src);
+
+#endif

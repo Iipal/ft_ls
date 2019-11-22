@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 11:12:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:26:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static struct s_arg
 	i = -1;
 	out = NULL;
 	while (ac > ++i)
-		if (init_lstat_check(av[i], &st))
+		if (init_stat(av[i], &st))
 			out = s_dup_arg(out, (struct s_arg){av[i],
 				ft_strlen(av[i]), S_ISDIR(st.st_mode)});
 	i_sort(out, g_va_counter, sizeof(struct s_arg), sort_isdir_args_cmp);

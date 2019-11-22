@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/21 21:49:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 12:41:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@
 # define F_REVERSE    'r'
 # define F_RECURSIVE  'R'
 # define F_HIDDEN     'a'
-
-# define E_ILL_OPT ERR "illegal option -- "
 
 #endif

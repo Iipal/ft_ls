@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_file.c                                   :+:      :+:    :+:   */
+/*   ls_comparators.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:40:45 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/22 12:55:27 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/22 12:55:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_COMPARATORS_H
+# define LS_COMPARATORS_H
 
-inline struct s_dir	*init_file(const char *restrict path)
-{
-	struct s_dir	*out;
-	struct stat			st;
+# include <sys/types.h>
 
-	if (!init_stat(path, &st))
-		return (NULL);
-	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __func__));
-	out->n_objs = 1UL;
-	out->is_file = true;
-	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
-		out = free_dir(&out);
-	return (out);
-}
+int32_t
+sort_ascii_dirents_cmp(const void *a, const void *b);
+
+int32_t
+sort_ascii_tabs_cmp(const void *a, const void *b);
+
+int32_t
+sort_ascii_args_cmp(const void *a, const void *b);
+
+int32_t
+sort_isdir_args_cmp(const void *a, const void *b);
+
+int32_t
+sort_time_stats_cmp(const void *a, const void *b);
+
+#endif

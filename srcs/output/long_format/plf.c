@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:41:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 13:15:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_long_format_listing.h"
+#include "ls.h"
 
 static inline void
 	s_print_link(const char *restrict file)
