@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 13:26:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 21:00:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static inline struct s_arg __attribute__((__always_inline__))
 	if (!dst)
 		dst = ft_memalloc(sizeof(struct s_arg));
 	else
-		dst = ft_memrealloc(dst, sizeof(*dst) * g_va_counter,
-								sizeof(*dst) * (g_va_counter + 1));
+		dst = ft_memrealloc(dst, sizeof(struct s_arg) * g_va_counter,
+								sizeof(struct s_arg) * (g_va_counter + 1));
 	dst[g_va_counter++] = (struct s_arg) { ft_strndup(arg.path, arg.path_len),
 											arg.path_len, arg.is_dir, { 0 } };
 	return (dst);

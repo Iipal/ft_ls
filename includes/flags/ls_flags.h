@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 12:41:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 21:08:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 
 # include "libft.h"
 # include "ls_errno.h"
+
+/*
+**	Command line options(flags).
+**	 Available options:
+**	  -l - Long format listing. (BIT_L_LIST)
+**	  -1 - List one file per line. (BIT_1_ONE)
+**	  -t - sort by modification time, newest first. (BIT_T_TIME)
+**	  -f - don't sorted, enable -a. (BIT_F_NOT_SORTED)
+**	  -r - reverse order while sorting. (BIT_R_REVERSE)
+**	  -R - list subdirectories recursively. (BIT_R_RECURSIVE)
+**	  -a - do not ignore entires starting with '.'. (BIT_A_HIDDEN)
+*/
+extern int32_t	g_flags;
 
 # define BIT_L_LIST       (1 << 0)
 # define BIT_1_ONE        (1 << 1)

@@ -6,17 +6,32 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:51:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/22 21:17:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
+/*
+** ls_output.h:
+*/
 char	*g_src_path = NULL;
 size_t	g_max_name_len = 0UL;
+
+/*
+** ls_system.h:
+*/
 t_s2si	g_win_size = { 100, 100 };
-int32_t	g_main_ret = EXIT_SUCCESS;
+
+/*
+** ls_falgs.h:
+*/
 int32_t	g_flags = 0;
+
+/*
+** ls.h:
+*/
+int32_t	g_main_ret = EXIT_SUCCESS;
 
 int	main(int argc, char *argv[])
 {
