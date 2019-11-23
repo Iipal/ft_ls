@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 21:00:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:51:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int32_t	g_va_notdir_counter = 0;
 static inline struct s_arg __attribute__((__always_inline__))
 	*s_dup_arg(struct s_arg *restrict dst, const struct s_arg arg)
 {
-	if (arg.is_dir)
+	if (!arg.is_dir)
 		++g_va_notdir_counter;
 	if (!dst)
 		dst = ft_memalloc(sizeof(struct s_arg));
@@ -51,6 +51,31 @@ static struct s_arg
 	return (out);
 }
 
+static inline void __attribute__((__always_inline__))
+	s_parse_arg_dir(struct s_arg *arg, int ac, int i)
+{
+	g_src_path = ft_strndup(arg->path, arg->path_len);
+	if (1 < ac)
+		ft_printf("%s:\n", g_src_path);
+	parse_dir(g_src_path);
+	if (g_va_counter != i + 1)
+		ft_putchar('\n');
+}
+
+static inline void  __attribute__((__always_inline__))
+	s_parse_arg_file(const char *restrict path, int i)
+{
+	ft_putstr(path);
+	if (g_va_notdir_counter > i + 1)
+		ft_putchar(IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
+	else if (g_va_notdir_counter <= i + 1)
+	{
+		ft_putchar('\n');
+		if (g_va_notdir_counter != g_va_counter)
+			ft_putchar('\n');
+	}
+}
+
 int
 	parse_args(int ac, char **av)
 {
@@ -63,16 +88,10 @@ int
 	while (g_va_counter > ++i)
 	{
 		ft_strdel(&g_src_path);
-		g_src_path = ft_strndup(args[i].path, args[i].path_len);
-		if (args[i].is_dir && 1 < ac)
-			ft_printf("%s:\n", g_src_path);
-		if (!parse_dir(g_src_path))
-		{
-			ft_putchar('\n');
-			continue ;
-		}
-		if (g_va_counter != i + 1)
-			ft_putchar('\n');
+		if (args[i].is_dir)
+			s_parse_arg_dir(&args[i], ac, i);
+		else
+			s_parse_arg_file(args[i].path, i);
 		ft_strdel(&args[i].path);
 	}
 	free(args);

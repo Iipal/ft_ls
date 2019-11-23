@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:53:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:23:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void
 	pdf(const int32_t n_objs, const struct s_object *restrict objs)
 {
 	const int32_t	ch_separator = (IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
-	t_s2si	items_fmt;
-	t_s2si	i;
+	t_s2si			items_fmt;
+	t_s2si			i;
 	int32_t			curr_i;
 
 	i.y = -1;
@@ -38,7 +38,7 @@ void
 			if (n_objs <= curr_i)
 				break ;
 			ft_printf("%s", objs[curr_i].dirent->d_name);
-			if (items_fmt.x - 1 != i.x)
+			if (n_objs > curr_i)
 			{
 				ft_putchar(ch_separator);
 				if (!IS_BIT(g_flags, BIT_1_ONE))

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 11:17:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:01:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static inline void
 	char	*buff_path;
 
 	if (!(buff = (char*)ft_memalloc(sizeof(char) * 256UL)))
-		return ((void)ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
+		return ((void)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, ""));
 	if (!(buff_path = (char*)ft_memalloc(sizeof(char) * 256UL)))
-		return ((void)ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
+		return ((void)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, ""));
 	readlink(u_full_path(buff_path, g_src_path, file), buff, 256UL);
 	ft_strdel(&buff_path);
 	ft_printf(" -> %s", buff);
@@ -60,7 +60,7 @@ void
 	i = -1;
 	total = 0L;
 	fmt_str = plf_fmt_str(plf_width_spec(n_objs, objs, &total));
-	ft_printf("total %ld\n", total);
+	ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
 		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i], false);
 	ft_strdel(&fmt_str);

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:49:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:30:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static bool			s_check_valid_flag(const char curr_flag)
 
 static inline void	s_flags_dependecy(void)
 {
-	if (IS_BIT(g_flags, BIT_1_ONE))
+	if (IS_BIT(g_flags, BIT_1_ONE) && 0 < g_isatty_ret)
 		UNSET_BIT(g_flags, BIT_L_LIST);
 	if (IS_BIT(g_flags, BIT_F_NOT_SORTED))
 		SET_BIT(g_flags, BIT_A_HIDDEN);
