@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 11:03:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 14:56:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
 */
 extern int32_t	g_flags;
+
+# define FLAGS_USAGE "usage: ft_ls [-lafRrtu] [file ...]"
 
 # define BIT_L_LIST       (1 << 0)
 # define BIT_1_ONE        (1 << 1)
