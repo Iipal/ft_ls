@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:45:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 11:14:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ inline struct s_object
 
 	out = dst;
 	if (!out && !(out = ft_memalloc(sizeof(struct s_object))))
-		return (ls_errno_msg(__FILE__, __func__));
+		return (ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
 	if (dirent && !(out->dirent = dup_dirent(dirent)))
 		return (free_dir_obj(out));
 	if (stat && !(out->stat = dup_stat(stat)))

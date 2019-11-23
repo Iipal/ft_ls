@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 13:16:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 11:16:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ inline char
 	const char	*date = ctime(&date_time);
 
 	if (!date)
-		return (ls_errno_msg(__FILE__, __func__));
+		return (ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
 	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
 	date_dst[12] = '\0';
 	return (date_dst);

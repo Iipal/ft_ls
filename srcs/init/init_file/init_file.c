@@ -20,7 +20,7 @@ inline struct s_dir	*init_file(const char *restrict path)
 	if (!init_stat(path, &st))
 		return (NULL);
 	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __func__));
+		return (ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
 	out->n_objs = 1UL;
 	out->is_file = true;
 	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
