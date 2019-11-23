@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 18:54:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 22:30:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ inline char
 	const t_time_t	mon_diff = s_get_mon(time(NULL)) - s_get_mon(file_time);
 
 	if (!date)
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, ""));
+		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ctime"));
 	date_dst = ft_strncpy(date_dst, date + 4UL, 12UL);
 	date_dst[12] = '\0';
 	if (6L <= mon_diff)
