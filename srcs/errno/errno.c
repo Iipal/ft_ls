@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 23:06:46 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 11:17:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 22:07:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ inline void
 				const int32_t fn_line,
 				const char *restrict const err_msg)
 {
-	ft_printf("ft_ls: (%s[%s:%d]) %s: %s\n",
+	ft_dprintf(STDERR_FILENO, "ft_ls: (%s[%s:%d]) %s: %s\n",
 		file_name, fn_name, fn_line, err_msg, strerror(errno));
 	return (NULL);
 }
