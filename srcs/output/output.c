@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 13:01:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 19:45:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,12 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 void		output(const char *restrict path,
 				const struct s_dir *restrict cd)
 {
-	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
-	{
-		if (IS_BIT(g_flags, BIT_T_TIME))
-			q_sort(cd->objs, cd->n_objs,
-				sizeof(struct s_object), sort_time_stats_cmp);
-		else
-			i_sort(cd->objs, cd->n_objs,
-				sizeof(struct s_object), sort_ascii_dirents_cmp);
-	}
+	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED) && IS_BIT(g_flags, BIT_T_TIME))
+		choose_sort(cd->objs, cd->n_objs,
+			sizeof(struct s_object), sort_time_stats_cmp);
+	else if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
+		choose_sort(cd->objs, cd->n_objs,
+			sizeof(struct s_object), sort_ascii_dirents_cmp);
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf(cd->n_objs, cd->objs);
 	else
