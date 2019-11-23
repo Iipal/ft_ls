@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_dirents_cmp.c                           :+:      :+:    :+:   */
+/*   sort_ascii_objects_cmp.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 00:39:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 19:51:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int32_t	sort_ascii_dirents_cmp(const void *a, const void *b)
+int32_t	sort_ascii_objects_cmp(const void *a, const void *b)
 {
 	int32_t	cmp;
 

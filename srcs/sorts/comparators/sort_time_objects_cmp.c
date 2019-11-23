@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_time_stats_cmp.c                              :+:      :+:    :+:   */
+/*   sort_time_objects_cmp.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 15:16:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 19:54:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int32_t	sort_time_stats_cmp(const void *a, const void *b)
+int32_t	sort_time_objects_cmp(const void *a, const void *b)
 {
 	const struct s_object	*aa = (const struct s_object*)a;
 	const struct s_object	*bb = (const struct s_object*)b;
@@ -23,6 +23,6 @@ int32_t	sort_time_stats_cmp(const void *a, const void *b)
 	else
 		cmp = aa->stat->st_ctime - bb->stat->st_ctime;
 	if (!cmp)
-		return (sort_ascii_dirents_cmp(a, b));
+		return (sort_ascii_objects_cmp(a, b));
 	return (IS_BIT(g_flags, BIT_R_REVERSE) ? cmp : -cmp);
 }

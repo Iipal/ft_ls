@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 19:45:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 19:52:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void		output(const char *restrict path,
 {
 	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED) && IS_BIT(g_flags, BIT_T_TIME))
 		choose_sort(cd->objs, cd->n_objs,
-			sizeof(struct s_object), sort_time_stats_cmp);
+			sizeof(struct s_object), sort_time_objects_cmp);
 	else if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
 		choose_sort(cd->objs, cd->n_objs,
-			sizeof(struct s_object), sort_ascii_dirents_cmp);
+			sizeof(struct s_object), sort_ascii_objects_cmp);
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf(cd->n_objs, cd->objs);
 	else
