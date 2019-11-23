@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 19:58:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 20:00:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ inline void
 		path);
 	if (S_ISLNK(obj->stat->st_mode))
 		s_print_link(path);
-	ft_printf("\n");
+	ft_putchar('\n');
 	if (is_free_fmt)
 		ft_strdel((char**)&fmt_str);
 }
