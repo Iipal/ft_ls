@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 11:17:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 19:52:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 	i = ~0U;
 	d_name = NULL;
 	if (!(subdir = (char*)ft_memalloc(sizeof(char) * 1024)))
-		return ((bool)ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
+		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, ""));
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].dirent->d_name;
@@ -42,15 +42,12 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 void		output(const char *restrict path,
 				const struct s_dir *restrict cd)
 {
-	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
-	{
-		if (IS_BIT(g_flags, BIT_T_TIME))
-			q_sort(cd->objs, cd->n_objs,
-				sizeof(struct s_object), sort_time_stats_cmp);
-		else
-			i_sort(cd->objs, cd->n_objs,
-				sizeof(struct s_object), sort_ascii_dirents_cmp);
-	}
+	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED) && IS_BIT(g_flags, BIT_T_TIME))
+		choose_sort(cd->objs, cd->n_objs,
+			sizeof(struct s_object), sort_time_objects_cmp);
+	else if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
+		choose_sort(cd->objs, cd->n_objs,
+			sizeof(struct s_object), sort_ascii_objects_cmp);
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf(cd->n_objs, cd->objs);
 	else

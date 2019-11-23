@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:59:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 13:00:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:34:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ init_stat(const char *restrict path, struct stat *restrict buff);
 extern bool
 init_stat_no_err(const char *restrict path, struct stat *restrict buff);
 
-struct s_dir
+extern struct s_dir
 *init_dir(const char *path, const bool force_open_dir);
 
 extern struct s_object

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 22:59:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 11:16:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:01:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ inline struct dirent
 	struct dirent	*out;
 
 	if (!(out = ft_memalloc(sizeof(struct dirent))))
-		return (ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
+		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, ""));
 	*out = *src;
 	return (out);
 }
@@ -29,7 +29,7 @@ inline struct stat
 	struct stat	*out;
 
 	if (!(out = ft_memalloc(sizeof(struct stat))))
-		return (ls_errno_msg(__FILE__, __pfunc__, __LINE__, ""));
+		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, ""));
 	*out = *src;
 	return (out);
 }

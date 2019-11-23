@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 13:47:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 13:11:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ inline void
 		const struct s_object *restrict obj)
 {
 	struct s_dir	*cd;
-	bool				is_link_parse_as_dir;
+	bool			is_link_parse_as_dir;
 
 	cd = NULL;
 	is_link_parse_as_dir = false;
