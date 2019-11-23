@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 15:48:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 16:31:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ static inline void
 	free(temp);
 }
 
+static inline void
+	s_flags_dependecy(size_t *curr_offset, char *fmt_str, size_t pw_name_w)
+{
+	if (!IS_BIT(g_flags, BIT_G_NOT_OWNER))
+	{
+		ft_strcpy(fmt_str + *curr_offset, "-");
+		*curr_offset += sizeof("-") - 1UL;
+		s_fmtcat_int(fmt_str + *curr_offset, pw_name_w);
+		*curr_offset += ft_digits(pw_name_w);
+		ft_strcpy(fmt_str + *curr_offset, "s  %-");
+		*curr_offset += sizeof("s  %-") - 1UL;
+	}
+	else
+	{
+		ft_strcpy(fmt_str + *curr_offset, "s%-");
+		*curr_offset += sizeof("s%-") - 1UL;
+	}
+}
+
 char
 	*plf_fmt_str(const struct s_lf_spec_width ws)
 {
@@ -68,20 +87,7 @@ char
 	curr_offset += ft_digits(ws.st_nlnk_w);
 	ft_strcpy(fmt_str + curr_offset, "d %");
 	curr_offset += sizeof("d %") - 1UL;
-	if (!IS_BIT(g_flags, BIT_G_NOT_OWNER))
-	{
-		ft_strcpy(fmt_str + curr_offset, "-");
-		curr_offset += sizeof("-") - 1UL;
-		s_fmtcat_int(fmt_str + curr_offset, ws.pw_name_w);
-		curr_offset += ft_digits(ws.pw_name_w);
-		ft_strcpy(fmt_str + curr_offset, "s  %-");
-		curr_offset += sizeof("s  %-") - 1UL;
-	}
-	else
-	{
-		ft_strcpy(fmt_str + curr_offset, "s%-");
-		curr_offset += sizeof("s%-") - 1UL;
-	}
+	s_flags_dependecy(&curr_offset, fmt_str, ws.pw_name_w);
 	s_fmtcat_int(fmt_str + curr_offset, ws.gr_name_w);
 	curr_offset += ft_digits(ws.gr_name_w);
 	ft_strcpy(fmt_str + curr_offset, "s  %");
