@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 14:59:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 15:06:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static inline int32_t
 static bool
 	s_check_valid_flag(const char curr_flag)
 {
-	static char		valid_flags[] = { F_LIST, F_ONE, F_TIME,
-			F_NOT_SORTED, F_REVERSE, F_RECURSIVE, F_HIDDEN };
+	static char		valid_flags[] = { F_ONE, F_HIDDEN, F_NOT_SORTED,
+				F_LIST, F_RECURSIVE, F_REVERSE, F_TIME, F_ACCESS };
 	const size_t	valid_flags_size = ARR_SIZE(valid_flags);
 	size_t			i;
 
