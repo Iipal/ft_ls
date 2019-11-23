@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 15:06:15 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 15:30:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static inline int32_t
 	s_flags_dependecy(const int32_t flag)
 {
-	if (IS_BIT(flag, BIT_L_LIST))
+	if (IS_BIT(flag, BIT_G_NOT_OWNER))
+		SET_BIT(g_flags, BIT_L_LIST);
+	else if (IS_BIT(flag, BIT_L_LIST))
 		UNSET_BIT(g_flags, BIT_1_ONE);
 	else if (IS_BIT(flag, BIT_1_ONE))
 		UNSET_BIT(g_flags, BIT_L_LIST);
@@ -28,7 +30,7 @@ static bool
 	s_check_valid_flag(const char curr_flag)
 {
 	static char		valid_flags[] = { F_ONE, F_HIDDEN, F_NOT_SORTED,
-				F_LIST, F_RECURSIVE, F_REVERSE, F_TIME, F_ACCESS };
+		F_NOT_OWNER, F_LIST, F_RECURSIVE, F_REVERSE, F_TIME, F_ACCESS };
 	const size_t	valid_flags_size = ARR_SIZE(valid_flags);
 	size_t			i;
 

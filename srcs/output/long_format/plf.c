@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 13:01:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 15:41:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ inline void
 {
 	ft_printf(fmt_str,
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->stat->st_mode),
-		obj->acl_ch,
-		obj->stat->st_nlink,
-		getpwuid(obj->stat->st_uid)->pw_name,
-		getgrgid(obj->stat->st_gid)->gr_name,
-		obj->stat->st_size,
-		plf_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat->st_ctime),
-		path);
+		obj->acl_ch, obj->stat->st_nlink,
+		IS_BIT(g_flags, BIT_G_NOT_OWNER)
+			? "" : getpwuid(obj->stat->st_uid)->pw_name,
+		getgrgid(obj->stat->st_gid)->gr_name, obj->stat->st_size,
+		plf_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat->st_ctime), path);
 	if (S_ISLNK(obj->stat->st_mode))
 		s_print_link(path);
 	ft_printf("\n");
