@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 13:34:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/23 19:21:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ inline struct s_dir
 {
 	struct s_dir_init	h;
 
+	g_max_name_len = 0UL;
 	if (!(h.i = ~0U) || !init_stat(path, &h.st))
 		return (NULL);
 	if (!force_open_dir && !S_ISDIR(h.st.st_mode))
