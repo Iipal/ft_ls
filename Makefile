@@ -15,11 +15,11 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS_NAMES) $(IFLAGS) -o $(NAME)
+	@$(CC) $(addprefix "-D ",$(DEFINES)) $(CFLAGS) $(OBJS) $(LIBS_NAMES) $(IFLAGS) -o $(NAME)
 	@$(MAKE) STATUS
 
 $(OBJS): %.o: %.c
-	@$(CC) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
+	@$(CC) $(addprefix "-D ",$(DEFINES)) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
 	@$(ECHO) " | $@: $(MSG_BSUCCESS)"
 
 $(LIBS_NAMES):
@@ -27,6 +27,9 @@ $(LIBS_NAMES):
 
 STATUS:
 	@$(ECHO) "/ compiled [$(words $(OBJS))] objects to $(CLR_INVERT)$(NAME)$(CLR_WHITE): $(MSG_SUCCESS)"
+ifneq (,$(DEFINES))
+	@$(ECHO) "| defines: $(DEFINES)"
+endif
 	@$(ECHO) "\ flags: $(CLR_BLUE)$(CFLAGS)$(CLR_WHITE)"
 
 debug_all: fclean multi
