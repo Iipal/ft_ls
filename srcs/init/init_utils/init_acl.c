@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:19:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 23:06:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 23:10:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ inline char
 	init_acl(const char *restrict filename,
 		const struct stat *restrict st)
 {
-	ssize_t		xattr;
-	char		*full_path;
+	ssize_t	xattr;
 
 	(void)u_full_path(g_data_buf, g_src_path, filename);
 	xattr = listxattr(g_data_buf, NULL, 0);
