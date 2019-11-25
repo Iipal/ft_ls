@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:19:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 23:10:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 23:10:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ inline char
 
 	(void)u_full_path(g_data_buf, g_src_path, filename);
 	xattr = listxattr(g_data_buf, NULL, 0);
-	ft_printf("[%zd] : \'%s\'\n", xattr, g_data_buf);
 	if (41 == xattr)
 		return ('+');
 	return (' ');
