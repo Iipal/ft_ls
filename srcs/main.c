@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 13:30:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 21:09:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 ** ls_output.h:
 */
-char	*g_src_path = NULL;
+char	g_src_path[1024] = { 0 };
 size_t	g_max_name_len = 0UL;
 
 /*
@@ -33,6 +33,7 @@ int32_t	g_flags = 0;
 ** ls.h:
 */
 int32_t	g_main_ret = EXIT_SUCCESS;
+char	g_data_buf[1024] = { 0 };
 
 int	main(int ac, char *av[])
 {
@@ -41,7 +42,7 @@ int	main(int ac, char *av[])
 	if (!get_term_win_size())
 		return (EXIT_FAILURE);
 	g_isatty_ret = isatty(STDOUT_FILENO);
-	g_src_path = ft_strdup(".");
+	ft_strncpy(g_src_path, ".", sizeof("."));
 	(!g_isatty_ret) ? SET_BIT(g_flags, BIT_1_ONE) : 0;
 	if (!ac)
 		g_main_ret = !parse_dir(g_src_path);
@@ -56,6 +57,5 @@ int	main(int ac, char *av[])
 		}
 		(!ac) ? (g_main_ret = !parse_dir(g_src_path)) : parse_args(ac, av);
 	}
-	ft_strdel(&g_src_path);
 	return (g_main_ret);
 }

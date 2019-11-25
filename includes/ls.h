@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 21:11:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 21:27:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,10 @@
 ** Variable changes only in main.c and parse_args.c
 */
 extern int		g_main_ret;
+
+/*
+** char buffer for anything.
+*/
+extern char		g_data_buf[1024];
 
 #endif

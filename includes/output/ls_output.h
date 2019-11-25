@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:49:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 21:14:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 21:03:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **	Store the dupcliate of argument name which currently parsing.
 **	 (Used for links)
 */
-extern char		*g_src_path;
+extern char		g_src_path[1024];
 
 /*
 ** Store the max item name lenght in directory which currently parsing.

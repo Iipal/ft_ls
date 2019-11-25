@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 19:46:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 21:26:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static struct s_arg
 static inline void __attribute__((__always_inline__))
 	s_parse_arg_dir(struct s_arg *arg, int ac, int i)
 {
-	g_src_path = ft_strndup(arg->path, arg->path_len);
+	ft_strncpy(g_src_path, arg->path, arg->path_len);
 	if (1 < ac)
 		ft_printf("%s:\n", g_src_path);
 	parse_dir(g_src_path);
@@ -94,7 +94,6 @@ int
 	i = -1;
 	while (g_va_counter > ++i)
 	{
-		ft_strdel(&g_src_path);
 		if (args[i].is_dir)
 			s_parse_arg_dir(&args[i], ac, i);
 		else

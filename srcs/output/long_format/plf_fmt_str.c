@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 16:31:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 21:55:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,57 +43,22 @@ struct s_lf_spec_width
 	return (ws);
 }
 
-static inline void
-	s_fmtcat_int(char *restrict dst, int32_t num)
-{
-	char	*temp;
-
-	temp = ft_itoa(num);
-	ft_strcpy(dst, temp);
-	free(temp);
-}
-
-static inline void
-	s_flags_dependecy(size_t *curr_offset, char *fmt_str, size_t pw_name_w)
-{
-	if (!IS_BIT(g_flags, BIT_G_NOT_OWNER))
-	{
-		ft_strcpy(fmt_str + *curr_offset, "-");
-		*curr_offset += sizeof("-") - 1UL;
-		s_fmtcat_int(fmt_str + *curr_offset, pw_name_w);
-		*curr_offset += ft_digits(pw_name_w);
-		ft_strcpy(fmt_str + *curr_offset, "s  %-");
-		*curr_offset += sizeof("s  %-") - 1UL;
-	}
-	else
-	{
-		ft_strcpy(fmt_str + *curr_offset, "s%-");
-		*curr_offset += sizeof("s%-") - 1UL;
-	}
-}
-
 char
 	*plf_fmt_str(const struct s_lf_spec_width ws)
 {
 	char	*fmt_str;
 	size_t	curr_offset;
 
-	fmt_str = ft_strnew(STR_LEN_DEFAULT_FMT + ft_digits(ws.st_nlnk_w)
-				+ ft_digits(ws.st_size_w) + ft_digits(ws.pw_name_w)
+	fmt_str = ft_strnew(STR_LEN_DEFAULT_FMT
+				+ ft_digits(ws.st_nlnk_w)
+				+ ft_digits(ws.st_size_w)
+				+ ft_digits(ws.pw_name_w)
 				+ ft_digits(ws.gr_name_w));
-	ft_strcpy(fmt_str, "%s%c %");
-	curr_offset = sizeof("%s%c %") - 1UL;
-	s_fmtcat_int(fmt_str + curr_offset, ws.st_nlnk_w);
-	curr_offset += ft_digits(ws.st_nlnk_w);
-	ft_strcpy(fmt_str + curr_offset, "d %");
-	curr_offset += sizeof("d %") - 1UL;
-	s_flags_dependecy(&curr_offset, fmt_str, ws.pw_name_w);
-	s_fmtcat_int(fmt_str + curr_offset, ws.gr_name_w);
-	curr_offset += ft_digits(ws.gr_name_w);
-	ft_strcpy(fmt_str + curr_offset, "s  %");
-	curr_offset += sizeof("s  %") - 1UL;
-	s_fmtcat_int(fmt_str + curr_offset, ws.st_size_w);
-	curr_offset += ft_digits(ws.st_size_w);
-	ft_strcpy(fmt_str + curr_offset, "d %s %s");
+	if (!IS_BIT(g_flags, BIT_G_NOT_OWNER))
+		sprintf(fmt_str, "%%s%%c %%%zud %%-%zus  %%-%zus  %%%zud %%s %%s",
+			ws.st_nlnk_w, ws.pw_name_w, ws.gr_name_w, ws.st_size_w);
+	else
+		sprintf(fmt_str, "%%s%%c %%%zud %%s%%-%zus  %%%zud %%s %%s",
+			ws.st_nlnk_w, ws.pw_name_w, ws.st_size_w);
 	return (fmt_str);
 }
