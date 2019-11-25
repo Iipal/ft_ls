@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 21:26:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/25 22:55:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static inline void __attribute__((__always_inline__))
 static inline void  __attribute__((__always_inline__))
 	s_parse_arg_file(const char *restrict path, int i)
 {
-	ft_putstr(path);
+	parse_dir(path);
 	if (g_va_notdir_counter > i + 1)
 		ft_putchar(IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
 	else if (g_va_notdir_counter <= i + 1)
