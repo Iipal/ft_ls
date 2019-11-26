@@ -26,11 +26,12 @@ $(LIBS_NAMES):
 	@$(MAKE) -C $(dir $@) $(MAKECMDGOALS)
 
 STATUS:
-	@$(ECHO) "/ compiled [$(words $(OBJS))] objects to $(CLR_INVERT)$(NAME)$(CLR_WHITE): $(MSG_SUCCESS)"
+	@$(ECHO) "/ compiled: $(NAME) $(MSG_SUCCESS)"
 ifneq (,$(DEFINES))
 	@$(ECHO) "| defines: $(DEFINES)"
 endif
-	@$(ECHO) "\ flags: $(CLR_BLUE)$(CFLAGS)$(CLR_WHITE)"
+	@$(ECHO) "| details: [$(words $(OBJS))].c, [$(words $(IFLAGS))].h files."
+	@$(ECHO) "_ flags: $(CLR_BLUE)$(CFLAGS)$(CLR_WHITE)"
 
 debug_all: fclean multi
 debug: multi
@@ -41,11 +42,11 @@ sanitize: multi
 clean:
 	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) clean;)
 	@$(DEL) $(OBJS)
-	@$(ECHO) "$(CLR_INVERT)deleted$(CLR_WHITE): $(NAME) source objects."
+	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NAME) source objects."
 fclean: clean
 	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) fclean;)
 	@$(DEL) $(NAME)
-	@$(ECHO) "$(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD)"
+	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD)"
 
 del:
 	@$(DEL) $(OBJS)
