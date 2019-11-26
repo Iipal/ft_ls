@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plf_fmt_str.c                                      :+:      :+:    :+:   */
+/*   plf_get_fmt_str.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 21:55:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 11:19:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 struct s_lf_spec_width
-	plf_width_spec(const uint32_t n_objs,
+	s_width_specific(const int32_t n_objs,
 		const struct s_object *restrict objs,
 		t_blkcnt_t *restrict total)
 {
@@ -43,22 +43,20 @@ struct s_lf_spec_width
 	return (ws);
 }
 
-char
-	*plf_fmt_str(const struct s_lf_spec_width ws)
+inline char
+	*plf_get_fmt_str(const int32_t n_objs,
+		const struct s_object *restrict objs,
+		t_blkcnt_t *restrict total)
 {
-	char	*fmt_str;
-	size_t	curr_offset;
+	struct s_lf_spec_width	ws;
+	size_t					curr_offset;
 
-	fmt_str = ft_strnew(STR_LEN_DEFAULT_FMT
-				+ ft_digits(ws.st_nlnk_w)
-				+ ft_digits(ws.st_size_w)
-				+ ft_digits(ws.pw_name_w)
-				+ ft_digits(ws.gr_name_w));
+	ws = s_width_specific(n_objs, objs, total);
 	if (!IS_BIT(g_flags, BIT_G_NOT_OWNER))
-		sprintf(fmt_str, "%%s%%c %%%zud %%-%zus  %%-%zus  %%%zud %%s %%s",
+		ft_sprintf(g_data_buf, "%%s%%c %%%zud %%-%zus  %%-%zus  %%%zud %%s %%s",
 			ws.st_nlnk_w, ws.pw_name_w, ws.gr_name_w, ws.st_size_w);
 	else
-		sprintf(fmt_str, "%%s%%c %%%zud %%s%%-%zus  %%%zud %%s %%s",
+		ft_sprintf(g_data_buf, "%%s%%c %%%zud %%s%%-%zus  %%%zud %%s %%s",
 			ws.st_nlnk_w, ws.pw_name_w, ws.st_size_w);
-	return (fmt_str);
+	return (g_data_buf);
 }

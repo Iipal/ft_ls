@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 22:31:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 11:20:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static inline void
 inline void
 	plf_obj(char *restrict fmt_str,
 		const char *restrict path,
-		const struct s_object *restrict obj,
-		const bool is_free_fmt)
+		const struct s_object *restrict obj)
 {
 	ft_printf(fmt_str,
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->stat->st_mode),
@@ -50,8 +49,6 @@ inline void
 	if (S_ISLNK(obj->stat->st_mode))
 		s_print_link(path);
 	ft_putchar('\n');
-	if (is_free_fmt)
-		ft_strdel((char**)&fmt_str);
 }
 
 void
@@ -63,9 +60,8 @@ void
 
 	i = -1;
 	total = 0L;
-	fmt_str = plf_fmt_str(plf_width_spec(n_objs, objs, &total));
+	fmt_str = plf_get_fmt_str(n_objs, objs, &total);
 	ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
-		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i], false);
-	ft_strdel(&fmt_str);
+		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i]);
 }

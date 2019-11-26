@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 22:55:52 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 11:39:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static struct s_arg
 	while (ac > ++i)
 		if (init_stat(av[i], &st))
 			out = s_dup_arg(out, (struct s_arg){av[i],
-				ft_strlen(av[i]), S_ISDIR(st.st_mode)});
+				ft_strlen(av[i]) + 1UL, S_ISDIR(st.st_mode)});
 	choose_sort(out,
 		g_va_counter,
 		sizeof(struct s_arg),
@@ -61,7 +61,6 @@ static struct s_arg
 static inline void __attribute__((__always_inline__))
 	s_parse_arg_dir(struct s_arg *arg, int ac, int i)
 {
-	ft_strncpy(g_src_path, arg->path, arg->path_len);
 	if (1 < ac)
 		ft_printf("%s:\n", g_src_path);
 	parse_dir(g_src_path);
@@ -72,7 +71,6 @@ static inline void __attribute__((__always_inline__))
 static inline void  __attribute__((__always_inline__))
 	s_parse_arg_file(const char *restrict path, int i)
 {
-	parse_dir(path);
 	if (g_va_notdir_counter > i + 1)
 		ft_putchar(IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
 	else if (g_va_notdir_counter <= i + 1)
@@ -94,7 +92,8 @@ int
 	i = -1;
 	while (g_va_counter > ++i)
 	{
-		if (args[i].is_dir)
+		ft_strncpy(g_src_path, args[i].path, args[i].path_len);
+		if (args[i].is_dir || IS_BIT(g_flags, BIT_L_LIST))
 			s_parse_arg_dir(&args[i], ac, i);
 		else
 			s_parse_arg_file(args[i].path, i);
