@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:57:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 15:17:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ struct s_lf_spec_width
 			(tmp.pw_name_w > ws.pw_name_w) ? tmp.pw_name_w : ws.pw_name_w,
 			(tmp.gr_name_w > ws.gr_name_w) ? tmp.gr_name_w : ws.gr_name_w
 		};
-		if (!(S_ISDIR(objs[i].stat->st_mode)))
-			*total += objs[i].stat->st_blocks;
+		*total += objs[i].stat->st_blocks;
 	}
 	return (ws);
 }
