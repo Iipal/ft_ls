@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:40:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 14:24:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ inline void
 			? "" : getpwuid(obj->stat->st_uid)->pw_name,
 		getgrgid(obj->stat->st_gid)->gr_name,
 		obj->stat->st_size,
-		plf_get_date((char[STR_LEN_DATE]) { 0 }, IS_BIT(g_flags, BIT_U_ACCESS)
-			? obj->stat->st_atime : obj->stat->st_ctime),
+		plf_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat),
 		path);
 	if (S_ISLNK(obj->stat->st_mode))
 		s_print_link(path);
