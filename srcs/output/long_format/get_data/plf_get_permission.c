@@ -6,26 +6,34 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 00:23:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 20:12:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 16:57:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
+static inline char __attribute__((__const__))
+	s_get_type(const mode_t st_mode_perm)
+{
+	if (S_ISDIR(st_mode_perm))
+		return ('d');
+	else if (S_ISCHR(st_mode_perm))
+		return ('c');
+	else if (S_ISBLK(st_mode_perm))
+		return ('b');
+	else if (S_ISLNK(st_mode_perm))
+		return ('l');
+	else if (S_ISFIFO(st_mode_perm))
+		return ('p');
+	else if (S_ISSOCK(st_mode_perm))
+		return ('s');
+	return ('-');
+}
+
 inline char
 	*plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm)
 {
-	perm_str[0] = '-';
-	if (S_ISDIR(st_mode_perm))
-		perm_str[0] = 'd';
-	else if (S_ISLNK(st_mode_perm))
-		perm_str[0] = 'l';
-	else if (S_ISCHR(st_mode_perm))
-		perm_str[0] = 'c';
-	else if (S_ISBLK(st_mode_perm))
-		perm_str[0] = 'b';
-	else if (S_ISFIFO(st_mode_perm))
-		perm_str[0] = 'p';
+	perm_str[0] = s_get_type(st_mode_perm);
 	perm_str[1] = (st_mode_perm & S_IRUSR) ? 'r' : '-';
 	perm_str[2] = (st_mode_perm & S_IWUSR) ? 'w' : '-';
 	perm_str[3] = (st_mode_perm & S_IXUSR) ? 'x' : '-';
