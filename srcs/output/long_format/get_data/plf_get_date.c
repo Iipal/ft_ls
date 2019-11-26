@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 14:42:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 16:11:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline time_t __attribute__((__const__))
+static inline int __attribute__((__const__))
 	s_get_mon(const time_t file_time)
 {
 	return (localtime(&file_time)->tm_mon);
@@ -31,12 +31,12 @@ static inline time_t __attribute__((__const__))
 inline char
 	*plf_get_date(char *restrict date_dst, const struct stat *restrict st)
 {
-	char	*date_str = ctime(&st->st_mtime);
-	float	mon_diff;
+	const int	mon_diff = s_get_mon(time(NULL)) - s_get_mon(st->st_ctime);
+	char		*date_str;
 
+	date_str = ctime(&st->st_mtime);
 	date_dst = ft_strncpy(date_dst, date_str + 4UL, 12UL);
-	mon_diff = (float)s_get_mon(time(NULL)) - (float)s_get_mon(st->st_ctime);
-	if (6.0f <= mon_diff)
+	if (6 <= mon_diff || 0 > mon_diff)
 	{
 		date_str = ctime(&st->st_ctime);
 		date_dst = ft_strncpy(date_dst, date_str + 4UL, 12UL);

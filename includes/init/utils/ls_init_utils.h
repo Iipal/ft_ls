@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:56:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 17:21:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 16:21:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ extern bool
 init_stat_no_err(const char *restrict path, struct stat *restrict buff);
 
 extern char
-init_acl(const char *restrict filename,
+init_acl_ea(const char *restrict filename,
 	const struct stat *restrict st);
 
 #endif

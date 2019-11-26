@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:39:23 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 16:22:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ inline struct s_object
 		if (g_max_name_len < out->d_name_len)
 			g_max_name_len = out->d_name_len;
 	}
-	out->acl_ch = init_acl(filename, stat);
+	out->acl_ch = init_acl_ea(filename, stat);
 	return (out);
 }

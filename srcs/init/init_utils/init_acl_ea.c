@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_acl.c                                         :+:      :+:    :+:   */
+/*   init_acl_ea.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:19:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 23:10:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 16:21:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #if defined (__APPLE__)
 
 inline char
-	init_acl(const char *restrict filename,
+	init_acl_ea(const char *restrict filename,
 		const struct stat *restrict st)
 {
 	acl_t		acl;
@@ -45,7 +45,7 @@ inline char
 #elif defined (__linux__)
 
 inline char
-	init_acl(const char *restrict filename,
+	init_acl_ea(const char *restrict filename,
 		const struct stat *restrict st)
 {
 	ssize_t	xattr;
