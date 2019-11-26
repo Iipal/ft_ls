@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 16:26:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 17:06:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define STR_LEN_DATE        sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION  sizeof("drwxrwxrwx")
 # define STR_LEN_DEFAULT_FMT sizeof("%s%c %d %-s  %-s  %d %s %s")
+# define TIME_HALF_YEAR      15768000
 
 /*
 ** PLF - Print Long Format
