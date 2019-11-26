@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 14:24:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 16:26:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ plf_obj(char *restrict fmt_str,
 	const struct s_object *restrict obj);
 
 extern char
-*plf_get_date(char *restrict date_dst, const struct stat *restrict st);
+*plf_get_date(char *restrict dst, const struct stat *restrict st);
 
 extern char
 *plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm);
