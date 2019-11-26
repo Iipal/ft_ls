@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 22:34:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 13:39:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static struct s_dir
 	if (!dir)
 		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
 	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ft_memalloc"));
+		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
 	while ((dirent = readdir(dir)))
 		out->n_objs += !(!IS_BIT(g_flags, BIT_A_HIDDEN)
 					&& '.' == dirent->d_name[0]);
@@ -29,10 +29,10 @@ static struct s_dir
 	if (!IS_BIT(g_flags, BIT_A_HIDDEN) && !out->n_objs)
 	{
 		if (!(out->objs = ft_memalloc(sizeof(struct s_object) * 1UL)))
-			return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ft_memalloc"));
+			return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
 	}
 	else if (!(out->objs = ft_memalloc(sizeof(struct s_object) * out->n_objs)))
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ft_memalloc"));
+		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
 	return (out);
 }
 

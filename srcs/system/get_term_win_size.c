@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 17:58:24 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 22:31:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 13:40:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ inline bool	get_term_win_size(void)
 	{
 		if (!isatty(fileno(stdout)))
 			return (true);
-		return ((bool)ls_errno_msg(__FILE__,
-						__PFUNC__, __LINE__, "ft_memalloc"));
+		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ioctl"));
 	}
 	g_win_size = (t_s2si) { w_size.ws_col, w_size.ws_row };
 	return (true);

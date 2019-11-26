@@ -6,11 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 19:30:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 19:32:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 13:40:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ls.h"
+#include "ls.h"
 
 inline void	choose_sort(void *restrict base,
 				size_t n_el,

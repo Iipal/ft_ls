@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 23:06:46 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 22:45:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 13:37:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-# if defined (LS_DEBUG_MSG) || defined (DEBUG)
+#if defined (LS_DEBUG_MSG) || defined (DEBUG)
 
 inline void
 	*ls_errno_msg(const char *restrict const file_name,
@@ -25,7 +25,7 @@ inline void
 	return (NULL);
 }
 
-# else
+#else
 
 inline void
 	*ls_errno_msg(const char *restrict const file_name,
@@ -40,4 +40,4 @@ inline void
 	return (NULL);
 }
 
-# endif
+#endif
