@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 11:39:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 13:23:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static struct s_arg
 static inline void __attribute__((__always_inline__))
 	s_parse_arg_dir(struct s_arg *arg, int ac, int i)
 {
-	if (1 < ac)
+	if (1 < ac && arg->is_dir)
 		ft_printf("%s:\n", g_src_path);
 	parse_dir(g_src_path);
 	if (g_va_counter != i + 1)
@@ -71,12 +71,13 @@ static inline void __attribute__((__always_inline__))
 static inline void  __attribute__((__always_inline__))
 	s_parse_arg_file(const char *restrict path, int i)
 {
+	parse_dir(path);
 	if (g_va_notdir_counter > i + 1)
 		ft_putchar(IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
 	else if (g_va_notdir_counter <= i + 1)
 	{
 		ft_putchar('\n');
-		if (g_va_notdir_counter != g_va_counter)
+		if (g_va_notdir_counter != i + 1)
 			ft_putchar('\n');
 	}
 }
