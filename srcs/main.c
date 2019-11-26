@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 11:30:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 18:29:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int32_t	g_flags = 0;
 ** ls.h:
 */
 int32_t	g_main_ret = EXIT_SUCCESS;
-char	g_data_buf[1024] = { 0 };
+char	g_data_buf[4096] = { 0 };
 
 int	main(int ac, char *av[])
 {

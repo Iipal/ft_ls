@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/25 22:13:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 18:28:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ extern int		g_main_ret;
 /*
 ** char buffer for anything.
 */
-extern char		g_data_buf[1024];
+extern char		g_data_buf[4096];
 
 #endif
