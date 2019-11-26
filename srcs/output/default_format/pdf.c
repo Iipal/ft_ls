@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 18:42:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/26 19:50:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ static void
 void
 	pdf(const int32_t n_objs, const struct s_object *restrict objs)
 {
-	t_s2si			i;
-	t_s2si			items_fmt;
-	size_t			offset;
-	int32_t			curr_i;
+	t_s2si	i;
+	t_s2si	items_fmt;
+	size_t	offset;
+	int32_t	curr_i;
 
 	i.y = -1;
 	offset = 0UL;
-	g_win_size = (t_s2si) { 90, 99 };
 	items_fmt = s_items_output_fmt(n_objs);
 	while (items_fmt.y > ++i.y && (i.x = -1))
 	{
