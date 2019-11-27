@@ -6,15 +6,12 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 14:52:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 21:38:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_FLAGS_H
 # define LS_FLAGS_H
-
-# include "libft.h"
-# include "ls_errno.h"
 
 # define FLAGS_USAGE "usage: ft_ls [-Rafglrtu1] [file ...]"
 
