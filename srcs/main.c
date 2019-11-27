@@ -6,34 +6,25 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 18:29:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 14:54:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 /*
-** ls_output.h:
-*/
-char	g_src_path[1024] = { 0 };
-size_t	g_max_name_len = 0UL;
-
-/*
-** ls_system.h:
-*/
-t_s2si	g_win_size = { 100, 100 };
-int32_t	g_isatty_ret = 0;
-
-/*
-** ls_falgs.h:
-*/
-int32_t	g_flags = 0;
-
-/*
 ** ls.h:
 */
 int32_t	g_main_ret = EXIT_SUCCESS;
 char	g_data_buf[4096] = { 0 };
+
+int32_t	g_flags = 0;
+
+t_s2si	g_win_size = { 100, 100 };
+int32_t	g_isatty_ret = 0;
+
+char	g_src_path[1024] = { 0 };
+size_t	g_max_name_len = 0UL;
 
 int	main(int ac, char *av[])
 {

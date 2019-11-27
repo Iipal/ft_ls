@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 15:33:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 14:52:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,6 @@
 
 # include "libft.h"
 # include "ls_errno.h"
-
-/*
-**	Command line options(flags).
-**	 Available options:
-**	  -1 - Force output to be one entry per line.
-**	   This is the default when output is not to a terminal. (BIT_1_ONE)
-**	  -a - Include directory entries whose names begin with a dot ‘.’.
-**	    (BIT_A_HIDDEN)
-**	  -f - Output is not sorted. This option implies -a. (BIT_F_NOT_SORTED)
-**	  -g - List in long format as in -l,
-**	   except that the owner is not printed. (BIT_F_NOT_SORTED)
-**	  -l - List in long format. (BIT_L_LIST)
-**	  -R - Recursively list subdirectories encountered. (BIT_R_RECURSIVE)
-**	  -r - Reverse order while sorting. (BIT_R_REVERSE)
-**	  -t - Sort by modification time, newest first. (BIT_T_TIME)
-**	  -u - Use file's last access time instead of
-**	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
-*/
-extern int32_t	g_flags;
 
 # define FLAGS_USAGE "usage: ft_ls [-Rafglrtu1] [file ...]"
 
