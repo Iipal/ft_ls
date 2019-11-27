@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 18:52:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 21:43:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ inline bool
 		struct stat *restrict buff)
 {
 	struct stat	tmp_lstat;
+	int			stat_ret;
+	int			lstat_ret;
 
-	if (0 > stat(path, buff))
-		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
-	if (0 > lstat(path, &tmp_lstat))
+	stat_ret = stat(path, buff);
+	lstat_ret = lstat(path, &tmp_lstat);
+	if (0 > stat_ret && 0 > lstat_ret)
 		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
@@ -32,10 +34,12 @@ inline bool
 		struct stat *restrict buff)
 {
 	struct stat	tmp_lstat;
+	int			stat_ret;
+	int			lstat_ret;
 
-	if (0 > stat(path, buff))
-		return (false);
-	if (0 > lstat(path, &tmp_lstat))
+	stat_ret = stat(path, buff);
+	lstat_ret = lstat(path, &tmp_lstat);
+	if (0 > stat_ret && 0 > lstat_ret)
 		return (false);
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
