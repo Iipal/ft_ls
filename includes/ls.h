@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 19:03:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 00:41:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ extern char		g_data_buf[4096];
 **	  -g - List in long format as in -l,
 **	   except that the owner is not printed. (BIT_F_NOT_SORTED)
 **	  -l - List in long format. (BIT_L_LIST)
+**	  -p - Write a slash '/' after each filename if that file is a directory.
 **	  -R - Recursively list subdirectories encountered. (BIT_R_RECURSIVE)
 **	  -r - Reverse order while sorting. (BIT_R_REVERSE)
 **	  -t - Sort by modification time, newest first. (BIT_T_TIME)
