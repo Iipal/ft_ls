@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 15:18:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:52:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ inline bool
 {
 	struct stat	tmp_lstat;
 
-	if (0 > stat(path, buff) && 0 > lstat(path, &tmp_lstat))
+	if (0 > stat(path, buff))
+		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
+	if (0 > lstat(path, &tmp_lstat))
 		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
@@ -31,7 +33,9 @@ inline bool
 {
 	struct stat	tmp_lstat;
 
-	if (0 > stat(path, buff) && 0 > lstat(path, &tmp_lstat))
+	if (0 > stat(path, buff))
+		return (false);
+	if (0 > lstat(path, &tmp_lstat))
 		return (false);
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
