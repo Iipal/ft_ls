@@ -42,7 +42,7 @@ sanitize: multi
 clean:
 	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) clean;)
 	@$(DEL) $(OBJS)
-	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NAME) source objects."
+	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD) source objects"
 fclean: clean
 	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) fclean;)
 	@$(DEL) $(NAME)
