@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_term_win_size.c                                :+:      :+:    :+:   */
+/*   get_term_win_col.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 17:58:24 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:40:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 19:05:52 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-inline bool	get_term_win_size(void)
+inline int	get_term_win_col(void)
 {
 	struct winsize	w_size;
 
-	if (0 > ioctl(STDOUT_FILENO, TIOCGWINSZ, &w_size))
-	{
-		if (!isatty(fileno(stdout)))
-			return (true);
-		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ioctl"));
-	}
-	g_win_size = (t_s2si) { w_size.ws_col, w_size.ws_row };
-	return (true);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w_size);
+	return (w_size.ws_col);
 }

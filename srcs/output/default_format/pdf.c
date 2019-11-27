@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 18:04:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 19:25:23 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 static inline __attribute__((__const__)) t_s2si
 	s_fmt(const int32_t n_objs)
 {
-	const float	x = (float)g_win_size.x / (float)g_max_name_len;
+	const int	win_x = get_term_win_col();
+	const float	x = (float)win_x / (float)g_max_name_len;
 
-	return ((t_s2si) { x, (float)n_objs / x + 1.11f });
+	return ((t_s2si) { x, (float)n_objs / x + 1.0f});
 }
 
 static void

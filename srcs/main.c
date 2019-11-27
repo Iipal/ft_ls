@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 18:18:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 19:04:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	g_data_buf[4096] = { 0 };
 
 int32_t	g_flags = 0;
 
-t_s2si	g_win_size = { 100, 100 };
 int32_t	g_isatty_ret = 0;
 
 char	g_src_path[2048] = { 0 };
@@ -32,8 +31,6 @@ int	main(int ac, char *av[])
 {
 	--ac;
 	++av;
-	if (!get_term_win_size())
-		return (EXIT_FAILURE);
 	g_isatty_ret = isatty(STDOUT_FILENO);
 	ft_strncpy(g_src_path, ".", sizeof("."));
 	(!g_isatty_ret) ? SET_BIT(g_flags, BIT_1_ONE) : 0;

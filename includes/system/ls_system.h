@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:04:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 14:53:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 19:05:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # endif
 # define __PFUNC__ __PRETTY_FUNCTION__
 
-extern bool	get_term_win_size(void);
+extern int	get_term_win_col(void);
 
 #endif

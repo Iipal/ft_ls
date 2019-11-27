@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 18:18:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 19:03:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,6 @@ extern char		g_data_buf[4096];
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
 */
 extern int32_t	g_flags;
-
-/*
-**	Store size of current terminal widnow.
-**	 Using for correct default format output.
-*/
-extern t_s2si	g_win_size;
 
 /*
 ** Store the value what was returned from isatty(STDOUT_FILENO).
