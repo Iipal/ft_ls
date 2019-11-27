@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 14:56:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:18:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,17 @@ extern int32_t	g_isatty_ret;
 /*
 **	Store the dupcliate of argument name which currently parsing.
 */
-extern char		g_src_path[1024];
+extern char		g_src_path[2048];
 
 /*
 ** Store the max item name lenght in directory which currently parsing.
 **	 (Used for corrent default output formating)
 */
 extern size_t	g_max_name_len;
+
+/*
+** Sets to false when printing long format files from arguments.
+*/
+extern bool		g_is_print_total;
 
 #endif

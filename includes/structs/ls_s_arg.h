@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:47:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 12:47:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 16:52:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 struct	s_arg
 {
 	char	*path;
-	size_t	path_len;
 	bool	is_dir;
-	char	dummy[7];
 };
 
 #endif

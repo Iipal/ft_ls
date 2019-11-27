@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 13:38:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 16:55:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void		output(const char *restrict path,
 		plf(cd->n_objs, cd->objs);
 	else
 		pdf(cd->n_objs, cd->objs);
-	if (IS_BIT(g_flags, BIT_R_RECURSIVE))
+	if (path && IS_BIT(g_flags, BIT_R_RECURSIVE))
 		s_check_subdirs(path, cd->n_objs, cd->objs);
 }

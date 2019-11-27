@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:44:02 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 12:56:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 17:48:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ struct	s_object
 {
 	struct dirent	*dirent;
 	struct stat		*stat;
+	char			*d_name;
 	size_t			d_name_len;
 	char			acl_ch;
 };

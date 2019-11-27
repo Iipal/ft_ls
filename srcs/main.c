@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 14:54:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:18:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int32_t	g_flags = 0;
 t_s2si	g_win_size = { 100, 100 };
 int32_t	g_isatty_ret = 0;
 
-char	g_src_path[1024] = { 0 };
+char	g_src_path[2048] = { 0 };
 size_t	g_max_name_len = 0UL;
+
+bool	g_is_print_total = true;
 
 int	main(int ac, char *av[])
 {

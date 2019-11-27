@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 14:24:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:18:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void
 	i = -1;
 	total = 0L;
 	fmt_str = plf_get_fmt_str(n_objs, objs, &total);
-	ft_printf("total %lld\n", total);
+	if (g_is_print_total)
+		ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
-		plf_obj(fmt_str, objs[i].dirent->d_name, &objs[i]);
+		plf_obj(fmt_str, objs[i].d_name, &objs[i]);
 }

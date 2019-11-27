@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 14:59:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 18:04:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void
 
 	i.y = -1;
 	offset = 0UL;
-	items_fmt = IS_BIT(g_flags, BIT_1_ONE) ? (t_s2si){999, 999} : s_fmt(n_objs);
+	items_fmt = IS_BIT(g_flags, BIT_1_ONE) ? (t_s2si){999, 1} : s_fmt(n_objs);
 	while (items_fmt.y > ++i.y && (i.x = -1))
 	{
 		while (items_fmt.x > ++i.x)
@@ -56,7 +56,7 @@ void
 			if (n_objs <= (curr_i = i.x * items_fmt.y + i.y))
 				break ;
 			ft_strncpy(g_data_buf + offset,
-				objs[curr_i].dirent->d_name, objs[curr_i].d_name_len);
+				objs[curr_i].d_name, objs[curr_i].d_name_len);
 			offset += objs[curr_i].d_name_len;
 			if (n_objs - 1 > curr_i)
 				s_put_file_separators(objs[curr_i].d_name_len, n_objs,
