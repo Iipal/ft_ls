@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 19:04:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 22:07:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ int	main(int ac, char *av[])
 	--ac;
 	++av;
 	g_isatty_ret = isatty(STDOUT_FILENO);
-	ft_strncpy(g_src_path, ".", sizeof("."));
 	(!g_isatty_ret) ? SET_BIT(g_flags, BIT_1_ONE) : 0;
 	if (!ac)
-		g_main_ret = !parse_dir(g_src_path);
+		g_main_ret = !parse_dir(".");
 	else
 	{
 		while (ac && '-' == **av && *(*av + 1))
@@ -45,7 +44,7 @@ int	main(int ac, char *av[])
 			++av;
 			--ac;
 		}
-		(!ac) ? (g_main_ret = !parse_dir(g_src_path)) : parse_args(ac, av);
+		(!ac) ? (g_main_ret = !parse_dir(".")) : parse_args(ac, av);
 	}
 	return (g_main_ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 16:44:51 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 18:17:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 22:07:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	parse_args_files_as_dir(struct s_arg *args, int32_t n)
 			&st, NULL, args[dir->n_objs].path)))
 			return ((void)free_dir(&dir));
 	}
+	ft_strcpy(g_src_path, ".");
 	g_is_print_total = false;
 	output(NULL, dir);
 	g_is_print_total = true;

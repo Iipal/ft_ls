@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 18:07:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/27 22:02:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ int
 	{
 		if (args[i].is_dir)
 		{
-			ft_strncpy(g_src_path, args[i].path, ft_strlen(args[i].path) + 1UL);
 			if (1 < ac)
-				ft_printf("%s:\n", g_src_path);
-			parse_dir(g_src_path);
+				ft_printf("%s:\n", args[i].path);
+			parse_dir(args[i].path);
 			if (g_va_counter != i + 1)
 				ft_putchar('\n');
 		}
