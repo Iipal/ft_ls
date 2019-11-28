@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:25:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 20:22:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,11 @@ static inline __attribute__((__const__)) t_s2si
 }
 
 static void
-	s_put_sep(size_t d_name_len, const int32_t n, size_t *offset, t_s2si xy)
+	s_put_sep(size_t d_name_len, const int32_t n, t_s2si xy)
 {
-	size_t	n_spaces;
-
-	n_spaces = 0UL;
-	g_data_buf[(*offset)++] = IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ';
+	ft_putchar(IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
 	if (!IS_BIT(g_flags, BIT_1_ONE) && xy.x + 1 < n / (float)xy.y)
-	{
-		n_spaces = g_max_name_len - d_name_len;
-		while (n_spaces--)
-			g_data_buf[(*offset)++] = ' ';
-	}
+		ft_putnchar(' ', g_max_name_len - d_name_len);
 }
 
 static inline struct s_pdf
@@ -48,13 +41,11 @@ void
 {
 	t_s2si			i;
 	t_s2si			fmt;
-	size_t			offset;
 	int32_t			j;
 	struct s_pdf	p;
 
 	i.y = -1;
-	offset = 0UL;
-	fmt = IS_BIT(g_flags, BIT_1_ONE) ? (t_s2si){999, 1} : s_fmt(n);
+	fmt = IS_BIT(g_flags, BIT_1_ONE) ? (t_s2si){INT32_MAX, 1} : s_fmt(n);
 	while (fmt.y > ++i.y && (i.x = -1))
 	{
 		while (fmt.x > ++i.x)
@@ -62,13 +53,13 @@ void
 			if (n <= (j = i.x * fmt.y + i.y))
 				break ;
 			p = s_select_output_data(&objs[j]);
-			ft_strncpy(g_data_buf + offset, p.name, p.name_len);
-			offset += p.name_len;
+			write(STDOUT_FILENO, p.name, p.name_len);
 			if (n - 1 > j)
-				s_put_sep(objs[j].d_name_len, n, &offset, (t_s2si){i.x, fmt.y});
+				s_put_sep(objs[j].d_name_len, n, (t_s2si){i.x, fmt.y});
 		}
-		!IS_BIT(g_flags, BIT_1_ONE) ? (g_data_buf[offset++] = '\n') : 0;
+		if (!IS_BIT(g_flags, BIT_1_ONE))
+			ft_putchar('\n');
 	}
-	IS_BIT(g_flags, BIT_1_ONE) ? (g_data_buf[offset++] = '\n') : 0;
-	write(STDOUT_FILENO, g_data_buf, offset);
+	if (IS_BIT(g_flags, BIT_1_ONE))
+		ft_putchar('\n');
 }

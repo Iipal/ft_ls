@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:33:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:31:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 19:04:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,17 @@ static inline char
 
 	out = NULL;
 	if (S_ISDIR(st->st_mode))
-	{
 		out = PF_FG_CLR_LCYAN;
-		*clr_len += sizeof(PF_FG_CLR_LCYAN) - 1UL;
-	}
+	else if (S_ISCHR(st->st_mode) || S_ISBLK(st->st_mode))
+		out = PF_FG_CLR_YELLOW;
 	else if (S_ISLNK(st->st_mode))
-	{
 		out = PF_FG_CLR_MAGENTA;
-		*clr_len += sizeof(PF_FG_CLR_MAGENTA) - 1UL;
-	}
-	else if (IS_BIT(st->st_mode, S_IXUSR))
-	{
+	else if (st->st_mode & S_IXUSR
+		|| st->st_mode & S_IXGRP
+		|| st->st_mode & S_IXOTH)
 		out = PF_FG_CLR_RED;
-		*clr_len += sizeof(PF_FG_CLR_RED) - 1UL;
-	}
+	if (out)
+		*clr_len = sizeof(PF_FG_CLR_RED) - 1UL;
 	return (out);
 }
 

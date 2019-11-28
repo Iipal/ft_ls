@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:21:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 19:55:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/acl.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
+# include <execinfo.h>
 # include <math.h>
 
 # include "ls_structs.h"
@@ -47,9 +48,24 @@
 extern int		g_main_ret;
 
 /*
+** Store the value what was returned from isatty(STDOUT_FILENO).
+*/
+extern int32_t	g_isatty_ret;
+
+/*
 ** char buffer for anything.
 */
-extern char		g_data_buf[4096];
+extern char		g_data_buf[1024];
+/*
+**	Store the dupcliate of argument name which currently parsing.
+*/
+extern char		g_src_path[1024];
+
+/*
+** Store the max item name lenght in directory which currently parsing.
+**	 (Used for corrent default output formating)
+*/
+extern size_t	g_max_name_len;
 
 /*
 **	Command line options(flags).
@@ -71,22 +87,6 @@ extern char		g_data_buf[4096];
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
 */
 extern int32_t	g_flags;
-
-/*
-** Store the value what was returned from isatty(STDOUT_FILENO).
-*/
-extern int32_t	g_isatty_ret;
-
-/*
-**	Store the dupcliate of argument name which currently parsing.
-*/
-extern char		g_src_path[2048];
-
-/*
-** Store the max item name lenght in directory which currently parsing.
-**	 (Used for corrent default output formating)
-*/
-extern size_t	g_max_name_len;
 
 /*
 ** Sets to false when printing long format files from arguments.

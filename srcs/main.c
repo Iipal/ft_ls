@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:21:24 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 19:58:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 ** ls.h:
 */
 int32_t	g_main_ret = EXIT_SUCCESS;
-char	g_data_buf[4096] = { 0 };
-
-int32_t	g_flags = 0;
 
 int32_t	g_isatty_ret = 0;
 
-char	g_src_path[2048] = { 0 };
+char	g_data_buf[1024] = { 0 };
+char	g_src_path[1024] = { 0 };
+
 size_t	g_max_name_len = 0UL;
+
+int32_t	g_flags = 0;
 
 bool	g_is_print_total = true;
 
