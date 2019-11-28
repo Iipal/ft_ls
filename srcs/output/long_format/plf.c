@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 13:54:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 17:07:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ inline void
 		plf_get_date((char[STR_LEN_DATE]) { 0 }, obj->stat),
 		path);
 	if (S_ISLNK(obj->stat->st_mode))
-		s_print_link(path);
+		s_print_link(obj->d_name);
 	ft_putchar('\n');
 }
 
@@ -61,5 +61,6 @@ void
 	if (g_is_print_total)
 		ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
-		plf_obj(fmt_str, objs[i].d_name, &objs[i]);
+		plf_obj(fmt_str, (objs[i].clr_name ? objs[i].clr_name : objs[i].d_name),
+			&objs[i]);
 }
