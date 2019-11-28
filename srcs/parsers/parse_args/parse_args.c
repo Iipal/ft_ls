@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 22:02:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 14:01:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ int
 	if (!(args = s_pre_parse_errno_args(ac, av)))
 		return (g_main_ret = EXIT_FAILURE);
 	if (g_va_notdir_counter)
+	{
 		parse_args_files_as_dir(args, g_va_notdir_counter);
+		(g_va_counter - g_va_notdir_counter) ? ft_putchar('\n') : 0;
+	}
 	i = -1;
 	while (g_va_counter > ++i)
 	{

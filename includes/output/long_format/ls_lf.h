@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 17:06:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 13:47:35 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 # define STR_LEN_DATE        sizeof("Aug  1 05:42")
 # define STR_LEN_PERMISSION  sizeof("drwxrwxrwx")
-# define STR_LEN_DEFAULT_FMT sizeof("%s%c %d %-s  %-s  %d %s %s")
+# define STR_LEN_DEVICE      sizeof("1111,1111")
+# define STR_LEN_DEFAULT_FMT sizeof("%s%c %d %-s  %-s  %s %s %s")
 # define TIME_HALF_YEAR      15768000
 
 /*
@@ -42,6 +43,9 @@ extern char
 
 extern char
 *plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm);
+
+extern char
+*plf_get_dev_info(char *dst, struct stat *restrict st);
 
 extern char
 *plf_get_fmt_str(const int32_t n_objs,
