@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 13:41:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 17:31:28 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ inline char
 	size_t					curr_offset;
 
 	ws = s_lfsw(n_objs, objs, total);
-	if (!IS_BIT(g_flags, BIT_G_NOT_OWNER))
+	if (!IS_BIT(g_flags, BIT_G_NO_OWNER))
 		ft_sprintf(g_data_buf, "%%s%%c %%%zud %%-%zus  %%-%zus  %%%zus %%s %%s",
 			ws.st_nlnk_w, ws.pw_name_w, ws.gr_name_w, ws.st_size_w);
 	else

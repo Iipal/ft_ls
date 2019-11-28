@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:07:16 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 17:31:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ inline void
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->stat->st_mode),
 		obj->acl_ch,
 		obj->stat->st_nlink,
-		IS_BIT(g_flags, BIT_G_NOT_OWNER)
+		IS_BIT(g_flags, BIT_G_NO_OWNER)
 			? "" : getpwuid(obj->stat->st_uid)->pw_name,
 		getgrgid(obj->stat->st_gid)->gr_name,
 		plf_get_dev_info((char[STR_LEN_DEVICE]) { 0 }, obj->stat),
