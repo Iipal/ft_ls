@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 22:04:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 15:42:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,18 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 void		output(const char *restrict path,
 				const struct s_dir *restrict cd)
 {
-	if (!IS_BIT(g_flags, BIT_F_NOT_SORTED) && IS_BIT(g_flags, BIT_T_TIME))
-		choose_sort(cd->objs, cd->n_objs,
-			sizeof(struct s_object), sort_time_objects_cmp);
-	else if (!IS_BIT(g_flags, BIT_F_NOT_SORTED))
-		choose_sort(cd->objs, cd->n_objs,
-			sizeof(struct s_object), sort_ascii_objects_cmp);
+	if (!IS_BIT(g_flags, BIT_F_NO_SORT))
+	{
+		if (IS_BIT(g_flags, BIT_T_SORT_TIME))
+			choose_sort(cd->objs, cd->n_objs,
+				sizeof(struct s_object), sort_time_objects_cmp);
+		else if (IS_BIT(g_flags, BIT_S_SORT_SIZE))
+			choose_sort(cd->objs, cd->n_objs,
+				sizeof(struct s_object), sort_size_objects_cmp);
+		else
+			choose_sort(cd->objs, cd->n_objs,
+				sizeof(struct s_object), sort_ascii_objects_cmp);
+	}
 	if (IS_BIT(g_flags, BIT_L_LIST))
 		plf(cd->n_objs, cd->objs);
 	else

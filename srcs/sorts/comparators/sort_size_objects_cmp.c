@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_isdir_args_cmp.c                              :+:      :+:    :+:   */
+/*   sort_size_objects_cmp.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 20:39:40 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 15:35:15 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/28 15:30:46 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/28 15:38:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int32_t	sort_isdir_args_cmp(const void *a, const void *b)
+int32_t	sort_size_objects_cmp(const void *a, const void *b)
 {
-	return ((int32_t)(((struct s_arg*)a)->is_dir - ((struct s_arg*)b)->is_dir));
+	const off_t	a_size = ((const struct s_object*)a)->stat->st_size;
+	const off_t	b_size = ((const struct s_object*)b)->stat->st_size;
+	off_t		cmp;
+
+	cmp = a_size - b_size;
+	if (!cmp)
+		return (sort_ascii_objects_cmp(a, b));
+	return ((int32_t)(IS_BIT(g_flags, BIT_R_SORT_REV) ? cmp : -cmp));
 }

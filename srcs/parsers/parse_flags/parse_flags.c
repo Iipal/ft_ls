@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 14:15:35 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 15:27:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static inline int32_t
 		UNSET_BIT(g_flags, BIT_1_ONE);
 	else if (IS_BIT(flag, BIT_1_ONE))
 		UNSET_BIT(g_flags, BIT_L_LIST);
-	else if (IS_BIT(flag, BIT_F_NOT_SORTED))
+	else if (IS_BIT(flag, BIT_F_NO_SORT))
 		SET_BIT(g_flags, BIT_A_HIDDEN);
 	return (flag);
 }
@@ -30,8 +30,8 @@ static bool
 	s_check_valid_flag(const char curr_flag)
 {
 	static char		valid_flags[16] = { F_ONE, F_HIDDEN, F_NOT_SORTED,
-		F_NOT_OWNER, F_LIST, F_RECURSIVE, F_REVERSE, F_FULL_TIME, F_TIME,
-		F_ACCESS };
+		F_NOT_OWNER, F_LIST, F_RECURSIVE, F_REVERSE, F_SIZE, F_FULL_TIME,
+		F_TIME, F_ACCESS };
 	const size_t	valid_flags_size = ARR_SIZE(valid_flags);
 	size_t			i;
 
