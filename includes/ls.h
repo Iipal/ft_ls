@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 13:13:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 14:12:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ extern char		g_data_buf[4096];
 **	  -l - List in long format. (BIT_L_LIST)
 **	  -R - Recursively list subdirectories encountered. (BIT_R_RECURSIVE)
 **	  -r - Reverse order while sorting. (BIT_R_REVERSE)
+**	  -T - Display complete time information for the file. (BIT_T_FULL_TIME)
 **	  -t - Sort by modification time, newest first. (BIT_T_TIME)
 **	  -u - Use file's last access time instead of
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
