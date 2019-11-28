@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:49:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 16:52:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 17:26:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_S_PDF_H
 # define LS_S_PDF_H
 
-struct s_pdf
+struct	s_pdf
 {
 	char	*name;
 	size_t	name_len;
