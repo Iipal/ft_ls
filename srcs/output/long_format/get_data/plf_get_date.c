@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 22:17:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 14:18:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 21:06:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ inline char
 	date_str = ctime(IS_BIT(g_flags, BIT_U_ACCESS)
 			? &st->st_atime : &st->st_mtime);
 	dst = ft_strncpy(dst, date_str + 4UL,
-		IS_BIT(g_flags, BIT_T_FULL_TIME) ? 20UL : 12UL);
+		IS_BIT(g_flags, BIT_T_FULL_TIME) ? (ft_strlen(date_str) - 4UL) : 12UL);
 	dst[20UL] = 0;
 	if (!IS_BIT(g_flags, BIT_T_FULL_TIME)
 	&& (TIME_HALF_YEAR <= mon_diff || 0 > mon_diff))

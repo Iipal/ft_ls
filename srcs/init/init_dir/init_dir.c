@@ -6,26 +6,27 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 20:18:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 21:32:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 static struct s_dir
-	*s_precalc_in_dir_objs(DIR *restrict dir, const char *restrict path)
+	*s_precalc_in_dir_objs(struct s_dir_init *restrict h,
+		const char *restrict path)
 {
 	struct s_dir	*out;
 	struct dirent	*dirent;
 
-	if (!dir)
+	if (!h->dir)
 		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
 	if (!(out = ft_memalloc(sizeof(struct s_dir))))
 		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
-	while ((dirent = readdir(dir)))
+	while ((dirent = readdir(h->dir)))
 		out->n_objs += !(!IS_BIT(g_flags, BIT_A_HIDDEN)
 					&& '.' == dirent->d_name[0]);
-	rewinddir(dir);
+	rewinddir(h->dir);
 	if (!IS_BIT(g_flags, BIT_A_HIDDEN) && !out->n_objs)
 	{
 		if (!(out->objs = ft_memalloc(sizeof(struct s_object) * 1UL)))
@@ -48,8 +49,6 @@ static struct s_dir
 							&h->st, h->d, h->d->d_name)))
 				return (free_dir(&h->out));
 		}
-	closedir(h->dir);
-	ft_strdel(&h->tmp);
 	return (h->out);
 }
 
@@ -63,12 +62,13 @@ inline struct s_dir
 		return (NULL);
 	if (!force_open_dir && !S_ISDIR(h.st.st_mode))
 		return (init_file(path));
+	h.dir = opendir(path);
+	if (!(h.out = s_precalc_in_dir_objs(&h, path)))
+		return (NULL);
 	if (!(h.tmp = ft_strnew(1024UL)))
 		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ft_strnew"));
-	h.dir = opendir(path);
-	if (!(h.out = s_precalc_in_dir_objs(h.dir, path)))
-		return (NULL);
-	if (!s_read_dir(&h, path))
-		return (NULL);
+	h.out = s_read_dir(&h, path);
+	ft_strdel(&h.tmp);
+	closedir(h.dir);
 	return (h.out->n_objs ? h.out : free_dir(&h.out));
 }
