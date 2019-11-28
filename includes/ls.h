@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 19:55:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/28 23:38:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # include <sys/ioctl.h>
 # include <execinfo.h>
 # include <math.h>
+
+# ifdef __linux__
+#  include <sys/sysmacros.h>
+# endif
 
 # include "ls_structs.h"
 # include "ls_types.h"
