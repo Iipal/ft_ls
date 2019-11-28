@@ -3,7 +3,7 @@ NPWD := $(CURDIR)/$(NAME)
 
 CC := clang
 
-CFLAGS := -glldb -D DEBUG
+CFLAGS := -march=native -mtune=native -Ofast -pipe -flto -fpic
 CFLAGS_DEBUG := -glldb -D DEBUG
 CFLAGS_SANITIZE := -glldb -D DEBUG -fsanitize=address
 
