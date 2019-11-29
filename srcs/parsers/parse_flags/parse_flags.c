@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 16:20:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 17:52:41 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static bool
 		F_COLOR, F_NO_OWNER, F_LIST, F_RECURSIVE, F_REVERSE, F_SIZE,
 		F_FULL_TIME, F_TIME, F_ACCESS };
 	const size_t	valid_flags_size = ARR_SIZE(valid_flags);
-	size_t			i;
+	ptrdiff_t		i;
 
-	i = ~0UL;
-	while (valid_flags[++i] != curr_flag)
-		;
+	i = 0L;
+	while (valid_flags[i] && valid_flags[i] != curr_flag)
+		++i;
 	if (curr_flag == valid_flags[i])
 		return (s_flags_dependecy(SET_BIT(g_flags, TO_N_BIT(i))));
 	return (false);
