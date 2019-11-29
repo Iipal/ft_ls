@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 18:52:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 21:46:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static struct s_dir
 	rewinddir(h->dir);
 	if (!IS_BIT(g_flags, BIT_A_HIDDEN) && !out->n_objs)
 	{
-		if (!(out->objs = ft_memalloc(sizeof(struct s_object) * 1UL)))
+		if (!(out->objs = ft_memalloc(sizeof(struct s_object))))
 			return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	}
 	else if (!(out->objs = ft_memalloc(sizeof(struct s_object) * out->n_objs)))
@@ -47,7 +47,7 @@ static struct s_dir
 			if (!init_stat(u_full_path(h->tmp, path, h->d->d_name), &h->st))
 				return (free_dir(&h->out));
 			if (!(h->obj = init_dir_obj(&h->out->objs[++h->i],
-							&h->st, h->d, h->d->d_name)))
+							&h->st, h->d->d_name)))
 				return (free_dir(&h->out));
 		}
 	return (h->out);
@@ -70,5 +70,7 @@ inline struct s_dir
 	h.out = s_read_dir(&h, path);
 	ft_strdel(&h.tmp);
 	closedir(h.dir);
-	return (h.out->n_objs ? h.out : free_dir(&h.out));
+	if (h.out && h.out->n_objs)
+		return (h.out);
+	return (free_dir(&h.out));
 }

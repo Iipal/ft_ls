@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 15:58:01 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:09:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 21:12:43 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ inline struct s_dir	*init_file(const char *restrict path)
 		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	out->n_objs = 1UL;
 	out->is_file = true;
-	if (!(out->objs = init_dir_obj(NULL, &st, NULL, path)))
+	if (!(out->objs = init_dir_obj(NULL, &st, path)))
 		out = free_dir(&out);
 	return (out);
 }

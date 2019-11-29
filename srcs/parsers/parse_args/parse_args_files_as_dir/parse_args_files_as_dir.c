@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 16:44:51 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:13:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 21:12:31 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_args_files_as_dir(struct s_arg *args, int32_t n)
 	{
 		init_stat_no_err(args[dir->n_objs].path, &st);
 		if (!(init_dir_obj(&dir->objs[dir->n_objs],
-			&st, NULL, args[dir->n_objs].path)))
+							&st, args[dir->n_objs].path)))
 			return ((void)free_dir(&dir));
 	}
 	ft_strcpy(g_src_path, ".");

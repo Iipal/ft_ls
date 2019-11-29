@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:59:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 16:04:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 21:11:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ extern struct s_dir
 extern struct s_object
 *init_dir_obj(struct s_object *restrict dst,
 	const struct stat *restrict stat,
-	const struct dirent *restrict dirent,
 	const char *restrict filename);
 
 extern char

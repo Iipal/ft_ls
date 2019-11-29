@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 18:51:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 21:59:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].d_name;
-		if (('.' == d_name[0] && '\0' == d_name[1])
+		if (d_name && (('.' == d_name[0] && '\0' == d_name[1])
 		|| ('.' == d_name[0] && '.' == d_name[1] && '\0' == d_name[2])
-		|| !S_ISDIR(objs[i].st->mode))
+		|| !S_ISDIR(objs[i].st->mode)))
 			continue ;
 		subdir = u_full_path(subdir, prev_dir, d_name);
 		ft_strcpy(g_src_path, subdir);
