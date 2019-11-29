@@ -6,30 +6,30 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:13:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:52:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 static bool	s_check_subdirs(const char *restrict prev_dir,
-				const uint32_t n_objs,
+				const int32_t n_objs,
 				const struct s_object *restrict objs)
 {
-	char		*d_name;
-	char		*subdir;
-	uint32_t	i;
+	char	*d_name;
+	char	*subdir;
+	int32_t	i;
 
-	i = ~0U;
+	i = -1;
 	d_name = NULL;
 	if (!(subdir = (char*)ft_memalloc(sizeof(char) * 1024)))
 		return ((bool)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	while (n_objs > ++i)
 	{
-		d_name = objs[i].dirent->d_name;
+		d_name = objs[i].d_name;
 		if (('.' == d_name[0] && '\0' == d_name[1])
 		|| ('.' == d_name[0] && '.' == d_name[1] && '\0' == d_name[2])
-		|| !S_ISDIR(objs[i].stat->st_mode))
+		|| !S_ISDIR(objs[i].st->mode))
 			continue ;
 		subdir = u_full_path(subdir, prev_dir, d_name);
 		ft_strcpy(g_src_path, subdir);

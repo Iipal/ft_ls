@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 12:54:16 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 16:24:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:43:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ inline void	*free_dir_obj(struct s_object *obj)
 {
 	if (obj)
 	{
-		if (obj->dirent)
-			ft_memdel((void**)&obj->dirent);
-		if (obj->stat)
-			ft_memdel((void**)&obj->stat);
+		if (obj->st)
+			free(obj->st);
 		if (obj->d_name)
 			ft_strdel(&obj->d_name);
 		if (obj->clr_name)

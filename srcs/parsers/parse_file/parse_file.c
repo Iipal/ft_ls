@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 19:45:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 13:02:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static inline bool __attribute__((__always_inline__))
 	bool	is_print_as_dir;
 
 	is_print_as_dir = false;
-	if (S_ISLNK(obj->stat->st_mode) && file[ft_strlen(file) - 1] == '/')
+	if (S_ISLNK(obj->st->mode) && file[ft_strlen(file) - 1] == '/')
 		is_print_as_dir = true;
 	else
 		is_endl ? ft_putendl(file) : ft_putstr(file);
@@ -34,7 +34,7 @@ static inline bool __attribute__((__always_inline__))
 	t_blkcnt_t	t;
 
 	is_print_as_dir = false;
-	if (S_ISLNK(obj->stat->st_mode) && file[ft_strlen(file) - 1] == '/')
+	if (S_ISLNK(obj->st->mode) && file[ft_strlen(file) - 1] == '/')
 		is_print_as_dir = true;
 	else
 		plf_obj(plf_get_fmt_str(1UL, obj, &t), file, obj);

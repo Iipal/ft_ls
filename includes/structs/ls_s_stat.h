@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_s_dir_init.h                                    :+:      :+:    :+:   */
+/*   ls_s_stat.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/22 12:45:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 13:00:05 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/29 12:44:55 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/29 12:53:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_S_DIR_INIT_H
-# define LS_S_DIR_INIT_H
+#ifndef LS_S_STAT_H
+# define LS_S_STAT_H
 
-# include <dirent.h>
+# include <sys/stat.h>
 
-# include "ls_s_dir.h"
+# include "ls_types.h"
 
-struct	s_dir_init
+struct	s_stat
 {
-	struct s_dir	*out;
-	DIR				*dir;
-	struct s_object	*obj;
-	struct dirent	*d;
-	struct stat		st;
-	uint32_t		i;
-	char			*tmp;
+	uid_t		uid;
+	gid_t		gid;
+	t_time_t	a_time;
+	t_time_t	c_time;
+	t_time_t	m_time;
+	off_t		size;
+	t_blkcnt_t	blocks;
+	dev_t		rdev;
+	mode_t		mode;
+	nlink_t		nlink;
 };
 
 #endif

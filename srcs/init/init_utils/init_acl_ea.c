@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:19:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/26 16:32:22 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:50:22 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #if defined (__APPLE__)
 
 inline char
-	init_acl_ea(const char *restrict filename,
-		const struct stat *restrict st)
+	init_acl_ea(const char *restrict filename)
 {
 	acl_t		acl;
 	acl_entry_t	dummy;
@@ -45,11 +44,9 @@ inline char
 #elif defined (__linux__)
 
 inline char
-	init_acl_ea(const char *restrict filename,
-		const struct stat *restrict st)
+	init_acl_ea(const char *restrict filename)
 {
 	(void)filename;
-	(void)st;
 	return (' ');
 }
 

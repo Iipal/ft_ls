@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:04:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:05:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:55:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define TIME_HALF_YEAR      15768000
 
 extern char
-*plf_get_date(char *restrict dst, const struct stat *restrict st);
+*plf_get_date(char *restrict dst, const struct s_stat *restrict st);
 
 extern char
 *plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm);
 
 extern char
-*plf_get_dev_info(char *dst, struct stat *restrict st);
+*plf_get_dev_info(char *dst, struct s_stat *restrict st);
 
 extern char
 *plf_get_fmt_str(const int32_t n_objs,

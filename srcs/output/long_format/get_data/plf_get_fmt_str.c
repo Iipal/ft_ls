@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:31:28 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:57:54 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ struct s_lf_spec_width
 	ws = (struct s_lf_spec_width) { 0 };
 	while (n_objs > ++i)
 	{
-		tmp.st_nlnk_w = ft_digits(objs[i].stat->st_nlink);
-		tmp.st_size_w = S_ISCHR(objs[i].stat->st_dev)
-			? 0UL : ft_digits(objs[i].stat->st_size);
-		tmp.pw_name_w = ft_strlen(getpwuid(objs[i].stat->st_uid)->pw_name);
-		tmp.gr_name_w = ft_strlen(getgrgid(objs[i].stat->st_gid)->gr_name);
+		tmp.st_nlnk_w = ft_digits(objs[i].st->nlink);
+		tmp.st_size_w = S_ISCHR(objs[i].st->mode)
+						? 0UL : ft_digits(objs[i].st->size);
+		tmp.pw_name_w = ft_strlen(getpwuid(objs[i].st->uid)->pw_name);
+		tmp.gr_name_w = ft_strlen(getgrgid(objs[i].st->gid)->gr_name);
 		ws = (struct s_lf_spec_width) {
 			(tmp.st_nlnk_w > ws.st_nlnk_w) ? tmp.st_nlnk_w : ws.st_nlnk_w,
 			(tmp.st_size_w > ws.st_size_w) ? tmp.st_size_w : ws.st_size_w,
 			(tmp.pw_name_w > ws.pw_name_w) ? tmp.pw_name_w : ws.pw_name_w,
 			(tmp.gr_name_w > ws.gr_name_w) ? tmp.gr_name_w : ws.gr_name_w
 		};
-		*total += objs[i].stat->st_blocks;
+		*total += objs[i].st->blocks;
 	}
 	return (ws);
 }
