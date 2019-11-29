@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:09:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 13:54:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ inline struct s_dir
 	h.dir = opendir(path);
 	if (!(h.out = s_precalc_in_dir_objs(&h, path)))
 		return (NULL);
-	if (!(h.tmp = ft_strnew(1024UL)))
+	if (!(h.tmp = ft_strnew(1023UL)))
 		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_strnew"));
 	h.out = s_read_dir(&h, path);
 	ft_strdel(&h.tmp);

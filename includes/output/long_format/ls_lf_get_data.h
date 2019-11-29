@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:04:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:55:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 14:28:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 # include "ls_types.h"
 # include "ls_structs.h"
 
-# define STR_LEN_DATE        sizeof("Aug  1 05:42 2019")
-# define STR_LEN_PERMISSION  sizeof("drwxrwxrwx")
-# define STR_LEN_DEVICE      sizeof("1111,1111")
-# define STR_LEN_DEFAULT_FMT sizeof("%s%c %d %-s  %-s  %s %s %s")
+# define STR_LEN_DATE        sizeof("Aug  1 05:42 2019      ")
+# define STR_LEN_PERMISSION  sizeof("drwxrwxrwx     ")
+# define STR_LEN_DEVICE      sizeof("1111,1111      ")
 # define TIME_HALF_YEAR      15768000
 
 extern char

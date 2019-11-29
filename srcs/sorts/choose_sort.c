@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 19:30:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 19:43:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 13:57:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ inline void	choose_sort(void *restrict base,
 
 	if (2 > n_el)
 		return ;
-	if (3000UL <= n_el)
+	if (1000UL <= n_el)
 		bt_size = backtrace(bt_arr, 15);
-	if (10UL >= n_el || bt_size >= 15UL || 3000UL <= n_el)
+	if (10UL >= n_el || bt_size >= 15UL || 1000UL <= n_el)
 		i_sort(base, n_el, width, comparator);
 	else
 		q_sort(base, n_el, width, comparator);

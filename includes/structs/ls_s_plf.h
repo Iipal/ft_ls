@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_structs.h                                       :+:      :+:    :+:   */
+/*   ls_s_plf.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/31 21:48:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 14:34:38 by tmaluh           ###   ########.fr       */
+/*   Created: 2019/11/29 14:31:48 by tmaluh            #+#    #+#             */
+/*   Updated: 2019/11/29 14:34:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_STRUCTS_H
-# define LS_STRUCTS_H
+#ifndef LS_S_PLF_H
+# define LS_S_PLF_H
 
-# include "ls_s_object.h"
-# include "ls_s_dir.h"
-# include "ls_s_dir_init.h"
-# include "ls_s_arg.h"
-# include "ls_s_lf_spec_width.h"
-# include "ls_s_plf.h"
-# include "ls_s_pdf.h"
+struct	s_plf
+{
+	char	*perm;
+	char	*dev_info;
+	char	*date;
+	char	*pw_name;
+	char	*gr_name;
+};
 
 #endif
