@@ -6,11 +6,39 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:58:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 18:51:47 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
+
+static bool	s_check_subdirs(const char *restrict prev_dir,
+				const int32_t n_objs,
+				const struct s_object *restrict objs)
+{
+	char	*d_name;
+	char	*subdir;
+	int32_t	i;
+
+	i = -1;
+	d_name = NULL;
+	if (!(subdir = ft_strnew(1023UL)))
+		return ((bool)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
+	while (n_objs > ++i)
+	{
+		d_name = objs[i].d_name;
+		if (('.' == d_name[0] && '\0' == d_name[1])
+		|| ('.' == d_name[0] && '.' == d_name[1] && '\0' == d_name[2])
+		|| !S_ISDIR(objs[i].st->mode))
+			continue ;
+		subdir = u_full_path(subdir, prev_dir, d_name);
+		ft_strcpy(g_src_path, subdir);
+		ft_printf("\n%s:\n", subdir);
+		parse_dir(subdir);
+	}
+	ft_strdel(&subdir);
+	return (true);
+}
 
 inline bool	parse_dir(const char *restrict path)
 {
@@ -22,7 +50,11 @@ inline bool	parse_dir(const char *restrict path)
 	if (cd->is_file)
 		parse_file(path, cd->objs, true);
 	else
+	{
 		output(path, cd);
+		if (IS_BIT(g_flags, BIT_R_RECURSIVE))
+			s_check_subdirs(path, cd->n_objs, cd->objs);
+	}
 	free_dir(&cd);
 	return (true);
 }
