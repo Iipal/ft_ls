@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 13:54:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 18:52:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static struct s_dir
 static struct s_dir
 	*s_read_dir(struct s_dir_init *restrict h, const char *restrict path)
 {
+	g_max_name_len = 0UL;
 	while ((h->d = readdir(h->dir)))
 		if (!(!IS_BIT(g_flags, BIT_A_HIDDEN) && '.' == h->d->d_name[0]))
 		{
@@ -57,7 +58,6 @@ inline struct s_dir
 {
 	struct s_dir_init	h;
 
-	g_max_name_len = 0UL;
 	if (!(h.i = ~0U) || !init_stat(path, &h.st))
 		return (NULL);
 	if (!force_open_dir && !S_ISDIR(h.st.st_mode))
