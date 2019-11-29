@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 14:37:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 17:09:55 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ inline void
 		const char *restrict path,
 		const struct s_object *restrict obj)
 {
-	const struct s_plf	plf_obj = {
-		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 },	obj->st->mode),
+	static struct s_plf	plf_obj;
+
+	plf_obj = (struct s_plf) {
+		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->st->mode),
 		plf_get_dev_info((char[STR_LEN_DEVICE]){ 0 }, obj->st),
 		plf_get_date((char[STR_LEN_DATE]){ 0 }, obj->st),
 		IS_BIT(g_flags, BIT_G_NO_OWNER) ? "" : getpwuid(obj->st->uid)->pw_name,
 		getgrgid(obj->st->gid)->gr_name
 	};
-
 	ft_printf(fmt_str, plf_obj.perm, obj->acl_ch, obj->st->nlink,
 		plf_obj.pw_name, plf_obj.gr_name, plf_obj.dev_info, plf_obj.date, path);
 	if (S_ISLNK(obj->st->mode))

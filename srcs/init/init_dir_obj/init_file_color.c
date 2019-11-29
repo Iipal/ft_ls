@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:33:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 16:17:58 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 17:21:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static inline char
 
 	out = NULL;
 	if (S_ISDIR(mode))
-		out = PF_FG_CLR_LCYAN;
+		out = LS_CLR_DIR;
 	else if (S_ISCHR(mode))
-		out = PF_BG_CLR_YELLOW PF_FG_CLR_BLACK;
+		out = LS_CLR_CHR;
 	else if (S_ISBLK(mode))
-		out = PF_BG_CLR_CYAN PF_FG_CLR_BLACK;
+		out = LS_CLR_BLK;
 	else if (S_ISLNK(mode))
-		out = PF_FG_CLR_MAGENTA;
+		out = LS_CLR_LNK;
 	else if (mode & S_IXUSR || mode & S_IXGRP || mode & S_IXOTH)
-		out = PF_FG_CLR_RED;
+		out = LS_CLR_EXE;
 	else if (S_ISSOCK(mode))
-		out = PF_FG_CLR_GREEN;
+		out = LS_CLR_SOCK;
 	if (out)
 	{
 		*clr_len = ft_strlen(out);
@@ -44,15 +44,14 @@ inline char
 		const mode_t mode,
 		size_t *restrict clr_len)
 {
-	char			*out;
-	char			*clr;
-	size_t			out_len;
-	const char		*clr_end = PF_FG_CLR_DEFAULT PF_BG_CLR_DEFAULT;
-	const size_t	clr_end_len = sizeof(PF_FG_CLR_DEFAULT)
-								+ sizeof(PF_BG_CLR_DEFAULT) - 2UL;
+	char		*out;
+	char		*clr;
+	size_t		out_len;
+	size_t		clr_end_len;
 
 	out = NULL;
 	*clr_len = 0UL;
+	clr_end_len = sizeof(LS_CLR_DEFAULT) - 2UL;
 	if (!g_isatty_ret || !IS_BIT(g_flags, BIT_G_COLOR))
 		return (NULL);
 	if ((clr = s_select_color(mode, clr_len)))
@@ -61,7 +60,7 @@ inline char
 		out = ft_strnew(out_len);
 		out = ft_strncpy(out, clr, *clr_len);
 		ft_strncpy(out + *clr_len, filename, filename_len);
-		ft_strcpy(out + filename_len + *clr_len, clr_end);
+		ft_strcpy(out + filename_len + *clr_len, LS_CLR_DEFAULT);
 		ft_strdel(&clr);
 		*clr_len = out_len;
 	}
