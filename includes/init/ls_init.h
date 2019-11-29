@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:59:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:50:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 16:04:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ extern struct s_object
 extern char
 *init_file_color(const char *restrict filename,
 	const size_t filename_len,
-	const struct s_stat *restrict st,
+	const mode_t mode,
 	size_t *restrict clr_len);
 
 extern struct s_dir

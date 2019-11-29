@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:31:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 16:20:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static bool
 	size_t			i;
 
 	i = ~0UL;
-	while (valid_flags_size > ++i)
-		if (curr_flag == valid_flags[i])
-			return (s_flags_dependecy(SET_BIT(g_flags, TO_N_BIT(i))));
+	while (valid_flags[++i] != curr_flag)
+		;
+	if (curr_flag == valid_flags[i])
+		return (s_flags_dependecy(SET_BIT(g_flags, TO_N_BIT(i))));
 	return (false);
 }
 

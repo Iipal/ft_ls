@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 14:28:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 15:07:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ struct s_lf_spec_width
 	{
 		tmp.st_nlnk_w = ft_digits(objs[i].st->nlink);
 		tmp.st_size_w = S_ISCHR(objs[i].st->mode)
-						? 7UL : ft_digits(objs[i].st->size);
+						? 8UL : ft_digits(objs[i].st->size);
 		tmp.pw_name_w = ft_strlen(getpwuid(objs[i].st->uid)->pw_name);
 		tmp.gr_name_w = ft_strlen(getgrgid(objs[i].st->gid)->gr_name);
 		ws = (struct s_lf_spec_width) {
