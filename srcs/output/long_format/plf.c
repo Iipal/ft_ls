@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:56:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 13:05:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static inline void
 	char	*buff;
 	char	*buff_path;
 
-	if (!(buff = (char*)ft_memalloc(sizeof(char) * 256UL)))
+	if (!(buff = (char*)ft_memalloc(sizeof(char) * 1024UL)))
 		return ((void)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
-	if (!(buff_path = (char*)ft_memalloc(sizeof(char) * 256UL)))
+	if (!(buff_path = (char*)ft_memalloc(sizeof(char) * 1024UL)))
 		return ((void)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
-	readlink(u_full_path(buff_path, g_src_path, file), buff, 256UL);
+	readlink(u_full_path(buff_path, g_src_path, file), buff, 1024UL);
 	ft_strdel(&buff_path);
 	ft_printf(" -> %s", buff);
 	ft_strdel(&buff);
