@@ -6,12 +6,18 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:33:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 11:14:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:08:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_ERRNO_H
 # define LS_ERRNO_H
+
+# ifdef PFUNC
+#  undef PFUNC
+# endif
+
+# define PFUNC __PRETTY_FUNCTION__
 
 extern void
 *ls_errno_msg(const char *restrict const file_name,

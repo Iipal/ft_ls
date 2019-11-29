@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 16:44:51 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 14:00:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:13:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	parse_args_files_as_dir(struct s_arg *args, int32_t n)
 	struct stat		st;
 
 	if (!(dir = ft_memalloc(sizeof(*dir))))
-		return ((void)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
+		return ((void)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	if (!(dir->objs = ft_memalloc(sizeof(struct s_object) * n)))
-		return ((void)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
+		return ((void)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	dir->n_objs = -1;
 	dir->is_file = true;
 	while (n > ++dir->n_objs)

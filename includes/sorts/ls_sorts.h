@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:54:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/23 19:47:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:02:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ls_comparators.h"
 
 /*
-** If n_el less than 10, that function will val i_sort() if not - q_sort().
+** "smart" sort function select.
 */
 extern void
 choose_sort(void *restrict base,

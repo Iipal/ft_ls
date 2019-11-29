@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 21:32:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:09:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static struct s_dir
 	struct dirent	*dirent;
 
 	if (!h->dir)
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
+		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, path));
 	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
+		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	while ((dirent = readdir(h->dir)))
 		out->n_objs += !(!IS_BIT(g_flags, BIT_A_HIDDEN)
 					&& '.' == dirent->d_name[0]);
@@ -30,10 +30,10 @@ static struct s_dir
 	if (!IS_BIT(g_flags, BIT_A_HIDDEN) && !out->n_objs)
 	{
 		if (!(out->objs = ft_memalloc(sizeof(struct s_object) * 1UL)))
-			return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
+			return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	}
 	else if (!(out->objs = ft_memalloc(sizeof(struct s_object) * out->n_objs)))
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "malloc"));
+		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	return (out);
 }
 
@@ -66,7 +66,7 @@ inline struct s_dir
 	if (!(h.out = s_precalc_in_dir_objs(&h, path)))
 		return (NULL);
 	if (!(h.tmp = ft_strnew(1024UL)))
-		return (ls_errno_msg(__FILE__, __PFUNC__, __LINE__, "ft_strnew"));
+		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_strnew"));
 	h.out = s_read_dir(&h, path);
 	ft_strdel(&h.tmp);
 	closedir(h.dir);

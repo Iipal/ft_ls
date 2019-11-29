@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:05:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 13:51:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:11:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ inline bool
 	stat_ret = stat(path, buff);
 	lstat_ret = lstat(path, &tmp_lstat);
 	if (0 > stat_ret && 0 > lstat_ret)
-		return ((bool)ls_errno_msg(__FILE__, __PFUNC__, __LINE__, path));
+		return ((bool)ls_errno_msg(__FILE__, PFUNC, __LINE__, path));
 	if (S_ISLNK(tmp_lstat.st_mode))
 		*buff = tmp_lstat;
 	return (true);

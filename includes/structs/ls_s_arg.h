@@ -6,14 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:47:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 16:52:27 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/29 12:01:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_S_ARG_H
 # define LS_S_ARG_H
 
-# include <sys/types.h>
 # include <stdbool.h>
 
 struct	s_arg
