@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 14:01:50 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 14:49:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ static void		s_qs_iterative(t_s2sl pi)
 {
 	ssize_t	pivot;
 	ssize_t	stack[pi.y - pi.x + 1L];
-	ssize_t	top = -1L;
+	ssize_t	top;
 
+	top = -1L;
 	stack[++top] = pi.x;
 	stack[++top] = pi.y;
 	while (0 <= top)
