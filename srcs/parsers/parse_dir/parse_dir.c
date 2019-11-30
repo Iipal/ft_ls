@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 21:59:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 13:00:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 				const struct s_object *restrict objs)
 {
 	char	*d_name;
-	char	*subdir;
+	char	subdir[1024];
 	int32_t	i;
 
 	i = -1;
 	d_name = NULL;
-	if (!(subdir = ft_strnew(1023UL)))
-		return ((bool)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].d_name;
@@ -31,12 +29,11 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 		|| ('.' == d_name[0] && '.' == d_name[1] && '\0' == d_name[2])
 		|| !S_ISDIR(objs[i].st->mode)))
 			continue ;
-		subdir = u_full_path(subdir, prev_dir, d_name);
+		u_full_path(subdir, prev_dir, d_name);
 		ft_strcpy(g_src_path, subdir);
 		ft_printf("\n%s:\n", subdir);
 		parse_dir(subdir);
 	}
-	ft_strdel(&subdir);
 	return (true);
 }
 

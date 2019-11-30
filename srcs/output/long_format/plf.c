@@ -6,27 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:09:55 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 13:03:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
-
-static inline void
-	s_print_link(const char *restrict file)
-{
-	char	*buff;
-	char	*buff_path;
-
-	if (!(buff = (char*)ft_memalloc(sizeof(char) * 1024UL)))
-		return ((void)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
-	if (!(buff_path = (char*)ft_memalloc(sizeof(char) * 1024UL)))
-		return ((void)ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
-	readlink(u_full_path(buff_path, g_src_path, file), buff, 1024UL);
-	ft_strdel(&buff_path);
-	ft_printf(" -> %s", buff);
-	ft_strdel(&buff);
-}
 
 inline void
 	plf_obj(char *restrict fmt_str,
@@ -45,7 +29,7 @@ inline void
 	ft_printf(fmt_str, plf_obj.perm, obj->acl_ch, obj->st->nlink,
 		plf_obj.pw_name, plf_obj.gr_name, plf_obj.dev_info, plf_obj.date, path);
 	if (S_ISLNK(obj->st->mode))
-		s_print_link(obj->d_name);
+		plf_get_link(obj->d_name);
 	ft_putchar('\n');
 }
 

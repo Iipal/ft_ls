@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:04:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:56:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 13:03:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ extern char
 
 extern char
 *plf_get_dev_info(char *dst, struct s_stat *restrict st);
+
+extern void
+plf_get_link(const char *restrict file);
 
 extern char
 *plf_get_fmt_str(const int32_t n_objs,
