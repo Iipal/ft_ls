@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 13:00:12 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 14:01:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ inline void		q_sort(void *base,
 	g_qs_base = base;
 	g_qs_width = width;
 	g_qs_comparator = comparator;
-	if (500UL <= n_el)
+	if (200UL <= n_el)
 		s_qs_recursive((t_s2sl) { 0L, n_el - 1L });
 	else
 		s_qs_iterative((t_s2sl) { 0L, n_el - 1L });

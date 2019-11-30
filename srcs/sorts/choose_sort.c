@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 19:30:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 12:49:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 14:01:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline void	choose_sort(void *restrict base,
 {
 	if (2UL > n_el)
 		return ;
-	if (10UL >= n_el)
+	if (10UL >= n_el || 500UL <= n_el)
 		i_sort(base, n_el, width, comparator);
 	else
 		q_sort(base, n_el, width, comparator);
