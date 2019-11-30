@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 14:48:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 18:37:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int32_t	sort_time_objects_cmp(const void *a, const void *b)
 	if (IS_BIT(g_flags, BIT_U_ACCESS))
 		cmp = st_a->a_time - st_b->a_time;
 	else
-		cmp = st_a->c_time - st_b->c_time;
+		cmp = st_a->m_time - st_b->m_time;
 	if (!cmp)
 		return (sort_ascii_objects_cmp(a, b));
 	return ((int32_t)(IS_BIT(g_flags, BIT_R_SORT_REV) ? cmp : -cmp));
