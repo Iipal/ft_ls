@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 21:56:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 12:12:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ inline struct s_object
 	if (g_max_name_len < out->d_name_len)
 		g_max_name_len = out->d_name_len;
 	out->acl_ch = init_acl_ea(filename);
-	out->clr_name = init_file_color(filename, out->d_name_len,
+	if (g_isatty_ret && IS_BIT(g_flags, BIT_G_COLOR))
+		out->clr_name = init_file_color(filename, out->d_name_len,
 									out->st->mode, &out->clr_len);
 	return (out);
 }

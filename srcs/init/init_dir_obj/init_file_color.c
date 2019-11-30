@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:33:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 18:56:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 12:05:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ inline char
 	out = NULL;
 	*clr_len = 0UL;
 	clr_end_len = sizeof(LS_CLR_DEFAULT) - 1UL;
-	if (!g_isatty_ret || !IS_BIT(g_flags, BIT_G_COLOR))
-		return (NULL);
 	if ((clr = s_select_color(mode, clr_len)))
 	{
 		out_len = *clr_len + filename_len + clr_end_len;

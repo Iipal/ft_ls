@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 23:38:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 12:13:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/acl.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
-# include <execinfo.h>
 # include <math.h>
 
 # ifdef __linux__
