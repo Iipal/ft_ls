@@ -6,15 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 10:52:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 11:06:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 12:38:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
-
-static size_t	g_is_width = 0UL;
-static void		*g_is_base = NULL;
-static int32_t	(*g_is_comparator)(const void*, const void*) = NULL;
 
 void	i_sort(void *base,
 			const size_t n_el,
