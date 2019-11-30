@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 00:23:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 19:02:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/11/30 16:05:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ inline char
 	perm_str[7] = (st_mode_perm & S_IROTH) ? 'r' : '-';
 	perm_str[8] = (st_mode_perm & S_IWOTH) ? 'w' : '-';
 	perm_str[9] = (st_mode_perm & S_IXOTH) ? 'x' : '-';
+	if (st_mode_perm & S_ISVTX)
+		perm_str[9] = 'T';
 	return (perm_str);
 }
