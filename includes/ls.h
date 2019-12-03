@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 12:13:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/03 17:58:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define _GNU_SOURCE
 
 # include "libft.h"
-# include "ft_printf.h"
+# include "libftprintf.h"
 
 # include <stdio.h>
 # include <errno.h>
