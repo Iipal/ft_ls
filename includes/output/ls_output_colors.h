@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:58:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/03 17:58:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_OUTPUT_COLORS_H
 # define LS_OUTPUT_COLORS_H
 
-# include "ft_printf_colors.h"
+# include "libftprintf_colors.h"
 
 # define LS_CLR_DEFAULT PF_FG_CLR_DEFAULT PF_BG_CLR_DEFAULT
 
