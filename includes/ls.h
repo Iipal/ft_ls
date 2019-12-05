@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 12:13:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:38:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,5 @@ extern size_t	g_max_name_len;
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
 */
 extern int32_t	g_flags;
-
-/*
-** Sets to false when printing long format files from arguments.
-*/
-extern bool		g_is_print_total;
 
 #endif

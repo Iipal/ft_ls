@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 19:58:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:38:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ char	g_src_path[1024] = { 0 };
 size_t	g_max_name_len = 0UL;
 
 int32_t	g_flags = 0;
-
-bool	g_is_print_total = true;
 
 int	main(int ac, char *av[])
 {

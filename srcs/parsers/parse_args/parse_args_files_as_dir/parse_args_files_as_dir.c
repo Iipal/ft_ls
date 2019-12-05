@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 16:44:51 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 21:12:31 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:37:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	parse_args_files_as_dir(struct s_arg *args, int32_t n)
 			return ((void)free_dir(&dir));
 	}
 	ft_strcpy(g_src_path, ".");
-	g_is_print_total = false;
+	SET_BIT(g_flags, BIT_NO_TOTAL);
 	output(NULL, dir);
-	g_is_print_total = true;
+	UNSET_BIT(g_flags, BIT_NO_TOTAL);
 	free_dir(&dir);
 }

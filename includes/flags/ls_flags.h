@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:10:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 17:30:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:35:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define BIT_T_FULL_TIME  (1 << 9)
 # define BIT_T_SORT_TIME  (1 << 10)
 # define BIT_U_ACCESS     (1 << 11)
+
+# define BIT_NO_TOTAL     (1 << 31)
 
 # define F_ONE        '1'
 # define F_HIDDEN     'a'

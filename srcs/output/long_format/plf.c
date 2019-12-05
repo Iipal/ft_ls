@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 13:03:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/05 20:37:36 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void
 	i = -1;
 	total = 0L;
 	fmt_str = plf_get_fmt_str(n_objs, objs, &total);
-	if (g_is_print_total)
+	if (!IS_BIT(g_flags, BIT_NO_TOTAL))
 		ft_printf("total %lld\n", total);
 	while (n_objs > ++i)
 		plf_obj(fmt_str, (objs[i].clr_name ? objs[i].clr_name : objs[i].d_name),
