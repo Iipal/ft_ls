@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:52:41 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 16:19:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,17 @@ static bool
 	return (false);
 }
 
-bool
+int
 	parse_flags(const char *flags_str)
 {
 	while (*(++flags_str))
-		if (!s_check_valid_flag(*flags_str))
+		if (*flags_str == '-')
+			return (0);
+		else if (!s_check_valid_flag(*flags_str))
 		{
 			ft_printf("ft_ls: illegal option -- %c\n%s\n",
 				*flags_str, FLAGS_USAGE);
-			return (false);
+			return (-1);
 		}
-	return (true);
+	return (1);
 }

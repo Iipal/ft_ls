@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:03:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 17:40:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 16:17:05 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ parse_args(int ac, char **av);
 void
 parse_args_files_as_dir(struct s_arg *args, int32_t n);
 
-bool
+int
 parse_flags(const char *flags_str);
 
 extern bool
