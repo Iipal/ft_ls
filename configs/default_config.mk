@@ -51,6 +51,8 @@ endif
 MAKE += --no-print-directory
 
 CLR_INVERT := \033[7m
+CLR_UNDERLINE := \033[4m
+
 CLR_GREEN := \033[32m
 CLR_WHITE := \033[0m
 CLR_BLUE := \033[34m

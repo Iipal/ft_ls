@@ -19,11 +19,13 @@ $(NAME): $(OBJS)
 	@$(MAKE) STATUS
 
 $(OBJS): %.o: %.c
-	@$(CC) $(addprefix "-D ",$(DEFINES)) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
-	@$(ECHO) " | $@: $(MSG_BSUCCESS)"
+	@$(CC) $(addprefix "-D ",$(DEFINES)) -c $(CFLAGS) $(CFLAGS_WARN) $(IFLAGS) $< -o $@
+	@$(ECHO) " | $@: $(MSG_SUCCESS)"
 
 $(LIBS_DIRS):
+ifneq ($(MAKECMDGOALS),pre)
 	@$(MAKE) -C $@ $(MAKECMDGOALS)
+endif
 
 STATUS:
 	@$(ECHO) "/ compiled: $(NAME) $(MSG_SUCCESS)"
@@ -31,7 +33,8 @@ ifneq (,$(DEFINES))
 	@$(ECHO) "| defines: $(DEFINES)"
 endif
 	@$(ECHO) "| details: [$(words $(OBJS))].c, [$(words $(IFLAGS))].h files."
-	@$(ECHO) "_ flags: $(CLR_BLUE)$(CFLAGS)$(CLR_WHITE)"
+	@$(ECHO) "| compile default flags: $(CLR_UNDERLINE)$(CFLAGS_WARN)$(CLR_WHITE)"
+	@$(ECHO) "_ compile optional flags: $(CLR_UNDERLINE)$(CFLAGS)$(CLR_WHITE)"
 
 debug_all: fclean multi
 debug: multi
