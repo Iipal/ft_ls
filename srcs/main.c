@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/05 20:38:00 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 16:19:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,26 @@ int32_t	g_flags = 0;
 
 int	main(int ac, char *av[])
 {
+	int	parse_flags_ret;
+
 	--ac;
 	++av;
 	g_isatty_ret = isatty(STDOUT_FILENO);
 	(!g_isatty_ret) ? SET_BIT(g_flags, BIT_1_ONE) : 0;
 	if (!ac)
-		g_main_ret = !parse_dir(".");
-	else
+		return (!parse_dir("."));
+	while (ac && '-' == **av)
 	{
-		while (ac && '-' == **av && *(*av + 1))
-		{
-			if (!parse_flags(*av))
-				return (EXIT_FAILURE);
-			++av;
-			--ac;
-		}
-		(!ac) ? (g_main_ret = !parse_dir(".")) : parse_args(ac, av);
+		parse_flags_ret = parse_flags(*av);
+		++av;
+		--ac;
+		if (0 > parse_flags_ret)
+			return (EXIT_FAILURE);
+		else if (!parse_flags_ret)
+			break ;
 	}
+	if (!ac)
+		return (!parse_dir("."));
+	parse_args(ac, av);
 	return (g_main_ret);
 }
