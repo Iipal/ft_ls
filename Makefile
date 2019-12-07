@@ -1,7 +1,7 @@
 include configs/default_config.mk
 
-.PHONY: all multi
-multi: $(LIBS_NAMES)
+.PHONY: all multi $(LIBS_DIRS)
+multi: $(LIBS_DIRS)
 ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
 	@$(MAKE) $(MAKE_PARALLEL_FLAGS) CFLAGS="$(CFLAGS_DEBUG)" all
 else
@@ -22,8 +22,8 @@ $(OBJS): %.o: %.c
 	@$(CC) $(addprefix "-D ",$(DEFINES)) -c $(CFLAGS) $(CC_WARNINGS_FLAGS) $(IFLAGS) $< -o $@
 	@$(ECHO) " | $@: $(MSG_BSUCCESS)"
 
-$(LIBS_NAMES):
-	@$(MAKE) -C $(dir $@) $(MAKECMDGOALS)
+$(LIBS_DIRS):
+	@$(MAKE) -C $@ $(MAKECMDGOALS)
 
 STATUS:
 	@$(ECHO) "/ compiled: $(NAME) $(MSG_SUCCESS)"
@@ -48,12 +48,10 @@ del_libs:
 pre: del multi
 re: del del_libs multi
 
-clean:
-	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) clean;)
+clean: $(LIBS_DIRS)
 	@$(DEL) $(OBJS)
 	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD) source objects"
-fclean: clean
-	@$(foreach L_DIRS,$(LIBS_DIRS),$(MAKE) -C $(L_DIRS) fclean;)
+fclean: clean $(LIBS_DIRS)
 	@$(DEL) $(NAME)
 	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD)"
 
