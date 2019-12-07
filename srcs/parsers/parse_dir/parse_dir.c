@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 14:47:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 18:58:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ inline bool	parse_dir(const char *restrict path)
 		parse_file(path, cd->objs, true);
 	else
 	{
-		output(path, cd);
+		output(cd);
 		if (IS_BIT(g_flags, BIT_R_RECURSIVE))
 			s_check_subdirs(path, cd->n_objs, cd->objs);
 	}

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 13:02:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 18:58:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ inline void
 	if (is_print_as_dir)
 	{
 		cd = init_dir(file, true);
-		output(file, cd);
+		output(cd);
 		free_dir(&cd);
 	}
 }

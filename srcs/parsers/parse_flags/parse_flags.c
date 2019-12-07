@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 16:19:33 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 18:59:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static bool
 	static char		valid_flags[16] = { F_ONE, F_HIDDEN, F_NO_SORTED,
 		F_COLOR, F_NO_OWNER, F_LIST, F_RECURSIVE, F_REVERSE, F_SIZE,
 		F_FULL_TIME, F_TIME, F_ACCESS };
-	const size_t	valid_flags_size = ARR_SIZE(valid_flags);
 	ptrdiff_t		i;
 
 	i = 0L;

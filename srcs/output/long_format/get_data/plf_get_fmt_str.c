@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 15:07:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 18:58:48 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ inline char
 		t_blkcnt_t *restrict total)
 {
 	struct s_lf_spec_width	ws;
-	size_t					curr_offset;
 
 	ws = s_lfsw(n_objs, objs, total);
 	if (!IS_BIT(g_flags, BIT_G_NO_OWNER))

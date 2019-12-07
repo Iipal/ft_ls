@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:49:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:18:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/07 18:57:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # include "ls_output_colors.h"
 
 void
-output(const char *restrict path, const struct s_dir *restrict cd);
+output(const struct s_dir *restrict cd);
 
 #endif
