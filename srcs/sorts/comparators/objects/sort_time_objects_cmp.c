@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 16:29:03 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 16:38:20 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 17:14:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int64_t	sort_time_objects_cmp(const void *a, const void *b)
+int64_t	sort_time_objects_cmp(const void *restrict a, const void *restrict b)
 {
 	const struct s_stat	*st_a = ((const struct s_object*)a)->st;
 	const struct s_stat	*st_b = ((const struct s_object*)b)->st;

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:54:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 16:39:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 17:15:21 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ choose_sort(void *restrict base,
 ** quick sort
 */
 extern void
-q_sort(void *base,
+q_sort(void *restrict base,
 	const size_t n_el,
 	const size_t width,
 	int64_t (*comparator)(const void*, const void*));
@@ -37,7 +37,7 @@ q_sort(void *base,
 ** insertion sort
 */
 extern void
-i_sort(void *base,
+i_sort(void *restrict base,
 	const size_t n_el,
 	const size_t width,
 	int64_t (*comparator)(const void*, const void*));

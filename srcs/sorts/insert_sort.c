@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 10:52:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 16:39:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 17:15:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	i_sort(void *base,
+void	i_sort(void *restrict base,
 			const size_t n_el,
 			const size_t width,
 			int64_t (*comparator)(const void*, const void*))

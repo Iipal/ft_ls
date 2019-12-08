@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 16:39:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 17:15:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		s_qs_iterative(t_s2sl pi)
 	}
 }
 
-inline void		q_sort(void *base,
+inline void		q_sort(void *restrict base,
 					const size_t n_el,
 					const size_t width,
 					int64_t (*comparator)(const void*, const void*))

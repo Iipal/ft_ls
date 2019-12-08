@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 16:38:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 17:14:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int64_t	sort_ascii_objects_cmp(const void *a, const void *b)
+int64_t	sort_ascii_objects_cmp(const void *restrict a, const void *restrict b)
 {
 	int64_t	cmp;
 
