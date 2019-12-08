@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/05 20:37:36 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:30:08 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ inline void
 		const struct s_object *restrict obj)
 {
 	static struct s_plf	plf_obj;
+
 
 	plf_obj = (struct s_plf) {
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->st->mode),

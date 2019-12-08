@@ -6,18 +6,18 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 13:37:55 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 17:56:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:35:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 static inline void
-	s_catint(char *dst, int n)
+	s_catint(char *dst, off_t n)
 {
 	char	*tmp;
 
-	tmp = ft_itoa(n);
+	tmp = ft_ltoa(n);
 	dst = ft_strcpy(dst, tmp);
 	free(tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:58:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:31:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ inline char
 
 	ws = s_lfsw(n_objs, objs, total);
 	if (!IS_BIT(g_flags, BIT_G_NO_OWNER))
-		ft_sprintf(g_data_buf, "%%s%%c %%%zud %%-%zus  %%-%zus  %%%zus %%s %%s",
+		ft_sprintf(g_data_buf,
+			"%%s%%c %%%zulu %%-%zus  %%-%zus  %%%zus %%s %%s",
 			ws.st_nlnk_w, ws.pw_name_w, ws.gr_name_w, ws.st_size_w);
 	else
-		ft_sprintf(g_data_buf, "%%s%%c %%%zud %%s%%-%zus  %%%zus %%s %%s",
+		ft_sprintf(g_data_buf, "%%s%%c %%%zuzu %%s%%-%zus  %%%zus %%s %%s",
 			ws.st_nlnk_w, ws.gr_name_w, ws.st_size_w);
 	return (g_data_buf);
 }
