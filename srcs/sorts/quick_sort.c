@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 15:39:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 14:49:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:39:32 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static size_t	g_qs_width = 0UL;
 static void		*g_qs_base = NULL;
-static int32_t	(*g_qs_comparator)(const void*, const void*) = NULL;
+static int64_t	(*g_qs_comparator)(const void*, const void*) = NULL;
 
 static ssize_t	s_qs_partition(register const t_s2sl pi)
 {
@@ -74,7 +74,7 @@ static void		s_qs_iterative(t_s2sl pi)
 inline void		q_sort(void *base,
 					const size_t n_el,
 					const size_t width,
-					int32_t (*comparator)(const void*, const void*))
+					int64_t (*comparator)(const void*, const void*))
 {
 	g_qs_base = base;
 	g_qs_width = width;

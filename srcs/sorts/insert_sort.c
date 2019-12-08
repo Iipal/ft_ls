@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 10:52:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:59:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:39:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	i_sort(void *base,
 			const size_t n_el,
 			const size_t width,
-			int32_t (*comparator)(const void*, const void*))
+			int64_t (*comparator)(const void*, const void*))
 {
 	t_s2sl	i;
 	void	*key;

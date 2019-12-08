@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:55:27 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 15:36:39 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:40:06 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 # include <sys/types.h>
 
-int32_t
+int64_t
 sort_ascii_objects_cmp(const void *a, const void *b);
 
-int32_t
+int64_t
 sort_ascii_tabs_cmp(const void *a, const void *b);
 
-int32_t
+int64_t
 sort_ascii_args_cmp(const void *a, const void *b);
 
-int32_t
+int64_t
 sort_isdir_args_cmp(const void *a, const void *b);
 
-int32_t
+int64_t
 sort_time_objects_cmp(const void *a, const void *b);
 
-int32_t
+int64_t
 sort_size_objects_cmp(const void *a, const void *b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 19:30:26 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 14:48:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 16:39:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 inline void	choose_sort(void *restrict base,
 				size_t n_el,
 				size_t width,
-				int32_t (*comparator)(const void*, const void*))
+				int64_t (*comparator)(const void*, const void*))
 {
 	if (2UL > n_el)
 		return ;
