@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/03 17:58:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/08 15:45:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@
 # define LS_CLR_LNK     PF_FG_CLR_MAGENTA
 # define LS_CLR_EXE     PF_FG_CLR_RED
 # define LS_CLR_SOCK    PF_FG_CLR_GREEN
+
+# include "libftprintf_colors_end.h"
 
 #endif
