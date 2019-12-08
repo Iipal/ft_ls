@@ -5,11 +5,11 @@ multi: $(LIBS_DIRS)
 ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
 	@$(MAKE) $(MAKE_PARALLEL_FLAGS) CFLAGS="$(CFLAGS_DEBUG)" all
 else
-ifneq (,$(filter $(MAKECMDGOALS),sanitize sanitize_all))
+ ifneq (,$(filter $(MAKECMDGOALS),sanitize sanitize_all))
 	@$(MAKE) $(MAKE_PARALLEL_FLAGS) CFLAGS="$(CFLAGS_SANITIZE)" all
-else
+ else
 	@$(MAKE) $(MAKE_PARALLEL_FLAGS) all
-endif
+ endif
 endif
 
 all: $(NAME)
@@ -32,9 +32,8 @@ STATUS:
 ifneq (,$(DEFINES))
 	@$(ECHO) "| defines: $(DEFINES)"
 endif
-	@$(ECHO) "| details: [$(words $(OBJS))].c, [$(words $(IFLAGS))].h files."
-	@$(ECHO) "| compile default flags: $(CLR_UNDERLINE)$(CFLAGS_WARN)$(CLR_WHITE)"
-	@$(ECHO) "_ compile optional flags: $(CLR_UNDERLINE)$(CFLAGS)$(CLR_WHITE)"
+	@$(ECHO) "| compiler default flags: $(CLR_UNDERLINE)$(CFLAGS_WARN)$(CLR_WHITE)"
+	@$(ECHO) "_ compiler optional flags: $(CLR_UNDERLINE)$(CFLAGS)$(CLR_WHITE)"
 
 debug_all: fclean multi
 debug: multi
