@@ -1,7 +1,7 @@
 include configs/default_config.mk
 
-.PHONY: all multi $(LIBS_DIRS)
-multi: $(LIBS_DIRS)
+.PHONY: all multi $(LIBS_DIRS) STATUS_START
+multi: $(LIBS_DIRS) STATUS_START
  ifneq (,$(filter $(MAKECMDGOALS),debug debug_all))
 	@$(MAKE) $(MAKE_PARALLEL_FLAGS) CFLAGS="$(CFLAGS_DEBUG)" DEFINES="$(shell echo $(basename $(subst -,_,$(NAME))) | tr a-z A-Z)_DEBUG" all
  else
@@ -12,14 +12,20 @@ multi: $(LIBS_DIRS)
   endif
  endif
 
+STATUS_START:
+	@$(ECHO) " | -------"
+	@$(ECHO) " | making: $(CLR_UNDERLINE)$(NAME)$(CLR_WHITE) ..."
+	@$(ECHO) " | -------"
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $(addprefix -D,$(DEFINES)) $(CFLAGS) $(OBJS) $(LIBS_NAMES) $(CFLAGS_LIBS) $(IFLAGS) -o $(NAME)
 	@$(MAKE) STATUS
 
+-include $(DEPS)
 $(OBJS): %.o: %.c
-	@$(CC) $(addprefix -D,$(DEFINES)) -c $(CFLAGS) $(CFLAGS_WARN) $(IFLAGS) $< -o $@
+	@$(CC) $(addprefix -D,$(DEFINES)) -c $(CFLAGS) $(CFLAGS_DEFAULT) $(IFLAGS) $< -o $@
 	@$(ECHO) " | $@: $(MSG_SUCCESS)"
 
 $(LIBS_DIRS):
@@ -33,9 +39,9 @@ STATUS:
  ifneq (,$(DEFINES))
 	@$(ECHO) "| compiler custom defines: $(foreach dfns,$(DEFINES),$(CLR_INVERT)$(dfns)$(CLR_WHITE) )"
  endif
-	@$(ECHO) "| compiler default flags: $(CFLAGS_WARN)"
+	@$(ECHO) "| compiler default flags: $(CFLAGS_DEFAULT)"
 	@$(ECHO) "| compiler optional flags: $(CLR_UNDERLINE)$(CFLAGS)$(CLR_WHITE)"
-	@$(ECHO) "-$(shell printf "%0.s_" {1..$(words $(OBJS))})-"
+	@$(ECHO) "_"
 
 debug_all: fclean multi
 debug: multi
@@ -50,7 +56,7 @@ del_libs:
 	@$(DEL) $(LIBS_NAMES)
 
 pre: del multi
-re: del del_libs multi
+re: fclean multi
 
 clean: $(LIBS_DIRS)
 	@$(DEL) $(OBJS)
