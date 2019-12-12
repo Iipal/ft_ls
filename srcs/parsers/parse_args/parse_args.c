@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 14:01:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:47:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int
 	if (g_va_notdir_counter)
 	{
 		parse_args_files_as_dir(args, g_va_notdir_counter);
-		(g_va_counter - g_va_notdir_counter) ? ft_putchar('\n') : 0;
+		if (g_va_counter - g_va_notdir_counter)
+			fwrite("\n", sizeof(char), 1UL, stdout);
 	}
 	i = -1;
 	while (g_va_counter > ++i)
@@ -68,10 +69,10 @@ int
 		if (args[i].is_dir)
 		{
 			if (1 < ac)
-				ft_printf("%s:\n", args[i].path);
+				ft_fprintf(stdout, "%s:\n", args[i].path);
 			parse_dir(args[i].path);
 			if (g_va_counter != i + 1)
-				ft_putchar('\n');
+				fwrite("\n", sizeof(char), 1UL, stdout);
 		}
 		ft_strdel(&args[i].path);
 	}

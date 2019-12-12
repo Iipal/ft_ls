@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/28 20:31:19 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:46:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ static inline __attribute__((__const__)) t_s2si
 static void
 	s_put_sep(size_t d_name_len, const int32_t n, t_s2si xy)
 {
-	ft_putchar(IS_BIT(g_flags, BIT_1_ONE) ? '\n' : ' ');
+	size_t	i;
+
+	i = ~0ULL;
+	fwrite(IS_BIT(g_flags, BIT_1_ONE) ? "\n" : " ", sizeof(char), 1UL, stdout);
 	if (!IS_BIT(g_flags, BIT_1_ONE) && xy.x + 1 < n / (float)xy.y)
-		ft_putnchar(' ', g_max_name_len - d_name_len);
+		while (g_max_name_len - d_name_len > ++i)
+			fwrite(" ", sizeof(char), 1UL, stdout);
 }
 
 static inline struct s_pdf
@@ -56,13 +60,13 @@ void
 			if (n <= (j = i.x * fmt.y + i.y))
 				break ;
 			p = s_select_output_data(&objs[j]);
-			write(STDOUT_FILENO, p.name, p.name_len);
+			fwrite(p.name, sizeof(char), p.name_len, stdout);
 			if (n - 1 > j)
 				s_put_sep(objs[j].d_name_len, n, (t_s2si){i.x, fmt.y});
 		}
 		if (!IS_BIT(g_flags, BIT_1_ONE))
-			ft_putchar('\n');
+			fwrite("\n", sizeof(char), 1UL, stdout);
 	}
 	if (IS_BIT(g_flags, BIT_1_ONE))
-		ft_putchar('\n');
+		fwrite("\n", sizeof(char), 1UL, stdout);
 }
