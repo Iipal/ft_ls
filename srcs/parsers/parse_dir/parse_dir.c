@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:58:08 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:52:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 			continue ;
 		u_full_path(subdir, prev_dir, d_name);
 		ft_strcpy(g_src_path, subdir);
-		ft_printf("\n%s:\n", subdir);
+		ft_fprintf(stdout, "\n%s:\n", subdir);
 		parse_dir(subdir);
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:59:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/12 18:52:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int
 			return (0);
 		else if (!s_check_valid_flag(*flags_str))
 		{
-			ft_printf("ft_ls: illegal option -- %c\n%s\n",
+			ft_fprintf(stderr, "ft_ls: illegal option -- %c\n%s\n",
 				*flags_str, FLAGS_USAGE);
 			return (-1);
 		}
