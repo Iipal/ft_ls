@@ -23,13 +23,13 @@ STATUS_START:
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(addprefix -D,$(DEFINES)) \
+	@$(CC) $(addprefix -D,$(DEFINES)) \
 		$(IFLAGS) \
-		$(LIBS_NAMES) \
 		$(OBJS) \
 		$(CFLAGS) \
 		$(CFLAGS_OPTIONAL) \
 		$(CFLAGS_LIBS) \
+		$(LIBS_NAMES) \
 		-o $(NAME)
 	@$(MAKE) STATUS
 
