@@ -26,9 +26,4 @@ STATUS_END:
  ifneq (,$(CFLAGS_OPTIONAL))
 	@$(ECHO) "| compiler optional flags : $(CLR_UNDERLINE)$(CFLAGS_OPTIONAL)$(CLR_WHITE)"
  endif
- ifneq (,$(ARFLAGS))
-  ifneq (,$(OBJS))
-	@$(ECHO) "| archiver          flags : $(CLR_UNDERLINE)$(ARFLAGS)$(CLR_WHITE)"
-  endif
- endif
 	@$(ECHO) "\\ ----------------------- |"

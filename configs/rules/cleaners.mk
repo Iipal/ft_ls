@@ -5,7 +5,7 @@ clean_deps:
 	@$(DEL) $(OBJS:%.o=%.d)
 clean: $(LIBS_DIRS) clean_deps clean_asms
 	@$(DEL) $(OBJS)
-fclean: clean $(LIBS_DIRS)
+fclean: clean
  ifneq (,$(wildcard $(NAME)))
 	@$(DEL) $(NAME)
 	@$(ECHO) " | $(CLR_INVERT)deleted$(CLR_WHITE): $(NPWD)"
