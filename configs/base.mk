@@ -40,7 +40,7 @@ endif
 
 # Compiler settings.
 CC                    := clang
-CFLAGS                := -Wall -Wextra -Werror -Wunused -MMD -Wpedantic -std=c11
+CFLAGS                := -Wall -Wextra -Werror -Wunused -MMD -std=c11
 CFLAGS_PEDANTIC       := -Wpedantic
 CFLAGS_DEBUG          := -g3
 CFLAGS_SANITIZE       := $(CFLAGS_DEBUG) -fsanitize=address
