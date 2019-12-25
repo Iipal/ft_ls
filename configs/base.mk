@@ -40,7 +40,8 @@ endif
 
 # Compiler settings.
 CC                    := clang
-CFLAGS                := -Wall -Wextra -Werror -Wunused -MMD
+CFLAGS                := -Wall -Wextra -Werror -Wunused -MMD -Wpedantic -std=c11
+CFLAGS_PEDANTIC       := -Wpedantic
 CFLAGS_DEBUG          := -g3
 CFLAGS_SANITIZE       := $(CFLAGS_DEBUG) -fsanitize=address
 CFLAGS_OPTIMIZE       := -march=native -mtune=native -Ofast -pipe -flto -fpic

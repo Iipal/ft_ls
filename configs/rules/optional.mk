@@ -19,6 +19,10 @@ make_optional:
 	@$(eval ASMS:=$(OBJS:.o=.S))
 	@$(eval OBJS:=)
  endif
+ ifneq (,$(filter $(MAKECMDGOALS),pedantic pedantic_all))
+	@$(eval DEFINES+=$(shell echo $(basename $(NAME)) | tr a-z A-Z)_PEDANTIC)
+	@$(eval CFLAGS+=$(CFLAGS_PEDANTIC))
+ endif
 
 debug_all: pre
 debug: multi
@@ -31,3 +35,6 @@ assembly: multi
 
 debug_assembly_all: pre
 debug_assembly: multi
+
+pedantic_all: pre
+pedantic: multi
