@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 13:01:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/12 18:50:54 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 04:00:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 inline void	plf_get_link(const char *restrict file)
 {
-	char	link_name[1024];
-	char	full_path[1024];
+	char	*link_name;
+	char	*full_path;
 
-	ft_bzero(link_name, sizeof(char) * 1024);
-	ft_bzero(full_path, sizeof(char) * 1024);
+	link_name = (char[1024]){ 0 };
+	full_path = (char[1024]){ 0 };
 	readlink(u_full_path(full_path, g_src_path, file), link_name, 1024UL);
 	ft_fprintf(stdout, " -> %s", link_name);
 }

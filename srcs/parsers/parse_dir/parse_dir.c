@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/26 02:06:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 03:48:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static bool
 		const struct s_object *restrict objs)
 {
 	char	*d_name;
-	char	subdir[1024];
+	char	*subdir;
 	int32_t	i;
 
 	i = -1;
 	d_name = NULL;
-	ft_bzero(subdir, sizeof(char) * 1024);
+	subdir = (char[1024]) { 0 };
 	while (n_objs > ++i)
 	{
 		d_name = objs[i].d_name;
