@@ -6,34 +6,26 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 00:23:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 16:05:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 01:46:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline char __attribute__((__const__))
-	s_get_type(const mode_t st_mode_perm)
+char	*plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm)
 {
-	if (S_ISDIR(st_mode_perm))
-		return ('d');
-	else if (S_ISCHR(st_mode_perm))
-		return ('c');
-	else if (S_ISBLK(st_mode_perm))
-		return ('b');
-	else if (S_ISLNK(st_mode_perm))
-		return ('l');
-	else if (S_ISFIFO(st_mode_perm))
-		return ('p');
-	else if (S_ISSOCK(st_mode_perm))
-		return ('s');
-	return ('-');
-}
+	const static char	obj_chars[8] = "dcblps-";
+	static bool			*obj_types_table;
+	bool				*obj_type_ptr_selector;
 
-inline char
-	*plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm)
-{
-	perm_str[0] = s_get_type(st_mode_perm);
+	obj_types_table = (bool[8]){ S_ISDIR(st_mode_perm), S_ISCHR(st_mode_perm),
+		S_ISBLK(st_mode_perm), S_ISLNK(st_mode_perm), S_ISFIFO(st_mode_perm),
+		S_ISSOCK(st_mode_perm), 1L, 0L
+	};
+	obj_type_ptr_selector = obj_types_table;
+	while (!*obj_type_ptr_selector)
+		++obj_type_ptr_selector;
+	perm_str[0] = obj_chars[obj_type_ptr_selector - obj_types_table];
 	perm_str[1] = (st_mode_perm & S_IRUSR) ? 'r' : '-';
 	perm_str[2] = (st_mode_perm & S_IWUSR) ? 'w' : '-';
 	perm_str[3] = (st_mode_perm & S_IXUSR) ? 'x' : '-';
