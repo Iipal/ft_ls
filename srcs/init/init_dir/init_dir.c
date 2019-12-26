@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 21:46:45 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 00:12:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static struct s_dir
 	return (h->out);
 }
 
-inline struct s_dir
+struct s_dir
 	*init_dir(const char *path, const bool force_open_dir)
 {
 	struct s_dir_init	h;

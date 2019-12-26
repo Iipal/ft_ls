@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:33:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 12:05:18 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 00:23:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static inline char
 	return (out);
 }
 
-inline char
+char
 	*init_file_color(const char *restrict filename,
 		const size_t filename_len,
 		const mode_t mode,

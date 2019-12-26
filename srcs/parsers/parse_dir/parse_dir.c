@@ -6,15 +6,16 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/12 18:52:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 02:06:53 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static bool	s_check_subdirs(const char *restrict prev_dir,
-				const int32_t n_objs,
-				const struct s_object *restrict objs)
+static bool
+	s_check_subdirs(const char *restrict prev_dir,
+		const int32_t n_objs,
+		const struct s_object *restrict objs)
 {
 	char	*d_name;
 	char	subdir[1024];
@@ -38,7 +39,8 @@ static bool	s_check_subdirs(const char *restrict prev_dir,
 	return (true);
 }
 
-inline bool	parse_dir(const char *restrict path)
+bool
+	parse_dir(const char *restrict path)
 {
 	struct s_dir	*cd;
 

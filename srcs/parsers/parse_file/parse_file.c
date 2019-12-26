@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:58:16 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 02:06:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static inline bool __attribute__((__always_inline__))
 	return (is_print_as_dir);
 }
 
-inline void
+void
 	parse_file(const char *restrict file,
 		const struct s_object *restrict obj,
 		const bool is_endl)
