@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:37:39 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/27 15:56:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/26 02:12:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LS_TYPES_H
 
 /*
-** My own typedefs for compapibility between Linux and MacOS:
+** My own typedefs for compatibility between Linux and MacOS:
 */
 typedef long long	t_blkcnt_t;
 typedef long		t_time_t;
