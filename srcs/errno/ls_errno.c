@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errno.c                                            :+:      :+:    :+:   */
+/*   ls_errno.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 23:06:46 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/12 18:48:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:33:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-#if defined (LS_DEBUG_MSG) || defined (DEBUG)
+#if defined (LS_DEBUG_MSG) || defined (FT_LS_DEBUG)
 
-inline void
-	*ls_errno_msg(const char *restrict const file_name,
+inline void __attribute__((noreturn))
+	ls_errno_exit(const char *restrict const file_name,
 				const char *restrict const fn_name,
 				const int32_t fn_line,
 				const char *restrict const err_msg)
 {
 	ft_fprintf(stderr, "ft_ls: (%s[%s:%d]) %s: %s\n",
 		file_name, fn_name, fn_line, err_msg, strerror(errno));
-	return (NULL);
+	_Exit(1);
 }
 
 #else
 
-inline void
-	*ls_errno_msg(const char *restrict const file_name,
+inline void __attribute__((noreturn))
+	ls_errno_exit(const char *restrict const file_name,
 				const char *restrict const fn_name,
 				const int32_t fn_line,
 				const char *restrict const err_msg)
@@ -37,7 +37,7 @@ inline void
 	(void)fn_name;
 	(void)fn_line;
 	ft_fprintf(stderr, "ft_ls: %s: %s\n", err_msg, strerror(errno));
-	return (NULL);
+	_Exit(1);
 }
 
 #endif

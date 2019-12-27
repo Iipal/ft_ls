@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/12 18:46:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:17:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static inline __attribute__((__const__)) t_s2si
-	s_fmt(const int32_t n)
+static inline __attribute__((__always_inline__)) t_s2si
+	s_get_term_size(const int32_t n)
 {
 	const int	win_x = get_term_win_col();
 	float		x;
@@ -24,7 +24,7 @@ static inline __attribute__((__const__)) t_s2si
 	return ((t_s2si) { x, (float)n / x + 1.0f});
 }
 
-static void
+static inline void
 	s_put_sep(size_t d_name_len, const int32_t n, t_s2si xy)
 {
 	size_t	i;
@@ -36,7 +36,7 @@ static void
 			fwrite(" ", sizeof(char), 1UL, stdout);
 }
 
-static inline struct s_pdf
+static inline __attribute__((__always_inline__)) struct s_pdf
 	s_select_output_data(const struct s_object *restrict obj)
 {
 	return ((struct s_pdf) { obj->clr_name ? obj->clr_name : obj->d_name,
@@ -52,7 +52,8 @@ void
 	struct s_pdf	p;
 
 	i.y = -1;
-	fmt = IS_BIT(g_flags, BIT_1_ONE) ? (t_s2si){INT32_MAX, 1} : s_fmt(n);
+	fmt = IS_BIT(g_flags, BIT_1_ONE)
+		? (t_s2si){ INT32_MAX, 1 } : s_get_term_size(n);
 	while (fmt.y > ++i.y && (i.x = -1))
 	{
 		while (fmt.x > ++i.x)

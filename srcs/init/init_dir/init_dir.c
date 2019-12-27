@@ -6,34 +6,27 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 11:30:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/26 00:12:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:30:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 static struct s_dir
-	*s_precalc_in_dir_objs(struct s_dir_init *restrict h,
-		const char *restrict path)
+	*s_precalc_in_dir_objs(struct s_dir_init *restrict h)
 {
 	struct s_dir	*out;
 	struct dirent	*dirent;
 
-	if (!h->dir)
-		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, path));
-	if (!(out = ft_memalloc(sizeof(struct s_dir))))
-		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
+	LS_ASSERT(out = ft_memalloc(sizeof(*out)));
 	while ((dirent = readdir(h->dir)))
 		out->n_objs += !(!IS_BIT(g_flags, BIT_A_HIDDEN)
 					&& '.' == dirent->d_name[0]);
 	rewinddir(h->dir);
 	if (!IS_BIT(g_flags, BIT_A_HIDDEN) && !out->n_objs)
-	{
-		if (!(out->objs = ft_memalloc(sizeof(struct s_object))))
-			return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
-	}
-	else if (!(out->objs = ft_memalloc(sizeof(struct s_object) * out->n_objs)))
-		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
+		LS_ASSERT(out->objs = ft_memalloc(sizeof(*out->objs)));
+	else
+		LS_ASSERT(out->objs = ft_memalloc(sizeof(*out->objs) * out->n_objs));
 	return (out);
 }
 
@@ -58,15 +51,13 @@ struct s_dir
 {
 	struct s_dir_init	h;
 
-	if (!(h.i = ~0U) || !init_stat(path, &h.st))
-		return (NULL);
+	init_stat(path, &h.st);
+	h.i = ~0U;
 	if (!force_open_dir && !S_ISDIR(h.st.st_mode))
 		return (init_file(path));
-	h.dir = opendir(path);
-	if (!(h.out = s_precalc_in_dir_objs(&h, path)))
-		return (NULL);
-	if (!(h.tmp = ft_strnew(1023UL)))
-		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_strnew"));
+	LS_ASSERT_MGS(h.dir = opendir(path), path);
+	h.out = s_precalc_in_dir_objs(&h);
+	LS_ASSERT(h.tmp = ft_strnew(1023UL));
 	h.out = s_read_dir(&h, path);
 	ft_strdel(&h.tmp);
 	closedir(h.dir);

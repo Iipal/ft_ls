@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 12:12:03 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:30:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ inline struct s_object
 	struct s_object *out;
 
 	out = dst;
-	if (!out && !(out = ft_memalloc(sizeof(struct s_object))))
-		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memmalloc"));
-	if (st && !(out->st = dup_stat(st)))
-		return (free_dir_obj(out));
+	LS_ASSERT(!(!dst && !(out = ft_memalloc(sizeof(*out)))));
+	if (st)
+		out->st = dup_stat(st);
 	out->d_name_len = ft_strlen(filename);
 	out->d_name = ft_strndup(filename, out->d_name_len);
 	if (g_max_name_len < out->d_name_len)

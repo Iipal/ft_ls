@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/12 18:47:57 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:31:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ static inline struct s_arg __attribute__((__always_inline__))
 	if (!arg.is_dir)
 		++g_va_notdir_counter;
 	if (!dst)
-		dst = ft_memalloc(sizeof(struct s_arg));
+		LS_ASSERT(dst = ft_memalloc(sizeof(struct s_arg)));
 	else
-		dst = ft_memrealloc(dst, sizeof(struct s_arg) * g_va_counter,
-								sizeof(struct s_arg) * (g_va_counter + 1));
-	dst[g_va_counter++] = (struct s_arg) { ft_strdup(arg.path), arg.is_dir };
+		LS_ASSERT(dst = ft_memrealloc(dst,
+			sizeof(struct s_arg) * g_va_counter,
+			sizeof(struct s_arg) * (g_va_counter + 1)));
+	LS_ASSERT(dst[g_va_counter].path = ft_strdup(arg.path));
+	dst[g_va_counter++].is_dir = arg.is_dir;
 	return (dst);
 }
 

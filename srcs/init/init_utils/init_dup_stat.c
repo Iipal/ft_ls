@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 22:59:58 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 21:10:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:31:14 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ inline struct s_stat
 {
 	struct s_stat	*out;
 
-	if (!(out = ft_memalloc(sizeof(*out))))
-		return (ls_errno_msg(__FILE__, PFUNC, __LINE__, "ft_memalloc"));
+	LS_ASSERT(out = ft_memalloc(sizeof(*out)));
 	*out = (struct s_stat){ src->st_uid, src->st_gid,
 		src->st_atime, src->st_ctime, src->st_mtime,
 		src->st_size, src->st_blocks, src->st_rdev,

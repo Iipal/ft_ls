@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 17:40:07 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 18:57:21 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/12/28 01:17:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	output(const struct s_dir *restrict cd)
+inline void	output(const struct s_dir *restrict cd)
 {
 	if (!IS_BIT(g_flags, BIT_F_NO_SORT))
 	{
