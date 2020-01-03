@@ -58,7 +58,7 @@ int
 	int32_t			i;
 
 	if (!(args = s_pre_parse_errno_args(ac, av)))
-		return (g_main_ret = EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (g_va_notdir_counter)
 	{
 		parse_args_files_as_dir(args, g_va_notdir_counter);

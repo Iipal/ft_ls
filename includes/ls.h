@@ -21,10 +21,13 @@
 # include <stdio.h>
 # include <errno.h>
 # include <sys/xattr.h>
-# include <sys/acl.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <math.h>
+
+# ifdef __APPLE__
+#  include <sys/acl.h>
+# endif
 
 # ifdef __linux__
 #  include <sys/sysmacros.h>
@@ -43,12 +46,6 @@
 # include "ls_free.h"
 
 # include "ls_errno.h"
-
-/*
-** What main shoud to return.
-** Variable changes only in main.c and parse_args.c
-*/
-extern int		g_main_ret;
 
 /*
 ** Store the value what was returned from isatty(STDOUT_FILENO).

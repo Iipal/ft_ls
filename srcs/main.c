@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 16:19:37 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 15:17:00 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /*
 ** ls.h:
 */
-int32_t	g_main_ret = EXIT_SUCCESS;
-
 int32_t	g_isatty_ret = 0;
 
 char	g_data_buf[1024] = { 0 };
@@ -48,6 +46,5 @@ int	main(int ac, char *av[])
 	}
 	if (!ac)
 		return (!parse_dir("."));
-	parse_args(ac, av);
-	return (g_main_ret);
+	return (parse_args(ac, av));
 }
