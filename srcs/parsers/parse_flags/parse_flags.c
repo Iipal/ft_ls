@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/28 01:20:14 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:32:26 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool
 }
 
 int
-	parse_flags(const char *flags_str)
+	s_parse_av_str(const char *flags_str)
 {
 	while (*(++flags_str))
 		if (*flags_str == '-')
@@ -55,4 +55,22 @@ int
 			return (-1);
 		}
 	return (1);
+}
+
+int
+	parse_flags(struct s_arg_av *restrict const a)
+{
+	int	parse_status;
+
+	while (a->ac && '-' == **(a->av))
+	{
+		parse_status = s_parse_av_str(*(a->av));
+		++a->av;
+		--a->ac;
+		if (0 > parse_status)
+			return (EXIT_FAILURE);
+		else if (!parse_status)
+			break ;
+	}
+	return (EXIT_SUCCESS);
 }

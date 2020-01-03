@@ -14,5 +14,5 @@
 
 int64_t	sort_isdir_args_cmp(const void *restrict a, const void *restrict b)
 {
-	return ((int64_t)(((struct s_arg*)a)->is_dir - ((struct s_arg*)b)->is_dir));
+	return ((int64_t)(((struct s_arg_obj*)a)->is_dir - ((struct s_arg_obj*)b)->is_dir));
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:04:49 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:00:11 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:27:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define LS_SYSTEM_H
 
 extern int	get_term_win_col(void);
+extern void	check_isatty(void);
 
 #endif

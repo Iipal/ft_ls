@@ -12,7 +12,7 @@
 
 #include "ls.h"
 
-void	parse_args_files_as_dir(struct s_arg *args, int32_t n)
+void	parse_args_files_as_dir(struct s_arg_obj *args, int32_t n)
 {
 	struct s_dir	*d;
 	struct stat		st;

@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_s_arg.h                                         :+:      :+:    :+:   */
+/*   check_isatty.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/22 12:47:11 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:01:29 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/03 20:27:12 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/03 20:27:39 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_S_ARG_H
-# define LS_S_ARG_H
+#include "ls.h"
 
-# include <stdbool.h>
-
-struct	s_arg
+inline void	check_isatty(void)
 {
-	char	*path;
-	bool	is_dir;
-};
-
-#endif
+	if (!(g_isatty_ret = isatty(fileno(stdout))))
+		SET_BIT(g_flags, BIT_1_ONE);
+}

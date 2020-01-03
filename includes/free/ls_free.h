@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:54:00 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 12:57:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:22:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ls_s_dir.h"
 
-void
+extern void
 *free_dir(struct s_dir **curr_dir);
 
 extern void

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 23:06:46 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/28 01:41:48 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:23:37 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 inline void __attribute__((noreturn))
 	ls_errno_exit(const char *restrict const file_name,
 				const char *restrict const fn_name,
-				const int32_t fn_line,
+				const size_t fn_line,
 				const char *restrict const err_msg)
 {
-	ft_fprintf(stderr, "%s[%3d]: %s\n\t'%s': %s\n",
+	ft_fprintf(stderr, "%s[%3zu]: %s\n\t'%s': %s\n",
 		file_name, fn_line, fn_name, err_msg, strerror(errno));
 	_Exit(1);
 }
@@ -30,7 +30,7 @@ inline void __attribute__((noreturn))
 inline void __attribute__((noreturn))
 	ls_errno_exit(const char *restrict const file_name,
 				const char *restrict const fn_name,
-				const int32_t fn_line,
+				const size_t fn_line,
 				const char *restrict const err_msg)
 {
 	(void)file_name;

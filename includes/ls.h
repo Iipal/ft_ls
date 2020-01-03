@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/05 20:41:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:34:10 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,6 @@
 # include "ls_errno.h"
 
 /*
-** Store the value what was returned from isatty(STDOUT_FILENO).
-*/
-extern int32_t	g_isatty_ret;
-
-/*
-** char buffer for anything.
-*/
-extern char		g_data_buf[1024];
-/*
-**	Store the dupcliate of argument name which currently parsing.
-*/
-extern char		g_src_path[1024];
-
-/*
-** Store the max item name lenght in directory which currently parsing.
-**	 (Used for corrent default output formating)
-*/
-extern size_t	g_max_name_len;
-
-/*
 **	Command line options(flags).
 **	 Available options:
 **	  -1 - Force output to be one entry per line.
@@ -87,5 +67,25 @@ extern size_t	g_max_name_len;
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
 */
 extern int32_t	g_flags;
+
+/*
+** Store the value what was returned from isatty(STDOUT_FILENO).
+*/
+extern int32_t	g_isatty_ret;
+
+/*
+** Store the max item name lenght in directory which currently parsing.
+**	 (Used for corrent default output formating)
+*/
+extern size_t	g_max_name_len;
+
+/*
+** char buffer for anything.
+*/
+extern char		g_data_buf[1024];
+/*
+**	Store the dupcliate of argument name which currently parsing.
+*/
+extern char		g_src_path[1024];
 
 #endif

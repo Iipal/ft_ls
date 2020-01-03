@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:52:09 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:05:46 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:21:46 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 ** PLF - Print Long Format
 */
-void
+extern void
 plf(const int32_t n_objs, const struct s_object *restrict objs);
 
 extern void

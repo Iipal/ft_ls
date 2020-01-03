@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:33:13 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/28 01:33:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:29:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 extern void __attribute__((noreturn))
 ls_errno_exit(const char *restrict const file_name,
 			const char *restrict const fn_name,
-			const int32_t fn_line,
+			const size_t fn_line,
 			const char *restrict const err_msg);
 
 #endif

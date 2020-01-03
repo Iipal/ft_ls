@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_s_object.h                                      :+:      :+:    :+:   */
+/*   ls_s_arg_av.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/22 12:44:02 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/29 12:46:03 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/03 20:13:04 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/03 20:15:59 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_S_OBJECT_H
-# define LS_S_OBJECT_H
+#ifndef LS_S_ARG_AV_H
+# define LS_S_ARG_AV_H
 
-# include <sys/types.h>
-
-# include "ls_s_stat.h"
-
-struct	s_object
+struct s_arg_av
 {
-	struct s_stat	*st;
-	char			*d_name;
-	char			*clr_name;
-	size_t			d_name_len;
-	size_t			clr_len;
-	char			acl_ch;
-	char			_dummy[7] __attribute__((unused));
+	char	**av;
+	int		ac;
+	char	_dummy[4] __attribute__((unused));
 };
 
 #endif

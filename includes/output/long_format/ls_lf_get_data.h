@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:04:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/30 13:03:06 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:22:13 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ extern char
 *plf_get_permission(char *restrict perm_str, const mode_t st_mode_perm);
 
 extern char
-*plf_get_dev_info(char *dst, struct s_stat *restrict st);
+*plf_get_dev_info(char *restrict dst, struct s_stat *restrict st);
 
 extern void
 plf_get_link(const char *restrict file);

@@ -6,23 +6,23 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:03:17 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/07 16:17:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/03 20:21:25 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_PARSERS_H
 # define LS_PARSERS_H
 
-# include "ls_s_dir.h"
+# include "ls_structs.h"
 
-int
-parse_args(int ac, char **av);
+extern int
+parse_args(struct s_arg_av *restrict const a);
 
-void
-parse_args_files_as_dir(struct s_arg *args, int32_t n);
+extern void
+parse_args_files_as_dir(struct s_arg_obj *args, int32_t n);
 
-int
-parse_flags(const char *flags_str);
+extern int
+parse_flags(struct s_arg_av *restrict const a);
 
 extern bool
 parse_dir(const char *restrict path);
