@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 15:30:46 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 17:14:47 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 15:41:45 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int64_t	sort_size_objects_cmp(const void *restrict a, const void *restrict b)
 	cmp = a_size - b_size;
 	if (!cmp)
 		return (sort_ascii_objects_cmp(a, b));
-	return ((IS_BIT(g_flags, BIT_R_SORT_REV) ? cmp : -cmp));
+	return ((GDI_FLAGS_IS_BIT(BIT_R_SORT_REV) ? cmp : -cmp));
 }

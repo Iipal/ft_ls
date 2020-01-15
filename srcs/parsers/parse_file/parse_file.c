@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/06 17:30:05 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/26 02:06:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 15:40:29 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void
 
 	cd = NULL;
 	is_print_as_dir = false;
-	if (!IS_BIT(g_flags, BIT_L_LIST))
+	if (!GDI_FLAGS_IS_BIT(BIT_L_LIST))
 		is_print_as_dir = s_check_def_or_under_link_print(file, obj, is_endl);
 	else
 		is_print_as_dir = s_check_plf_or_under_link_print(file, obj);

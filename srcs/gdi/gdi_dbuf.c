@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_objects_cmp.c                           :+:      :+:    :+:   */
+/*   gdi_dbuf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/19 14:38:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 15:41:36 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/15 16:12:49 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/15 16:14:17 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int64_t	sort_ascii_objects_cmp(const void *restrict a, const void *restrict b)
+inline char	*gdi_dbuf_get_ptr(void)
 {
-	int64_t	cmp;
+	static char	data_buff[GDI_DBUF_SIZE];
 
-	cmp = (int64_t)ft_strcmp(((const struct s_object*)a)->d_name,
-							((const struct s_object*)b)->d_name);
-	return (GDI_FLAGS_IS_BIT(BIT_R_SORT_REV) ? -cmp : cmp);
+	return (data_buff);
 }

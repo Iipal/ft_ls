@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/28 01:18:10 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 15:39:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ inline void
 		plf_get_permission((char[STR_LEN_PERMISSION]){ 0 }, obj->st->mode),
 		plf_get_dev_info((char[STR_LEN_DEVICE]){ 0 }, obj->st),
 		plf_get_date((char[STR_LEN_DATE]){ 0 }, obj->st),
-		IS_BIT(g_flags, BIT_G_NO_OWNER) ? "" : getpwuid(obj->st->uid)->pw_name,
+		GDI_FLAGS_IS_BIT(BIT_G_NO_OWNER) ? "" : getpwuid(obj->st->uid)->pw_name,
 		getgrgid(obj->st->gid)->gr_name
 	};
 	ft_fprintf(stdout, fmt_str, plf_obj.perm, obj->acl_ch, obj->st->nlink,
@@ -43,7 +43,7 @@ void
 	i = -1;
 	total = 0L;
 	fmt_str = plf_get_fmt_str(n_objs, objs, &total);
-	if (!IS_BIT(g_flags, BIT_NO_TOTAL))
+	if (!GDI_FLAGS_IS_BIT(BIT_NO_TOTAL))
 		ft_fprintf(stdout, "total %lld\n", total);
 	while (n_objs > ++i)
 		plf_obj(fmt_str, (objs[i].clr_name ? objs[i].clr_name : objs[i].d_name),

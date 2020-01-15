@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_objects_cmp.c                           :+:      :+:    :+:   */
+/*   ls_gdi.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/19 14:38:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 15:41:36 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/15 15:21:42 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/15 16:17:07 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_GDI_H
+# define LS_GDI_H
 
-int64_t	sort_ascii_objects_cmp(const void *restrict a, const void *restrict b)
-{
-	int64_t	cmp;
+/*
+** Global Data Interfaces - code for better manipulations
+**  with a global variables via functions and actually don't creating
+**  global-visible variables at all.
+*/
 
-	cmp = (int64_t)ft_strcmp(((const struct s_object*)a)->d_name,
-							((const struct s_object*)b)->d_name);
-	return (GDI_FLAGS_IS_BIT(BIT_R_SORT_REV) ? -cmp : cmp);
-}
+# include "ls_gdi_flags.h"
+# include "ls_gdi_isatty.h"
+# include "ls_gdi_maxlen.h"
+# include "ls_gdi_dbuf.h"
+# include "ls_gdi_src.h"
+
+#endif /* LS_GDI_H */

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:32:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/28 01:17:07 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static inline __attribute__((__always_inline__)) t_s2si
 	const int	win_x = get_term_win_col();
 	float		x;
 
-	x = (float)win_x / (float)g_max_name_len;
+	x = (float)win_x / (float)GDI_MAXLEN_GET_VALUE();
 	if (1.0 > x)
 		x = 1.0f;
 	return ((t_s2si) { x, (float)n / x + 1.0f});
@@ -30,9 +30,9 @@ static inline void
 	size_t	i;
 
 	i = ~0ULL;
-	fwrite(IS_BIT(g_flags, BIT_1_ONE) ? "\n" : " ", sizeof(char), 1UL, stdout);
-	if (!IS_BIT(g_flags, BIT_1_ONE) && xy.x + 1 < n / (float)xy.y)
-		while (g_max_name_len - d_name_len > ++i)
+	fwrite(GDI_FLAGS_IS_BIT(BIT_1_ONE) ? "\n" : " ", sizeof(char), 1UL, stdout);
+	if (!GDI_FLAGS_IS_BIT(BIT_1_ONE) && xy.x + 1 < n / (float)xy.y)
+		while (GDI_MAXLEN_GET_VALUE() - d_name_len > ++i)
 			fwrite(" ", sizeof(char), 1UL, stdout);
 }
 
@@ -52,7 +52,7 @@ void
 	struct s_pdf	p;
 
 	i.y = -1;
-	fmt = IS_BIT(g_flags, BIT_1_ONE)
+	fmt = GDI_FLAGS_IS_BIT(BIT_1_ONE)
 		? (t_s2si){ INT32_MAX, 1 } : s_get_term_size(n);
 	while (fmt.y > ++i.y && (i.x = -1))
 	{
@@ -65,9 +65,9 @@ void
 			if (n - 1 > j)
 				s_put_sep(objs[j].d_name_len, n, (t_s2si){i.x, fmt.y});
 		}
-		if (!IS_BIT(g_flags, BIT_1_ONE))
+		if (!GDI_FLAGS_IS_BIT(BIT_1_ONE))
 			fwrite("\n", sizeof(char), 1UL, stdout);
 	}
-	if (IS_BIT(g_flags, BIT_1_ONE))
+	if (GDI_FLAGS_IS_BIT(BIT_1_ONE))
 		fwrite("\n", sizeof(char), 1UL, stdout);
 }

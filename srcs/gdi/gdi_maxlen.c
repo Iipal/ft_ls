@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_objects_cmp.c                           :+:      :+:    :+:   */
+/*   gdi_maxlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/19 14:38:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 15:41:36 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/15 16:04:38 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/15 16:06:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-int64_t	sort_ascii_objects_cmp(const void *restrict a, const void *restrict b)
+inline size_t	*gdi_maxlen_get_ptr(void)
 {
-	int64_t	cmp;
+	static size_t	maxlen;
 
-	cmp = (int64_t)ft_strcmp(((const struct s_object*)a)->d_name,
-							((const struct s_object*)b)->d_name);
-	return (GDI_FLAGS_IS_BIT(BIT_R_SORT_REV) ? -cmp : cmp);
+	return (&maxlen);
+}
+
+inline void		gdi_maxlen_cmp(size_t len)
+{
+	if (GDI_MAXLEN_GET_VALUE() < len)
+		GDI_MAXLEN_GET_VALUE() = len;
 }

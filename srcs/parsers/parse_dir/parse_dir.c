@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/26 03:48:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 16:22:09 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static bool
 		|| !S_ISDIR(objs[i].st->mode)))
 			continue ;
 		u_full_path(subdir, prev_dir, d_name);
-		ft_strcpy(g_src_path, subdir);
 		ft_fprintf(stdout, "\n%s:\n", subdir);
 		parse_dir(subdir);
 	}
@@ -44,7 +43,7 @@ bool
 {
 	struct s_dir	*cd;
 
-	ft_strcpy(g_src_path, path);
+	ft_strcpy(GDI_SRC_GET_VALUE(), path);
 	if (!(cd = init_dir(path, false)))
 		return (false);
 	if (cd->is_file)
@@ -52,7 +51,7 @@ bool
 	else
 	{
 		output(cd);
-		if (IS_BIT(g_flags, BIT_R_RECURSIVE))
+		if (GDI_FLAGS_IS_BIT(BIT_R_RECURSIVE))
 			s_check_subdirs(path, cd->n_objs, cd->objs);
 	}
 	free_dir(&cd);

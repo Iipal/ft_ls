@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_ascii_objects_cmp.c                           :+:      :+:    :+:   */
+/*   ls_gdi_maxlen.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/19 14:38:14 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 15:41:36 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/15 16:03:12 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/15 16:08:03 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls.h"
+#ifndef LS_GDI_MAXLEN_H
+# define LS_GDI_MAXLEN_H
 
-int64_t	sort_ascii_objects_cmp(const void *restrict a, const void *restrict b)
-{
-	int64_t	cmp;
+# include <sys/types.h>
 
-	cmp = (int64_t)ft_strcmp(((const struct s_object*)a)->d_name,
-							((const struct s_object*)b)->d_name);
-	return (GDI_FLAGS_IS_BIT(BIT_R_SORT_REV) ? -cmp : cmp);
-}
+/*
+** Store the max item name lenght in directory which currently parsing.
+**	 (Used for corrent default output formating)
+*/
+extern size_t	*gdi_maxlen_get_ptr(void);
+extern void		gdi_maxlen_cmp(size_t len);
+
+# undef GDI_MAXLEN_GET_VALUE
+# define GDI_MAXLEN_GET_VALUE() *gdi_maxlen_get_ptr()
+
+#endif /* LS_GDI_MAX_LEN_H */

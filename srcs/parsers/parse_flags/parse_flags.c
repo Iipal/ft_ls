@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 19:05:29 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/03 20:32:26 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 15:41:15 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static inline int32_t
 	s_flags_dependecy(const int32_t flag)
 {
-	if (IS_BIT(flag, BIT_G_NO_OWNER))
-		SET_BIT(g_flags, BIT_L_LIST);
-	else if (IS_BIT(flag, BIT_L_LIST))
-		UNSET_BIT(g_flags, BIT_1_ONE);
-	else if (IS_BIT(flag, BIT_1_ONE))
-		UNSET_BIT(g_flags, BIT_L_LIST);
-	else if (IS_BIT(flag, BIT_F_NO_SORT))
-		SET_BIT(g_flags, BIT_A_HIDDEN);
+	if (GDI_FLAGS_IS_BIT(BIT_G_NO_OWNER))
+		GDI_FLAGS_SET_BIT(BIT_L_LIST);
+	else if (GDI_FLAGS_IS_BIT(BIT_L_LIST))
+		GDI_FLAGS_UNSET_BIT(BIT_1_ONE);
+	else if (GDI_FLAGS_IS_BIT(BIT_1_ONE))
+		GDI_FLAGS_UNSET_BIT(BIT_L_LIST);
+	else if (GDI_FLAGS_IS_BIT(BIT_F_NO_SORT))
+		GDI_FLAGS_SET_BIT(BIT_A_HIDDEN);
 	return (flag);
 }
 
@@ -38,7 +38,7 @@ static bool
 	while (valid_flags[i] && valid_flags[i] != curr_flag)
 		++i;
 	if (curr_flag == valid_flags[i])
-		return (s_flags_dependecy(SET_BIT(g_flags, TO_N_BIT(i))));
+		return (s_flags_dependecy(GDI_FLAGS_SET_BIT(TO_N_BIT(i))));
 	return (false);
 }
 

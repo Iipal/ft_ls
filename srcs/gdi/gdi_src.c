@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_isatty.c                                     :+:      :+:    :+:   */
+/*   gdi_src.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/03 20:27:12 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/03 20:27:39 by tmaluh           ###   ########.fr       */
+/*   Created: 2020/01/15 16:18:22 by tmaluh            #+#    #+#             */
+/*   Updated: 2020/01/15 16:19:20 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-inline void	check_isatty(void)
+inline char	*gdi_src_get_ptr(void)
 {
-	if (!(g_isatty_ret = isatty(fileno(stdout))))
-		SET_BIT(g_flags, BIT_1_ONE);
+	static char	src_path[GDI_SRC_SIZE];
+
+	return (src_path);
 }

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/28 01:30:56 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 16:08:34 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ inline struct s_object
 		out->st = dup_stat(st);
 	out->d_name_len = ft_strlen(filename);
 	out->d_name = ft_strndup(filename, out->d_name_len);
-	if (g_max_name_len < out->d_name_len)
-		g_max_name_len = out->d_name_len;
 	out->acl_ch = init_acl_ea(filename);
-	if (g_isatty_ret && IS_BIT(g_flags, BIT_G_COLOR))
+	gdi_maxlen_cmp(out->d_name_len);
+	if (GDI_ISATTY_GET_VALUE() && GDI_FLAGS_IS_BIT(BIT_G_COLOR))
 		out->clr_name = init_file_color(filename, out->d_name_len,
 									out->st->mode, &out->clr_len);
 	return (out);

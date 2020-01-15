@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/08 16:31:02 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/15 16:15:49 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ inline char
 	struct s_lf_spec_width	ws;
 
 	ws = s_lfsw(n_objs, objs, total);
-	if (!IS_BIT(g_flags, BIT_G_NO_OWNER))
-		ft_sprintf(g_data_buf,
+	if (!GDI_FLAGS_IS_BIT(BIT_G_NO_OWNER))
+		ft_sprintf(GDI_DBUF_GET_VALUE(),
 			"%%s%%c %%%zulu %%-%zus  %%-%zus  %%%zus %%s %%s",
 			ws.st_nlnk_w, ws.pw_name_w, ws.gr_name_w, ws.st_size_w);
 	else
-		ft_sprintf(g_data_buf, "%%s%%c %%%zuzu %%s%%-%zus  %%%zus %%s %%s",
+		ft_sprintf(GDI_DBUF_GET_VALUE(),
+			"%%s%%c %%%zuzu %%s%%-%zus  %%%zus %%s %%s",
 			ws.st_nlnk_w, ws.gr_name_w, ws.st_size_w);
-	return (g_data_buf);
+	return (GDI_DBUF_GET_VALUE());
 }
