@@ -6,14 +6,14 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 18:11:08 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/03 20:30:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/25 19:20:18 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-static int32_t	g_va_counter = 0;
-static int32_t	g_va_notdir_counter = 0;
+static size_t	g_va_counter = 0;
+static size_t	g_va_notdir_counter = 0;
 
 static inline struct s_arg_obj __attribute__((__always_inline__))
 	*s_dup_arg(struct s_arg_obj *restrict dst, const struct s_arg_obj arg)
@@ -36,9 +36,9 @@ static struct s_arg_obj
 {
 	struct s_arg_obj	*out;
 	struct stat			st;
-	int32_t				i;
+	size_t				i;
 
-	i = -1;
+	i = ~0UL;
 	out = NULL;
 	while (a->ac > ++i)
 		if (init_stat(a->av[i], &st))
@@ -56,7 +56,7 @@ int
 	parse_args(struct s_arg_av *restrict const a)
 {
 	struct s_arg_obj	*args;
-	int32_t				i;
+	size_t				i;
 
 	if (!(args = s_pre_parse_errno_args(a)))
 		return (EXIT_FAILURE);

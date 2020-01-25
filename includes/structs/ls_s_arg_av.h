@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 20:13:04 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/03 20:15:59 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/25 18:52:50 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 struct s_arg_av
 {
 	char	**av;
-	int		ac;
-	char	_dummy[4] __attribute__((unused));
+	size_t	ac;
 };
 
 #endif

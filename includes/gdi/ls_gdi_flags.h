@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:30:41 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 15:55:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/25 19:32:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LS_GDI_FLAGS_H
 
 # include <stdint.h>
+
+# include "ls_s_arg_av.h"
 
 /*
 **	Command line options(flags).
@@ -35,6 +37,7 @@
 **	   last modification time for sorting (-t) or printing. (BIT_U_ACESS)
 */
 extern int32_t	*gdi_flags_get_ptr(void);
+extern void		gdi_flags_parser(struct s_arg_av *restrict a);
 
 # undef GDI_FLAGS_GET_VALUE
 # define GDI_FLAGS_GET_VALUE() *gdi_flags_get_ptr()

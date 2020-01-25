@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 10:40:35 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 16:20:04 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/25 19:05:33 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <math.h>
+# include <err.h>
 
 # ifdef __APPLE__
 #  include <sys/acl.h>
