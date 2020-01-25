@@ -1,6 +1,6 @@
 # ft_ls
 
-#### Implementation of MacOS(Darwin) system utilite - `ls`, on C. (project from school42([UNIT Factory](https://unit.ua/en/)))
+#### Implementation of MacOS(Darwin) system command - `ls`, on C. [[education project](https://unit.ua/en/)]
 
 ## Additional info:
 
