@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:30:41 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/25 19:32:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/25 23:31:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 */
 extern int32_t	*gdi_flags_get_ptr(void);
 extern void		gdi_flags_parser(struct s_arg_av *restrict a);
+extern void		gdif_internal_checks(const int32_t mask);
 
 # undef GDI_FLAGS_GET_VALUE
 # define GDI_FLAGS_GET_VALUE() *gdi_flags_get_ptr()
