@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:37:39 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/12/26 02:12:17 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:54:16 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef long		t_time_t;
 
 typedef struct	s_2si
 {
-	int	x;
-	int	y;
+	size_t	x;
+	size_t	y;
 }				t_s2si;
 
 typedef struct	s_2sl

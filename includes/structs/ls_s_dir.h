@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:42:53 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 12:44:53 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:49:58 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 struct	s_dir
 {
 	struct s_object	*objs;
-	int32_t			n_objs;
+	size_t			n_objs;
 	bool			is_file;
 };
 

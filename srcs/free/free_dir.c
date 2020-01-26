@@ -6,17 +6,17 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:05:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/11/22 10:40:05 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:50:27 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-void	*free_dir(struct s_dir **curr_dir)
+inline void	*free_dir(struct s_dir **curr_dir)
 {
-	int32_t	i;
+	size_t	i;
 
-	i = -1;
+	i = ~0UL;
 	if (*curr_dir)
 	{
 		if ((*curr_dir)->objs)

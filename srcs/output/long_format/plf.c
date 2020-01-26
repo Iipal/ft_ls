@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 22:03:56 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 15:39:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:52:19 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ inline void
 }
 
 void
-	plf(const int32_t n_objs, const struct s_object *restrict objs)
+	plf(const size_t n_objs, const struct s_object *restrict objs)
 {
 	char		*fmt_str;
+	size_t		i;
 	t_blkcnt_t	total;
-	int32_t		i;
 
-	i = -1;
+	i = ~0UL;
 	total = 0L;
 	fmt_str = plf_get_fmt_str(n_objs, objs, &total);
 	if (!GDI_FLAGS_IS_BIT(BIT_NO_TOTAL))

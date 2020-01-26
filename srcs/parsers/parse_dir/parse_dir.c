@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 08:27:47 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 16:22:09 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:57:57 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static bool
 	s_check_subdirs(const char *restrict prev_dir,
-		const int32_t n_objs,
+		const size_t n_objs,
 		const struct s_object *restrict objs)
 {
 	char	*d_name;
 	char	*subdir;
-	int32_t	i;
+	size_t	i;
 
-	i = -1;
+	i = ~0UL;
 	d_name = NULL;
 	subdir = (char[1024]) { 0 };
 	while (n_objs > ++i)

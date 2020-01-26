@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:04:15 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/03 20:22:13 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:56:12 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ extern void
 plf_get_link(const char *restrict file);
 
 extern char
-*plf_get_fmt_str(const int32_t n_objs,
+*plf_get_fmt_str(const size_t size_t,
 	const struct s_object *restrict objs,
 	t_blkcnt_t *restrict total);
 

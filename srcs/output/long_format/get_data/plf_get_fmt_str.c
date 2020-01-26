@@ -6,22 +6,22 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/02 19:52:38 by tmaluh            #+#    #+#             */
-/*   Updated: 2020/01/15 16:15:49 by tmaluh           ###   ########.fr       */
+/*   Updated: 2020/01/26 22:56:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
 struct s_lf_spec_width
-	s_lfsw(const int32_t n_objs,
+	s_lfsw(const size_t n_objs,
 		const struct s_object *restrict objs,
 		t_blkcnt_t *restrict total)
 {
 	struct s_lf_spec_width	ws;
 	struct s_lf_spec_width	tmp;
-	int32_t					i;
+	size_t					i;
 
-	i = -1;
+	i = ~0UL;
 	ws = (struct s_lf_spec_width) { 0 };
 	while (n_objs > ++i)
 	{
@@ -42,7 +42,7 @@ struct s_lf_spec_width
 }
 
 inline char
-	*plf_get_fmt_str(const int32_t n_objs,
+	*plf_get_fmt_str(const size_t n_objs,
 		const struct s_object *restrict objs,
 		t_blkcnt_t *restrict total)
 {
